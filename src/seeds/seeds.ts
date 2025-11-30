@@ -1,0 +1,92 @@
+import { BalanceCardProps, ExchangeRate, Goal } from "../interface/interface";
+
+const dt = new Date();
+
+export const balanceCards: BalanceCardProps[] = [
+  {
+    id: 1,
+    title: "Bolivares Amount",
+    amount: 1500,
+    currency: "VES",
+    started: 2000,
+    spent: 500,
+    lastEntry: dt.toLocaleDateString(),
+    theme: "green",
+  },
+  {
+    id: 2,
+    title: "Dollars Amount",
+    amount: 800,
+    currency: "USD",
+    started: 1000,
+    spent: 200,
+    lastEntry: dt.toLocaleDateString(),
+    theme: "blue",
+  },
+];
+
+export const exchangeRates: ExchangeRate[] = [
+  {
+    exchangeName: "official",
+    value: 238.84,
+    todayDate: dt.toLocaleDateString(),
+  },
+  {
+    exchangeName: "average",
+    value: 286.26,
+    todayDate: dt.toLocaleDateString(),
+  },
+  {
+    exchangeName: "parallel",
+    value: 333.67,
+    todayDate: dt.toLocaleDateString(),
+  },
+];
+
+export const goals: Goal[] = [
+  {
+    id: 1,
+    icon: "laptop",
+    title: "New Laptop",
+    description: "Save money to buy a new laptop for work.",
+    color: "#4CAF50",
+    goalValue: 1200,
+    currentValue: 1164,
+  },
+  {
+    id: 2,
+    icon: "airplane-ticket",
+    title: "Vacation Trip",
+    description: "Plan and save for a vacation trip next summer.",
+    color: "#2196F3",
+    goalValue: 3000,
+    currentValue: 3000,
+  },
+  {
+    id: 3,
+    icon: "home",
+    title: "Home Renovation",
+    description: "Renovate the kitchen and living room area.",
+    color: "#FF9800",
+    goalValue: 5000,
+    currentValue: 1000,
+  },
+  {
+    id: 4,
+    icon: "directions-car",
+    title: "New Car",
+    description: "Save for a down payment on a new car.",
+    color: "#9C27B0",
+    goalValue: 10000,
+    currentValue: 100,
+  },
+  {
+    id: 5,
+    icon: "book",
+    title: "Education Fund",
+    description: "Set aside money for further education and courses.",
+    color: "#E91E63",
+    goalValue: 4000,
+    currentValue: 2000,
+  },
+];
