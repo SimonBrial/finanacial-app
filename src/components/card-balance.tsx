@@ -1,6 +1,6 @@
 import { StyleSheet, View } from "react-native";
 import Typography from "./general/typography";
-import Feather from "@react-native-vector-icons/feather";
+import Feather from "@expo/vector-icons/Feather";
 import { BalanceCardProps } from "../interface/interface";
 import Badge from "./general/badge";
 
@@ -90,7 +90,7 @@ export default function CardCoin({
             display: "flex",
             flexDirection: "row",
             alignItems: "center",
-            gap: 6
+            gap: 6,
           }}
         >
           <Typography
@@ -100,11 +100,13 @@ export default function CardCoin({
           >
             Last entry:
           </Typography>
-          {lastEntry ? (
-            <Badge text={lastEntry} type="filled" />
-          ) : (
-            <Badge text={"No entries yet"} type="bordered"  />
-          )}
+          <View style={{ width: 120 }}>
+            {lastEntry ? (
+              <Badge text={lastEntry} type="filled" />
+            ) : (
+              <Badge text={"No entries yet"} type="bordered" />
+            )}
+          </View>
         </View>
       </View>
     </View>

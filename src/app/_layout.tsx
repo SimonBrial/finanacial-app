@@ -1,13 +1,28 @@
-import { SafeAreaView } from "react-native-safe-area-context";
 import { Stack } from "expo-router";
 
 export default function Layout() {
   return (
-    <SafeAreaView>
-      <Stack>
-        <Stack.Screen name="index" options={{ title: "Home" }} />
-        <Stack.Screen name="profile" options={{ title: "Profile" }} />
-      </Stack>
-    </SafeAreaView>
+    <Stack
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen
+        name="index"
+        options={{ title: "Home", headerShown: false }}
+      />
+      <Stack.Screen
+        name="profile"
+        options={{ title: "Profile", headerShown: false }}
+      />
+      <Stack.Screen
+        name="transactions"
+        options={{ title: "Transactions", headerShown: false }}
+      />
+      <Stack.Screen
+        name="goals"
+        options={{ title: "Goals", headerShown: false }}
+      />
+    </Stack>
   );
 }

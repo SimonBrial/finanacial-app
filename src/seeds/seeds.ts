@@ -1,4 +1,9 @@
-import { BalanceCardProps, ExchangeRate, Goal } from "../interface/interface";
+import {
+  BalanceCardProps,
+  ExchangeRate,
+  Expense,
+  Goal,
+} from "../interface/interface";
 
 const dt = new Date();
 
@@ -52,6 +57,9 @@ export const goals: Goal[] = [
     color: "#4CAF50",
     goalValue: 1200,
     currentValue: 1164,
+    period: 6,
+    periodUnit: "month",
+    completed: false,
   },
   {
     id: 2,
@@ -61,6 +69,9 @@ export const goals: Goal[] = [
     color: "#2196F3",
     goalValue: 3000,
     currentValue: 3000,
+    period: 12,
+    periodUnit: "month",
+    completed: true,
   },
   {
     id: 3,
@@ -70,6 +81,9 @@ export const goals: Goal[] = [
     color: "#FF9800",
     goalValue: 5000,
     currentValue: 1000,
+    period: 12,
+    periodUnit: "month",
+    completed: false,
   },
   {
     id: 4,
@@ -79,6 +93,9 @@ export const goals: Goal[] = [
     color: "#9C27B0",
     goalValue: 10000,
     currentValue: 100,
+    period: 12,
+    periodUnit: "month",
+    completed: false,
   },
   {
     id: 5,
@@ -88,5 +105,56 @@ export const goals: Goal[] = [
     color: "#E91E63",
     goalValue: 4000,
     currentValue: 2000,
+    period: 12,
+    periodUnit: "month",
+    completed: false,
+  },
+];
+
+export const constExpense: Expense[] = [
+  {
+    id: 1,
+    icon: "laptop",
+    title: "Internet",
+    description: "Save money to buy a new laptop for work.",
+    color: "#4CAF50",
+    expenseValue: 1200,
+    completed: false,
+  },
+  {
+    id: 2,
+    icon: "coffee",
+    title: "Coffee",
+    description: "Save money to buy a new laptop for work.",
+    color: "#4CAF50",
+    expenseValue: 1200,
+    completed: false,
+  },
+  {
+    id: 3,
+    icon: "fast-food",
+    title: "Food",
+    description: "Save money to buy a new laptop for work.",
+    color: "#4CAF50",
+    expenseValue: 1200,
+    completed: false,
+  },
+  {
+    id: 4,
+    icon: "directions-car",
+    title: "New Car",
+    description: "Save money to buy a new laptop for work.",
+    color: "#4CAF50",
+    expenseValue: 1200,
+    completed: false,
+  },
+  {
+    id: 5,
+    icon: "book",
+    title: "Education Fund",
+    description: "Set aside money for further education and courses.",
+    color: "#E91E63",
+    expenseValue: 1200,
+    completed: false,
   },
 ];

@@ -1,13 +1,13 @@
 import { View, StyleSheet } from "react-native";
-import Typography from "./general/typography";
-import { ExchangeCardProps } from "../interface/interface";
 import { LinearGradient } from "expo-linear-gradient";
-import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
+import { ExchangeCardProps } from "../../interface/interface";
+import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
+import Typography from "../general/typography";
 
 export default function ExchangeCard({
   dolarRate,
   exchangeName,
-  todayDate
+  todayDate,
 }: ExchangeCardProps) {
   const styleSelector = () => {
     if (exchangeName.toLowerCase() === "parallel".toLowerCase()) {
@@ -27,10 +27,10 @@ export default function ExchangeCard({
   return (
     <View style={containerStyles}>
       <LinearGradient
-        colors={[`${styleSelector().color}72`, 'transparent']}
+        colors={[`${styleSelector().color}72`, "transparent"]}
         style={styles.background}
         start={{ x: 0, y: 1 }}
-        locations={[0.05,0.9]}
+        locations={[0.05, 0.9]}
       />
       <Typography bold={false} variant="lg" customStyles={styles.text}>
         {capitalizeFirstLetter(exchangeName)}
@@ -40,7 +40,9 @@ export default function ExchangeCard({
         {dolarRate}
       </Typography>
       <Typography bold variant="sm" customStyles={styles.text}>
-        {todayDate === typeof String ? todayDate : new Date().toLocaleDateString()}
+        {todayDate === typeof String
+          ? todayDate
+          : new Date().toLocaleDateString()}
       </Typography>
     </View>
   );
@@ -73,7 +75,7 @@ const styles = StyleSheet.create({
     color: "#0fff3b",
   },
   background: {
-    position: 'absolute',
+    position: "absolute",
     left: -1,
     right: 0,
     top: -1,
@@ -81,6 +83,5 @@ const styles = StyleSheet.create({
     width: 120,
     borderTopRightRadius: 8,
     borderBottomRightRadius: 8,
-    
   },
 });

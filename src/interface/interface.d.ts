@@ -29,6 +29,8 @@ interface BadgeProps {
   text: string;
   color?: string;
   type: typeBadge;
+  iconLeft?: React.ReactNode;
+  iconRight?: React.ReactNode;
 }
 
 interface ColProps {
@@ -44,6 +46,7 @@ interface GridProps {
   children: React.ReactNode;
   customStyles?: object;
   gap?: number;
+  wrap?: boolean;
 }
 
 interface ExchangeRate {
@@ -60,6 +63,25 @@ interface Goal {
   color?: string;
   goalValue: number;
   currentValue: number;
+  period: number;
+  periodUnit: "year" | "month" | "week" | "day";
+  completed: boolean;
+}
+
+interface TabItem {
+  name: string;
+  icon: MaterialIconsIconName;
+  label: string;
+}
+
+interface Expense {
+  id: number;
+  icon: MaterialIconsIconName;
+  title: string;
+  description: string;
+  color: string;
+  expenseValue: number;
+  completed: boolean;
 }
 
 export type {
@@ -71,5 +93,7 @@ export type {
   GridProps,
   ColProps,
   RowProps,
+  Expense,
+  TabItem,
   Goal,
 };

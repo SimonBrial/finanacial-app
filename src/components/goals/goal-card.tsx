@@ -1,17 +1,20 @@
 import { StyleSheet, View } from "react-native";
-import Typography from "./general/typography";
-import { Goal } from "../interface/interface";
-import MaterialIcons from "@react-native-vector-icons/material-icons";
-import Stack from "./general/stack";
-import Container from "./general/container";
-import Badge from "./general/badge";
-import { goalPercentage } from "../utils/goalPercentage";
-import { formatNumber } from "../utils/formatNumber";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import Stack from "../../components/general/stack";
+import { Goal } from "../../interface/interface";
+import { formatNumber } from "../../utils/formatNumber";
+import { goalPercentage } from "../../utils/goalPercentage";
+import Badge from "../general/badge";
+import Container from "../general/container";
+import Typography from "../general/typography";
 
 export default function GoalCard({
   currentValue,
   description,
+  periodUnit,
   goalValue,
+  completed,
+  period,
   title,
   color = "#fff",
   icon,
@@ -24,7 +27,7 @@ export default function GoalCard({
 
   const titleStyles = StyleSheet.flatten([
     styles.titleContainer,
-    { borderColor: color },
+    { borderColor: color, width: 300 },
   ]);
 
   const iconStyles = StyleSheet.flatten([
@@ -63,9 +66,33 @@ export default function GoalCard({
           {description}
         </Typography>
       </Container>
+      <Container customStyles={styles.periodDescription} gap={8}>
+        <Typography variant="base" bold={false} customStyles={styles.text}>
+          Period:
+        </Typography>
+        <Typography
+          variant="base"
+          bold={false}
+          customStyles={StyleSheet.flatten([styles.text, { color: color }])}
+        >
+          {period} {periodUnit}{" "}
+        </Typography>
+        {completed ? (
+          <View style={{ width: 100 }}>
+            <Badge
+              iconLeft={
+                <MaterialIcons name={"check-circle"} size={20} color={color} />
+              }
+              text={"DONE"}
+              type="filled"
+            />
+          </View>
+        ) : null}
+      </Container>
       <Container
         customStyles={{
-          width: "100%",
+          width: "95%",
+          height: 90,
           flexWrap: "wrap",
         }}
       >
@@ -75,7 +102,8 @@ export default function GoalCard({
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
-            marginTop: 25,
+            position: "absolute",
+            top: 0,
           }}
         >
           <Typography variant="base" bold={false} customStyles={styles.text}>
@@ -105,7 +133,7 @@ export default function GoalCard({
               position: "absolute",
               zIndex: 1,
               left: 3,
-              top: 2,
+              top: 30,
             }}
           ></View>
           <View
@@ -114,6 +142,9 @@ export default function GoalCard({
               width: "100%",
               backgroundColor: `${color}70`,
               borderRadius: 4,
+              position: "absolute",
+              top: 28,
+              left: 0,
             }}
           ></View>
           <Container
@@ -130,11 +161,12 @@ export default function GoalCard({
                 paddingHorizontal: -2,
                 marginHorizontal: 0,
                 position: "absolute",
-                bottom: -3,
+                marginLeft: 10,
+                top: 40,
               }}
             >
               <Badge
-                text={`${goalCompletedPercentage}%`}
+                text={`${goalCompletedPercentage}%.`}
                 type="bordered"
                 color={goalPercentage(currentValue, goalValue)}
               />
@@ -170,6 +202,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "flex-start",
     flexShrink: 1,
     gap: 8,
     width: "100%",
@@ -181,15 +214,24 @@ const styles = StyleSheet.create({
   description: {
     flex: 1,
   },
+  periodDescription: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    flexWrap: "nowrap",
+    paddingVertical: 8,
+  },
   progress: {
     display: "flex",
     justifyContent: "space-between",
     flexDirection: "row",
     alignItems: "center",
     marginTop: 8,
-    flexWrap: "nowrap" /* 
-    borderColor: "red",
-    borderWidth: 1, */,
+    flexWrap: "nowrap" /*
+     borderColor: "red",
+     borderWidth: 1, */,
     width: "100%",
   },
   text: {

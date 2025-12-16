@@ -1,12 +1,14 @@
 import { View, StyleSheet } from "react-native";
 import Typography from "./typography";
-import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
 import { BadgeProps } from "../../interface/interface";
+import Container from "./container";
 
 export default function Badge({
   text,
   color = "#0f9fff",
   type = "bordered",
+  iconLeft,
+  iconRight,
 }: BadgeProps) {
   const allStyles = StyleSheet.flatten([
     styles.defaultStyles,
@@ -17,12 +19,15 @@ export default function Badge({
       backgroundColor: `${color}25`,
     },
   ]);
+
   return (
-    <View style={styles.defaultStyles}>
-      <Typography bold variant="xs" customStyles={allStyles}>
-        {capitalizeFirstLetter(text)}
+    <Container customStyles={allStyles}>
+      {iconLeft && <View>{iconLeft}</View>}
+      <Typography bold variant="xs" customStyles={{ color: color }}>
+        {text}
       </Typography>
-    </View>
+      {iconRight && <View>{iconLeft}</View>}
+    </Container>
   );
 }
 
