@@ -83,8 +83,17 @@ interface Expense {
   expenseValue: number;
   completed: boolean;
 }
+interface ThemeContextProps {
+  sizes: Record<string, number>;
+  theme: Record<string, string>;
+  inProgress: Record<string, string>;
+  complete: Record<string, string>;
+  danger: Record<string, string>;
+  globalStyles: Record<string, string>;
+}
 
 export type {
+  ThemeContextProps,
   ExchangeCardProps,
   BalanceCardProps,
   GoalCardProps,

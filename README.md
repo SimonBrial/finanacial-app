@@ -81,3 +81,37 @@ Crear la interfaz base de una aplicación de finanzas personales que permita reg
 - Widget de resumen diario/semanal
 - Backup en la nube o exportación local
 - Multiusuario o perfiles familiares
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+### Estructura del Commit
+
+```text
+<tipo>[alcance opcional]: <descripción corta>
+
+[cuerpo opcional]
+
+[pie de página opcional]
+```
+
+### Tipos de Commit
+
+
+  1. **Feat:** Una nueva funcionalidad (ej. una nueva pantalla de estadísticas).
+  2. **Fix:** Corrección de un error (ej. error al guardar un gasto).
+  3. **docs:** Cambios solo en la documentación.
+  4. **Style:** Cambios de formato que no afectan la lógica (espacios, linting).
+  5. **Refactor:** Cambio en el código que no añade funcionalidad ni corrige errores.
+  6. **Perf:** Mejoras de rendimiento.
+  7. **Test:** Añadir o modificar pruebas.
+  8. **Chore:** Tareas de mantenimiento.
+
+### Reglas de Oro
+
+  1. **Imperativo:** Usa verbos en imperativo ("Añadir" en lugar de "Añadí" o "Añadido").
+  2. **Brevedad:** El encabezado no debe superar los 72 caracteres.
+  3. **Atómico:** Un commit debe realizar una sola tarea lógica. Si haces dos cosas distintas, haz dos commits.
+  4. **Idioma:** Se prefiere el uso de [Español/Inglés - Elige uno] de forma consistente.
+
+### ¿Dónde ponerlo?
+Si quieres que sea lo primero que vean posibles colaboradores, ponlo al final de tu **README.md**. Si prefieres mantener el README limpio para los usuarios, crea un archivo llamado **CONTRIBUTING.md** en la raíz del proyecto; GitHub y la mayoría de plataformas detectan ese archivo automáticamente y se lo muestran a cualquiera que intente abrir un *Pull Request*.

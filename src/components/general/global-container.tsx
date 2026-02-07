@@ -16,7 +16,7 @@ export default function GlobalContainer({
     ...styles.containerGlobal,
   });
   return (
-    <ScrollView style={{ backgroundColor: "#1A1A1A" }}>
+    <ScrollView style={{ backgroundColor: "black" }}>
       <SafeAreaView>
         <View style={globalStyles}>{children}</View>
         <StatusBar
@@ -32,7 +32,7 @@ export default function GlobalContainer({
 const styles = StyleSheet.create({
   containerGlobal: {
     flex: 1,
-    backgroundColor: "#1A1A1A",
+    backgroundColor: "black",
     alignItems: "flex-start",
     justifyContent: "flex-start",
     padding: 8,

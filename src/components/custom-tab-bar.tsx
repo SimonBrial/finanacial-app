@@ -1,14 +1,43 @@
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, StyleSheet, Animated, View } from "react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { TabItem } from "../interface/interface";
+import Typography from "./general/typography";
+import useTheme from "../hook/useTheme";
 
 export default function CustomTabBar({
   descriptors,
   navigation,
   state,
   color,
+  width,
   arr,
 }: any) {
+  const { sizes, theme, globalStyles } = useTheme();
+
+  const tabStyles = StyleSheet.flatten([
+    /*{
+      borderWidth: 1,
+      borderColor: "transparent",
+      borderTopColor: theme.t100,
+      },*/
+    stylesTabs.tabItemContainer,
+  ]);
+  /*const tabStylesSmall = StyleSheet.create([
+    {
+      width: "100%",
+      height: "60%",
+      display: "flex",
+      flexDirection: "row",
+      gap: sizes.xxs,
+      justifyContent: "center",
+      alignItems: "center",
+      //borderWidth: 1,
+      //borderColor: theme.t100,
+    },
+    /*{
+      transform: [{ scaleX: 1 }],
+    },
+  ]);*/
   const tabsItem: TabItem[] = [
     {
       name: "home",
@@ -41,16 +70,17 @@ export default function CustomTabBar({
     <View style={stylesTabs.tabBar}>
       {state.routes.map((route: any, index: number) => {
         const { options } = descriptors[route.key];
-        /*const label =
+        const label =
           options.tabBarLabel !== undefined
             ? options.tabBarLabel
             : options.title !== undefined
               ? options.title
-              : route.name;*/
+              : route.name;
 
         const isFocused = state.index === index;
 
         const onPress = () => {
+          // startAnimation();
           const event = navigation.emit({
             type: "tabPress",
             target: route.key,
@@ -77,32 +107,65 @@ export default function CustomTabBar({
             testID={options.tabBarButtonTestID}
             onPress={onPress}
             onLongPress={onLongPress}
-            style={stylesTabs.tabbarItem}
+            style={tabStyles}
             key={route.name}
           >
-            <MaterialIcons
-              size={28}
-              name={
-                route.name === tabsItem[index].name
-                  ? tabsItem[index].icon
-                  : "attach-money"
-              }
-              color={color}
-            />
-            {/*{icons[route.name]({
+            <View
+              style={[
+                {
+                  width: isFocused ? "90%" : "60%",
+                  height: "60%",
+                  display: "flex",
+                  flexDirection: "row",
+                  gap: sizes.xxs,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderWidth: isFocused ? 1 : 0,
+                  borderBottomColor: isFocused ? theme.t100 : "transparent",
+                },
+              ]}
+            >
+              <MaterialIcons
+                size={28}
+                name={
+                  route.name === tabsItem[index].name
+                    ? tabsItem[index].icon
+                    : "attach-money"
+                }
+                color={isFocused ? "white" : globalStyles.subtitle}
+                style={{ marginLeft: isFocused ? -sizes.xs : 0 }}
+              />
+              {/*{icons[route.name]({
               color: isFocused ? colors.primary : colors.text,
               size: 28,
               })}*/}
-
-            {/*<Typography
-              variant="xs"
-              customStyles={{
-                color: isFocused ? colors.primary : colors.text,
-                textAlign: "auto",
-              }}
-            >
-              {label}
-            </Typography>*/}
+              {isFocused ? (
+                <Animated.View>
+                  <Typography
+                    variant="xs"
+                    customStyles={{
+                      color: isFocused ? "white" : globalStyles.subtitle,
+                      textAlign: "auto",
+                    }}
+                  >
+                    {label}
+                  </Typography>
+                </Animated.View>
+              ) : null}
+            </View>
+            {/*{isFocused ? (
+              <View
+                style={{
+                  backgroundColor: theme.t100,
+                  width: "90%",
+                  height: 1,
+                  display: "flex",
+                  //flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              ></View>
+            ) : null}*/}
           </TouchableOpacity>
         );
       })}
@@ -112,35 +175,20 @@ export default function CustomTabBar({
 
 const stylesTabs = StyleSheet.create({
   tabBar: {
-    position: "absolute",
+    //position: "absolute",
     display: "flex",
     flexDirection: "row",
-    //alignItems: "center",
-    //justifyContent: "space-between",
-    //flexShrink: 1,
-    backgroundColor: "#2e2e2e",
-    marginHorizontal: 5,
-    paddingVertical: 5,
+    backgroundColor: "black",
     paddingHorizontal: 10,
-    borderRadius: 15,
-    borderCurve: "continuous",
-    bottom: 50,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 10 },
-    shadowRadius: 10,
-    shadowOpacity: 0.5,
-    elevation: 5,
   },
-  tabbarItem: {
-    //backgroundColor: "#fff45835",
-    //flex: 1,
+  tabItemContainer: {
     display: "flex",
+    flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
+    paddingTop: 5,
     flexShrink: 1,
-    // borderWidth: 1,
-    // borderColor: "#000",
-    height: 50,
-    width: "100%",
+    height: 90,
+    //width: "100%",
   },
 });

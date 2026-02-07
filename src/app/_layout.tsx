@@ -9,7 +9,11 @@ export default function Layout() {
     >
       <Stack.Screen
         name="index"
-        options={{ title: "Home", headerShown: false }}
+        options={{
+          title: "Home",
+
+          headerShown: false,
+        }}
       />
       <Stack.Screen
         name="profile"

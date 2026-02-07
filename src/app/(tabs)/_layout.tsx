@@ -5,31 +5,26 @@ import CustomTabBar from "../../components/custom-tab-bar";
 export default function TabLayout() {
   return (
     <Tabs
-      tabBar={(props) => <CustomTabBar {...props} color={"#2bf35d"} />}
+      tabBar={(props) => <CustomTabBar {...props} color={"red"} />}
       screenOptions={{
         headerShown: false,
         /*-------- */
-        tabBarActiveTintColor: "#2bf35d", // Active icon/label color
+        tabBarActiveTintColor: "blue", // Active icon/label color
         tabBarInactiveTintColor: "#ccc", // Inactive icon/label color
         tabBarStyle: {
           backgroundColor: "#333", // Tab bar background color
           borderTopColor: "transparent", // Tab bar border color
-          height: 70,
+          height: 80,
           paddingTop: 6,
-          position: "absolute",
-          bottom: 20,
-          left: 0,
-          right: 0,
-          width: "98%",
-          borderRadius: 10,
-          shadowColor: "#000",
-          shadowOffset: {
-            width: 0,
-            height: 1,
-          },
-          shadowOpacity: 0.25,
-          shadowRadius: 3.84,
-          elevation: 5,
+        },
+        tabBarItemStyle: {
+          display: "flex",
+          flexDirection: "row",
+          //width: "100%",
+          justifyContent: "center",
+          alignItems: "center",
+          borderWidth: 1,
+          borderColor: "#ccc",
         },
       }}
     >

@@ -33,6 +33,7 @@ export default function Typography({
   children,
   customStyles,
   bold = false,
+  ...rest
 }: TypographyProps) {
   // Obtenemos el número directamente del objeto constante
   const fontSize = FONT_SIZES[variant];
@@ -44,7 +45,11 @@ export default function Typography({
     customStyles,
   ]);
 
-  return <Text style={combinedStyles}>{children}</Text>;
+  return (
+    <Text style={combinedStyles} {...rest}>
+      {children}
+    </Text>
+  );
 }
 
 const baseStyles = StyleSheet.create({

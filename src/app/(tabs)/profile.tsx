@@ -1,20 +1,32 @@
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { Link } from "expo-router";
+import GlobalContainer from "../../components/general/global-container";
+import Typography from "../../components/general/typography";
+import { theme } from "../../context/styles/styles-base";
 
 export default function Profile() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#1A1A1A",
-      }}
-    >
-      <Text style={{ color: "white" }}>PROFILE page</Text>
-      <Link href="/">
-        <Text style={{ color: "cyan", marginTop: 20 }}>Go to LOGIN</Text>
-      </Link>
-    </View>
+    <GlobalContainer>
+      <View
+        style={{
+          flex: 1,
+          gap: 20,
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: "black",
+        }}
+      >
+        <Link href="/home">
+          <Typography customStyles={{ color: theme.t100, marginTop: 20 }}>
+            Go to Home
+          </Typography>
+        </Link>
+        <Link href="/">
+          <Typography customStyles={{ color: theme.t100, marginTop: 20 }}>
+            Go to Login
+          </Typography>
+        </Link>
+      </View>
+    </GlobalContainer>
   );
 }

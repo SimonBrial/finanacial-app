@@ -1,53 +1,32 @@
-import { goals } from "../../seeds/seeds";
-import { Goal } from "../../interface/interface";
 import GlobalContainer from "../../components/general/global-container";
-import Stack from "../../components/general/stack";
-import { StyleSheet } from "react-native";
-import Container from "../../components/general/container";
 import Typography from "../../components/general/typography";
-import GoalCard from "../../components/goals/goal-card";
+import { Link } from "expo-router";
+import { theme } from "../../context/styles/styles-base";
+import { View } from "react-native";
 
 export default function Goals() {
   return (
     <GlobalContainer>
-      <Container customStyles={styles.containerTitle}>
-        <Typography bold={false} variant="2xl" customStyles={styles.text}>
-          😎 Goals!
-        </Typography>
-      </Container>
-      <Stack gap={8}>
-        {goals.map((goal: Goal) => (
-          <GoalCard
-            key={goal.id}
-            title={goal.title}
-            description={goal.description}
-            color={goal.color}
-            currentValue={goal.currentValue}
-            goalValue={goal.goalValue}
-            icon={goal.icon}
-            id={goal.id}
-            period={goal.period}
-            periodUnit={goal.periodUnit}
-            completed={goal.completed}
-          />
-        ))}
-      </Stack>
+      <View
+        style={{
+          flex: 1,
+          gap: 20,
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: "black",
+        }}
+      >
+        <Link href="/home">
+          <Typography customStyles={{ color: theme.t100, marginTop: 20 }}>
+            Go to Home
+          </Typography>
+        </Link>
+        <Link href="/">
+          <Typography customStyles={{ color: theme.t100, marginTop: 20 }}>
+            Go to Login
+          </Typography>
+        </Link>
+      </View>
     </GlobalContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  containerTitle: {
-    width: "100%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-start",
-    borderColor: "#FFFFFF",
-    paddingVertical: 20,
-  },
-  text: {
-    color: "#FFFFFF",
-    textAlign: "left",
-    marginLeft: 12,
-  },
-});
