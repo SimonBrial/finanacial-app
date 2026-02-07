@@ -1,20 +1,5 @@
 import { Text, StyleSheet, StyleProp, TextStyle } from "react-native";
-
-const FONT_SIZES = {
-  xs: 12,
-  sm: 14,
-  base: 16,
-  lg: 18,
-  xl: 20,
-  "2xl": 24,
-  "3xl": 30,
-  "4xl": 36,
-  "5xl": 48,
-  "6xl": 60,
-  "7xl": 72,
-  "8xl": 96,
-  "9xl": 128,
-} as const;
+import { sizes as FONT_SIZES } from "../../context/styles/styles-base";
 
 type TypographyVariant2 = keyof typeof FONT_SIZES;
 
@@ -35,12 +20,12 @@ export default function Typography({
   bold = false,
   ...rest
 }: TypographyProps) {
-  // Obtenemos el número directamente del objeto constante
+  // se obtiene el número directamente del objeto constante
   const fontSize = FONT_SIZES[variant];
 
   const combinedStyles = StyleSheet.flatten([
     baseStyles.text,
-    { fontSize }, // Aplicamos el tamaño dinámicamente
+    { fontSize },
     bold ? { fontWeight: "bold" as const } : {},
     customStyles,
   ]);
