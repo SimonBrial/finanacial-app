@@ -1,14 +1,17 @@
 import { View, StyleSheet } from "react-native";
 import { GridProps } from "../../interface/interface";
-import { sizes } from "../../context/styles/styles-base";
+import { useContext } from "react";
+import { ThemeContext } from "../../context/styles/theme-provider";
 
 export default function Container({
+  width = "95%",
   customStyles,
   children,
+  gap = 4,
   wrap,
-  gap = sizes.xxs,
-  width = "95%",
 }: GridProps) {
+  const { sizes } = useContext(ThemeContext);
+
   const styles = StyleSheet.flatten([
     defaultStyles.container,
     customStyles,

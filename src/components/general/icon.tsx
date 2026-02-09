@@ -6,7 +6,6 @@ import {
   Feather,
 } from "@expo/vector-icons";
 import { OpaqueColorValue, StyleSheet, View } from "react-native";
-import { sizes } from "../../context/styles/styles-base";
 
 const IconLibraries = {
   MaterialCommunityIcons,
@@ -30,7 +29,7 @@ interface IconProps {
 export default function Icon({
   library = "MaterialCommunityIcons",
   color = "#ffffff",
-  size = sizes.base,
+  size = 16,
   name = "home",
   bgStyle,
   style,

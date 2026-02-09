@@ -1,5 +1,4 @@
 import { Text, StyleSheet, StyleProp, TextStyle } from "react-native";
-import { sizes } from "../../context/styles/styles-base";
 
 interface TypographyProps {
   children: React.ReactNode;
@@ -12,7 +11,7 @@ interface TypographyProps {
 }
 
 export default function Typography({
-  fontSize = sizes.md,
+  fontSize = 16,
   children,
   customStyles,
   bold = false,
