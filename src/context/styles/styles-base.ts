@@ -5,8 +5,8 @@ export const sizes: Record<string, number> = {
   md: 16,
   lg: 20,
   xl: 24,
-  "2xl": 28,
-  "3xl": 32,
+  xxl: 28,
+  xxxl: 32,
 };
 
 export const theme: Record<string, string> = {

@@ -46,7 +46,7 @@ export default function CustomTabBar({
     },
     {
       name: "goals",
-      icon: "workspace-premium",
+      icon: "emoji-events",
       label: "Goals",
     },
     {
@@ -60,9 +60,9 @@ export default function CustomTabBar({
       label: "Exchange",
     },
     {
-      name: "profile",
-      icon: "person",
-      label: "Profile",
+      name: "settings",
+      icon: "settings",
+      label: "Settings",
     },
   ];
 
@@ -142,7 +142,7 @@ export default function CustomTabBar({
               {isFocused ? (
                 <Animated.View>
                   <Typography
-                    variant="xs"
+                    fontSize={sizes.sm}
                     customStyles={{
                       color: isFocused ? "white" : globalStyles.subtitle,
                       textAlign: "auto",

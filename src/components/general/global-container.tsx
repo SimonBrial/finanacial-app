@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
     alignItems: "flex-start",
     justifyContent: "flex-start",
-    padding: 8,
+    padding: 20,
     paddingBottom: 80,
   },
 });

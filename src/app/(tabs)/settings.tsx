@@ -1,12 +1,12 @@
-import Typography from "../../components/general/typography";
-import GlobalContainer from "../../components/general/global-container";
-import { Link } from "expo-router";
-import useTheme from "../../hook/useTheme";
 import { View } from "react-native";
+import { Link } from "expo-router";
+import GlobalContainer from "../../components/general/global-container";
+import Typography from "../../components/general/typography";
 import Icon from "../../components/general/icon";
 import Row from "../../components/general/row";
+import useTheme from "../../hook/useTheme";
 
-export default function Home() {
+export default function Settings() {
   const { theme, sizes } = useTheme();
   return (
     <GlobalContainer>
@@ -30,29 +30,29 @@ export default function Home() {
               padding: sizes.xxs,
               borderRadius: sizes.xs,
               backgroundColor: `${theme.t20}`,
-              //width: 44,
-              //height: 44,
             }}
             color={theme.t100}
             size={sizes.xl}
+            library="MaterialIcons"
+            name={"settings"}
           />
           <Typography
             fontSize={sizes.xl}
             bold={false}
             customStyles={{ color: "white" }}
           >
-            Hi Simon!!!
+            Settings
           </Typography>
         </Row>
         <Icon
           bgStyle={{
             padding: sizes.xxs,
             borderRadius: "100%",
-            backgroundColor: `${theme.t20}`,
+            backgroundColor: `transparent`,
             width: 44,
             height: 44,
           }}
-          color={theme.t100}
+          color={"transparent"}
           size={sizes.xl}
           name={"bell-outline"}
         />
@@ -87,5 +87,3 @@ export default function Home() {
     </GlobalContainer>
   );
 }
-
-// TODO: https://dolarapi.com/docs/venezuela/operations/get-dolares.html

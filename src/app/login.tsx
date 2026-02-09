@@ -1,32 +1,10 @@
 import { Link } from "expo-router";
-import {
-  View,
-  StyleSheet,
-  Animated,
-  Button,
-  useWindowDimensions,
-} from "react-native";
+import { StyleSheet, View } from "react-native";
 import Typography from "../components/general/typography";
 import useTheme from "../hook/useTheme";
-import { useReducer } from "react";
-import { useAnimatedStyle, withTiming } from "react-native-reanimated";
-// import { theme } from "../context/styles/styles-base";
 
 export default function Login() {
-  const { theme } = useTheme();
-  const [isToggled, toggle] = useReducer((s) => !s, false);
-
-  const { width } = useWindowDimensions();
-  // Definimos el estilo animado
-  const animatedStyle = useAnimatedStyle(() => {
-    return {
-      // Usamos withTiming para controlar la duración (500ms como tenías antes)
-      width: withTiming(isToggled ? 240 : 120, { duration: 500 }),
-      backgroundColor: withTiming(isToggled ? "#fa7f7c" : "#87cce8", {
-        duration: 500,
-      }),
-    };
-  });
+  const { theme, sizes } = useTheme();
 
   return (
     <View style={styles.container}>
@@ -34,7 +12,17 @@ export default function Login() {
         Welcome to the Financial App!
       </Typography>
 
-      <Link href="/home">
+      <Link
+        href="/home"
+        style={{
+          paddingVertical: sizes.sm,
+          paddingHorizontal: sizes.xl,
+          backgroundColor: theme.t20,
+          borderRadius: sizes.xs,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <Typography customStyles={{ color: theme.t100, marginTop: 20 }}>
           Go to Home
         </Typography>
@@ -49,6 +37,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "black",
+    gap: 20,
   },
   linearGradient: {
     alignItems: "center",

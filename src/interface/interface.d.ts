@@ -1,4 +1,4 @@
-import { MaterialIconsIconName } from "@react-native-vector-icons/material-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { typeBadge } from "../types/type";
 
 interface ExchangeCardProps {
@@ -40,6 +40,11 @@ interface ColProps {
 
 interface RowProps {
   children: React.ReactNode;
+  customStyles?: object;
+  gap?: number;
+  width?: number | string;
+  alignItem?: string;
+  justifyContent?: string;
 }
 
 interface GridProps {
@@ -47,6 +52,7 @@ interface GridProps {
   customStyles?: object;
   gap?: number;
   wrap?: boolean;
+  width?: number | string;
 }
 
 interface ExchangeRate {
@@ -57,7 +63,7 @@ interface ExchangeRate {
 
 interface Goal {
   id: number;
-  icon: MaterialIconsIconName;
+  icon: MaterialCommunityIcons;
   title: string;
   description: string;
   color?: string;
@@ -70,13 +76,13 @@ interface Goal {
 
 interface TabItem {
   name: string;
-  icon: MaterialIconsIconName;
+  icon: MaterialCommunityIcons;
   label: string;
 }
 
 interface Expense {
   id: number;
-  icon: MaterialIconsIconName;
+  icon: MaterialCommunityIcons;
   title: string;
   description: string;
   color: string;
