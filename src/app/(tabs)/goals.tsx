@@ -5,6 +5,7 @@ import { View } from "react-native";
 import Icon from "../../components/general/icon";
 import Row from "../../components/general/row";
 import useTheme from "../../hook/useTheme";
+import NotificationIcon from "../../components/notification-icon";
 
 export default function Goals() {
   const { theme, sizes } = useTheme();
@@ -46,18 +47,7 @@ export default function Goals() {
             Goals
           </Typography>
         </Row>
-        <Icon
-          bgStyle={{
-            padding: sizes.xxs,
-            borderRadius: "100%",
-            backgroundColor: `${theme.t20}`,
-            width: 44,
-            height: 44,
-          }}
-          color={theme.t100}
-          size={sizes.xl}
-          name={"bell-outline"}
-        />
+        <NotificationIcon />
       </Row>
       <View
         style={{

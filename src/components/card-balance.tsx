@@ -3,6 +3,7 @@ import Typography from "./general/typography";
 import Feather from "@expo/vector-icons/Feather";
 import { BalanceCardProps } from "../interface/interface";
 import Badge from "./general/badge";
+import useTheme from "../hook/useTheme";
 
 export default function CardCoin({
   lastEntry,
@@ -13,6 +14,7 @@ export default function CardCoin({
   title,
   id,
 }: BalanceCardProps) {
+  const {sizes} = useTheme();
   return (
     <View style={cardBalanceStyles.container}>
       <View
@@ -24,7 +26,7 @@ export default function CardCoin({
           paddingBottom: 10,
         }}
       >
-        <Typography bold variant="base" customStyles={cardBalanceStyles.title}>
+        <Typography bold fontSize={sizes.md} customStyles={cardBalanceStyles.title}>
           {title}
         </Typography>
       </View>
@@ -38,7 +40,7 @@ export default function CardCoin({
         >
           <Typography
             bold={false}
-            variant="xl"
+            fontSize={sizes.xl}
             customStyles={{ color: "#FFFFFF", fontSize: 24 }}
           >
             <Feather name="dollar-sign" size={24} color="#FFFFFF" />
@@ -46,7 +48,7 @@ export default function CardCoin({
           </Typography>
           <Typography
             bold={false}
-            variant="xl"
+            fontSize={sizes.xl}
             customStyles={{ color: "#FFFFFF", fontSize: 20 }}
           >
             {currency}
@@ -71,14 +73,14 @@ export default function CardCoin({
           >
             <Typography
               bold={false}
-              variant="base"
+              fontSize={sizes.md}
               customStyles={{ color: "#2bf35d" }}
             >
               IN: {started}
             </Typography>
             <Typography
               bold={false}
-              variant="base"
+              fontSize={sizes.md}
               customStyles={{ color: "#f32b35" }}
             >
               OUT: {spent}
@@ -95,7 +97,7 @@ export default function CardCoin({
         >
           <Typography
             bold={false}
-            variant="sm"
+            fontSize={sizes.sm}
             customStyles={{ color: "#AAAAAA" }}
           >
             Last entry:

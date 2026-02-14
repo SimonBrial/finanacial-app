@@ -7,6 +7,7 @@ import { goalPercentage } from "../../utils/goalPercentage";
 import Badge from "../general/badge";
 import Container from "../general/container";
 import Typography from "../general/typography";
+import useTheme from "../../hook/useTheme";
 
 export default function GoalCard({
   currentValue,
@@ -20,6 +21,7 @@ export default function GoalCard({
   icon,
   id,
 }: Goal) {
+  const { sizes } = useTheme();
   const containerStyles = StyleSheet.flatten([
     styles.container,
     { borderLeftColor: color },
@@ -57,21 +59,21 @@ export default function GoalCard({
     <Stack customStyles={containerStyles}>
       <Container customStyles={titleStyles} gap={8}>
         <MaterialIcons name={icon} size={20} color={color} style={iconStyles} />
-        <Typography variant="lg" bold customStyles={textStyles}>
+        <Typography fontSize={sizes.lg} bold customStyles={textStyles}>
           {title}
         </Typography>
       </Container>
       <Container customStyles={styles.description}>
-        <Typography variant="base" bold={false} customStyles={styles.text}>
+        <Typography fontSize={sizes.md} bold={false} customStyles={styles.text}>
           {description}
         </Typography>
       </Container>
       <Container customStyles={styles.periodDescription} gap={8}>
-        <Typography variant="base" bold={false} customStyles={styles.text}>
+        <Typography fontSize={sizes.md} bold={false} customStyles={styles.text}>
           Period:
         </Typography>
         <Typography
-          variant="base"
+          fontSize={sizes.md}
           bold={false}
           customStyles={StyleSheet.flatten([styles.text, { color: color }])}
         >
@@ -106,10 +108,10 @@ export default function GoalCard({
             top: 0,
           }}
         >
-          <Typography variant="base" bold={false} customStyles={styles.text}>
+          <Typography fontSize={sizes.md} bold={false} customStyles={styles.text}>
             {formatNumber(currentValue)}
           </Typography>
-          <Typography variant="base" bold={false} customStyles={styles.text}>
+          <Typography fontSize={sizes.md} bold={false} customStyles={styles.text}>
             {formatNumber(goalValue)}
           </Typography>
         </Container>

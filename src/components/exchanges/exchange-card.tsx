@@ -3,12 +3,14 @@ import { LinearGradient } from "expo-linear-gradient";
 import { ExchangeCardProps } from "../../interface/interface";
 import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
 import Typography from "../general/typography";
+import useTheme from "../../hook/useTheme";
 
 export default function ExchangeCard({
   dolarRate,
   exchangeName,
   todayDate,
 }: ExchangeCardProps) {
+  const {sizes} = useTheme();
   const styleSelector = () => {
     if (exchangeName.toLowerCase() === "parallel".toLowerCase()) {
       return styles.parallel;
@@ -32,14 +34,14 @@ export default function ExchangeCard({
         start={{ x: 0, y: 1 }}
         locations={[0.05, 0.9]}
       />
-      <Typography bold={false} variant="lg" customStyles={styles.text}>
+      <Typography bold={false} fontSize={sizes.lg} customStyles={styles.text}>
         {capitalizeFirstLetter(exchangeName)}
       </Typography>
 
-      <Typography bold={false} variant="lg" customStyles={styleSelector()}>
+      <Typography bold={false} fontSize={sizes.lg} customStyles={styleSelector()}>
         {dolarRate}
       </Typography>
-      <Typography bold variant="sm" customStyles={styles.text}>
+      <Typography bold fontSize={sizes.sm} customStyles={styles.text}>
         {todayDate === typeof String
           ? todayDate
           : new Date().toLocaleDateString()}

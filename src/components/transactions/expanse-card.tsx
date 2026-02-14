@@ -5,6 +5,7 @@ import Typography from "../general/typography";
 import { StyleSheet } from "react-native";
 import Stack from "../general/stack";
 import Badge from "../general/badge";
+import useTheme from "../../hook/useTheme";
 
 export default function ExpanseCard({
   description,
@@ -15,6 +16,7 @@ export default function ExpanseCard({
   icon,
   id,
 }: Expense) {
+  const {sizes} = useTheme();
   const containerStyles = StyleSheet.flatten([
     styles.containerCard,
     { borderColor: color, borderWidth: 1 },
@@ -43,10 +45,10 @@ export default function ExpanseCard({
           width: "70%",
         }}
       >
-        <Typography bold variant="xl" customStyles={styles.text}>
+        <Typography bold fontSize={sizes.xl} customStyles={styles.text}>
           {title}
         </Typography>
-        <Typography bold={false} variant="sm" customStyles={styles.text}>
+        <Typography bold={false} fontSize={sizes.sm} customStyles={styles.text}>
           {description}
         </Typography>
       </Stack>

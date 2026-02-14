@@ -5,6 +5,7 @@ import Typography from "../../components/general/typography";
 import Icon from "../../components/general/icon";
 import Row from "../../components/general/row";
 import useTheme from "../../hook/useTheme";
+import NotificationIcon from "../../components/notification-icon";
 
 export default function Exchange() {
   const { sizes, theme } = useTheme();
@@ -46,18 +47,7 @@ export default function Exchange() {
             Exchanges
           </Typography>
         </Row>
-        <Icon
-          bgStyle={{
-            padding: sizes.xxs,
-            borderRadius: "100%",
-            backgroundColor: `${theme.t20}`,
-            width: 44,
-            height: 44,
-          }}
-          color={theme.t100}
-          size={sizes.xl}
-          name={"bell-outline"}
-        />
+        <NotificationIcon />
       </Row>
       <View
         style={{

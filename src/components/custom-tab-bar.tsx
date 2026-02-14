@@ -14,73 +14,37 @@ export default function CustomTabBar({
 }: any) {
   const { sizes, theme, globalStyles } = useTheme();
 
-  const tabStyles = StyleSheet.flatten([
-    /*{
-      borderWidth: 1,
-      borderColor: "transparent",
-      borderTopColor: theme.t100,
-      },*/
-    stylesTabs.tabItemContainer,
-  ]);
-  /*const tabStylesSmall = StyleSheet.create([
-    {
-      width: "100%",
-      height: "60%",
-      display: "flex",
-      flexDirection: "row",
-      gap: sizes.xxs,
-      justifyContent: "center",
-      alignItems: "center",
-      //borderWidth: 1,
-      //borderColor: theme.t100,
-    },
-    /*{
-      transform: [{ scaleX: 1 }],
-    },
-  ]);*/
+  const tabStyles = StyleSheet.flatten([stylesTabs.tabItemContainer]);
+
   const tabsItem: TabItem[] = [
-    {
-      name: "home",
-      icon: "home",
-      label: "Home",
-    },
-    {
-      name: "goals",
-      icon: "emoji-events",
-      label: "Goals",
-    },
-    {
-      name: "transactions",
-      icon: "autorenew",
-      label: "Transactions",
-    },
-    {
-      name: "exchange",
-      icon: "attach-money",
-      label: "Exchange",
-    },
-    {
-      name: "settings",
-      icon: "settings",
-      label: "Settings",
-    },
+    { name: "home", icon: "home", label: "Home" },
+    { name: "goals", icon: "emoji-events", label: "Goals" },
+    { name: "transactions", icon: "autorenew", label: "Transactions" },
+    // CORRECCIÓN: Cambié "exchange" por "exchanges" para que coincida con tu TabLayout
+    { name: "exchanges", icon: "attach-money", label: "Exchange" },
+    { name: "settings", icon: "settings", label: "Settings" },
   ];
 
   return (
     <View style={stylesTabs.tabBar}>
       {state.routes.map((route: any, index: number) => {
+        // 1. Buscamos la información del tab basándonos en el nombre de la ruta, no en el índice
+        const tabInfo = tabsItem.find((item) => item.name === route.name);
+
+        // 2. Si Expo Router coló una ruta extra que no está en nuestra lista, no la renderizamos
+        if (!tabInfo) return null;
+
         const { options } = descriptors[route.key];
         const label =
           options.tabBarLabel !== undefined
             ? options.tabBarLabel
             : options.title !== undefined
               ? options.title
-              : route.name;
+              : tabInfo.label; // Usamos nuestro label personalizado como última opción
 
         const isFocused = state.index === index;
 
         const onPress = () => {
-          // startAnimation();
           const event = navigation.emit({
             type: "tabPress",
             target: route.key,
@@ -101,7 +65,6 @@ export default function CustomTabBar({
 
         return (
           <TouchableOpacity
-            // href={buildHref(route.name, route.params)}
             accessibilityState={isFocused ? { selected: true } : {}}
             accessibilityLabel={options.tabBarAccessibilityLabel}
             testID={options.tabBarButtonTestID}
@@ -127,18 +90,12 @@ export default function CustomTabBar({
             >
               <MaterialIcons
                 size={28}
-                name={
-                  route.name === tabsItem[index].name
-                    ? tabsItem[index].icon
-                    : "attach-money"
-                }
+                // Usamos directamente el icono que encontramos en nuestro buscador
+                name={tabInfo.icon as any}
                 color={isFocused ? "white" : globalStyles.subtitle}
                 style={{ marginLeft: isFocused ? -sizes.xs : 0 }}
               />
-              {/*{icons[route.name]({
-              color: isFocused ? colors.primary : colors.text,
-              size: 28,
-              })}*/}
+
               {isFocused ? (
                 <Animated.View>
                   <Typography
@@ -153,19 +110,6 @@ export default function CustomTabBar({
                 </Animated.View>
               ) : null}
             </View>
-            {/*{isFocused ? (
-              <View
-                style={{
-                  backgroundColor: theme.t100,
-                  width: "90%",
-                  height: 1,
-                  display: "flex",
-                  //flexDirection: "row",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              ></View>
-            ) : null}*/}
           </TouchableOpacity>
         );
       })}

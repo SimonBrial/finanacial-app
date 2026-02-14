@@ -2,6 +2,7 @@ import { View, StyleSheet } from "react-native";
 import Typography from "./typography";
 import { BadgeProps } from "../../interface/interface";
 import Container from "./container";
+import useTheme from "../../hook/useTheme";
 
 export default function Badge({
   text,
@@ -10,6 +11,7 @@ export default function Badge({
   iconLeft,
   iconRight,
 }: BadgeProps) {
+  const { sizes } = useTheme();
   const allStyles = StyleSheet.flatten([
     styles.defaultStyles,
     {
@@ -23,7 +25,7 @@ export default function Badge({
   return (
     <Container customStyles={allStyles}>
       {iconLeft && <View>{iconLeft}</View>}
-      <Typography bold variant="xs" customStyles={{ color: color }}>
+      <Typography bold fontSize={sizes.xs} customStyles={{ color: color }}>
         {text}
       </Typography>
       {iconRight && <View>{iconLeft}</View>}
