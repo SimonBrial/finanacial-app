@@ -1,22 +1,20 @@
 import { Pressable, View } from "react-native";
-import { useState } from "react";
 import Icon from "./general/icon";
 
-export default function ShowString() {
-  const [show, setShow] = useState(false);
+interface ShowStringProps {
+  show: boolean;
+  fnShow: () => void;
+}
 
-  const handleShow = () => {
-    setShow(!show);
-  };
-
+export default function ShowString({ show = true, fnShow }: ShowStringProps) {
   return (
     <View>
       {show ? (
-        <Pressable onPress={handleShow}>
+        <Pressable onPress={fnShow}>
           <Icon name={"eye"} variant="ghost" color={"#FFFFFF"} />
         </Pressable>
       ) : (
-        <Pressable onPress={handleShow}>
+        <Pressable onPress={fnShow}>
           <Icon name={"eye-off"} variant="ghost" color={"#FFFFFF"} />
         </Pressable>
       )}

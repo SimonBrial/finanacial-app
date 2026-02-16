@@ -63,7 +63,7 @@ export default function CarouselCardBank() {
         size={6} // Aumentamos un poco el tamaño base de la celda
         containerStyle={{
           gap: 8, // Espaciado entre los puntos
-          marginTop: 20,
+          //marginTop: 20,
           alignItems: "center",
           justifyContent: "center",
           backgroundColor: "transparent",

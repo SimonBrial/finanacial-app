@@ -5,6 +5,7 @@ import useTheme from "../hook/useTheme";
 import Row from "./general/row";
 import ShowString from "./show-string";
 import Badge from "./general/badge";
+import { useState } from "react";
 
 interface BankCardProps {
   bankName: string;
@@ -25,11 +26,12 @@ export default function BankCard({
   percentage,
   trendIcon,
 }: BankCardProps) {
-  const { theme, sizes, globalStyles } = useTheme();
+  const { sizes, globalStyles } = useTheme();
+  const [show, setShow] = useState<boolean>(false);
 
   // Verificación de seguridad extra
   if (!gradientColors || gradientColors.length < 2) {
-    gradientColors = ["#487CF3", "#011B4C"]; 
+    gradientColors = ["#487bf3", "#011B4C"];
   }
 
   return (
@@ -62,7 +64,7 @@ export default function BankCard({
       <Typography
         bold
         fontSize={sizes.xxl}
-        customStyles={{ color: theme.t100, textAlign: "right" }}
+        customStyles={{ color: gradientColors[0], textAlign: "right" }}
       >
         {bankName} {/* DINÁMICO */}
       </Typography>
@@ -73,7 +75,7 @@ export default function BankCard({
             Balance
           </Typography>
           <Typography fontSize={sizes.md} customStyles={{ color: "white" }}>
-            ({currency}) {/* DINÁMICO */}
+            ({currency})
           </Typography>
         </Row>
 
@@ -83,34 +85,50 @@ export default function BankCard({
           customStyles={{
             borderWidth: 1,
             borderColor: "transparent",
-            borderBottomColor: theme.t100,
+            borderBottomColor: gradientColors[0],
             paddingBottom: sizes.xs,
           }}
         >
-          <Typography fontSize={sizes.xxl} customStyles={{ color: "white" }}>
-            {balance} {/* DINÁMICO */}
-          </Typography>
-          <ShowString />
+          {show ? (
+            <Typography fontSize={sizes.xxl} customStyles={{ color: "white" }}>
+              {balance}
+            </Typography>
+          ) : (
+            <Typography fontSize={sizes.xxl} customStyles={{ color: "white" }}>
+              {balance.replace(/./g, "*")}
+            </Typography>
+          )}
+          <ShowString fnShow={() => setShow(!show)} show={show} />
         </Row>
 
         <Row justifyContent="flex-start" gap={sizes.sm} width={"auto"}>
           <Typography fontSize={sizes.sm} customStyles={{ color: "white" }}>
             Last Entry:
           </Typography>
-          <Badge
-            size="sm"
-            text={lastEntry} // DINÁMICO
-            type="bordered"
-            color="white"
-          />
 
-          <Badge
-            size="sm"
-            text={percentage} // DINÁMICO
-            type="bordered"
-            color="#ffffff"
-            iconLeft={trendIcon} // DINÁMICO
-          />
+          {show ? (
+            <Row justifyContent="flex-start" gap={sizes.sm}>
+              <Badge
+                size="sm"
+                text={lastEntry} // DINÁMICO
+                type="bordered"
+                color="white"
+              />
+
+              <Badge
+                size="sm"
+                text={percentage} // DINÁMICO
+                type="bordered"
+                color="#ffffff"
+                iconLeft={trendIcon} // DINÁMICO
+              />
+            </Row>
+          ) : <Badge
+                size="sm"
+                text={"**/**/**"} // DINÁMICO
+                type="bordered"
+                color="#ffffff"
+              />}
         </Row>
       </View>
     </View>
@@ -122,7 +140,6 @@ const stylesDefault = StyleSheet.create({
     width: "100%",
     height: 200,
     borderRadius: 20,
-    //backgroundColor: "red",
   },
   background: {
     position: "absolute",
