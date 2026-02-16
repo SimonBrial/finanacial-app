@@ -9,9 +9,11 @@ import {
   Extrapolation,
   useSharedValue,
 } from "react-native-reanimated";
+import useTheme from "../hook/useTheme";
 
 export default function CarouselCardBank() {
   const progress = useSharedValue<number>(0);
+  const { sizes } = useTheme();
 
   const { width: windowWidth } = useWindowDimensions();
 
@@ -22,7 +24,7 @@ export default function CarouselCardBank() {
 
   const ref = React.useRef<ICarouselInstance>(null);
   return (
-    <View id="carousel-component">
+    <View id="carousel-component" style={{ marginBottom: sizes.lg }}>
       <Carousel
         ref={ref}
         autoPlayInterval={2000}
@@ -67,7 +69,7 @@ export default function CarouselCardBank() {
           alignItems: "center",
           justifyContent: "center",
           backgroundColor: "transparent",
-          }}
+        }}
         renderItem={() => (
           <View
             style={{

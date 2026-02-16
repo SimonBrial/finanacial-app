@@ -1,0 +1,61 @@
+import React from "react";
+import Icon from "./general/icon";
+import Row from "./general/row";
+import Typography from "./general/typography";
+import NotificationIcon from "./notification-icon";
+import useTheme from "../hook/useTheme";
+import { IconBase } from "../interface/interface";
+
+interface TitleCustomProps extends IconBase {
+  title: string;
+  withNotificationIcon: boolean;
+}
+
+export default function TitleCustom({
+  withNotificationIcon,
+  library,
+  title,
+  name,
+}: TitleCustomProps) {
+  const { theme, sizes } = useTheme();
+  return (
+    <Row
+      alignItem="center"
+      justifyContent="space-between"
+      width={"100%"}
+      customStyles={{
+        paddingBottom: sizes.sm,
+      }}
+    >
+      <Row
+        width={"70%"}
+        gap={sizes.xs}
+        //customStyles={{ paddingLeft: sizes.xs }}
+        alignItem="center"
+        justifyContent="start"
+      >
+        <Icon
+          bgStyle={{
+            padding: sizes.xxs,
+            borderRadius: sizes.xs,
+            backgroundColor: `${theme.t20}`,
+            //width: 44,
+            //height: 44,
+          }}
+          color={theme.t100}
+          size={sizes.xl}
+          library={library}
+          name={name}
+        />
+        <Typography
+          fontSize={sizes.xl}
+          bold={false}
+          customStyles={{ color: "white" }}
+        >
+          {title}
+        </Typography>
+      </Row>
+      {withNotificationIcon && <NotificationIcon />}
+    </Row>
+  );
+}

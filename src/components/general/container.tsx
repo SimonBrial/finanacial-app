@@ -16,7 +16,7 @@ export default function Container({
     defaultStyles.container,
     customStyles,
     { gap: gap ? gap : sizes.xxs },
-    { width: width ? width : sizes.xxs },
+    { width: width ? width : "100%" },
     { flexWrap: wrap ? "wrap" : "nowrap" },
   ]);
   return <View style={styles}>{children}</View>;

@@ -53,6 +53,8 @@ interface GridProps {
   gap?: number;
   wrap?: boolean;
   width?: number | string;
+  alignItem?: string;
+  justifyContent?: string;
 }
 
 interface ExchangeRate {

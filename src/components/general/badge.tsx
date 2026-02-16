@@ -6,7 +6,7 @@ import Icon from "./icon";
 import { IconBase } from "../../interface/interface";
 
 // 1. Tipados más descriptivos y exportables
-export type BadgeVariant = "filled" | "bordered" | "ghost";
+export type BadgeVariant = "filled" | "bordered" | "ghost" | "light" ;
 export type BadgeSize = "sm" | "md" | "lg";
 
 interface BadgeProps extends Partial<IconBase> {
@@ -41,6 +41,7 @@ export default function Badge({
 
     const variantStyles: Record<BadgeVariant, ViewStyle> = {
       filled: { backgroundColor: color, borderWidth: 0 },
+      light: { backgroundColor: "transparent", borderWidth: 0 },
       bordered: {
         backgroundColor: "transparent",
         borderWidth: 1,
