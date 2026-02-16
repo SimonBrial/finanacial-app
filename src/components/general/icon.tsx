@@ -1,60 +1,85 @@
-import {
-  MaterialCommunityIcons,
-  MaterialIcons,
-  FontAwesome,
-  Ionicons,
-  Feather,
-} from "@expo/vector-icons";
-import { OpaqueColorValue, StyleSheet, View } from "react-native";
+import { StyleSheet, View, ViewStyle } from "react-native";
+import useTheme from "../../hook/useTheme";
+import { IconBase } from "../../interface/interface";
+import { IconLibraries } from "../../types/type";
 
-const IconLibraries = {
-  MaterialCommunityIcons,
-  MaterialIcons,
-  FontAwesome,
-  Ionicons,
-  Feather,
-};
+type IconVariant = "solid" | "bordered" | "ghost" | "light";
 
-export type IconLibrary = keyof typeof IconLibraries;
-
-interface IconProps {
-  library?: IconLibrary;
-  name?: any; //  Flexibilidad de nombres entre familias
+interface IconProps extends IconBase {
   size?: number;
-  color?: string | OpaqueColorValue;
+  color?: string;
   style?: object;
   bgStyle?: object;
+  withBg?: boolean;
+  rounded?: boolean;
+  variant?: IconVariant; // <-- Agregamos la prop variant
+  padding?: number; // <-- Útil para darle respiro al ícono dentro del View
 }
 
 export default function Icon({
   library = "MaterialCommunityIcons",
-  color = "#ffffff",
-  size = 16,
+  color, // Lo dejamos dinámico según la variante si no se pasa uno explícito
+  rounded = false,
+  variant = "solid", // 'ghost' suele ser un buen por defecto para íconos sueltos
   name = "home",
+  size = 24,
+  padding = 8,
   bgStyle,
   style,
 }: IconProps) {
-  const SelectedIcon = IconLibraries[library];
+  const { sizes, theme } = useTheme();
+  const SelectedIcon: any = IconLibraries[library];
 
   if (!SelectedIcon) {
     return null;
   }
 
-  const iconStyles = StyleSheet.flatten([
-    bgStyle,
+  const variantStyles: Record<IconVariant, ViewStyle> = {
+    light: {
+      backgroundColor: "transparent",
+      borderWidth: 0,
+      padding: 0,
+    },
+    solid: {
+      backgroundColor: theme.t20,
+      borderWidth: 0,
+    },
+    bordered: {
+      backgroundColor: "transparent",
+      borderWidth: 1,
+      borderColor: theme.t100,
+    },
+    ghost: {
+      backgroundColor: color ? `${color}33` : theme.t20,
+      borderWidth: 0,
+    },
+  };
+
+  const variantTextStyle: Record<IconVariant, string> = {
+    light: color ? (color as string) : "white",
+    solid: theme.t100,
+    bordered: theme.t100,
+    ghost: color ? color : theme.t100,
+  };
+
+  const containerStyles = StyleSheet.flatten([
     {
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
+      padding: padding,
+      borderRadius: rounded ? 999 : sizes.xxs,
     },
+    variantStyles[variant], // <-- Magia aquí: busca directo el estilo que le pases
+    bgStyle,
   ]);
 
   return (
-    <View style={iconStyles}>
+    <View style={containerStyles}>
       <SelectedIcon
         name={name as any}
         size={size}
-        color={color}
+        color={variantTextStyle[variant]}
         style={style}
       />
     </View>

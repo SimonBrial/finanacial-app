@@ -6,6 +6,8 @@ import { View } from "react-native";
 import Icon from "../../components/general/icon";
 import Row from "../../components/general/row";
 import NotificationIcon from "../../components/notification-icon";
+import BankCard from "../../components/bank-card";
+import CarouselCardBank from "../../components/carousel-card-bank";
 
 export default function Home() {
   const { theme, sizes } = useTheme();
@@ -53,27 +55,13 @@ export default function Home() {
           flex: 1,
           gap: 20,
           alignItems: "center",
-          justifyContent: "center",
+          justifyContent: "flex-start",
           backgroundColor: "black",
           width: "100%",
           height: 500,
         }}
       >
-        <Link
-          href="/"
-          style={{
-            paddingVertical: sizes.sm,
-            paddingHorizontal: sizes.xl,
-            backgroundColor: theme.t20,
-            borderRadius: sizes.xs,
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Typography customStyles={{ color: theme.t100, marginTop: 20 }}>
-            Go to Login
-          </Typography>
-        </Link>
+        <CarouselCardBank />
       </View>
     </GlobalContainer>
   );

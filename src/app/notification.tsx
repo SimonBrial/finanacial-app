@@ -5,9 +5,13 @@ import Row from "../components/general/row";
 import useTheme from "../hook/useTheme";
 
 export default function Notification({ ...props }) {
-  const { theme, sizes } = useTheme();
+  const { theme, sizes, globalStyles } = useTheme();
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {
+      borderWidth: 2,
+      borderColor: globalStyles.borderContainer,
+      borderRadius: sizes.xs,
+    }]}>
       <Row alignItem="center" justifyContent="space-between" width={"100%"}>
         <Row
           width={"70%"}
@@ -64,11 +68,12 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     justifyContent: "flex-start",
     backgroundColor: "rgba(000, 000, 000, 0.99)",
-    paddingVertical: 68,
+    marginTop: 50,
+    paddingVertical: 20,
     paddingHorizontal: 20,
     opacity: 0.9,
-    height: "100%",
-    borderWidth: 2,
-    borderColor: "rgba(255, 255, 255, 0.1)",
+    height: "90%",
+    
+    //borderColor: "rgba(255, 255, 255, 0.1)",
   },
 });

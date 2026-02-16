@@ -1,32 +1,37 @@
-import {
-  BalanceCardProps,
-  ExchangeRate,
-  Expense,
-  Goal,
-} from "../interface/interface";
+import { ExchangeRate, Expense, Goal } from "../interface/interface";
 
 const dt = new Date();
 
-export const balanceCards: BalanceCardProps[] = [
+export const balanceCards: any = [
   {
-    id: 1,
-    title: "Bolivares Amount",
-    amount: 1500,
+    id: "1",
+    bankName: "BNC",
+    gradientColors: ["#487CF3", "#011B4C"],
+    balance: "1.456,65",
     currency: "VES",
-    started: 2000,
-    spent: 500,
-    lastEntry: dt.toLocaleDateString(),
-    theme: "green",
+    lastEntry: "01/01/2024",
+    percentage: "5%",
+    trendIcon: "trending-up",
   },
   {
-    id: 2,
-    title: "Dollars Amount",
-    amount: 800,
+    id: "2",
+    bankName: "BANESCO",
+    gradientColors: ["#00a650", "#005a2b"],
+    balance: "3.120,00",
+    currency: "VES",
+    lastEntry: "12/02/2026",
+    percentage: "12%",
+    trendIcon: "trending-up",
+  },
+  {
+    id: "3",
+    bankName: "MERCANTIL",
+    gradientColors: ["#1d428a", "#0d1f42"],
+    balance: "850,20",
     currency: "USD",
-    started: 1000,
-    spent: 200,
-    lastEntry: dt.toLocaleDateString(),
-    theme: "blue",
+    lastEntry: "14/02/2026",
+    percentage: "2%",
+    trendIcon: "trending-down",
   },
 ];
 

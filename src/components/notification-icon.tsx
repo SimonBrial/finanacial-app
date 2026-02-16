@@ -6,7 +6,7 @@ import useTheme from "../hook/useTheme";
 
 export default function NotificationIcon({ active, ...props }: any) {
   const navigation = useNavigation();
-  const { theme, sizes } = useTheme();
+  const { theme } = useTheme();
 
   const openNotifications = () => {
     navigation.dispatch(DrawerActions.openDrawer());
@@ -14,20 +14,22 @@ export default function NotificationIcon({ active, ...props }: any) {
   return (
     <Pressable onPress={openNotifications}>
       <Icon
-        bgStyle={[
+        /*bgStyle={[
           //styles.container,
           {
             padding: sizes.xxs,
             borderRadius: "100%",
-            backgroundColor: `${theme.t20}`,
+            //backgroundColor: `${theme.t20}`,
             width: 44,
             height: 44,
             position: "relative",
           },
         ]}
         color={theme.t100}
-        size={sizes.xl}
+        size={sizes.xl}*/
         name={"bell-outline"}
+        rounded
+        variant="ghost"
       />
       <View
         style={[

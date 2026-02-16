@@ -1,5 +1,5 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { typeBadge } from "../types/type";
+import { typeBadge, IconLibrary } from "../types/type";
 
 interface ExchangeCardProps {
   dolarRate: number;
@@ -98,6 +98,11 @@ interface ThemeContextProps {
   globalStyles: Record<string, string>;
 }
 
+interface IconBase{
+  library?: IconLibrary;
+  name?: any; //  Flexibilidad de nombres entre familias
+}
+
 export type {
   ThemeContextProps,
   ExchangeCardProps,
@@ -106,6 +111,7 @@ export type {
   ExchangeRate,
   BadgeProps,
   GridProps,
+  IconBase,
   ColProps,
   RowProps,
   Expense,
