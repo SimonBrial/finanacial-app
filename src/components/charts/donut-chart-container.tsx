@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import {
+  ActivityIndicator,
   ScrollView,
   StyleSheet,
-  Text,
   View,
-  ActivityIndicator,
 } from "react-native";
 import { useSharedValue, withTiming } from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -23,7 +22,7 @@ const GAP = 0.015;
 
 const donutData: Data[] = [
   { value: 45, color: "#009FFF", percentage: 45 },
-  { value: 30, color: "#93FCF8", percentage: 30 },
+  { value: 30, color: "#FFFFFF", percentage: 30 },
   { value: 250, color: "#BDB2FA", percentage: 25 },
 ];
 

@@ -45,6 +45,7 @@ interface RowProps {
   width?: number | string;
   alignItem?: string;
   justifyContent?: string;
+  wrap?: boolean;
 }
 
 interface GridProps {
@@ -100,7 +101,7 @@ interface ThemeContextProps {
   globalStyles: Record<string, string>;
 }
 
-interface IconBase{
+interface IconBase {
   library?: IconLibrary;
   name?: any; //  Flexibilidad de nombres entre familias
 }

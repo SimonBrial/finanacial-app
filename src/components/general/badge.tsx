@@ -64,6 +64,11 @@ export default function Badge({
       md: { fontSize: sizes.sm },
       lg: { fontSize: sizes.md },
     };
+    const sizeIcon: Record<BadgeSize, TextStyle> = {
+      sm: { fontSize: sizes.sm },
+      md: { fontSize: sizes.md },
+      lg: { fontSize: sizes.lg },
+    };
 
     // 1. Calculamos el estilo del contenedor
     const containerStyleObj = StyleSheet.flatten([
@@ -71,6 +76,7 @@ export default function Badge({
       variantStyles[type],
       sizeStyles[size],
       sizeText[size],
+      sizeIcon[size],
       fullWidth && { width: "100%", alignSelf: "auto" as const },
       containerStyle,
     ]) as ViewStyle;
@@ -81,6 +87,7 @@ export default function Badge({
       textStyle: { color: contentColor, textAlign: "center", fontSize: sizeText[size]?.fontSize } as TextStyle,
       iconColor: contentColor,
       sizeText: sizeText[size],
+      sizeIcon: sizeIcon[size],
     };
   }, [type, size, color, fullWidth, containerStyle, sizes]);
 
@@ -92,7 +99,7 @@ export default function Badge({
           name={iconLeft}
           library={library}
           color={themedStyles.iconColor}
-          size={sizes.sm}
+          size={themedStyles.sizeIcon.fontSize}
         />
       )}
 
@@ -110,7 +117,7 @@ export default function Badge({
           name={iconRight}
           library={library}
           color={themedStyles.iconColor}
-          size={sizes.sm}
+          size={themedStyles.sizeIcon.fontSize}
         />
       )}
     </View>

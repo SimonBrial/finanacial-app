@@ -8,6 +8,7 @@ export default function Row({
   width = "100%",
   customStyles,
   children,
+  wrap = false,
   gap,
 }: RowProps) {
   const { sizes } = useTheme();
@@ -18,6 +19,7 @@ export default function Row({
       display: "flex",
       flexDirection: "row",
     },
+    { flexWrap: wrap ? "wrap" : "nowrap" },
     { gap: gap ? gap : sizes.xxs },
     { width: width ? width : sizes.xxs },
     { alignItems: alignItem ? alignItem : "start" },
