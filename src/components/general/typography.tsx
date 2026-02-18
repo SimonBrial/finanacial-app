@@ -8,6 +8,7 @@ interface TypographyProps {
   fontSize?: number;
   /** Si es true, aplica negrita */
   bold?: boolean;
+  txtWhite?: boolean;
 }
 
 export default function Typography({
@@ -15,12 +16,14 @@ export default function Typography({
   children,
   customStyles,
   bold = false,
+  txtWhite = false,
   ...rest
 }: TypographyProps) {
   const combinedStyles = StyleSheet.flatten([
     baseStyles.text,
     { fontSize },
     bold ? { fontWeight: "bold" as const } : {},
+    txtWhite ? { color: "white" as const } : {},
     customStyles,
   ]);
 

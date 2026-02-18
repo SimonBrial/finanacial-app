@@ -4,6 +4,7 @@ import { Link } from "expo-router";
 import { View } from "react-native";
 import useTheme from "../../hook/useTheme";
 import TitleCustom from "../../components/title-custom";
+import GoalHero from "../../components/goals/goal-hero";
 
 export default function Goals() {
   const { theme, sizes } = useTheme();
@@ -15,8 +16,9 @@ export default function Goals() {
         name={"emoji-events"}
         library="MaterialIcons"
       />
+      <GoalHero />
 
-      <View
+      {/* <View
         style={{
           flex: 1,
           gap: 20,
@@ -42,7 +44,7 @@ export default function Goals() {
             Go to Login
           </Typography>
         </Link>
-      </View>
+      </View> */}
     </GlobalContainer>
   );
 }

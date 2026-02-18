@@ -44,7 +44,7 @@ export default function GoalCard({
       customStyles={{
         borderRadius: 1000,
         paddingHorizontal: sizes.xs,
-        paddingVertical: sizes.sm,
+        paddingVertical: sizes.xs,
         backgroundColor: globalStyles.bgContainerStart,
         borderColor: globalStyles.borderContainer,
         borderWidth: 1,
