@@ -1,8 +1,8 @@
 import useTheme from "../hook/useTheme";
-import Badge from "./general/badge";
-import Row from "./general/row";
-import Stack from "./general/stack";
-import Typography from "./general/typography";
+import Badge from "./ui/badge";
+import Row from "./ui/row";
+import Stack from "./ui/stack";
+import Typography from "./ui/typography";
 import CircularProgress from "./charts/progress-donut";
 import { View } from "react-native";
 import { Canvas, Rect, RadialGradient, vec } from "@shopify/react-native-skia";

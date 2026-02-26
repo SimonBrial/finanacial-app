@@ -9,6 +9,7 @@ export default function TabLayout() {
     <Drawer.Navigator // Le pasamos tu componente personalizado
       drawerContent={(props) => <Notification {...props} />}
       screenOptions={{
+        swipeEnabled: false, // Deshabilitamos el swipe para abrir el drawer
         drawerPosition: "right", // Se abre desde la derecha
         headerShown: false, // Ocultamos el header del drawer para usar los de tus pantallas
         drawerType: "front", // El drawer se superpone a la pantalla actual

@@ -1,10 +1,10 @@
 import { View, StyleSheet } from "react-native";
-import Typography from "./general/typography";
+import Typography from "./ui/typography";
 import { LinearGradient } from "expo-linear-gradient";
 import useTheme from "../hook/useTheme";
-import Row from "./general/row";
+import Row from "./ui/row";
 import ShowString from "./show-string";
-import Badge from "./general/badge";
+import Badge from "./ui/badge";
 import { useState } from "react";
 
 interface BankCardProps {
@@ -48,7 +48,7 @@ export default function BankCard({
       ]}
     >
       <LinearGradient
-        colors={gradientColors} // DINÁMICO
+        colors={gradientColors}
         style={[
           stylesDefault.background,
           {
@@ -66,7 +66,7 @@ export default function BankCard({
         fontSize={sizes.xxl}
         customStyles={{ color: gradientColors[0], textAlign: "right" }}
       >
-        {bankName} {/* DINÁMICO */}
+        {bankName}
       </Typography>
 
       <View style={{ display: "flex", flexDirection: "column", gap: sizes.xs }}>
@@ -110,22 +110,22 @@ export default function BankCard({
             <Row justifyContent="flex-start" gap={sizes.sm}>
               <Badge
                 size="sm"
-                text={lastEntry} // DINÁMICO
+                text={lastEntry}
                 type="bordered"
                 color="white"
               />
 
               <Badge
                 size="sm"
-                text={percentage} // DINÁMICO
+                text={percentage}
                 type="bordered"
                 color="#ffffff"
-                iconLeft={trendIcon} // DINÁMICO
+                iconLeft={trendIcon}
               />
             </Row>
           ) : <Badge
                 size="sm"
-                text={"**/**/**"} // DINÁMICO
+                text={"**/**/**"}
                 type="bordered"
                 color="#ffffff"
               />}

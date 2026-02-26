@@ -1,7 +1,7 @@
 import { LinearGradient } from "expo-linear-gradient";
 import useTheme from "../hook/useTheme";
 import TitleCustom from "./title-custom";
-import Stack from "./general/stack";
+import Stack from "./ui/stack";
 import DolarPriceItem from "./dolar-price-item";
 
 export default function DolarPriceContainer() {
@@ -13,11 +13,13 @@ export default function DolarPriceContainer() {
       customStyles={{
         borderWidth: 1,
         borderColor: globalStyles.borderContainer,
-        borderRadius: sizes.xs,
-        padding: sizes.lg,
+        borderRadius: sizes.lg,
+        paddingHorizontal: sizes.lg,
+        paddingVertical: sizes.xl,
         position: "relative",
         height: 360,
         width: "100%",
+        marginTop: sizes.xl,
       }}
     >
       <LinearGradient
@@ -30,7 +32,7 @@ export default function DolarPriceContainer() {
             top: 0,
             height: 360,
             //width: "100%",
-            borderRadius: sizes.xs,
+            borderRadius: sizes.lg,
             borderWidth: 1,
             borderColor: globalStyles.borderContainer,
           },

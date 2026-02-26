@@ -1,9 +1,9 @@
 import React from "react";
 import TitleCustom from "./title-custom";
 import useTheme from "../hook/useTheme";
-import Stack from "./general/stack";
+import Stack from "./ui/stack";
 import GoalCard from "./goal-card";
-import Row from "./general/row";
+import Row from "./ui/row";
 
 export default function GoalsContainer() {
   const { sizes } = useTheme();

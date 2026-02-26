@@ -16,6 +16,10 @@ export const IconLibraries = {
 
 type IconLibrary = keyof typeof IconLibraries;
 
-type typeBadge = "filled" | "bordered" | "ghost";
+type PrimitiveVariants = "filled" | "bordered" | "ghost" | "light" | "flat";
 
-export type { typeBadge, IconLibrary };
+type BasesSize = "sm" | "md" | "lg";
+
+type FilterKey = "Week" | "Month" | "Year";
+
+export type { PrimitiveVariants, IconLibrary, BasesSize, FilterKey };

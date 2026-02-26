@@ -1,17 +1,23 @@
 import { StyleSheet, View } from "react-native";
-import Typography from "../components/general/typography";
-import Icon from "../components/general/icon";
-import Row from "../components/general/row";
+import Typography from "../components/ui/typography";
+import Icon from "../components/ui/icon";
+import Row from "../components/ui/row";
 import useTheme from "../hook/useTheme";
 
 export default function Notification({ ...props }) {
   const { theme, sizes, globalStyles } = useTheme();
   return (
-    <View style={[styles.container, {
-      borderWidth: 2,
-      borderColor: globalStyles.borderContainer,
-      borderRadius: sizes.xs,
-    }]}>
+    <View
+      style={[
+        styles.container,
+        {
+          borderWidth: 2,
+          borderColor: globalStyles.borderContainer,
+          borderRadius: sizes.xs,
+          zIndex: -999,
+        },
+      ]}
+    >
       <Row alignItem="center" justifyContent="space-between" width={"100%"}>
         <Row
           width={"70%"}
@@ -73,7 +79,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     opacity: 0.9,
     height: "90%",
-    
+
     //borderColor: "rgba(255, 255, 255, 0.1)",
   },
 });

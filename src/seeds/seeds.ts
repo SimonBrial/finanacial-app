@@ -1,4 +1,5 @@
 import { ExchangeRate, Expense, Goal } from "../interface/interface";
+import { FilterKey } from "../types/type";
 
 const dt = new Date();
 
@@ -163,3 +164,94 @@ export const constExpense: Expense[] = [
     completed: false,
   },
 ];
+export const MOCK_DB: Record<FilterKey, any> = {
+  Week: {
+    periodLabel: "Esta Semana", // Comparado con la semana anterior
+    Income: {
+      data: [
+        { value: 120, label: "Mon" },
+        { value: 400, label: "Tue" },
+        { value: 200, label: "Wed" },
+        { value: 600, label: "Thu" },
+        { value: 100, label: "Fri" },
+        { value: 500, label: "Sat" },
+        { value: 250, label: "Sun" },
+      ],
+      currentTotal: 2170,
+      previousTotal: 1850,
+    },
+    Expense: {
+      data: [
+        { value: 50, label: "Mon" },
+        { value: 80, label: "Tue" },
+        { value: 30, label: "Wed" },
+        { value: 100, label: "Thu" },
+        { value: 150, label: "Fri" },
+        { value: 90, label: "Sat" },
+        { value: 120, label: "Sun" },
+      ],
+      currentTotal: 620,
+      previousTotal: 700,
+    },
+  },
+  Month: {
+    periodLabel: "Febrero 2026", // Comparado con el mes anterior
+    Income: {
+      // 28 días generados como ejemplo para un mes
+      data: Array.from({ length: 28 }, (_, i) => ({
+        value: Math.floor(Math.random() * 500) + 50,
+        label: `${i + 1}`,
+      })),
+      currentTotal: 8500,
+      previousTotal: 7200,
+    },
+    Expense: {
+      data: Array.from({ length: 28 }, (_, i) => ({
+        value: Math.floor(Math.random() * 300) + 20,
+        label: `${i + 1}`,
+      })),
+      currentTotal: 4200,
+      previousTotal: 3800,
+    },
+  },
+  Year: {
+    periodLabel: "Año 2026", // Comparado con el año anterior (2025)
+    Income: {
+      // 12 meses del año
+      data: [
+        { value: 3500, label: "Jan" },
+        { value: 4500, label: "Feb" },
+        { value: 4200, label: "Mar" },
+        { value: 5000, label: "Apr" },
+        { value: 6100, label: "May" },
+        { value: 5800, label: "Jun" },
+        { value: 6500, label: "Jul" },
+        { value: 7000, label: "Aug" },
+        { value: 6800, label: "Sep" },
+        { value: 7200, label: "Oct" },
+        { value: 8000, label: "Nov" },
+        { value: 9500, label: "Dec" },
+      ],
+      currentTotal: 74100,
+      previousTotal: 65000,
+    },
+    Expense: {
+      data: [
+        { value: 1500, label: "Jan" },
+        { value: 2100, label: "Feb" },
+        { value: 1800, label: "Mar" },
+        { value: 2500, label: "Apr" },
+        { value: 3000, label: "May" },
+        { value: 2800, label: "Jun" },
+        { value: 3200, label: "Jul" },
+        { value: 3500, label: "Aug" },
+        { value: 3100, label: "Sep" },
+        { value: 3400, label: "Oct" },
+        { value: 4000, label: "Nov" },
+        { value: 5000, label: "Dec" },
+      ],
+      currentTotal: 35900,
+      previousTotal: 30000,
+    },
+  },
+};

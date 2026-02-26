@@ -1,5 +1,5 @@
-import GlobalContainer from "../../components/general/global-container";
-import Typography from "../../components/general/typography";
+import GlobalContainer from "../../components/ui/global-container";
+import Typography from "../../components/ui/typography";
 import { Link } from "expo-router";
 import { View } from "react-native";
 import useTheme from "../../hook/useTheme";

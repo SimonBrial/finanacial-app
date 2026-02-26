@@ -1,12 +1,12 @@
 import { StyleSheet, View } from "react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import Stack from "../../components/general/stack";
+import Stack from "../ui/stack";
 import { Goal } from "../../interface/interface";
 import { formatNumber } from "../../utils/formatNumber";
 import { goalPercentage } from "../../utils/goalPercentage";
-import Badge from "../general/badge";
-import Container from "../general/container";
-import Typography from "../general/typography";
+import Badge from "../ui/badge";
+import Container from "../ui/container";
+import Typography from "../ui/typography";
 import useTheme from "../../hook/useTheme";
 
 export default function GoalCard({

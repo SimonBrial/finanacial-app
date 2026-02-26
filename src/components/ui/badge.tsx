@@ -3,22 +3,8 @@ import { StyleSheet, ViewStyle, TextStyle, View } from "react-native";
 import Typography from "./typography";
 import useTheme from "../../hook/useTheme";
 import Icon from "./icon";
-import { IconBase } from "../../interface/interface";
-
-// 1. Tipados más descriptivos y exportables
-export type BadgeVariant = "filled" | "bordered" | "ghost" | "light" ;
-export type BadgeSize = "sm" | "md" | "lg";
-
-interface BadgeProps extends Partial<IconBase> {
-  text: string;
-  color?: string;
-  type?: BadgeVariant; // Opcional con default
-  size?: BadgeSize; // Opcional con default
-  iconLeft?: any; // Cambiado a 'any' o string si esperas el nombre del icono
-  iconRight?: any;
-  fullWidth?: boolean; // Nueva prop para controlar el ancho completo
-  containerStyle?: ViewStyle;
-}
+import { BadgeProps } from "../../interface/interface";
+import { BasesSize, PrimitiveVariants } from "../../types/type";
 
 const DEFAULT_COLOR = "#006dff";
 
@@ -39,7 +25,7 @@ export default function Badge({
     const isFilled = type === "filled";
     const contentColor = isFilled ? "#FFFFFF" : color;
 
-    const variantStyles: Record<BadgeVariant, ViewStyle> = {
+    const variantStyles: Record<PrimitiveVariants, ViewStyle> = {
       filled: { backgroundColor: color, borderWidth: 0 },
       light: { backgroundColor: "transparent", borderWidth: 0 },
       bordered: {
@@ -52,31 +38,36 @@ export default function Badge({
         borderWidth: 1,
         borderColor: color,
       },
+      flat: {
+        backgroundColor: `${color}25`,
+        //borderWidth: 1,
+        //borderColor: color,
+      },
     };
 
-    const sizeStyles: Record<BadgeSize, ViewStyle> = {
+    const sizeStyles: Record<BasesSize, ViewStyle> = {
       sm: { height: 16, paddingHorizontal: 10 },
       md: { height: 20, paddingHorizontal: 12 },
       lg: { height: 22, paddingHorizontal: 14 },
     };
-    const sizeText: Record<BadgeSize, TextStyle> = {
+    const sizeText: Record<BasesSize, TextStyle> = {
       sm: { fontSize: sizes.xs },
       md: { fontSize: sizes.sm },
       lg: { fontSize: sizes.md },
     };
-    const sizeIcon: Record<BadgeSize, TextStyle> = {
+    const sizeIcon: Record<BasesSize, TextStyle> = {
       sm: { fontSize: sizes.sm },
       md: { fontSize: sizes.md },
       lg: { fontSize: sizes.lg },
     };
 
     // 1. Calculamos el estilo del contenedor
-    const containerStyleObj = StyleSheet.flatten([
+    const containerStyleObj: ViewStyle = StyleSheet.flatten([
       styles.defaultStyles,
-      variantStyles[type],
-      sizeStyles[size],
-      sizeText[size],
-      sizeIcon[size],
+      variantStyles[type as PrimitiveVariants],
+      sizeStyles[size as BasesSize],
+      sizeText[size as BasesSize],
+      sizeIcon[size as BasesSize],
       fullWidth && { width: "100%", alignSelf: "auto" as const },
       containerStyle,
     ]) as ViewStyle;
@@ -84,10 +75,14 @@ export default function Badge({
     // 2. Retornamos el objeto con sus propiedades bien definidas
     return {
       container: containerStyleObj,
-      textStyle: { color: contentColor, textAlign: "center", fontSize: sizeText[size]?.fontSize } as TextStyle,
+      textStyle: {
+        color: contentColor,
+        textAlign: "center",
+        fontSize: sizeText[size as BasesSize]?.fontSize,
+      } as TextStyle,
       iconColor: contentColor,
-      sizeText: sizeText[size],
-      sizeIcon: sizeIcon[size],
+      sizeText: sizeText[size as BasesSize],
+      sizeIcon: sizeIcon[size as BasesSize],
     };
   }, [type, size, color, fullWidth, containerStyle, sizes]);
 

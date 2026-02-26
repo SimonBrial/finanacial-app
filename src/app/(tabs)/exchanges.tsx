@@ -1,7 +1,7 @@
 import { Link } from "expo-router";
 import { View } from "react-native";
-import GlobalContainer from "../../components/general/global-container";
-import Typography from "../../components/general/typography";
+import GlobalContainer from "../../components/ui/global-container";
+import Typography from "../../components/ui/typography";
 import useTheme from "../../hook/useTheme";
 import TitleCustom from "../../components/title-custom";
 

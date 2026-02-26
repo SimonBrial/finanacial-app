@@ -1,8 +1,8 @@
 import { StyleSheet, View } from "react-native";
-import Typography from "./general/typography";
+import Typography from "./ui/typography";
 import Feather from "@expo/vector-icons/Feather";
 import { BalanceCardProps } from "../interface/interface";
-import Badge from "./general/badge";
+import Badge from "./ui/badge";
 import useTheme from "../hook/useTheme";
 
 export default function CardCoin({

@@ -1,5 +1,6 @@
+import { TextStyle } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { typeBadge, IconLibrary } from "../types/type";
+import { PrimitiveVariants, IconLibrary, BasesSize } from "../types/type";
 
 interface ExchangeCardProps {
   dolarRate: number;
@@ -24,13 +25,29 @@ interface BalanceCardProps {
   color?: string;
 } */
 
-interface BadgeProps {
-  // Define any props if needed in the future
+interface BadgeProps extends Partial<IconBase> {
   text: string;
   color?: string;
-  type: typeBadge;
-  iconLeft?: React.ReactNode;
-  iconRight?: React.ReactNode;
+  type?: PrimitiveVariants; // Opcional con default
+  size?: BasesSize; // Opcional con default
+  iconLeft?: any; // Cambiado a 'any' o string si esperas el nombre del icono
+  iconRight?: any;
+  fullWidth?: boolean; // Nueva prop para controlar el ancho completo
+  containerStyle?: ViewStyle;
+}
+interface ButtonProps extends Partial<IconBase> {
+  text: string;
+  color?: string;
+  type?: PrimitiveVariants; // Opcional con default
+  size?: BasesSize | "xs"; // Opcional con default
+  iconLeft?: any; // Cambiado a 'any' o string si esperas el nombre del icono
+  iconRight?: any;
+  fullWidth?: boolean; // Nueva prop para controlar el ancho completo
+  containerStyle?: ViewStyle;
+  customColorText?: TextStyle;
+  onPress?: () => void;
+  disabled?: boolean;
+  isActive?: boolean; // Nueva prop para controlar el estado activo
 }
 
 interface ColProps {
@@ -112,6 +129,7 @@ export type {
   BalanceCardProps,
   GoalCardProps,
   ExchangeRate,
+  ButtonProps,
   BadgeProps,
   GridProps,
   IconBase,

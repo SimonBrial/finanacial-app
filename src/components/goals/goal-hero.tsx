@@ -1,16 +1,17 @@
 import { TouchableOpacity, View } from "react-native";
-import Stack from "../general/stack";
-import Typography from "../general/typography";
-import Row from "../general/row";
+import Stack from "../ui/stack";
+import Typography from "../ui/typography";
+import Row from "../ui/row";
 import useTheme from "../../hook/useTheme";
 import { LinearGradient } from "expo-linear-gradient";
-import Badge from "../general/badge";
-import Icon from "../general/icon";
+import Badge from "../ui/badge";
+import Icon from "../ui/icon";
 import Collapsible from "react-native-collapsible";
 import { useState } from "react";
+import { Canvas, RadialGradient, Rect, vec } from "@shopify/react-native-skia";
 
 export default function GoalHero() {
-  const { globalStyles, sizes, inProgress, complete } = useTheme();
+  const { globalStyles, sizes, inProgress, complete, theme } = useTheme();
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   const toggleCollapsible = () => {
@@ -56,9 +57,67 @@ export default function GoalHero() {
           borderBottomColor: globalStyles.borderContainer,
           borderBottomWidth: 1,
           paddingBottom: sizes.xxl,
+          position: "relative",
         }}
       >
-        <Icon rounded size={64} />
+        <View
+          style={{
+            height: 120,
+            width: 120,
+            backgroundColor: theme.t20,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: 1000,
+            borderWidth: 1,
+            borderColor: theme.t100,
+          }}
+        >
+          <Canvas
+            style={{
+              flex: 1,
+              width: 150,
+              height: 150,
+              position: "absolute",
+              opacity: 0.2,
+              borderRadius: 1000,
+            }}
+            id="sdlajksdasdhasdhjhj"
+          >
+            <Rect x={0} y={0} width={150} height={150}>
+              <RadialGradient
+                c={vec(75, 75)}
+                r={75}
+                colors={[
+                  "transparent",
+                  "transparent",
+                  "transparent",
+                  "transparent",
+                  "transparent",
+                  "transparent",
+                  theme.t100,
+                  theme.t80,
+                  theme.t60,
+                  theme.t40,
+                  theme.t20,
+                  "transparent",
+                ]}
+              />
+            </Rect>
+          </Canvas>
+          <Icon
+            rounded
+            color="white"
+            size={50}
+            name={"emoji-events"}
+            library="MaterialIcons"
+            bgStyle={{
+              padding: 16,
+              backgroundColor: theme.t100,
+            }}
+            variant="light"
+          />
+        </View>
         <View
           style={{
             width: "50%",

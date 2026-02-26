@@ -1,5 +1,5 @@
 import { Pressable, View } from "react-native";
-import Icon from "./general/icon";
+import Icon from "./ui/icon";
 
 interface ShowStringProps {
   show: boolean;

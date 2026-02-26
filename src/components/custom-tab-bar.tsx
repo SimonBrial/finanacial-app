@@ -1,7 +1,7 @@
 import { TouchableOpacity, StyleSheet, Animated, View } from "react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { TabItem } from "../interface/interface";
-import Typography from "./general/typography";
+import Typography from "./ui/typography";
 import useTheme from "../hook/useTheme";
 
 export default function CustomTabBar({

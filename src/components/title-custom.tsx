@@ -1,7 +1,7 @@
 import React from "react";
-import Icon from "./general/icon";
-import Row from "./general/row";
-import Typography from "./general/typography";
+import Icon from "./ui/icon";
+import Row from "./ui/row";
+import Typography from "./ui/typography";
 import NotificationIcon from "./notification-icon";
 import useTheme from "../hook/useTheme";
 import { IconBase } from "../interface/interface";

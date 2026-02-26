@@ -1,22 +1,26 @@
 import React from "react";
-import Row from "./general/row";
+import Row from "./ui/row";
 import { View } from "react-native";
-import Typography from "./general/typography";
+import Typography from "./ui/typography";
 import useTheme from "../hook/useTheme";
-import Stack from "./general/stack";
-import Badge from "./general/badge";
+import Stack from "./ui/stack";
+import PercentIndicator from "./ui/percent-indicator";
 
 export default function DolarPriceItem({ title, color }: any) {
-  const { sizes, globalStyles, danger, theme } = useTheme();
+  const { sizes, globalStyles, theme } = useTheme();
   return (
-    <Row justifyContent="flex-start" width={"100%"}>
+    <Row
+      justifyContent="flex-start"
+      width={"100%"}
+      customStyles={{ paddingLeft: 10 }}
+    >
       <View
         style={{
           height: 50,
           width: 6,
           backgroundColor: color || theme.t100,
           marginRight: sizes.sm,
-          borderRadius: 1000
+          borderRadius: 1000,
         }}
       />
       <Stack width={"60%"}>
@@ -38,16 +42,16 @@ export default function DolarPriceItem({ title, color }: any) {
       <Stack
         width={"32%"}
         alignItem="center"
-        //customStyles={{ borderWidth: 1, borderColor: "red" }}
+        //customStyles={{ marginRight: -100 }}
       >
         <Typography fontSize={sizes.lg} customStyles={{ color: color }}>
           238.84
         </Typography>
         <Row
           width={"100%"}
-          gap={0}
+          gap={10}
           alignItem="flex-end"
-          justifyContent="space-around"
+          //justifyContent="space-around"
         >
           <Typography
             fontSize={sizes.sm}
@@ -55,12 +59,7 @@ export default function DolarPriceItem({ title, color }: any) {
           >
             -10.55{" "}
           </Typography>
-          <Badge
-            text="5%"
-            iconLeft={"trending-down"}
-            type="light"
-            color={danger.d100}
-          />
+          <PercentIndicator percentage="4.23%" trend="down" />
         </Row>
       </Stack>
     </Row>

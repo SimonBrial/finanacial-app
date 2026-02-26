@@ -2,7 +2,7 @@ import { View, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { ExchangeCardProps } from "../../interface/interface";
 import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
-import Typography from "../general/typography";
+import Typography from "../ui/typography";
 import useTheme from "../../hook/useTheme";
 
 export default function ExchangeCard({
