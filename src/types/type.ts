@@ -2,6 +2,7 @@ import {
   MaterialCommunityIcons,
   MaterialIcons,
   FontAwesome,
+  AntDesign,
   Ionicons,
   Feather,
 } from "@expo/vector-icons";
@@ -10,6 +11,7 @@ export const IconLibraries = {
   MaterialCommunityIcons,
   MaterialIcons,
   FontAwesome,
+  AntDesign,
   Ionicons,
   Feather,
 };

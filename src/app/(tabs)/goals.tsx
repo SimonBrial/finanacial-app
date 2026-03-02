@@ -1,13 +1,18 @@
 import GlobalContainer from "../../components/ui/global-container";
-import Typography from "../../components/ui/typography";
-import { Link } from "expo-router";
-import { View } from "react-native";
-import useTheme from "../../hook/useTheme";
 import TitleCustom from "../../components/title-custom";
 import GoalHero from "../../components/goals/goal-hero";
+import { View } from "react-native";
+import Icon from "../../components/ui/icon";
+import Button from "../../components/ui/button";
+import { useState } from "react";
+import useTheme from "../../hook/useTheme";
+import GoalCardLg from "../../components/goals/goal-card-lg";
+
+type GoalFilter = "All" | "Completed" | "In Progress" | "Deleted" | "Future";
 
 export default function Goals() {
-  const { theme, sizes } = useTheme();
+  const [activeFilter, setActiveFilter] = useState<GoalFilter>("All");
+  const { theme } = useTheme();
   return (
     <GlobalContainer>
       <TitleCustom
@@ -17,34 +22,51 @@ export default function Goals() {
         library="MaterialIcons"
       />
       <GoalHero />
-
-      {/* <View
+      <View
         style={{
-          flex: 1,
-          gap: 20,
+          flexDirection: "row",
           alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "black",
-          width: "100%",
-          height: 500,
+          gap: 10,
+          width: "85%",
+          marginTop: 20,
         }}
       >
-        <Link
-          href="/"
-          style={{
-            paddingVertical: sizes.sm,
-            paddingHorizontal: sizes.xl,
-            backgroundColor: theme.t20,
-            borderRadius: sizes.xs,
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Typography customStyles={{ color: theme.t100, marginTop: 20 }}>
-            Go to Login
-          </Typography>
-        </Link>
-      </View> */}
+        <TitleCustom
+          title="Your Goals"
+          withNotificationIcon={false}
+          name={"emoji-events"}
+          library="MaterialIcons"
+        />
+        <Icon name={"plus"} library="AntDesign" size={24} rounded />
+      </View>
+      <View
+        style={{
+          width: "100%",
+          flexDirection: "row",
+          gap: 10,
+          paddingHorizontal: 20,
+          marginTop: 10,
+        }}
+      >
+        {["All", "Completed", "In Progress", "Deleted", "Future"].map(
+          (filter) => (
+            <Button
+              key={filter}
+              text={filter}
+              size="xs"
+              type={filter === activeFilter ? "filled" : "bordered"}
+              color={filter === activeFilter ? theme.t100 : "white"}
+              onPress={() => setActiveFilter(filter as GoalFilter)}
+              containerStyle={{ borderRadius: 1000 }}
+            />
+          ),
+        )}
+      </View>
+      <View style={{ width: "100%", marginTop: 10, gap: 20 }}>
+        <GoalCardLg title="Save for vacation" status="In Progress" />
+        <GoalCardLg title="Buy a new car" status="Completed" />
+        <GoalCardLg title="Learn a new language" status="In Progress" />
+      </View>
     </GlobalContainer>
   );
 }
