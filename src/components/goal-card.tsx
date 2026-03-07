@@ -3,6 +3,7 @@ import Badge from "./ui/badge";
 import Row from "./ui/row";
 import Typography from "./ui/typography";
 import CircularProgress from "./charts/progress-donut";
+import React, { memo } from "react";
 import { View } from "react-native";
 import { Canvas, Rect, RadialGradient, vec } from "@shopify/react-native-skia";
 
@@ -16,7 +17,7 @@ interface GoalCardProps {
   size: "sm" | "lg";
 }
 
-export default function GoalCard({
+const GoalCard = memo(({
   currentAmount,
   goalAmount,
   description,
@@ -24,7 +25,7 @@ export default function GoalCard({
   status,
   title,
   size,
-}: GoalCardProps) {
+}: GoalCardProps) => {
   const { sizes, globalStyles, complete, theme } = useTheme();
 
   // Función para formatear números al estilo europeo/latino (puntos para miles, coma para decimal)
@@ -122,4 +123,8 @@ export default function GoalCard({
       </View>
     </Row>
   );
-}
+});
+
+GoalCard.displayName = "GoalCard";
+
+export default GoalCard;

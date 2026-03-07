@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { View } from "react-native";
 import {
   Svg,
@@ -8,7 +8,7 @@ import {
 } from "react-native-svg";
 import useTheme from "../../hook/useTheme";
 
-export default function CircularProgress(props: any) {
+const CircularProgress = memo((props: any) => {
   const { theme } = useTheme();
   const { size, strokeWidth, text } = props;
   const radius = (size - strokeWidth) / 2;
@@ -54,4 +54,8 @@ export default function CircularProgress(props: any) {
       </Svg>
     </View>
   );
-}
+});
+
+CircularProgress.displayName = "CircularProgress";
+
+export default CircularProgress;

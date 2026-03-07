@@ -1,3 +1,4 @@
+import React, { memo } from "react";
 import { View, StyleSheet } from "react-native";
 import useTheme from "../../hook/useTheme";
 import Typography from "../ui/typography";
@@ -15,7 +16,7 @@ interface GoalLgProps {
   status: GoalStatus;
 }
 
-export default function GoalCardLg({ title, status }: GoalLgProps) {
+const GoalCardLg = memo(({ title, status }: GoalLgProps) => {
   const { sizes, globalStyles, complete, theme, inProgress } = useTheme();
   if (status === "Completed") {
     return (
@@ -228,7 +229,11 @@ export default function GoalCardLg({ title, status }: GoalLgProps) {
       </View>
     </LinearGradient>
   );
-}
+});
+
+GoalCardLg.displayName = "GoalCardLg";
+
+export default GoalCardLg;
 
 const stylesDefault = StyleSheet.create({
   containerCard: {
