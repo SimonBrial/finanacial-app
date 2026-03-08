@@ -1,3 +1,4 @@
+import React, { useMemo } from "react";
 import { StyleSheet, View } from "react-native";
 import { RowProps } from "../../interface/interface";
 import useTheme from "../../hook/useTheme";
@@ -13,17 +14,21 @@ export default function Row({
 }: RowProps) {
   const { sizes } = useTheme();
 
-  const styles = StyleSheet.flatten([
-    customStyles,
-    {
-      display: "flex",
-      flexDirection: "row",
-    },
-    { flexWrap: wrap ? "wrap" : "nowrap" },
-    { gap: gap ? gap : sizes.xxs },
-    { width: width ? width : sizes.xxs },
-    { alignItems: alignItem ? alignItem : "start" },
-    { justifyContent: justifyContent ? justifyContent : "start" },
-  ]);
+  const styles = useMemo(
+    () =>
+      StyleSheet.flatten([
+        customStyles,
+        {
+          display: "flex",
+          flexDirection: "row",
+        },
+        { flexWrap: wrap ? "wrap" : "nowrap" },
+        { gap: gap ? gap : sizes.xxs },
+        { width: width ? width : sizes.xxs },
+        { alignItems: alignItem ? alignItem : "start" },
+        { justifyContent: justifyContent ? justifyContent : "start" },
+      ]),
+    [customStyles, gap, sizes.xxs, width, alignItem, justifyContent, wrap],
+  );
   return <View style={styles}>{children}</View>;
 }
