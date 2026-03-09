@@ -12,13 +12,17 @@ export default function Container({
 }: GridProps) {
   const { sizes } = useContext(ThemeContext);
 
-  const styles = StyleSheet.flatten([
+  // ⚡ Bolt: Removed StyleSheet.flatten to prevent expensive deep merges on every render
+  // Arrays are handled efficiently by React Native internals.
+  const styles = [
     defaultStyles.container,
+    {
+      gap: gap ? gap : sizes.xxs,
+      width: width ? width : "100%",
+      flexWrap: wrap ? "wrap" as const : "nowrap" as const,
+    },
     customStyles,
-    { gap: gap ? gap : sizes.xxs },
-    { width: width ? width : "100%" },
-    { flexWrap: wrap ? "wrap" : "nowrap" },
-  ]);
+  ];
   return <View style={styles}>{children}</View>;
 }
 
