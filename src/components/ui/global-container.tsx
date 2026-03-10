@@ -10,11 +10,12 @@ export default function GlobalContainer({
   children: React.ReactNode;
 }) {
   const insets = useSafeAreaInsets();
-  const globalStyles = StyleSheet.flatten({
-    paddingTop: insets.top,
-    //paddingBottom: insets.bottom,
-    ...styles.containerGlobal,
-  });
+  // ⚡ Bolt: Removed StyleSheet.flatten to avoid CPU overhead from deep merging during render. React Native handles style arrays natively.
+  const globalStyles = [
+    styles.containerGlobal,
+    { paddingTop: insets.top },
+    // { paddingBottom: insets.bottom },
+  ];
   return (
     <ScrollView style={{ backgroundColor: "black" }}>
       <SafeAreaView>

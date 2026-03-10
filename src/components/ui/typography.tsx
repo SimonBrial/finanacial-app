@@ -22,7 +22,8 @@ export default function Typography({
   variant,
   ...rest
 }: TypographyProps) {
-  const combinedStyles = StyleSheet.flatten([
+  // ⚡ Bolt: Removed StyleSheet.flatten to avoid CPU overhead from deep merging during render. React Native handles style arrays natively.
+  const combinedStyles = [
     baseStyles.text,
     { fontSize },
     // Mapeamos la variante al nombre de la fuente que cargaste en el Root
@@ -30,7 +31,7 @@ export default function Typography({
     bold ? { fontWeight: "bold" as const } : {},
     txtWhite ? { color: "white" as const } : {},
     customStyles,
-  ]);
+  ];
 
   return (
     <Text style={combinedStyles} {...rest}>
