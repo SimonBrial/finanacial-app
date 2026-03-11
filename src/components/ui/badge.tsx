@@ -9,15 +9,15 @@ import { BasesSize, PrimitiveVariants } from "../../types/type";
 const DEFAULT_COLOR = "#006dff";
 
 export default function Badge({
-  text,
-  color = DEFAULT_COLOR,
-  type = "bordered",
-  size = "sm",
-  iconLeft,
-  iconRight,
   library = "MaterialCommunityIcons",
+  color = DEFAULT_COLOR,
   fullWidth = false,
+  type = "bordered",
   containerStyle,
+  size = "sm",
+  iconRight,
+  iconLeft,
+  text,
 }: BadgeProps) {
   const { sizes } = useTheme();
 
@@ -46,12 +46,12 @@ export default function Badge({
     };
 
     const sizeStyles: Record<BasesSize, ViewStyle> = {
-      sm: { height: 16, paddingHorizontal: 10 },
+      sm: { height: 18, paddingHorizontal: 6 },
       md: { height: 20, paddingHorizontal: 12 },
       lg: { height: 22, paddingHorizontal: 14 },
     };
     const sizeText: Record<BasesSize, TextStyle> = {
-      sm: { fontSize: sizes.xs },
+      sm: { fontSize: 10 },
       md: { fontSize: sizes.sm },
       lg: { fontSize: sizes.md },
     };

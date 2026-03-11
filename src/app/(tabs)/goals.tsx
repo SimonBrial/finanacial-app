@@ -42,9 +42,11 @@ export default function Goals() {
       <View
         style={{
           width: "100%",
+          //borderWidth: 1,
+          //borderColor: "red",
           flexDirection: "row",
           gap: 10,
-          paddingHorizontal: 20,
+          //paddingHorizontal: 20,
           marginTop: 10,
         }}
       >
@@ -65,7 +67,7 @@ export default function Goals() {
       <View style={{ width: "100%", marginTop: 10, gap: 20 }}>
         <GoalCardLg title="Save for vacation" status="In Progress" />
         <GoalCardLg title="Buy a new car" status="Completed" />
-        <GoalCardLg title="Learn a new language" status="In Progress" />
+        <GoalCardLg title="Learn a new language" status="New" />
       </View>
     </GlobalContainer>
   );

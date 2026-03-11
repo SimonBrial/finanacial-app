@@ -1,12 +1,43 @@
-import { View } from "react-native";
-import { Link } from "expo-router";
+import { TouchableOpacity, View } from "react-native";
 import GlobalContainer from "../../components/ui/global-container";
 import Typography from "../../components/ui/typography";
 import useTheme from "../../hook/useTheme";
 import TitleCustom from "../../components/title-custom";
+import Avatar from "../../components/ui/avatar";
+import Badge from "../../components/ui/badge";
+import Icon from "../../components/ui/icon";
+import { IconLibrary } from "../../types/type";
+import { useRouter } from "expo-router";
+
+interface SettingsOption {
+  label: string;
+  icon: string;
+  library: IconLibrary;
+}
 
 export default function Settings() {
-  const { theme, sizes } = useTheme();
+  const { inProgress, sizes, theme } = useTheme();
+  const router = useRouter();
+
+  const hanleLogout = (exception: string) => {
+    router.push(exception === "Log Out" ? "/login" : "/404");
+  };
+
+  const settingsOptions: SettingsOption[] = [
+    {
+      label: "Edit Profile",
+      icon: "user-alt",
+      library: "FontAwesome5",
+    },
+    { label: "Notifications", icon: "notifications", library: "Ionicons" },
+    { label: "Language", icon: "translate", library: "MaterialIcons" },
+    {
+      label: "Help & Support",
+      icon: "support-agent",
+      library: "MaterialIcons",
+    },
+    { label: "Log Out", icon: "logout", library: "MaterialIcons" },
+  ];
   return (
     <GlobalContainer>
       <TitleCustom
@@ -17,30 +48,64 @@ export default function Settings() {
       />
       <View
         style={{
-          flex: 1,
-          gap: 20,
+          gap: sizes.sm,
+          display: "flex",
+          flexDirection: "row",
           alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "black",
+          justifyContent: "flex-start",
           width: "100%",
-          height: 500,
+          paddingHorizontal: sizes.md,
+          paddingTop: sizes.lg
         }}
       >
-        <Link
-          href="/"
-          style={{
-            paddingVertical: sizes.sm,
-            paddingHorizontal: sizes.xl,
-            backgroundColor: theme.t20,
-            borderRadius: sizes.xs,
-            justifyContent: "center",
-            alignItems: "center",
-          }}
+        <Avatar />
+        <View
+          style={{ gap: sizes.xs, display: "flex", flexDirection: "column" }}
         >
-          <Typography customStyles={{ color: theme.t100, marginTop: 20 }}>
-            Go to Login
+          <Typography txtWhite fontSize={sizes.lg}>
+            Simon Briceño
           </Typography>
-        </Link>
+          <Badge
+            iconLeft={"crown"}
+            library="MaterialCommunityIcons"
+            color={inProgress.p100}
+            text="Premium"
+          />
+        </View>
+      </View>
+      <View
+        style={{
+          width: "100%",
+          paddingHorizontal: sizes.md,
+          gap: sizes.sm,
+          marginTop: sizes.lg,
+        }}
+      >
+        {settingsOptions.map((item) => (
+          <TouchableOpacity
+            key={item.label}
+            onPress={() => hanleLogout(item.label)}
+            style={{
+              paddingHorizontal: sizes.md,
+              paddingVertical: sizes.sm,
+              borderColor: theme.t100,
+              borderBottomWidth: 1,
+              width: "100%",
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              gap: sizes.sm,
+            }}
+          >
+            <Icon
+              name={item.icon}
+              library={item.library}
+              bgStyle={{ borderRadius: sizes.sm }}
+              size={sizes.lg}
+            />
+            <Typography txtWhite>{item.label}</Typography>
+          </TouchableOpacity>
+        ))}
       </View>
     </GlobalContainer>
   );

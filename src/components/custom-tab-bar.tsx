@@ -3,6 +3,7 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { TabItem } from "../interface/interface";
 import Typography from "./ui/typography";
 import useTheme from "../hook/useTheme";
+import Icon from "./ui/icon";
 
 export default function CustomTabBar({
   descriptors,
@@ -116,6 +117,17 @@ export default function CustomTabBar({
     </View>
   );
 }
+/* {route.name === "transactions" ? (
+  <Icon
+    name="add"
+    library="MaterialIcons"
+    size={50}
+    rounded
+    bgStyle={stylesTabs.tabAdd}
+  />
+) : (
+  
+)} */
 
 const stylesTabs = StyleSheet.create({
   tabBar: {
@@ -134,5 +146,11 @@ const stylesTabs = StyleSheet.create({
     flexShrink: 1,
     height: 90,
     //width: "100%",
+  },
+  tabAdd: {
+    width: 50,
+    height: 50,
+    backgroundColor: "red",
+    position: "absolute",
   },
 });

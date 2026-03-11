@@ -1,6 +1,7 @@
 import {
   MaterialCommunityIcons,
   MaterialIcons,
+  FontAwesome5,
   FontAwesome,
   AntDesign,
   Ionicons,
@@ -10,6 +11,7 @@ import {
 export const IconLibraries = {
   MaterialCommunityIcons,
   MaterialIcons,
+  FontAwesome5,
   FontAwesome,
   AntDesign,
   Ionicons,
