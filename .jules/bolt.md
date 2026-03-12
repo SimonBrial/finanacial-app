@@ -1,0 +1,3 @@
+## 2024-05-24 - [Avoid StyleSheet.flatten in Render Loops]
+**Learning:** Using `StyleSheet.flatten` inside React Native component render functions introduces significant CPU overhead. `StyleSheet.flatten` merges style objects deeply, creating new object references on every render, which defeats React's shallow comparison optimizations and degrades performance, especially for frequently rendered UI primitive components (like Text/Typography, View/Container).
+**Action:** Always pass an array of style objects directly to components (e.g., `style={[styles.container, customStyle]}`) instead of flattening them. This pushes the merging work to the native layer where it's handled more efficiently, avoiding JS-thread bottlenecks.
