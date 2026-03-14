@@ -10,15 +10,15 @@ export default function GlobalContainer({
   children: React.ReactNode;
 }) {
   const insets = useSafeAreaInsets();
-  const globalStyles = StyleSheet.flatten({
-    paddingTop: insets.top,
-    //paddingBottom: insets.bottom,
-    ...styles.containerGlobal,
-  });
+  // ⚡ Bolt: Removed StyleSheet.flatten to avoid deep merging on every render frame
+  const globalStyles = [
+    styles.containerGlobal,
+    { paddingTop: insets.top },
+  ];
   return (
     <ScrollView style={{ backgroundColor: "black" }}>
       <SafeAreaView>
-        <View style={globalStyles}>{children}</View>
+        <View style={globalStyles as any}>{children}</View>
         <StatusBar
           barStyle={"light-content"}
           backgroundColor={"#1a1a1a"}

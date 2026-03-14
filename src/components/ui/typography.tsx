@@ -1,5 +1,4 @@
 import { Text, StyleSheet, StyleProp, TextStyle } from "react-native";
-import { useFonts } from "expo-font";
 
 interface TypographyProps {
   children: React.ReactNode;
@@ -22,15 +21,17 @@ export default function Typography({
   variant,
   ...rest
 }: TypographyProps) {
-  const combinedStyles = StyleSheet.flatten([
+  // ⚡ Bolt: Removed StyleSheet.flatten to avoid deep merging on every render frame
+  const combinedStyles = [
     baseStyles.text,
-    { fontSize },
-    // Mapeamos la variante al nombre de la fuente que cargaste en el Root
-    { fontFamily: `Inter-${variant}` },
-    bold ? { fontWeight: "bold" as const } : {},
-    txtWhite ? { color: "white" as const } : {},
+    {
+      fontSize,
+      fontFamily: `Inter-${variant}`,
+    },
+    bold && { fontWeight: "bold" as const },
+    txtWhite && { color: "white" as const },
     customStyles,
-  ]);
+  ];
 
   return (
     <Text style={combinedStyles} {...rest}>
