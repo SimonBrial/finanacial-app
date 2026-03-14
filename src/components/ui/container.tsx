@@ -12,14 +12,17 @@ export default function Container({
 }: GridProps) {
   const { sizes } = useContext(ThemeContext);
 
-  const styles = StyleSheet.flatten([
+  // ⚡ Bolt: Removed StyleSheet.flatten to avoid deep merging on every render frame
+  const styles = [
     defaultStyles.container,
     customStyles,
-    { gap: gap ? gap : sizes.xxs },
-    { width: width ? width : "100%" },
-    { flexWrap: wrap ? "wrap" : "nowrap" },
-  ]);
-  return <View style={styles}>{children}</View>;
+    {
+      gap: gap ? gap : sizes.xxs,
+      width: width ? width : "100%",
+      flexWrap: wrap ? "wrap" as const : "nowrap" as const
+    },
+  ];
+  return <View style={styles as any}>{children}</View>;
 }
 
 const defaultStyles = StyleSheet.create({

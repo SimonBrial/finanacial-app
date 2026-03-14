@@ -17,14 +17,15 @@ export default function ExpanseCard({
   id,
 }: Expense) {
   const {sizes} = useTheme();
-  const containerStyles = StyleSheet.flatten([
+  // ⚡ Bolt: Removed StyleSheet.flatten to avoid deep merging on every render frame
+  const containerStyles = [
     styles.containerCard,
     { borderColor: color, borderWidth: 1 },
-  ]);
-  const iconStyles = StyleSheet.flatten([
+  ];
+  const iconStyles = [
     styles.icon,
     { backgroundColor: `${color}4c` },
-  ]);
+  ];
   return (
     <Container customStyles={containerStyles} gap={6} wrap={false}>
       <Stack

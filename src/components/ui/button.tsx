@@ -72,17 +72,18 @@ export default function Button({
     };
 
     // 1. Calculamos el estilo del contenedor
-    const containerStyleObj = StyleSheet.flatten([
+    // ⚡ Bolt: Removed StyleSheet.flatten to avoid deep merging on every render frame
+    const containerStyleObj = [
       styles.defaultStyles,
       variantStyles[currentType as PrimitiveVariants], // Usamos currentType aquí
       sizeStyles[size as string],
-      fullWidth && { width: "100%", alignSelf: "auto" as const },
+      fullWidth && { width: "100%" as const, alignSelf: "auto" as const },
       containerStyle,
-    ]) as ViewStyle;
+    ];
 
     // 2. Retornamos el objeto con sus propiedades bien definidas
     return {
-      container: containerStyleObj,
+      container: containerStyleObj as ViewStyle,
       textStyle: {
         color: customColorText?.color || contentColor,
         textAlign: "center",

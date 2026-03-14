@@ -21,13 +21,14 @@ export default function ExchangeCard({
     return styles.official;
   };
 
-  const containerStyles = StyleSheet.flatten([
+  // ⚡ Bolt: Removed StyleSheet.flatten to avoid deep merging on every render frame
+  const containerStyles = [
     styles.container,
     { borderLeftColor: styleSelector().color },
-  ]);
+  ];
 
   return (
-    <View style={containerStyles}>
+    <View style={containerStyles as any}>
       <LinearGradient
         colors={[`${styleSelector().color}72`, "transparent"]}
         style={styles.background}
