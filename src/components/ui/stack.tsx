@@ -1,4 +1,4 @@
-import { View, StyleSheet } from "react-native";
+import { View } from "react-native";
 import { GridProps } from "../../interface/interface";
 import useTheme from "../../hook/useTheme";
 
@@ -12,19 +12,19 @@ export default function Stack({
   gap,
 }: GridProps) {
   const { sizes } = useTheme();
-  const styles = StyleSheet.flatten([
+  const styles = [
     customStyles,
     {
-      display: "flex",
-      flexDirection: "column",
-      width: "100%",
+      display: "flex" as const,
+      flexDirection: "column" as const,
+      width: "100%" as const,
     },
     { gap: gap ? gap : sizes.xxs },
-    { width: width ? width : "100%" },
-    { alignItems: alignItem ? alignItem : "flex-start" },
-    { justifyContent: justifyContent ? justifyContent : "flex-start" },
-    { flexWrap: wrap ? "wrap" : "nowrap" },
-  ]);
+    { width: width ? width : "100%" as const },
+    { alignItems: alignItem ? alignItem : "flex-start" as const },
+    { justifyContent: justifyContent ? justifyContent : "flex-start" as const },
+    { flexWrap: wrap ? "wrap" as const : "nowrap" as const },
+  ];
 
   return <View style={styles}>{children}</View>;
 }

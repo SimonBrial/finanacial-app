@@ -1,0 +1,3 @@
+## 2025-05-15 - React Native StyleSheet.flatten Performance Overhead
+**Learning:** Using `StyleSheet.flatten()` inside React Native render functions or custom hooks introduces unnecessary CPU overhead due to deep object merging. This is particularly noticeable in lists or frequently re-rendered components, acting as a performance bottleneck. React Native can inherently accept an array of style objects or IDs, making `StyleSheet.flatten()` largely redundant for simply combining styles to pass to a component's `style` prop.
+**Action:** Avoid using `StyleSheet.flatten()` inside render functions or hooks to combine styles. Always pass an array of style objects directly to the component's `style` prop instead (e.g., `style={[styles.base, customStyles]}`).
