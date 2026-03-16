@@ -62,7 +62,7 @@ export default function Badge({
     };
 
     // 1. Calculamos el estilo del contenedor
-    const containerStyleObj: ViewStyle = StyleSheet.flatten([
+    const containerStyleObj: ViewStyle[] = [
       styles.defaultStyles,
       variantStyles[type as PrimitiveVariants],
       sizeStyles[size as BasesSize],
@@ -70,7 +70,7 @@ export default function Badge({
       sizeIcon[size as BasesSize],
       fullWidth && { width: "100%", alignSelf: "auto" as const },
       containerStyle,
-    ]) as ViewStyle;
+    ];
 
     // 2. Retornamos el objeto con sus propiedades bien definidas
     return {

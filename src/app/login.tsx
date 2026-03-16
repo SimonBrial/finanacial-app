@@ -1,6 +1,5 @@
 import {
   KeyboardAvoidingView,
-  TouchableOpacity,
   StyleSheet,
   StatusBar,
   TextInput,
@@ -8,7 +7,6 @@ import {
   View,
   Text,
 } from "react-native";
-import { Feather } from "@expo/vector-icons";
 import { useState } from "react";
 import PinScreen from "./pin-screen";
 import Logo from "../components/logo";

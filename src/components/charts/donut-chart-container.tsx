@@ -98,15 +98,3 @@ const styles = StyleSheet.create({
     marginBottom: 20, // Agregué un margen inferior ya que quitamos el botón
   },
 });
-
-function calculatePercentage(numbers: number[], total: number): number[] {
-  const percentageArray: number[] = [];
-
-  numbers.forEach((number) => {
-    const percentage = Math.round((number / total) * 100);
-
-    percentageArray.push(percentage);
-  });
-
-  return percentageArray;
-}
