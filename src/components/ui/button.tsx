@@ -72,13 +72,13 @@ export default function Button({
     };
 
     // 1. Calculamos el estilo del contenedor
-    const containerStyleObj = StyleSheet.flatten([
+    const containerStyleObj = [
       styles.defaultStyles,
       variantStyles[currentType as PrimitiveVariants], // Usamos currentType aquí
       sizeStyles[size as string],
       fullWidth && { width: "100%", alignSelf: "auto" as const },
       containerStyle,
-    ]) as ViewStyle;
+    ];
 
     // 2. Retornamos el objeto con sus propiedades bien definidas
     return {
