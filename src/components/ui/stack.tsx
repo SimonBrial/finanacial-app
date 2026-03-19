@@ -1,4 +1,4 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleProp, ViewStyle } from "react-native";
 import { GridProps } from "../../interface/interface";
 import useTheme from "../../hook/useTheme";
 
@@ -12,7 +12,10 @@ export default function Stack({
   gap,
 }: GridProps) {
   const { sizes } = useTheme();
-  const styles = StyleSheet.flatten([
+
+  // ⚡ Bolt Optimization: Removed StyleSheet.flatten to avoid CPU-intensive deep object merging on every render.
+  // React Native efficiently processes arrays of style objects directly in C++.
+  const styles: StyleProp<ViewStyle> = [
     customStyles,
     {
       display: "flex",
@@ -24,7 +27,7 @@ export default function Stack({
     { alignItems: alignItem ? alignItem : "flex-start" },
     { justifyContent: justifyContent ? justifyContent : "flex-start" },
     { flexWrap: wrap ? "wrap" : "nowrap" },
-  ]);
+  ];
 
   return <View style={styles}>{children}</View>;
 }
