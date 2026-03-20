@@ -3,7 +3,6 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { TabItem } from "../interface/interface";
 import Typography from "./ui/typography";
 import useTheme from "../hook/useTheme";
-import Icon from "./ui/icon";
 
 export default function CustomTabBar({
   descriptors,
@@ -15,7 +14,7 @@ export default function CustomTabBar({
 }: any) {
   const { sizes, theme, globalStyles } = useTheme();
 
-  const tabStyles = StyleSheet.flatten([stylesTabs.tabItemContainer]);
+  const tabStyles = [stylesTabs.tabItemContainer];
 
   const tabsItem: TabItem[] = [
     { name: "home", icon: "home", label: "Home" },

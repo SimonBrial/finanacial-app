@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { StyleSheet, ViewStyle, TextStyle, View } from "react-native";
+import { StyleSheet, TextStyle, View, ViewStyle } from "react-native";
 import Typography from "./typography";
 import useTheme from "../../hook/useTheme";
 import Icon from "./icon";
@@ -62,22 +62,22 @@ export default function Badge({
     };
 
     // 1. Calculamos el estilo del contenedor
-    const containerStyleObj: ViewStyle = StyleSheet.flatten([
+    const containerStyleObj = [
       styles.defaultStyles,
       variantStyles[type as PrimitiveVariants],
       sizeStyles[size as BasesSize],
       sizeText[size as BasesSize],
       sizeIcon[size as BasesSize],
-      fullWidth && { width: "100%", alignSelf: "auto" as const },
+      fullWidth && { width: "100%" as const, alignSelf: "auto" as const },
       containerStyle,
-    ]) as ViewStyle;
+    ];
 
     // 2. Retornamos el objeto con sus propiedades bien definidas
     return {
       container: containerStyleObj,
       textStyle: {
         color: contentColor,
-        textAlign: "center",
+        textAlign: "center" as const,
         fontSize: sizeText[size as BasesSize]?.fontSize,
       } as TextStyle,
       iconColor: contentColor,
