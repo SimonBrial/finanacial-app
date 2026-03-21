@@ -21,10 +21,10 @@ export default function ExchangeCard({
     return styles.official;
   };
 
-  const containerStyles = StyleSheet.flatten([
+  const containerStyles = [
     styles.container,
     { borderLeftColor: styleSelector().color },
-  ]);
+  ];
 
   return (
     <View style={containerStyles}>
