@@ -13,17 +13,18 @@ export default function Row({
 }: RowProps) {
   const { sizes } = useTheme();
 
-  const styles = StyleSheet.flatten([
+  // ⚡ Bolt: Avoid StyleSheet.flatten in render to prevent unnecessary object deep merges on every render
+  const styles = [
     customStyles,
     {
       display: "flex",
       flexDirection: "row",
-    },
-    { flexWrap: wrap ? "wrap" : "nowrap" },
+    } as const,
+    { flexWrap: wrap ? "wrap" : "nowrap" } as const,
     { gap: gap ? gap : sizes.xxs },
     { width: width ? width : sizes.xxs },
-    { alignItems: alignItem ? alignItem : "start" },
-    { justifyContent: justifyContent ? justifyContent : "start" },
-  ]);
+    { alignItems: alignItem ? alignItem : "start" } as const,
+    { justifyContent: justifyContent ? justifyContent : "start" } as const,
+  ];
   return <View style={styles}>{children}</View>;
 }
