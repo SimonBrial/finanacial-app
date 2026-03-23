@@ -12,13 +12,14 @@ export default function Container({
 }: GridProps) {
   const { sizes } = useContext(ThemeContext);
 
-  const styles = StyleSheet.flatten([
+  // Bolt: Replaced StyleSheet.flatten with array to avoid CPU overhead on re-renders
+  const styles = [
     defaultStyles.container,
     customStyles,
     { gap: gap ? gap : sizes.xxs },
     { width: width ? width : "100%" },
     { flexWrap: wrap ? "wrap" : "nowrap" },
-  ]);
+  ];
   return <View style={styles}>{children}</View>;
 }
 
