@@ -62,7 +62,7 @@ export default function Icon({
     ghost: color ? color : theme.t100,
   };
 
-  const containerStyles = StyleSheet.flatten([
+  const containerStyles = [
     {
       display: "flex",
       alignItems: "center",
@@ -72,10 +72,10 @@ export default function Icon({
     },
     variantStyles[variant], // <-- Magia aquí: busca directo el estilo que le pases
     bgStyle,
-  ]);
+  ];
 
   return (
-    <View style={containerStyles}>
+    <View style={containerStyles as any}>
       <SelectedIcon
         name={name as any}
         size={size}

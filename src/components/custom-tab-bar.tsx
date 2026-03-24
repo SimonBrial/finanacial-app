@@ -15,7 +15,7 @@ export default function CustomTabBar({
 }: any) {
   const { sizes, theme, globalStyles } = useTheme();
 
-  const tabStyles = StyleSheet.flatten([stylesTabs.tabItemContainer]);
+  const tabStyles = [stylesTabs.tabItemContainer];
 
   const tabsItem: TabItem[] = [
     { name: "home", icon: "home", label: "Home" },
