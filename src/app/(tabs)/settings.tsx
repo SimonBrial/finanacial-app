@@ -1,4 +1,4 @@
-import { TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, View, ScrollView } from "react-native";
 import GlobalContainer from "../../components/ui/global-container";
 import Typography from "../../components/ui/typography";
 import useTheme from "../../hook/useTheme";
@@ -40,73 +40,79 @@ export default function Settings() {
   ];
   return (
     <GlobalContainer>
-      <TitleCustom
-        title="Settings"
-        withNotificationIcon={false}
-        library="MaterialIcons"
-        name={"settings"}
-      />
-      <View
-        style={{
-          gap: sizes.sm,
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "flex-start",
-          width: "100%",
-          paddingHorizontal: sizes.md,
-          paddingTop: sizes.lg
-        }}
+      <ScrollView
+        style={{ flex: 1 }}
+        contentContainerStyle={{ paddingVertical: 20 }}
+        showsVerticalScrollIndicator={false}
       >
-        <Avatar />
+        <TitleCustom
+          title="Settings"
+          withNotificationIcon={false}
+          library="MaterialIcons"
+          name={"settings"}
+        />
         <View
-          style={{ gap: sizes.xs, display: "flex", flexDirection: "column" }}
+          style={{
+            gap: sizes.sm,
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "flex-start",
+            width: "100%",
+            paddingHorizontal: sizes.md,
+            paddingTop: sizes.lg,
+          }}
         >
-          <Typography txtWhite fontSize={sizes.lg}>
-            Simon Briceño
-          </Typography>
-          <Badge
-            iconLeft={"crown"}
-            library="MaterialCommunityIcons"
-            color={inProgress.p100}
-            text="Premium"
-          />
-        </View>
-      </View>
-      <View
-        style={{
-          width: "100%",
-          paddingHorizontal: sizes.md,
-          gap: sizes.sm,
-          marginTop: sizes.lg,
-        }}
-      >
-        {settingsOptions.map((item) => (
-          <TouchableOpacity
-            key={item.label}
-            onPress={() => hanleLogout(item.label)}
-            style={{
-              paddingHorizontal: sizes.md,
-              paddingVertical: sizes.sm,
-              borderColor: theme.t100,
-              borderBottomWidth: 1,
-              width: "100%",
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              gap: sizes.sm,
-            }}
+          <Avatar />
+          <View
+            style={{ gap: sizes.xs, display: "flex", flexDirection: "column" }}
           >
-            <Icon
-              name={item.icon}
-              library={item.library}
-              bgStyle={{ borderRadius: sizes.sm }}
-              size={sizes.lg}
+            <Typography txtWhite fontSize={sizes.lg}>
+              Simon Briceño
+            </Typography>
+            <Badge
+              iconLeft={"crown"}
+              library="MaterialCommunityIcons"
+              color={inProgress.p100}
+              text="Premium"
             />
-            <Typography txtWhite>{item.label}</Typography>
-          </TouchableOpacity>
-        ))}
-      </View>
+          </View>
+        </View>
+        <View
+          style={{
+            width: "100%",
+            paddingHorizontal: sizes.md,
+            gap: sizes.sm,
+            marginTop: sizes.lg,
+          }}
+        >
+          {settingsOptions.map((item) => (
+            <TouchableOpacity
+              key={item.label}
+              onPress={() => hanleLogout(item.label)}
+              style={{
+                paddingHorizontal: sizes.md,
+                paddingVertical: sizes.sm,
+                borderColor: theme.t100,
+                borderBottomWidth: 1,
+                width: "100%",
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                gap: sizes.sm,
+              }}
+            >
+              <Icon
+                name={item.icon}
+                library={item.library}
+                bgStyle={{ borderRadius: sizes.sm }}
+                size={sizes.lg}
+              />
+              <Typography txtWhite>{item.label}</Typography>
+            </TouchableOpacity>
+          ))}
+        </View>
+      </ScrollView>
     </GlobalContainer>
   );
 }

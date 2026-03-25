@@ -3,8 +3,9 @@ import Typography from "../components/ui/typography";
 import Icon from "../components/ui/icon";
 import Row from "../components/ui/row";
 import useTheme from "../hook/useTheme";
+import { NotificationProps } from "../interface/interface";
 
-export default function Notification({ ...props }) {
+export default function Notification({ ...props }: NotificationProps) {
   const { theme, sizes, globalStyles } = useTheme();
   return (
     <View

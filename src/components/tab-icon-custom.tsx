@@ -9,7 +9,7 @@ export default function TabIconCustom({
 }: {
   focused: boolean;
   color: string;
-  name: any;
+  name: React.ComponentProps<typeof Ionicons>["name"];
   label: string;
 }) {
   return (

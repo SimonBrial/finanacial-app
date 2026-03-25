@@ -1,5 +1,5 @@
 import { Text, StyleSheet, StyleProp, TextStyle } from "react-native";
-import { useFonts } from "expo-font";
+//import { useFonts } from "expo-font";
 
 interface TypographyProps {
   children: React.ReactNode;

@@ -82,9 +82,8 @@ export default function GoalCard({
         {completed ? (
           <View style={{ width: 100 }}>
             <Badge
-              iconLeft={
-                <MaterialIcons name={"check-circle"} size={20} color={color} />
-              }
+              iconLeft="check-circle"
+              library="MaterialIcons"
               text={"DONE"}
               type="filled"
             />

@@ -1,11 +1,48 @@
 import { TextStyle } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { PrimitiveVariants, IconLibrary, BasesSize } from "../types/type";
+import { DrawerContentComponentProps } from "@react-navigation/drawer";
+
+interface NotificationProps extends DrawerContentComponentProps {}
 
 interface ExchangeCardProps {
   dolarRate: number;
   exchangeName: string;
   todayDate?: Date | string;
+}
+
+interface NotificationIconProps {
+  active?: boolean;
+}
+
+interface DolarPriceItemProps {
+  title: string;
+  color?: string;
+}
+
+interface CircularProgressProps {
+  progressPercent: number;
+  size: number;
+  strokeWidth: number;
+  text?: string;
+  textSize?: number;
+}
+
+interface DonutChartData {
+  value: number;
+  color: string;
+  label?: string;
+}
+
+interface BankCardData {
+  id: string;
+  bankName: string;
+  gradientColors: [string, string];
+  balance: string;
+  currency: string;
+  lastEntry: string;
+  percentage: string;
+  trendIcon: string;
 }
 
 interface BalanceCardProps {
@@ -28,20 +65,20 @@ interface BalanceCardProps {
 interface BadgeProps extends Partial<IconBase> {
   text: string;
   color?: string;
-  type?: PrimitiveVariants; // Opcional con default
-  size?: BasesSize; // Opcional con default
-  iconLeft?: any; // Cambiado a 'any' o string si esperas el nombre del icono
-  iconRight?: any;
-  fullWidth?: boolean; // Nueva prop para controlar el ancho completo
+  type?: PrimitiveVariants;
+  size?: BasesSize;
+  iconLeft?: string;
+  iconRight?: string;
+  fullWidth?: boolean;
   containerStyle?: ViewStyle;
 }
 interface ButtonProps extends Partial<IconBase> {
   text: string;
   color?: string;
-  type?: PrimitiveVariants; // Opcional con default
-  size?: BasesSize | "xs"; // Opcional con default
-  iconLeft?: any; // Cambiado a 'any' o string si esperas el nombre del icono
-  iconRight?: any;
+  type?: PrimitiveVariants;
+  size?: BasesSize | "xs";
+  iconLeft?: string;
+  iconRight?: string;
   fullWidth?: boolean; // Nueva prop para controlar el ancho completo
   containerStyle?: ViewStyle;
   customColorText?: TextStyle;
@@ -120,7 +157,7 @@ interface ThemeContextProps {
 
 interface IconBase {
   library?: IconLibrary;
-  name?: any; //  Flexibilidad de nombres entre familias
+  name?: string;
 }
 
 export type {
@@ -138,4 +175,10 @@ export type {
   Expense,
   TabItem,
   Goal,
+  NotificationProps,
+  NotificationIconProps,
+  DolarPriceItemProps,
+  CircularProgressProps,
+  DonutChartData,
+  BankCardData,
 };

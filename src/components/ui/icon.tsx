@@ -28,7 +28,7 @@ export default function Icon({
   style,
 }: IconProps) {
   const { sizes, theme } = useTheme();
-  const SelectedIcon: any = IconLibraries[library];
+  const SelectedIcon = IconLibraries[library as keyof typeof IconLibraries];
 
   if (!SelectedIcon) {
     return null;

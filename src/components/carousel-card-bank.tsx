@@ -10,6 +10,7 @@ import {
   useSharedValue,
 } from "react-native-reanimated";
 import useTheme from "../hook/useTheme";
+import { BankCardData } from "../interface/interface";
 
 export default function CarouselCardBank() {
   const progress = useSharedValue<number>(0);
@@ -24,7 +25,13 @@ export default function CarouselCardBank() {
 
   const ref = React.useRef<ICarouselInstance>(null);
   return (
-    <View id="carousel-component" style={{ marginBottom: sizes.lg }}>
+    <View
+      id="carousel-component"
+      style={{
+        marginBottom: sizes.lg,
+        flex: 1,
+      }}
+    >
       <Carousel
         ref={ref}
         autoPlayInterval={2000}
@@ -47,7 +54,7 @@ export default function CarouselCardBank() {
         onProgressChange={(_, absoluteProgress) => {
           progress.value = absoluteProgress;
         }}
-        renderItem={({ item }: any) => (
+        renderItem={({ item }: { item: BankCardData }) => (
           <BankCard
             bankName={item.bankName}
             gradientColors={item.gradientColors}
@@ -59,7 +66,7 @@ export default function CarouselCardBank() {
           />
         )}
       />
-      <Pagination.Custom<{ color: string }>
+      <Pagination.Custom<BankCardData>
         progress={progress}
         data={balanceCards}
         size={6} // Aumentamos un poco el tamaño base de la celda

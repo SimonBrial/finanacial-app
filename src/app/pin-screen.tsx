@@ -4,6 +4,8 @@ import {
   TextInput,
   View,
   Text,
+  NativeSyntheticEvent,
+  TextInputKeyPressEventData,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useState, useRef } from "react";
@@ -40,7 +42,7 @@ export default function PinScreen() {
     }
   };
 
-  const handleKeyPress = (e: any, index: number) => {
+  const handleKeyPress = (e: NativeSyntheticEvent<TextInputKeyPressEventData>, index: number) => {
     if (e.nativeEvent.key === "Backspace" && pin[index] === "" && index > 0) {
       pinRefs[index - 1].current?.focus();
     }

@@ -5,8 +5,9 @@ import Typography from "./ui/typography";
 import useTheme from "../hook/useTheme";
 import Stack from "./ui/stack";
 import PercentIndicator from "./ui/percent-indicator";
+import { DolarPriceItemProps } from "../interface/interface";
 
-export default function DolarPriceItem({ title, color }: any) {
+export default function DolarPriceItem({ title, color }: DolarPriceItemProps) {
   const { sizes, globalStyles, theme } = useTheme();
   return (
     <Row

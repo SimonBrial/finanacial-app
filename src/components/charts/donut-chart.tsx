@@ -3,6 +3,8 @@ import { View, StyleSheet } from "react-native";
 import { SharedValue } from "react-native-reanimated";
 import DonutPath from "./donut-path";
 
+import { DonutChartData } from "../../interface/interface";
+
 interface DonutChartProps {
   gap: number;
   radius: number;
@@ -10,7 +12,7 @@ interface DonutChartProps {
   outerStrokeWidth: number;
   decimals: SharedValue<number[]>;
   colors: string[];
-  data: any[];
+  data: DonutChartData[];
 }
 
 export default function DonutChart({

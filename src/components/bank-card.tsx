@@ -43,7 +43,7 @@ export default function BankCard({
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          width: "100%", // Asegúrate de que ocupe el ancho del contenedor del carrusel
+          width: "99%", // Asegúrate de que ocupe el ancho del contenedor del carrusel
         },
       ]}
     >
@@ -108,12 +108,7 @@ export default function BankCard({
 
           {show ? (
             <Row justifyContent="flex-start" gap={sizes.sm}>
-              <Badge
-                size="sm"
-                text={lastEntry}
-                type="bordered"
-                color="white"
-              />
+              <Badge size="sm" text={lastEntry} type="bordered" color="white" />
 
               <Badge
                 size="sm"
@@ -123,12 +118,14 @@ export default function BankCard({
                 iconLeft={trendIcon}
               />
             </Row>
-          ) : <Badge
-                size="sm"
-                text={"**/**/**"}
-                type="bordered"
-                color="#ffffff"
-              />}
+          ) : (
+            <Badge
+              size="sm"
+              text={"**/**/**"}
+              type="bordered"
+              color="#ffffff"
+            />
+          )}
         </Row>
       </View>
     </View>

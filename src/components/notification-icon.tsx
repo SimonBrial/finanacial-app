@@ -3,8 +3,9 @@ import { useNavigation } from "expo-router";
 import { Pressable, StyleSheet, View } from "react-native";
 import Icon from "./ui/icon";
 import useTheme from "../hook/useTheme";
+import { NotificationIconProps } from "../interface/interface";
 
-export default function NotificationIcon({ active, ...props }: any) {
+export default function NotificationIcon({ active, ...props }: NotificationIconProps) {
   const navigation = useNavigation();
   const { theme } = useTheme();
 

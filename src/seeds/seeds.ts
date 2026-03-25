@@ -1,9 +1,9 @@
-import { ExchangeRate, Expense, Goal } from "../interface/interface";
+import { ExchangeRate, Expense, Goal, BankCardData } from "../interface/interface";
 import { FilterKey } from "../types/type";
 
 const dt = new Date();
 
-export const balanceCards: any = [
+export const balanceCards: BankCardData[] = [
   {
     id: "1",
     bankName: "BNC",

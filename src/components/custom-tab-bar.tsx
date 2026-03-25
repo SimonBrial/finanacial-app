@@ -3,16 +3,14 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { TabItem } from "../interface/interface";
 import Typography from "./ui/typography";
 import useTheme from "../hook/useTheme";
-import Icon from "./ui/icon";
+import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
+import { Route } from "@react-navigation/native";
 
 export default function CustomTabBar({
   descriptors,
   navigation,
   state,
-  color,
-  width,
-  arr,
-}: any) {
+}: BottomTabBarProps) {
   const { sizes, theme, globalStyles } = useTheme();
 
   const tabStyles = StyleSheet.flatten([stylesTabs.tabItemContainer]);
@@ -28,7 +26,7 @@ export default function CustomTabBar({
 
   return (
     <View style={stylesTabs.tabBar}>
-      {state.routes.map((route: any, index: number) => {
+      {state.routes.map((route: Route<string>, index: number) => {
         // 1. Buscamos la información del tab basándonos en el nombre de la ruta, no en el índice
         const tabInfo = tabsItem.find((item) => item.name === route.name);
 
@@ -106,7 +104,7 @@ export default function CustomTabBar({
                       textAlign: "auto",
                     }}
                   >
-                    {label}
+                    {typeof label === "string" ? label : tabInfo.label}
                   </Typography>
                 </Animated.View>
               ) : null}
@@ -126,7 +124,7 @@ export default function CustomTabBar({
     bgStyle={stylesTabs.tabAdd}
   />
 ) : (
-  
+
 )} */
 
 const stylesTabs = StyleSheet.create({
@@ -142,15 +140,15 @@ const stylesTabs = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "flex-start",
-    paddingTop: 5,
+    marginBottom: 5,
     flexShrink: 1,
-    height: 90,
+    height: 70,
     //width: "100%",
   },
-  tabAdd: {
+  /*tabAdd: {
     width: 50,
     height: 50,
     backgroundColor: "red",
     position: "absolute",
-  },
+  },*/
 });

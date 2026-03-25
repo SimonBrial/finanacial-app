@@ -1,7 +1,7 @@
-import { ScrollView, StatusBar, StyleSheet, View } from "react-native";
+import { StatusBar, StyleSheet, View } from "react-native";
 import {
-  SafeAreaView,
   useSafeAreaInsets,
+  SafeAreaView,
 } from "react-native-safe-area-context";
 
 export default function GlobalContainer({
@@ -16,8 +16,8 @@ export default function GlobalContainer({
     ...styles.containerGlobal,
   });
   return (
-    <ScrollView style={{ backgroundColor: "black" }}>
-      <SafeAreaView>
+    <View style={{ flex: 1, backgroundColor: "black" }}>
+      <SafeAreaView style={{ flex: 1 }}>
         <View style={globalStyles}>{children}</View>
         <StatusBar
           barStyle={"light-content"}
@@ -25,7 +25,7 @@ export default function GlobalContainer({
           translucent={false}
         />
       </SafeAreaView>
-    </ScrollView>
+    </View>
   );
 }
 
@@ -33,9 +33,9 @@ const styles = StyleSheet.create({
   containerGlobal: {
     flex: 1,
     backgroundColor: "black",
-    alignItems: "flex-start",
+    alignItems: "stretch",
     justifyContent: "flex-start",
-    padding: 20,
+    paddingHorizontal: 20,
     //paddingBottom: 80,
   },
 });

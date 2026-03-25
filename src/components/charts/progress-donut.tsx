@@ -7,8 +7,9 @@ import {
   //RadialGradient,
 } from "react-native-svg";
 import useTheme from "../../hook/useTheme";
+import { CircularProgressProps } from "../../interface/interface";
 
-export default function CircularProgress(props: any) {
+export default function CircularProgress(props: CircularProgressProps) {
   const { theme } = useTheme();
   const { size, strokeWidth, text } = props;
   const radius = (size - strokeWidth) / 2;
@@ -45,7 +46,7 @@ export default function CircularProgress(props: any) {
         <SVGText
           fontSize={props.textSize ? props.textSize : "10"}
           x={size / 2}
-          y={size / 2 + (props.textSize ? props.textSize / 2 - 1 : 5)}
+          y={size / 2 + (props.textSize ? Number(props.textSize) / 2 - 1 : 5)}
           textAnchor="middle"
           fill={"white"}
         >
