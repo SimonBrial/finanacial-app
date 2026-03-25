@@ -22,22 +22,26 @@ export default function GoalCard({
   id,
 }: Goal) {
   const { sizes } = useTheme();
-  const containerStyles = StyleSheet.flatten([
+  // ⚡ Bolt Performance: Pass array of style objects directly instead of using StyleSheet.flatten() to avoid deep object merging overhead on every render
+  const containerStyles = [
     styles.container,
     { borderLeftColor: color },
-  ]);
+  ];
 
-  const titleStyles = StyleSheet.flatten([
+  // ⚡ Bolt Performance: Pass array of style objects directly instead of using StyleSheet.flatten() to avoid deep object merging overhead on every render
+  const titleStyles = [
     styles.titleContainer,
     { borderColor: color, width: 300 },
-  ]);
+  ];
 
-  const iconStyles = StyleSheet.flatten([
+  // ⚡ Bolt Performance: Pass array of style objects directly instead of using StyleSheet.flatten() to avoid deep object merging overhead on every render
+  const iconStyles = [
     styles.icon,
     { backgroundColor: `${color}4c` },
-  ]);
+  ];
 
-  const textStyles = StyleSheet.flatten([styles.text, { color: color }]);
+  // ⚡ Bolt Performance: Pass array of style objects directly instead of using StyleSheet.flatten() to avoid deep object merging overhead on every render
+  const textStyles = [styles.text, { color: color }];
 
   const goalCompletedPercentage = Math.round((currentValue / goalValue) * 100);
 
@@ -75,7 +79,7 @@ export default function GoalCard({
         <Typography
           fontSize={sizes.md}
           bold={false}
-          customStyles={StyleSheet.flatten([styles.text, { color: color }])}
+          customStyles={[styles.text, { color: color }]}
         >
           {period} {periodUnit}{" "}
         </Typography>

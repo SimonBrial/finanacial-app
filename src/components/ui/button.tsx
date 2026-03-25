@@ -72,13 +72,14 @@ export default function Button({
     };
 
     // 1. Calculamos el estilo del contenedor
-    const containerStyleObj = StyleSheet.flatten([
+  // ⚡ Bolt Performance: Pass array of style objects directly instead of using StyleSheet.flatten() to avoid deep object merging overhead on every render
+    const containerStyleObj = [
       styles.defaultStyles,
       variantStyles[currentType as PrimitiveVariants], // Usamos currentType aquí
       sizeStyles[size as string],
       fullWidth && { width: "100%", alignSelf: "auto" as const },
       containerStyle,
-    ]) as ViewStyle;
+    ] as any;
 
     // 2. Retornamos el objeto con sus propiedades bien definidas
     return {

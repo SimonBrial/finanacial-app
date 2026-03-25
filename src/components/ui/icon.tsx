@@ -1,4 +1,4 @@
-import { StyleSheet, View, ViewStyle } from "react-native";
+import { View, ViewStyle } from "react-native";
 import useTheme from "../../hook/useTheme";
 import { IconBase } from "../../interface/interface";
 import { IconLibraries } from "../../types/type";
@@ -62,7 +62,8 @@ export default function Icon({
     ghost: color ? color : theme.t100,
   };
 
-  const containerStyles = StyleSheet.flatten([
+  // ⚡ Bolt Performance: Pass array of style objects directly instead of using StyleSheet.flatten() to avoid deep object merging overhead on every render
+  const containerStyles = [
     {
       display: "flex",
       alignItems: "center",
@@ -72,7 +73,7 @@ export default function Icon({
     },
     variantStyles[variant], // <-- Magia aquí: busca directo el estilo que le pases
     bgStyle,
-  ]);
+  ];
 
   return (
     <View style={containerStyles}>

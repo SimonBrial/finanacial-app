@@ -62,7 +62,8 @@ export default function Badge({
     };
 
     // 1. Calculamos el estilo del contenedor
-    const containerStyleObj: ViewStyle = StyleSheet.flatten([
+  // ⚡ Bolt Performance: Pass array of style objects directly instead of using StyleSheet.flatten() to avoid deep object merging overhead on every render
+    const containerStyleObj: ViewStyle = [
       styles.defaultStyles,
       variantStyles[type as PrimitiveVariants],
       sizeStyles[size as BasesSize],
@@ -70,7 +71,7 @@ export default function Badge({
       sizeIcon[size as BasesSize],
       fullWidth && { width: "100%", alignSelf: "auto" as const },
       containerStyle,
-    ]) as ViewStyle;
+    ] as any;
 
     // 2. Retornamos el objeto con sus propiedades bien definidas
     return {
