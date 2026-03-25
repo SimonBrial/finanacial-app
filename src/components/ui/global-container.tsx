@@ -10,11 +10,12 @@ export default function GlobalContainer({
   children: React.ReactNode;
 }) {
   const insets = useSafeAreaInsets();
-  const globalStyles = StyleSheet.flatten({
+  // ⚡ Bolt Performance: Avoid StyleSheet.flatten to reduce CPU overhead
+  const globalStyles = {
     paddingTop: insets.top,
     //paddingBottom: insets.bottom,
     ...styles.containerGlobal,
-  });
+  };
   return (
     <ScrollView style={{ backgroundColor: "black" }}>
       <SafeAreaView>

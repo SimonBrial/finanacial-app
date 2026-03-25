@@ -21,10 +21,11 @@ export default function ExchangeCard({
     return styles.official;
   };
 
-  const containerStyles = StyleSheet.flatten([
+  // ⚡ Bolt Performance: Pass array of style objects directly instead of using StyleSheet.flatten() to avoid deep object merging overhead on every render
+  const containerStyles = [
     styles.container,
     { borderLeftColor: styleSelector().color },
-  ]);
+  ];
 
   return (
     <View style={containerStyles}>
