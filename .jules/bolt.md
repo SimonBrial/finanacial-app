@@ -1,0 +1,3 @@
+## 2024-03-26 - StyleSheet.flatten Performance Overhead
+**Learning:** Using `StyleSheet.flatten` directly inside React Native render functions creates unnecessary performance overhead by deep-merging style objects on every render cycle. This is especially impactful on foundational UI components like `Typography`, `Row`, `Stack`, and `Container`.
+**Action:** Always pass arrays of style objects directly to the component's `style` prop instead of manually flattening them. React Native handles style arrays natively and efficiently. Use `as any` type casting on the style array if TypeScript complains about the `style` prop not accepting an array of specific conditional objects.
