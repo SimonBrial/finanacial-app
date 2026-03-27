@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { RowProps } from "../../interface/interface";
 import useTheme from "../../hook/useTheme";
 
@@ -13,17 +13,19 @@ export default function Row({
 }: RowProps) {
   const { sizes } = useTheme();
 
-  const styles = StyleSheet.flatten([
+  // ⚡ Bolt: Removed StyleSheet.flatten() array wrapping to avoid CPU overhead from deep merging on every render.
+  // React Native supports passing style arrays directly natively.
+  const styles = [
     customStyles,
     {
-      display: "flex",
-      flexDirection: "row",
+      display: "flex" as const,
+      flexDirection: "row" as const,
     },
-    { flexWrap: wrap ? "wrap" : "nowrap" },
+    { flexWrap: wrap ? "wrap" as const : "nowrap" as const },
     { gap: gap ? gap : sizes.xxs },
     { width: width ? width : sizes.xxs },
     { alignItems: alignItem ? alignItem : "start" },
     { justifyContent: justifyContent ? justifyContent : "start" },
-  ]);
-  return <View style={styles}>{children}</View>;
+  ];
+  return <View style={styles as any}>{children}</View>;
 }
