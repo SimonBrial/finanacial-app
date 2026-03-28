@@ -13,6 +13,7 @@ interface DonutChartProps {
   decimals: SharedValue<number[]>;
   colors: string[];
   data: DonutChartData[];
+  selectedIndex?: number | null;
 }
 
 export default function DonutChart({
@@ -23,6 +24,7 @@ export default function DonutChart({
   colors,
   data,
   gap,
+  selectedIndex = null,
 }: DonutChartProps) {
   const innerRadius = radius - outerStrokeWidth / 2;
 
@@ -34,7 +36,7 @@ export default function DonutChart({
       <Canvas style={styles.container}>
         <Path
           path={path}
-          color="#f4f7fc"
+          color="#313035"
           style="stroke"
           strokeJoin="round"
           strokeWidth={outerStrokeWidth}
@@ -53,6 +55,7 @@ export default function DonutChart({
               index={index}
               key={index}
               gap={gap}
+              selectedIndex={selectedIndex}
             />
           );
         })}

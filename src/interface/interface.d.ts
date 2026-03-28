@@ -1,9 +1,27 @@
 import { TextStyle } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { PrimitiveVariants, IconLibrary, BasesSize } from "../types/type";
+import {
+  PrimitiveVariants,
+  IconLibrary,
+  BasesSize,
+  IconVariant,
+  BankNameTypes,
+} from "../types/type";
 import { DrawerContentComponentProps } from "@react-navigation/drawer";
+import React from "react";
 
 interface NotificationProps extends DrawerContentComponentProps {}
+
+interface CustomBadgeProps {
+  bankName: import("../types/type").BankNameTypes;
+  width?: number;
+  height?: number;
+}
+
+interface PercentIndicatorProps {
+  percentage: string;
+  trend: "up" | "down";
+}
 
 interface ExchangeCardProps {
   dolarRate: number;
@@ -13,6 +31,28 @@ interface ExchangeCardProps {
 
 interface NotificationIconProps {
   active?: boolean;
+}
+
+interface TypographyProps {
+  children: React.ReactNode;
+  customStyles?: import("react-native").StyleProp<
+    import("react-native").TextStyle
+  >;
+  fontSize?: number;
+  variant?: "Regular" | "Medium" | "Bold" | "SemiBold";
+  bold?: boolean;
+  txtWhite?: boolean;
+}
+
+interface IconProps extends IconBase {
+  size?: number;
+  color?: string;
+  style?: object;
+  bgStyle?: object;
+  withBg?: boolean;
+  rounded?: boolean;
+  variant?: IconVariant;
+  padding?: number;
 }
 
 interface DolarPriceItemProps {
@@ -63,7 +103,7 @@ interface BalanceCardProps {
 } */
 
 interface BadgeProps extends Partial<IconBase> {
-  text: string;
+  text?: string;
   color?: string;
   type?: PrimitiveVariants;
   size?: BasesSize;
@@ -181,4 +221,8 @@ export type {
   CircularProgressProps,
   DonutChartData,
   BankCardData,
+  TypographyProps,
+  IconProps,
+  PercentIndicatorProps,
+  CustomBadgeProps,
 };

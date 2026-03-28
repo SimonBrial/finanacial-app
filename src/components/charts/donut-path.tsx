@@ -14,6 +14,7 @@ interface DonutPathProps {
   color: string;
   decimals: SharedValue<number[]>;
   index: number;
+  selectedIndex?: number | null;
 }
 
 export default function DonutPath({
@@ -24,11 +25,18 @@ export default function DonutPath({
   color,
   index,
   gap,
+  selectedIndex = null,
 }: DonutPathProps) {
   const innerRadius = radius - outerStrokeWidth / 2;
 
   const path = Skia.Path.Make();
   path.addCircle(radius, radius, innerRadius);
+
+  const animatedStrokeWidth = useDerivedValue(() => {
+    return selectedIndex === index
+      ? withTiming(strokeWidth + 8, { duration: 250 })
+      : withTiming(strokeWidth, { duration: 250 });
+  }, [selectedIndex, index, strokeWidth]);
 
   const start = useDerivedValue(() => {
     if (index === 0) {
@@ -69,7 +77,7 @@ export default function DonutPath({
       color={color}
       style="stroke"
       strokeJoin="round"
-      strokeWidth={strokeWidth}
+      strokeWidth={animatedStrokeWidth}
       strokeCap="round"
       start={start}
       end={end}

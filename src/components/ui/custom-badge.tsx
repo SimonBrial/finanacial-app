@@ -7,14 +7,8 @@ import Svg, {
   Rect,
 } from "react-native-svg";
 import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
-
-type BankNameTypes =
-  | "payoneer"
-  | "banesco"
-  | "mercantil"
-  | "bdv"
-  | "provincial"
-  | "paypal";
+import { CustomBadgeProps } from "../../interface/interface";
+import { BankNameTypes } from "../../types/type";
 
 // Definimos la estructura de los datos de cada banco
 const BANK_CONFIGS: Record<BankNameTypes, string[]> = {
@@ -35,11 +29,6 @@ const BANK_CONFIGS: Record<BankNameTypes, string[]> = {
   // Puedes seguir agregando más bancos aquí...
 };
 
-interface CustomBadgeProps {
-  bankName: BankNameTypes; // El ID para buscar (ej: "banesco")
-  width?: number;
-  height?: number;
-}
 
 const strokeWidth = 1;
 

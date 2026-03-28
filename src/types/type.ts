@@ -26,4 +26,14 @@ type BasesSize = "sm" | "md" | "lg";
 
 type FilterKey = "Week" | "Month" | "Year";
 
-export type { PrimitiveVariants, IconLibrary, BasesSize, FilterKey };
+type IconVariant = "solid" | "bordered" | "ghost" | "light";
+
+type BankNameTypes =
+  | "payoneer"
+  | "banesco"
+  | "mercantil"
+  | "bdv"
+  | "provincial"
+  | "paypal";
+
+export type { PrimitiveVariants, IconLibrary, BasesSize, FilterKey, IconVariant, BankNameTypes };

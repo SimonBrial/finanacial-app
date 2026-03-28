@@ -1,10 +1,7 @@
 import useTheme from "../../hook/useTheme";
 import Badge from "./badge";
+import { PercentIndicatorProps } from "../../interface/interface";
 
-type PercentIndicatorProps = {
-  percentage: string;
-  trend: "up" | "down";
-};
 
 export default function PercentIndicator({
   percentage,

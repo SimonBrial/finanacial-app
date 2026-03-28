@@ -1,13 +1,15 @@
-import { View, ScrollView, Dimensions } from "react-native";
+import { View, Pressable } from "react-native";
 import GlobalContainer from "../../components/ui/global-container";
 import useTheme from "../../hook/useTheme";
 import TitleCustom from "../../components/title-custom";
 import Icon from "../../components/ui/icon";
 import TabHeaderNavigation from "./transation_section/tab-header-navigation";
+import Typography from "../../components/ui/typography";
+import { useState } from "react";
 
 export default function Transactions() {
   const { sizes, theme } = useTheme();
-  const { height } = Dimensions.get("window");
+  const [reportPressed, setReportPressed] = useState(false);
   return (
     <GlobalContainer>
       <TitleCustom
@@ -26,22 +28,35 @@ export default function Transactions() {
           width: "100%",
         }}
       >
-        <View
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: sizes.sm,
-          }}
+        <Pressable
+          onPressIn={() => setReportPressed(true)}
+          onPressOut={() => setReportPressed(false)}
+          onPress={() => console.log("Report Generated")}
+          style={
+            {
+              flexDirection: "row",
+              alignItems: "center",
+              paddingHorizontal: 8,
+              paddingVertical: 4,
+              borderRadius: 8,
+              gap: sizes.sm,
+              backgroundColor: reportPressed ? theme.t20 : "transparent"
+            }
+          }
         >
-          <Icon
-            name="calendar"
-            variant="light"
-            color={theme.t100}
-            size={sizes.xxl}
-          />
-        </View>
+          <View style={{ backgroundColor: `${theme.t20}80`, padding: 4, borderRadius: 6 }}>
+            <Icon
+              name="calendar"
+              variant="light"
+              color={theme.t100}
+              size={sizes.xxl}
+            />
+          </View>
+          <Typography fontSize={sizes.sm} customStyles={{ color: "white", marginRight: 6 }}>
+            {"january".toUpperCase()}
+          </Typography>
+        </Pressable>
+
         <View
           style={{
             gap: sizes.sm,

@@ -97,14 +97,15 @@ export default function Badge({
           size={themedStyles.sizeIcon.fontSize}
         />
       )}
-
-      <Typography
-        bold
-        fontSize={themedStyles.sizeText.fontSize}
-        customStyles={themedStyles.textStyle}
-      >
-        {text}
-      </Typography>
+      {text !== undefined ? (
+        <Typography
+          bold
+          fontSize={themedStyles.sizeText.fontSize}
+          customStyles={themedStyles.textStyle}
+        >
+          {text}
+        </Typography>
+      ) : null}
 
       {iconRight && (
         <Icon

@@ -1,20 +1,8 @@
 import { StyleSheet, View, ViewStyle } from "react-native";
 import useTheme from "../../hook/useTheme";
-import { IconBase } from "../../interface/interface";
-import { IconLibraries } from "../../types/type";
+import { IconBase, IconProps } from "../../interface/interface";
+import { IconLibraries, IconVariant } from "../../types/type";
 
-type IconVariant = "solid" | "bordered" | "ghost" | "light";
-
-interface IconProps extends IconBase {
-  size?: number;
-  color?: string;
-  style?: object;
-  bgStyle?: object;
-  withBg?: boolean;
-  rounded?: boolean;
-  variant?: IconVariant; // <-- Agregamos la prop variant
-  padding?: number; // <-- Útil para darle respiro al ícono dentro del View
-}
 
 export default function Icon({
   library = "MaterialCommunityIcons",
