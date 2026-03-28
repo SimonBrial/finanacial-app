@@ -1,4 +1,4 @@
-import { Text, StyleSheet, StyleProp, TextStyle } from "react-native";
+import { Text, StyleSheet } from "react-native";
 import { TypographyProps } from "../../interface/interface";
 
 
@@ -11,7 +11,8 @@ export default function Typography({
   variant,
   ...rest
 }: TypographyProps) {
-  const combinedStyles = StyleSheet.flatten([
+  // ⚡ Bolt: Removed StyleSheet.flatten to avoid CPU overhead from deep object merging on every render
+  const combinedStyles = [
     baseStyles.text,
     { fontSize },
     // Mapeamos la variante al nombre de la fuente que cargaste en el Root
@@ -19,10 +20,10 @@ export default function Typography({
     bold ? { fontWeight: "bold" as const } : {},
     txtWhite ? { color: "white" as const } : {},
     customStyles,
-  ]);
+  ];
 
   return (
-    <Text style={combinedStyles} {...rest}>
+    <Text style={combinedStyles as any} {...rest}>
       {children}
     </Text>
   );
