@@ -13,7 +13,9 @@ export default function CustomTabBar({
 }: BottomTabBarProps) {
   const { sizes, theme, globalStyles } = useTheme();
 
-  const tabStyles = StyleSheet.flatten([stylesTabs.tabItemContainer]);
+  // ⚡ Bolt Optimization: Using style arrays instead of StyleSheet.flatten
+  // to avoid recursive deep-merging overhead on every render.
+  const tabStyles = [stylesTabs.tabItemContainer];
 
   const tabsItem: TabItem[] = [
     { name: "home", icon: "home", label: "Home" },
