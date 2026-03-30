@@ -4,12 +4,7 @@ import Row from "./ui/row";
 import Typography from "./ui/typography";
 import NotificationIcon from "./notification-icon";
 import useTheme from "../hook/useTheme";
-import { IconBase } from "../interface/interface";
-
-interface TitleCustomProps extends IconBase {
-  title: string;
-  withNotificationIcon: boolean;
-}
+import { TitleCustomProps } from "../interface/interface";
 
 export default function TitleCustom({
   withNotificationIcon,

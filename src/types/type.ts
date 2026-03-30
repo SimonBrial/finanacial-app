@@ -36,4 +36,14 @@ type BankNameTypes =
   | "provincial"
   | "paypal";
 
-export type { PrimitiveVariants, IconLibrary, BasesSize, FilterKey, IconVariant, BankNameTypes };
+type GoalStatus = "Completed" | "In Progress" | "New";
+
+export type {
+  PrimitiveVariants,
+  BankNameTypes,
+  IconLibrary,
+  IconVariant,
+  GoalStatus,
+  BasesSize,
+  FilterKey,
+};

@@ -1,16 +1,15 @@
 import { TextStyle } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { SharedValue } from "react-native-reanimated";
 import {
   PrimitiveVariants,
   IconLibrary,
-  BasesSize,
   IconVariant,
-  BankNameTypes,
+  BasesSize,
+  GoalStatus,
 } from "../types/type";
-import { DrawerContentComponentProps } from "@react-navigation/drawer";
-import React from "react";
 
-interface NotificationProps extends DrawerContentComponentProps {}
+import React from "react";
 
 interface CustomBadgeProps {
   bankName: import("../types/type").BankNameTypes;
@@ -95,12 +94,6 @@ interface BalanceCardProps {
   lastEntry?: string;
   theme?: "blue" | "green" | "red" | "yellow";
 }
-
-/* interface GoalCardProps {
-  title: string;
-  description: string;
-  color?: string;
-} */
 
 interface BadgeProps extends Partial<IconBase> {
   text?: string;
@@ -200,29 +193,191 @@ interface IconBase {
   name?: string;
 }
 
+interface SettingsOption {
+  label: string;
+  icon: string;
+  library: IconLibrary;
+}
+
+interface BackgroundShapesProps {
+  height?: number;
+  width?: number;
+  customStyles?: object;
+  color?: string;
+  cX: number;
+  cY: number;
+  r: number;
+  blur?: number;
+}
+
+interface BankCardProps {
+  bankName: string;
+  gradientColors: [string, string];
+  balance: string;
+  currency: string;
+  lastEntry: string;
+  percentage: string;
+  trendIcon: string;
+}
+
+interface GenerateScaleParams {
+  categoryId: string[];
+  steps: number;
+  hex: string;
+}
+
+interface ColorScaleItem {
+  categoryId: string;
+  color: string;
+}
+
+interface Data {
+  value: number;
+  percentage: number;
+  color: string;
+}
+
+export interface Budget {
+  id: string;
+  title: string;
+  amount: number; // Lo gastado
+  limit: number; // Lo asignado
+  color: string;
+  icon: string;
+  library: string;
+}
+
+interface BudgetState {
+  insights: Budget[];
+  selectedIndex: number | null;
+  setSelectedIndex: (index: number | null) => void;
+}
+
+interface SpendingCategoryCardProps {
+  title: string;
+  amount: number;
+  limit: number;
+  color: string;
+  iconName: string;
+  library?: any;
+  index: number;
+  onPress: (index: number) => void;
+  approachingLimit?: boolean;
+  selected: number | null;
+}
+
+interface DonutChartProps {
+  gap: number;
+  radius: number;
+  strokeWidth: number;
+  outerStrokeWidth: number;
+  decimals: SharedValue<number[]>;
+  colors: string[];
+
+  // SOLUCIÓN: Quitar el '?' de amount y limit para que TypeScript
+  // sepa que SIEMPRE vendrán como números, igual que en donut-path.tsx
+  data: (DonutChartData & { amount: number; limit: number })[];
+
+  selectedIndex?: number | null;
+}
+
+interface DonutPathProps {
+  strokeWidth: number;
+  outerStrokeWidth: number;
+  gap: number;
+  radius: number;
+  color: string;
+  decimals: SharedValue<number[]>;
+  index: number;
+  selectedIndex?: number | null;
+  segmentData: DonutChartData & { amount: number; limit: number };
+}
+
+interface SegmentedControlProps {
+  options: string[];
+  selectedIndex: number;
+  onChange: (index: number) => void;
+}
+
+interface GoalCardProps {
+  title: string;
+  description?: string;
+  goalAmount: number; // Monto objetivo para la meta
+  currentAmount: number; // Monto actual ahorrado
+  progress: number; // Porcentaje de progreso (0-100)
+  status: boolean; // true para completado, false para en progreso
+  size: "sm" | "lg";
+}
+interface CategoryCardProps {
+  id?: number;
+  title: string;
+  icon: string;
+  library: IconLibrary;
+  share: boolean;
+  color: string;
+}
+
+interface GoalLgProps {
+  title: string;
+  status: GoalStatus;
+}
+
+interface TitleCustomProps extends IconBase {
+  title: string;
+  withNotificationIcon: boolean;
+}
+
+interface PaypalIconProps {
+  size?: number; // Para controlar el tamaño proporcionalmente
+  width?: number;
+  height?: number;
+}
+
+interface ShowStringProps {
+  show: boolean;
+  fnShow: () => void;
+}
+
 export type {
+  SpendingCategoryCardProps,
+  SegmentedControlProps,
+  BackgroundShapesProps,
+  NotificationIconProps,
+  CircularProgressProps,
+  PercentIndicatorProps,
+  DolarPriceItemProps,
+  GenerateScaleParams,
   ThemeContextProps,
   ExchangeCardProps,
+  CategoryCardProps,
+  NotificationProps,
+  CustomBadgeProps,
+  TitleCustomProps,
   BalanceCardProps,
+  ShowStringProps,
+  PaypalIconProps,
+  DonutChartProps,
+  TypographyProps,
+  DonutPathProps,
+  DonutChartData,
+  ColorScaleItem,
+  SettingsOption,
   GoalCardProps,
+  BankCardProps,
+  BankCardData,
   ExchangeRate,
+  GoalLgProps,
+  BudgetState,
   ButtonProps,
   BadgeProps,
   GridProps,
+  IconProps,
   IconBase,
   ColProps,
   RowProps,
   Expense,
   TabItem,
+  Budget,
+  Data,
   Goal,
-  NotificationProps,
-  NotificationIconProps,
-  DolarPriceItemProps,
-  CircularProgressProps,
-  DonutChartData,
-  BankCardData,
-  TypographyProps,
-  IconProps,
-  PercentIndicatorProps,
-  CustomBadgeProps,
 };

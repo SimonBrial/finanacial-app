@@ -6,16 +6,7 @@ import Row from "./ui/row";
 import ShowString from "./show-string";
 import Badge from "./ui/badge";
 import { useState } from "react";
-
-interface BankCardProps {
-  bankName: string;
-  gradientColors: [string, string];
-  balance: string;
-  currency: string;
-  lastEntry: string;
-  percentage: string;
-  trendIcon: string;
-}
+import { BankCardProps } from "../interface/interface";
 
 export default function BankCard({
   bankName,

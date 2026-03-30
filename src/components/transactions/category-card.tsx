@@ -1,24 +1,27 @@
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import Typography from "../../components/ui/typography";
 import useTheme from "../../hook/useTheme";
 import Icon from "../ui/icon";
 import { LinearGradient } from "expo-linear-gradient";
 import Badge from "../ui/badge";
-import { IconLibrary } from "../../types/type";
 import { Dropdown } from "react-native-element-dropdown";
-
-interface CategoryCardProps {
-  id?: number;
-  title: string;
-  icon: string;
-  library: IconLibrary;
-  share: boolean;
-  color: string;
-}
+import { CategoryCardProps } from "../../interface/interface";
 
 const actionData = [
-  { label: 'Edit', value: 'edit', icon: 'edit', iconLibrary: 'Feather', color: "#ff6004" },
-  { label: 'Delete', value: 'deactivate', icon: 'trash-2', iconLibrary: 'Feather', color: "#ff0101" },
+  {
+    label: "Edit",
+    value: "edit",
+    icon: "edit",
+    iconLibrary: "Feather",
+    color: "#ff6004",
+  },
+  {
+    label: "Delete",
+    value: "deactivate",
+    icon: "trash-2",
+    iconLibrary: "Feather",
+    color: "#ff0101",
+  },
 ];
 
 export default function CategoryCard({
@@ -32,10 +35,9 @@ export default function CategoryCard({
 
   const renderDropdownItem = (item: any) => {
     return (
-      <View style={[
-        styles.dropdownItem,
-        { backgroundColor: `${item.color}22` }
-      ]}>
+      <View
+        style={[styles.dropdownItem, { backgroundColor: `${item.color}22` }]}
+      >
         <Icon
           name={item.icon}
           library={item.iconLibrary}
@@ -46,11 +48,9 @@ export default function CategoryCard({
         <Typography
           fontSize={sizes.md}
           customStyles={{ color: item.color, marginLeft: 12 }}
-
         >
           {item.label}
         </Typography>
-
       </View>
     );
   };
@@ -108,14 +108,15 @@ export default function CategoryCard({
                 iconLeft="users"
                 library="Feather"
                 color={color}
-              />) :
-              (<Badge
+              />
+            ) : (
+              <Badge
                 text="Personal"
                 iconLeft="user"
                 library="Feather"
                 color={color}
               />
-              )}
+            )}
             <Badge
               text="27 MAR 2026"
               type="flat"
@@ -132,8 +133,8 @@ export default function CategoryCard({
             styles.dropdownContainer,
             {
               backgroundColor: globalStyles.bgContainerStart,
-              borderColor: globalStyles.borderContainer
-            }
+              borderColor: globalStyles.borderContainer,
+            },
           ]}
           data={actionData}
           labelField="label" // Corregido: antes decía "test"
@@ -141,9 +142,9 @@ export default function CategoryCard({
           activeColor="rgba(0, 0, 0, 0.15)" // Oscurece la opción al tocarla en vez de ponerla blanca
           itemContainerStyle={{
             borderRadius: 20,
-            marginBottom: 4 // Esto crea el gap de 4 entre los elementos
+            marginBottom: 4, // Esto crea el gap de 4 entre los elementos
           }}
-          onChange={item => null}
+          onChange={(item) => null}
           placeholder="" // Dejamos vacío para que no ocupe espacio
           selectedTextStyle={{ display: "none" }} // Ocultamos el texto seleccionado para solo ver los 3 puntos
           renderLeftIcon={() => (

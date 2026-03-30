@@ -5,16 +5,7 @@ import Typography from "./ui/typography";
 import CircularProgress from "./charts/progress-donut";
 import { View } from "react-native";
 import { Canvas, Rect, RadialGradient, vec } from "@shopify/react-native-skia";
-
-interface GoalCardProps {
-  title: string;
-  description?: string;
-  goalAmount: number; // Monto objetivo para la meta
-  currentAmount: number; // Monto actual ahorrado
-  progress: number; // Porcentaje de progreso (0-100)
-  status: boolean; // true para completado, false para en progreso
-  size: "sm" | "lg";
-}
+import { GoalCardProps } from "../interface/interface";
 
 export default function GoalCard({
   currentAmount,

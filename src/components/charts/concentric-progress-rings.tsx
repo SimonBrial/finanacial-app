@@ -6,6 +6,7 @@ import Typography from "../ui/typography"; // Asumiendo tu componente del ejempl
 import Icon from "../ui/icon"; // Asumiendo tu componente del ejemplo anterior
 import Row from "../ui/row";
 import useTheme from "../../hook/useTheme";
+import { GenerateScaleParams, ColorScaleItem } from "../../interface/interface";
 
 // Simulamos los datos del mes actual
 // Ordenamos de mayor a menor porcentaje para que el anillo más grande quede afuera
@@ -273,16 +274,6 @@ function hexToHSL(hex: string): { h: number; s: number; l: number } {
   };
 }
 
-interface GenerateScaleParams {
-  categoryId: string[];
-  steps: number;
-  hex: string;
-}
-
-interface ColorScaleItem {
-  categoryId: string;
-  color: string;
-}
 function generateScale({
   categoryId,
   steps,

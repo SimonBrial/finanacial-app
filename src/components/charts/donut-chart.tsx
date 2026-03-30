@@ -1,20 +1,8 @@
 import { Canvas, Path, Skia } from "@shopify/react-native-skia";
 import { View, StyleSheet } from "react-native";
-import { SharedValue } from "react-native-reanimated";
+
 import DonutPath from "./donut-path";
-
-import { DonutChartData } from "../../interface/interface";
-
-interface DonutChartProps {
-  gap: number;
-  radius: number;
-  strokeWidth: number;
-  outerStrokeWidth: number;
-  decimals: SharedValue<number[]>;
-  colors: string[];
-  data: DonutChartData[];
-  selectedIndex?: number | null;
-}
+import { DonutChartProps } from "../../interface/interface";
 
 export default function DonutChart({
   outerStrokeWidth,
@@ -27,13 +15,13 @@ export default function DonutChart({
   selectedIndex = null,
 }: DonutChartProps) {
   const innerRadius = radius - outerStrokeWidth / 2;
-
   const path = Skia.Path.Make();
   path.addCircle(radius, radius, innerRadius);
 
   return (
     <View style={styles.container}>
       <Canvas style={styles.container}>
+        {/* Fondo gris de los anillos no completados */}
         <Path
           path={path}
           color="#313035"
@@ -56,6 +44,7 @@ export default function DonutChart({
               key={index}
               gap={gap}
               selectedIndex={selectedIndex}
+              segmentData={d} // NUEVO: Pasamos la data del segmento para evaluar excesos
             />
           );
         })}

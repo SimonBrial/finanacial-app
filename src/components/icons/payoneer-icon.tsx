@@ -1,11 +1,7 @@
 import React from "react";
 import { Canvas, Path, SweepGradient, vec } from "@shopify/react-native-skia";
 
-interface PayoneerIconProps {
-  size?: number;
-}
-
-export default function PayoneerIcon({ size = 55 }: PayoneerIconProps) {
+export default function PayoneerIcon({ size = 55 }: { size?: number }) {
   const strokeWidth = 5;
   const radius = (size - strokeWidth) / 2;
   const center = size / 2;

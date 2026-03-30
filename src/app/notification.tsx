@@ -3,9 +3,11 @@ import Typography from "../components/ui/typography";
 import Icon from "../components/ui/icon";
 import Row from "../components/ui/row";
 import useTheme from "../hook/useTheme";
-import { NotificationProps } from "../interface/interface";
+import { DrawerContentComponentProps } from "@react-navigation/drawer";
 
-export default function Notification({ ...props }: NotificationProps) {
+export default function Notification({
+  ...props
+}: DrawerContentComponentProps) {
   const { theme, sizes, globalStyles } = useTheme();
   return (
     <View

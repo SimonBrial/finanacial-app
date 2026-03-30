@@ -9,12 +9,7 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import Typography from "../ui/typography";
-
-interface SegmentedControlProps {
-  options: string[];
-  selectedIndex: number;
-  onChange: (index: number) => void;
-}
+import { SegmentedControlProps } from "../../interface/interface";
 
 export default function SegmentedControl({
   selectedIndex,

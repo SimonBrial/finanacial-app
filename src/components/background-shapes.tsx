@@ -7,17 +7,7 @@ import {
 } from "@shopify/react-native-skia";
 import { View } from "react-native";
 import useTheme from "../hook/useTheme";
-
-interface BackgroundShapesProps {
-  height?: number;
-  width?: number;
-  customStyles?: object;
-  color?: string;
-  cX: number;
-  cY: number;
-  r: number;
-  blur?: number;
-}
+import { BackgroundShapesProps } from "../interface/interface";
 
 export default function BackgroundShapes({
   customStyles,

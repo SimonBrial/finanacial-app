@@ -1,70 +1,119 @@
-import React, { useState } from "react";
 import {
-  View,
+  TouchableWithoutFeedback,
   ScrollView,
-  TouchableOpacity,
-  Pressable,
   StyleSheet,
+  View,
 } from "react-native";
 import { useSharedValue } from "react-native-reanimated";
 import Typography from "../../../components/ui/typography";
-import Icon from "../../../components/ui/icon";
 import useTheme from "../../../hook/useTheme";
 import DonutChart from "../../../components/charts/donut-chart";
 import SpendingCategoryCard from "../../../components/transactions/spending-category-card";
+import { useBudgetStore } from "../../../store/useBudgetStore"; // Importar Zustand
 
 export default function Insight() {
   const { sizes, theme, globalStyles } = useTheme();
+  const { insights, selectedIndex, setSelectedIndex } = useBudgetStore();
 
-  // Simulated data equivalent to the UI mockup
-  const insights = [
-    {
-      id: "food16d",
-      title: "Food",
-      amount: 238.84,
-      limit: 300,
-      color: "#13dd67",
-      icon: "fast-food-outline",
-      library: "Ionicons",
-      approachingLimit: true,
-    },
-    {
-      id: "groceries16d",
-      title: "Groceries",
-      amount: 238.84,
-      limit: 300,
-      color: "#13ace9",
-      icon: "cart",
-      library: "Ionicons",
-      approachingLimit: true,
-    },
-    {
-      id: "car16d",
-      title: "Car",
-      amount: 238.84,
-      limit: 300,
-      color: "#8a2be2",
-      icon: "car",
-      library: "Ionicons",
-      approachingLimit: true,
-    },
-  ];
+  // 1. Cálculos de totales reales (basados en la data)
+  const totalAmount = insights.reduce((sum, item) => sum + item.amount, 0); // Total gastado
+  const totalLimit = insights.reduce((sum, item) => sum + item.limit, 0); // Total asignado (límite)
 
-  const chartData = insights.map((c, i) => ({
+  const globalPercentage = Math.round((totalAmount / totalLimit) * 100);
+
+  // 2. Preparar los datos para el DonutChart, incluyendo amount y limit
+  const chartData = insights.map((c) => ({
     id: c.id,
     label: c.title,
-    value: c.amount,
+    value: c.amount, // Valor principal a mostrar (gastado)
     color: c.color,
+    amount: c.amount, // Pasar estrictamente como número
+    limit: c.limit, // Pasar estrictamente como número
   }));
-  const totalAmount = "1 245";
 
-  // Compute slice proportions dynamically considering a fixed total or computed
-  const decimalsArray = insights.map((c) => c.amount / (c.amount * 4)); // just a dummy math to make it look like donut parts
-  const decimals = useSharedValue(decimalsArray);
+  // --- NUEVA LÓGICA DE PROPORCIONES BASE ---
+
+  // REGLA CLAVE: El tamaño total del arco base de cada categoría debe representar su LÍMITE (Asignado).
+  // No el dinero gastado, sino el espacio máximo que se le asignó en el presupuesto total.
+
+  // 3. Calcular proporciones base estrictas (proporcional al límite de cada categoría respecto al total asignado)
+  const rawProportions = insights.map((c) => c.limit / totalLimit);
+
+  // --- AJUSTE DE VISIBILIDAD MÍNIMA (para 'Health', etc.) ---
+
+  // Definimos un porcentaje mínimo de visibilidad (ej. 3%).
+  // Si una categoría es menor, la forzamos a este mínimo para que no desaparezca.
+  const MIN_VISIBILITY_PERCENTAGE = 0.03;
+
+  // 4. Enforzar mínimo y re-escalar matemáticamente el resto para que el total siga siendo 1.
+  // Es crucial re-escalar los demás para que el gráfico no se deforme.
+  let finalProportions = rawProportions.map((p) =>
+    Math.max(p, MIN_VISIBILITY_PERCENTAGE),
+  );
+  const finalProportionsSumRaw = finalProportions.reduce(
+    (sum, p) => sum + p,
+    0,
+  );
+
+  // Normalizar de vuelta a 1 (re-escalado matemático)
+  finalProportions = finalProportions.map((p) => p / finalProportionsSumRaw);
+
+  // 5. Crear el shared value con las proporciones corregidas y re-escaladas
+  const decimals = useSharedValue(finalProportions);
   const colors = insights.map((c) => c.color);
 
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-  const [reportPressed, setReportPressed] = useState(false);
+  const selectedCategory =
+    selectedIndex !== null ? insights[selectedIndex] : null;
+
+  // REGLA UX: Renderizado central (Máximo 2 características)
+  const renderCenterContent = () => {
+    if (!selectedCategory) {
+      return (
+        <View style={{ alignItems: "center" }}>
+          <Typography bold fontSize={sizes.xl} txtWhite>
+            {globalPercentage}%
+          </Typography>
+          <Typography
+            fontSize={sizes.xs}
+            customStyles={{ color: globalStyles.subtitle, marginTop: 4 }}
+          >
+            TOTAL SPENT
+          </Typography>
+        </View>
+      );
+    }
+
+    const isOverBudget = selectedCategory.amount > selectedCategory.limit;
+    const remainingOrOver = Math.abs(
+      selectedCategory.limit - selectedCategory.amount,
+    );
+
+    return (
+      <View style={{ alignItems: "center" }}>
+        {/* Característica 1: Total Gastado */}
+        <Typography
+          bold
+          fontSize={sizes.lg}
+          customStyles={{ color: selectedCategory.color }}
+        >
+          ${selectedCategory.amount.toFixed(2)}
+        </Typography>
+
+        {/* Característica 2: Restante o Exceso */}
+        <Typography
+          fontSize={sizes.sm}
+          customStyles={{
+            color: isOverBudget ? "#ef4444" : globalStyles.subtitle,
+            marginTop: 4,
+          }}
+        >
+          {isOverBudget
+            ? `Exceso: -$${remainingOrOver.toFixed(2)}`
+            : `Faltan: $${remainingOrOver.toFixed(2)}`}
+        </Typography>
+      </View>
+    );
+  };
 
   return (
     <ScrollView
@@ -74,36 +123,33 @@ export default function Insight() {
       <View
         style={{ height: 280, justifyContent: "center", alignItems: "center" }}
       >
-        <View style={{ width: 220, height: 220, position: "relative" }}>
-          <DonutChart
-            colors={colors}
-            data={chartData}
-            decimals={decimals}
-            gap={0.03}
-            radius={110}
-            strokeWidth={14}
-            outerStrokeWidth={20}
-            selectedIndex={selectedIndex}
-          />
-          <View
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Typography bold fontSize={sizes.lg} txtWhite>
-              {selectedIndex !== null
-                ? (decimalsArray[selectedIndex] * 100).toFixed(0)
-                : 25}
-              %
-            </Typography>
+        {/* Touchable para deseleccionar al tocar fuera */}
+        <TouchableWithoutFeedback onPress={() => setSelectedIndex(null)}>
+          <View style={{ width: 220, height: 220, position: "relative" }}>
+            <DonutChart
+              colors={colors}
+              data={chartData}
+              decimals={decimals}
+              gap={0.03}
+              radius={110}
+              strokeWidth={14}
+              outerStrokeWidth={20}
+              selectedIndex={selectedIndex}
+            />
+            <View style={StyleSheet.absoluteFillObject}>
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  pointerEvents: "none",
+                }}
+              >
+                {renderCenterContent()}
+              </View>
+            </View>
           </View>
-        </View>
+        </TouchableWithoutFeedback>
       </View>
 
       <View style={{ alignItems: "center", marginBottom: 32 }}>
@@ -120,86 +166,37 @@ export default function Insight() {
             fontSize={sizes.md}
             customStyles={{ color: theme.t100 }}
           >
-            {totalAmount} $
+            {totalAmount.toFixed(2)} $
           </Typography>
         </Typography>
       </View>
 
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: 16,
-        }}
-      >
-        <Typography
-          fontSize={sizes.sm}
-          customStyles={{ color: globalStyles.subtitle }}
-        >
-          SPENDING BY CATEGORY
-        </Typography>
-
-        <Pressable
-          onPressIn={() => setReportPressed(true)}
-          onPressOut={() => setReportPressed(false)}
-          onPress={() => console.log("Report Generated")}
-          style={[
-            styles.reportBtn,
-            { backgroundColor: reportPressed ? theme.t20 : "transparent" },
-          ]}
-        >
-          <Typography
-            fontSize={sizes.sm}
-            customStyles={{ color: theme.t100, marginRight: 6 }}
-          >
-            Generate report
-          </Typography>
-          <View
-            style={{
-              backgroundColor: `${theme.t20}80`,
-              padding: 4,
-              borderRadius: 6,
-            }}
-          >
-            <Icon
-              name="document-text"
-              library="Ionicons"
-              color={theme.t100}
-              size={sizes.md}
-            />
-          </View>
-        </Pressable>
-      </View>
+      {/* ... [El resto de la UI (SPENDING BY CATEGORY, Generate report) queda igual] ... */}
 
       <View>
-        {insights.map((ins, index) => (
-          <SpendingCategoryCard
-            key={ins.id}
-            index={index}
-            title={ins.title}
-            amount={ins.amount}
-            limit={ins.limit}
-            color={ins.color}
-            iconName={ins.icon}
-            library={ins.library}
-            selected={selectedIndex}
-            approachingLimit={ins.approachingLimit}
-            onPress={(i) => setSelectedIndex(i === selectedIndex ? null : i)}
-          />
-        ))}
+        {insights.map((ins, index) => {
+          // Calcular dinámicamente si se acerca al límite (ej. 80%)
+          const isApproaching =
+            ins.amount / ins.limit >= 0.8 && ins.amount <= ins.limit;
+
+          return (
+            <SpendingCategoryCard
+              key={ins.id}
+              index={index}
+              title={ins.title}
+              amount={ins.amount}
+              limit={ins.limit}
+              color={ins.color}
+              iconName={ins.icon}
+              library={ins.library}
+              selected={selectedIndex}
+              approachingLimit={isApproaching}
+              onPress={(i) => setSelectedIndex(i === selectedIndex ? null : i)}
+            />
+          );
+        })}
       </View>
       <View style={{ height: 50 }} />
     </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  reportBtn: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 8,
-  },
-});

@@ -1,19 +1,9 @@
 import React, { useEffect, useState } from "react";
-import {
-  ActivityIndicator,
-  ScrollView,
-  StyleSheet,
-  View,
-} from "react-native";
+import { ActivityIndicator, ScrollView, StyleSheet, View } from "react-native";
 import { useSharedValue, withTiming } from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
 import DonutChart from "./donut-chart";
-
-interface Data {
-  value: number;
-  percentage: number;
-  color: string;
-}
+import { Data } from "../../interface/interface";
 
 const RADIUS = 160;
 const STROKE_WIDTH = 10;

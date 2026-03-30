@@ -6,14 +6,8 @@ import TitleCustom from "../../components/title-custom";
 import Avatar from "../../components/ui/avatar";
 import Badge from "../../components/ui/badge";
 import Icon from "../../components/ui/icon";
-import { IconLibrary } from "../../types/type";
 import { useRouter } from "expo-router";
-
-interface SettingsOption {
-  label: string;
-  icon: string;
-  library: IconLibrary;
-}
+import { SettingsOption } from "../../interface/interface";
 
 export default function Settings() {
   const { inProgress, sizes, theme } = useTheme();
