@@ -1,0 +1,3 @@
+## 2024-05-18 - Avoid StyleSheet.flatten inside React Native render functions
+**Learning:** `StyleSheet.flatten` causes deep object merging, which introduces CPU performance overhead when executed inside React Native render loops.
+**Action:** Pass arrays of style objects directly to components instead of using `StyleSheet.flatten` since React Native `style` props natively support arrays and handle them more efficiently.

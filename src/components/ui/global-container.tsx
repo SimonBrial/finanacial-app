@@ -10,11 +10,11 @@ export default function GlobalContainer({
   children: React.ReactNode;
 }) {
   const insets = useSafeAreaInsets();
-  const globalStyles = StyleSheet.flatten({
-    paddingTop: insets.top,
-    //paddingBottom: insets.bottom,
-    ...styles.containerGlobal,
-  });
+  const globalStyles = [
+    { paddingTop: insets.top },
+    // { paddingBottom: insets.bottom },
+    styles.containerGlobal,
+  ];
   return (
     <View style={{ flex: 1, backgroundColor: "black" }}>
       <SafeAreaView style={{ flex: 1 }}>
