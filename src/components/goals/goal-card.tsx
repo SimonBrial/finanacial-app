@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, StyleProp, ViewStyle, TextStyle } from "react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Stack from "../ui/stack";
 import { Goal } from "../../interface/interface";
@@ -22,22 +22,25 @@ export default function GoalCard({
   id,
 }: Goal) {
   const { sizes } = useTheme();
-  const containerStyles = StyleSheet.flatten([
+
+  // ⚡ Bolt Optimization: Using style arrays instead of StyleSheet.flatten
+  // to avoid recursive deep-merging overhead on every render.
+  const containerStyles: StyleProp<ViewStyle> = [
     styles.container,
     { borderLeftColor: color },
-  ]);
+  ];
 
-  const titleStyles = StyleSheet.flatten([
+  const titleStyles: StyleProp<ViewStyle> = [
     styles.titleContainer,
     { borderColor: color, width: 300 },
-  ]);
+  ];
 
-  const iconStyles = StyleSheet.flatten([
+  const iconStyles: StyleProp<TextStyle> = [
     styles.icon,
     { backgroundColor: `${color}4c` },
-  ]);
+  ];
 
-  const textStyles = StyleSheet.flatten([styles.text, { color: color }]);
+  const textStyles: StyleProp<TextStyle> = [styles.text, { color: color }];
 
   const goalCompletedPercentage = Math.round((currentValue / goalValue) * 100);
 
@@ -75,7 +78,7 @@ export default function GoalCard({
         <Typography
           fontSize={sizes.md}
           bold={false}
-          customStyles={StyleSheet.flatten([styles.text, { color: color }])}
+          customStyles={[styles.text, { color: color }]}
         >
           {period} {periodUnit}{" "}
         </Typography>

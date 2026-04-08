@@ -2,7 +2,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { Expense } from "../../interface/interface";
 import Container from "../ui/container";
 import Typography from "../ui/typography";
-import { StyleSheet } from "react-native";
+import { StyleSheet, StyleProp, ViewStyle, TextStyle } from "react-native";
 import Stack from "../ui/stack";
 import Badge from "../ui/badge";
 import useTheme from "../../hook/useTheme";
@@ -17,14 +17,17 @@ export default function ExpanseCard({
   id,
 }: Expense) {
   const {sizes} = useTheme();
-  const containerStyles = StyleSheet.flatten([
+
+  // ⚡ Bolt Optimization: Using style arrays instead of StyleSheet.flatten
+  // to avoid recursive deep-merging overhead on every render.
+  const containerStyles: StyleProp<ViewStyle> = [
     styles.containerCard,
     { borderColor: color, borderWidth: 1 },
-  ]);
-  const iconStyles = StyleSheet.flatten([
+  ];
+  const iconStyles: StyleProp<TextStyle> = [
     styles.icon,
     { backgroundColor: `${color}4c` },
-  ]);
+  ];
   return (
     <Container customStyles={containerStyles} gap={6} wrap={false}>
       <Stack

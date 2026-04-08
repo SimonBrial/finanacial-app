@@ -1,4 +1,4 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, StyleProp, ViewStyle } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { ExchangeCardProps } from "../../interface/interface";
 import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
@@ -21,10 +21,12 @@ export default function ExchangeCard({
     return styles.official;
   };
 
-  const containerStyles = StyleSheet.flatten([
+  // ⚡ Bolt Optimization: Using style arrays instead of StyleSheet.flatten
+  // to avoid recursive deep-merging overhead on every render.
+  const containerStyles: StyleProp<ViewStyle> = [
     styles.container,
     { borderLeftColor: styleSelector().color },
-  ]);
+  ];
 
   return (
     <View style={containerStyles}>

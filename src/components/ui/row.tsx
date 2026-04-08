@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { View, StyleProp, ViewStyle } from "react-native";
 import { RowProps } from "../../interface/interface";
 import useTheme from "../../hook/useTheme";
 
@@ -13,17 +13,19 @@ export default function Row({
 }: RowProps) {
   const { sizes } = useTheme();
 
-  const styles = StyleSheet.flatten([
-    customStyles,
+  // ⚡ Bolt Optimization: Using style arrays instead of StyleSheet.flatten
+  // to avoid recursive deep-merging overhead on every render.
+  const styles: StyleProp<ViewStyle> = [
+    customStyles as StyleProp<ViewStyle>,
     {
       display: "flex",
       flexDirection: "row",
     },
     { flexWrap: wrap ? "wrap" : "nowrap" },
     { gap: gap ? gap : sizes.xxs },
-    { width: width ? width : sizes.xxs },
-    { alignItems: alignItem ? alignItem : "start" },
-    { justifyContent: justifyContent ? justifyContent : "start" },
-  ]);
+    { width: width ? width : sizes.xxs } as ViewStyle,
+    { alignItems: alignItem ? alignItem : "start" } as ViewStyle,
+    { justifyContent: justifyContent ? justifyContent : "start" } as ViewStyle,
+  ];
   return <View style={styles}>{children}</View>;
 }
