@@ -50,7 +50,8 @@ export default function Icon({
     ghost: color ? color : theme.t100,
   };
 
-  const containerStyles = StyleSheet.flatten([
+  // ⚡ Bolt: Passed array of styles instead of StyleSheet.flatten to avoid CPU overhead during renders.
+  const containerStyles = [
     {
       display: "flex",
       alignItems: "center",
@@ -60,7 +61,7 @@ export default function Icon({
     },
     variantStyles[variant], // <-- Magia aquí: busca directo el estilo que le pases
     bgStyle,
-  ]);
+  ];
 
   return (
     <View style={containerStyles}>
