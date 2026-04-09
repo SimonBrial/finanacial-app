@@ -1,4 +1,4 @@
-import { StyleSheet, View, ViewStyle } from "react-native";
+import { View, ViewStyle } from "react-native";
 import useTheme from "../../hook/useTheme";
 import { IconBase, IconProps } from "../../interface/interface";
 import { IconLibraries, IconVariant } from "../../types/type";
@@ -50,17 +50,17 @@ export default function Icon({
     ghost: color ? color : theme.t100,
   };
 
-  const containerStyles = StyleSheet.flatten([
+  const containerStyles = [
     {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
+      display: "flex" as const,
+      alignItems: "center" as const,
+      justifyContent: "center" as const,
       padding: padding,
       borderRadius: rounded ? 999 : sizes.xxs,
     },
     variantStyles[variant], // <-- Magia aquí: busca directo el estilo que le pases
     bgStyle,
-  ]);
+  ];
 
   return (
     <View style={containerStyles}>
