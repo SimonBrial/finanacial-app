@@ -13,7 +13,7 @@ export default function Row({
 }: RowProps) {
   const { sizes } = useTheme();
 
-  const styles = StyleSheet.flatten([
+  const styles = [
     customStyles,
     {
       display: "flex",
@@ -24,6 +24,6 @@ export default function Row({
     { width: width ? width : sizes.xxs },
     { alignItems: alignItem ? alignItem : "start" },
     { justifyContent: justifyContent ? justifyContent : "start" },
-  ]);
-  return <View style={styles}>{children}</View>;
+  ];
+  return <View style={styles as any}>{children}</View>;
 }

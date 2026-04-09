@@ -1,0 +1,3 @@
+## 2024-05-20 - [Performance] Removing StyleSheet.flatten for array styling
+**Learning:** Using `StyleSheet.flatten` inside functional components causes synchronous deep object merging on every render. This creates noticeable CPU overhead, especially for heavily used UI components like buttons, containers, typography, and lists in React Native apps. React Native already supports passing arrays directly to the `style` prop, handling the resolution natively and far more efficiently.
+**Action:** Always prefer passing style arrays (e.g., `style={[styles.base, customStyles]}`) directly instead of using `StyleSheet.flatten([styles.base, customStyles])` in component renders. Type cast to `as any` if needed to avoid TS complexity.
