@@ -1,14 +1,19 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import Typography from "../components/ui/typography";
 import Icon from "../components/ui/icon";
 import Row from "../components/ui/row";
 import useTheme from "../hook/useTheme";
 import { DrawerContentComponentProps } from "@react-navigation/drawer";
-
+import { useRouter } from "expo-router";
 export default function Notification({
   ...props
 }: DrawerContentComponentProps) {
   const { theme, sizes, globalStyles } = useTheme();
+  const router = useRouter();
+
+  const hanleLogout = (exception: string) => {
+    router.push(exception === "Settings" ? "/settings" : "/404");
+  };
   return (
     <View
       style={[
@@ -67,6 +72,42 @@ export default function Notification({
         />
         <Typography customStyles={{ color: theme.t100 }}>Test</Typography>
       </View>
+      <TouchableOpacity
+        onPress={() => hanleLogout("Settings")}
+        style={{
+          flex: 1,
+          gap: 20,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: "black",
+          width: "100%",
+          //height: 500,
+        }}
+      >
+
+        <Typography txtWhite customStyles={{
+          paddingVertical: sizes.sm,
+          paddingHorizontal: sizes.xl,
+          backgroundColor: theme.t20,
+          borderRadius: sizes.xs,
+          justifyContent: "center",
+          alignItems: "center",
+        }}>Go to login</Typography>
+        {/* <Button
+          fullWidth
+          text="Go to login"
+          customColorText={{ color: theme.t100 }}
+          containerStyle={{
+            paddingVertical: sizes.sm,
+            paddingHorizontal: sizes.xl,
+            backgroundColor: theme.t20,
+            borderRadius: sizes.xs,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        /> */}
+      </TouchableOpacity>
     </View>
   );
 }

@@ -50,7 +50,7 @@ export default function TitleCustom({
           {title}
         </Typography>
       </Row>
-      {withNotificationIcon && <NotificationIcon />}
+      {withNotificationIcon && <NotificationIcon hasNotification={true} />}
     </Row>
   );
 }

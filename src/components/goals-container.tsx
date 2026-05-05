@@ -4,9 +4,11 @@ import useTheme from "../hook/useTheme";
 import Stack from "./ui/stack";
 import GoalCard from "./goal-card";
 import Row from "./ui/row";
+import { useGoalStore } from "../store/useGoalStore";
 
 export default function GoalsContainer() {
   const { sizes } = useTheme();
+  const { goals } = useGoalStore();
   return (
     <Stack
       gap={sizes.lg}
@@ -22,61 +24,19 @@ export default function GoalsContainer() {
     >
       <TitleCustom title="Goals" withNotificationIcon={false} />
       <Stack gap={sizes.md}>
-        <Row gap={sizes.xs} width={"100%"} wrap>
-          <GoalCard
-            description="Save $1000 for a trip to Bali"
-            title="Vacation"
-            currentAmount={650}
-            goalAmount={1000}
-            progress={65}
-            status={false}
-            size="sm"
-          />
-          <GoalCard
-            description="Save $1000 for a trip to Bali"
-            title="New Car"
-            currentAmount={1000}
-            goalAmount={1000}
-            progress={100}
-            status={true}
-            size="sm"
-          />
-          <GoalCard
-            description="Save $1000 for a trip to Bali"
-            title="New Car"
-            currentAmount={1000}
-            goalAmount={1000}
-            progress={100}
-            status={true}
-            size="sm"
-          />
-          <GoalCard
-            description="Save $1000 for a trip to Bali"
-            title="New Car"
-            currentAmount={1000}
-            goalAmount={1000}
-            progress={100}
-            status={true}
-            size="sm"
-          />
-          <GoalCard
-            description="Save $1000 for a trip to Bali"
-            title="New Car"
-            currentAmount={1000}
-            goalAmount={1000}
-            progress={100}
-            status={true}
-            size="sm"
-          />
-          <GoalCard
-            description="Save $1000 for a trip to Bali"
-            title="New Car"
-            currentAmount={1000}
-            goalAmount={1000}
-            progress={100}
-            status={true}
-            size="sm"
-          />
+        <Row gap={sizes.xs} width={"100%"} wrap={true} justifyContent="flex-start">
+          {goals.map((goal) => (
+            <GoalCard
+              key={goal.id}
+              description={goal.description}
+              title={goal.title}
+              currentAmount={goal.currentValue}
+              goalAmount={goal.goalValue}
+              progress={(goal.currentValue / goal.goalValue) * 100}
+              status={goal.completed}
+              size="sm"
+            />
+          ))}
         </Row>
       </Stack>
     </Stack>

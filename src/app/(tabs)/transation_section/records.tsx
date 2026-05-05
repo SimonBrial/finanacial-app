@@ -2,24 +2,59 @@ import { SectionList, View } from "react-native";
 import Typography from "../../../components/ui/typography";
 import useTheme from "../../../hook/useTheme";
 import RecordCard from "../../../components/transactions/record-card";
+import { useTransactionStore } from "../../../store/useTransactionStore";
+import dayjs from "dayjs";
+import calendar from "dayjs/plugin/calendar";
+import "dayjs/locale/en";
 
-const TRANSACTIONS_DATA = [
-  {
-    title: "TODAY",
-    data: [{ id: "1" }, { id: "2" }],
-  },
-  {
-    title: "YESTERDAY",
-    data: [{ id: "3" }, { id: "4" }],
-  },
-  {
-    title: "TUESDAY 29 FEB - 2026",
-    data: [{ id: "5" }, { id: "6" }],
-  },
-];
+// Esta configuración se hace una sola vez en el archivo principal de tu app
+dayjs.extend(calendar);
+dayjs.locale("en");
+
+export const getFriendlyDate = (dateString: string): string => {
+  return dayjs(dateString).calendar(null, {
+    sameDay: "[Hoy]", // Si es hoy
+    lastDay: "[Ayer]", // Si es ayer
+    nextDay: "dddd YYYY / MM / DD", // (Opcional) Mañana
+    lastWeek: "dddd YYYY / MM / DD", // Cualquier día de la semana pasada
+    sameElse: "dddd YYYY / MM / DD", // Cualquier otra fecha más antigua
+  });
+};
+// Opcional: import 'dayjs/locale/es' si quisieras que diga "LUNES 23 MAR 2026"
+
+export const getCustomFormat = (dateString: string): string => {
+  // El formato 'dddd DD MMM YYYY' genera la estructura base
+  const formattedDate = dayjs(dateString).format("dddd DD MMM YYYY");
+
+  // Convertimos todo a mayúsculas para cumplir con tu requisito
+  return formattedDate.toUpperCase();
+};
+
+// Uso con uno de tus datos de prueba:
+// getCustomFormat("2026-03-23T20:00:00Z")
+// Retorna: "MONDAY 23 MAR 2026"
 
 export default function Records() {
   const { globalStyles, sizes } = useTheme();
+  const { transactions } = useTransactionStore();
+
+  const grouped = transactions.reduce(
+    (acc, tx) => {
+      const dateStr = tx.date.split("T")[0];
+      if (!acc[dateStr]) {
+        acc[dateStr] = [];
+      }
+      acc[dateStr].push(tx);
+      return acc;
+    },
+    {} as Record<string, typeof transactions>,
+  );
+
+  const TRANSACTIONS_DATA = Object.keys(grouped).map((dateStr) => ({
+    title: dateStr,
+    data: grouped[dateStr],
+  }));
+
   return (
     <View style={{ flex: 1, backgroundColor: "black" }}>
       <SectionList
@@ -28,7 +63,19 @@ export default function Records() {
         // 2. Renderizamos cada transacción
         renderItem={({ item }) => (
           // Aquí le pasarías los datos reales al RecordCard, ej: <RecordCard data={item} />
-          <RecordCard />
+          <RecordCard
+            locationSave={item.locationSave}
+            category={item.category}
+            library={item.library}
+            amount={item.amount}
+            title={item.title}
+            color={item.color}
+            date={item.date}
+            icon={item.icon}
+            bank={item.bank}
+            type={item.type}
+            id={item.id}
+          />
         )}
         ItemSeparatorComponent={() => <View style={{ height: sizes.sm }} />}
         // 3. Renderizamos los encabezados de cada sección (Las fechas)
@@ -42,7 +89,7 @@ export default function Records() {
               backgroundColor: "black", // Importante para que no se superponga raro al hacer scroll
             }}
           >
-            {title}
+            {getFriendlyDate(title)}
           </Typography>
         )}
         // 4. LA SOLUCIÓN AL CORTE: Espacio extra al final de la lista

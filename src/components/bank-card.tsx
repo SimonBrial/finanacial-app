@@ -34,7 +34,7 @@ export default function BankCard({
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          width: "99%", // Asegúrate de que ocupe el ancho del contenedor del carrusel
+          width: "91%", // Asegúrate de que ocupe el ancho del contenedor del carrusel
         },
       ]}
     >

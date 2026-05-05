@@ -3,6 +3,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { SharedValue } from "react-native-reanimated";
 import {
   PrimitiveVariants,
+  BankNameTypes,
   IconLibrary,
   IconVariant,
   BasesSize,
@@ -30,6 +31,15 @@ interface ExchangeCardProps {
 
 interface NotificationIconProps {
   active?: boolean;
+  hasNotification: boolean;
+}
+
+interface AvatarProps {
+  hasNotification: boolean;
+  source?: string;
+  size?: number;
+  borderWidth?: number;
+  borderColor?: string;
 }
 
 interface TypographyProps {
@@ -309,12 +319,13 @@ interface GoalCardProps {
   size: "sm" | "lg";
 }
 interface CategoryCardProps {
-  id?: number;
+  id: number;
   title: string;
   icon: string;
   library: IconLibrary;
   share: boolean;
   color: string;
+  createdAt: string;
 }
 
 interface GoalLgProps {
@@ -338,6 +349,44 @@ interface ShowStringProps {
   fnShow: () => void;
 }
 
+interface BankState {
+  banks: BankCardData[];
+  selectedBankIndex: number | null;
+  setSelectedBankIndex: (index: number | null) => void;
+}
+
+interface TransactionState {
+  transactions: Transaction[];
+}
+
+interface GoalState {
+  goals: Goal[];
+}
+
+interface ExchangeState {
+  rates: ExchangeRate[];
+}
+interface ExchangeState {
+  rates: ExchangeRate[];
+}
+interface CategoriesState {
+  categories: CategoryCardProps[];
+}
+
+interface Transaction {
+  id: string;
+  title: string;
+  date: string;
+  amount: number;
+  type: "income" | "expense";
+  category: string;
+  icon: string;
+  library: IconLibrary;
+  bank: BankNameTypes;
+  color: string;
+  locationSave: boolean;
+}
+
 export type {
   SpendingCategoryCardProps,
   SegmentedControlProps,
@@ -354,6 +403,7 @@ export type {
   CustomBadgeProps,
   TitleCustomProps,
   BalanceCardProps,
+  CategoriesState,
   ShowStringProps,
   PaypalIconProps,
   DonutChartProps,
@@ -368,7 +418,9 @@ export type {
   ExchangeRate,
   GoalLgProps,
   BudgetState,
+  AvatarProps,
   ButtonProps,
+  Transaction,
   BadgeProps,
   GridProps,
   IconProps,
@@ -380,4 +432,8 @@ export type {
   Budget,
   Data,
   Goal,
+  BankState,
+  TransactionState,
+  GoalState,
+  ExchangeState,
 };

@@ -3,7 +3,7 @@ import { useWindowDimensions, View } from "react-native";
 import type { ICarouselInstance } from "react-native-reanimated-carousel";
 import Carousel, { Pagination } from "react-native-reanimated-carousel";
 import BankCard from "./bank-card";
-import { balanceCards } from "../seeds/seeds";
+import { useBankStore } from "../store/useBankStore";
 import {
   interpolate,
   Extrapolation,
@@ -15,18 +15,24 @@ import { BankCardData } from "../interface/interface";
 export default function CarouselCardBank() {
   const progress = useSharedValue<number>(0);
   const { sizes } = useTheme();
+  const { banks } = useBankStore();
 
   const { width: windowWidth } = useWindowDimensions();
 
-  // 2. Calculamos el 80% del ancho
-  const DYNAMIC_WIDTH = windowWidth * 0.9;
-  // Mantenemos la proporción de la tarjeta (ejemplo 1.6:1)
-  const DYNAMIC_HEIGHT = DYNAMIC_WIDTH * 0.65;
+  // --- 1. MATEMÁTICA DEL LEFT-ALIGN ---
+  const MARGIN_LEFT = 0; // Margen inicial desde el borde de la pantalla
+  const GAP = 12; // Espaciado entre tarjetas
+  // Usamos el 85% de la pantalla para que la tarjeta siguiente se "asome" un 15%
+  const ITEM_WIDTH = windowWidth * 0.94;
+  // La distancia que debe saltar el carrusel en cada swipe (Tarjeta + Espacio)
+  const SNAP_DISTANCE = ITEM_WIDTH + GAP;
+  // Mantenemos tu proporción original
+  const DYNAMIC_HEIGHT = ITEM_WIDTH * 0.65;
 
   const ref = React.useRef<ICarouselInstance>(null);
   return (
     <View
-      id="carousel-component"
+      testID="carousel-component"
       style={{
         marginBottom: sizes.lg,
         flex: 1,
@@ -35,22 +41,28 @@ export default function CarouselCardBank() {
       <Carousel
         ref={ref}
         autoPlayInterval={2000}
-        data={balanceCards}
+        data={banks}
+        // loop={false} // Opcional: El 'left-align' suele sentirse más natural en false, pero true también funciona.
         loop={true}
-        pagingEnabled={true}
+        pagingEnabled={true} // Desactivamos el paging estándar
         snapEnabled={true}
-        style={{
-          alignItems: "flex-start",
-          justifyContent: "flex-start",
-        }}
-        width={DYNAMIC_WIDTH}
+        // 2. El contenedor ocupa toda la pantalla, pero el "salto" usa nuestro SNAP_DISTANCE
+        style={{ width: windowWidth, height: DYNAMIC_HEIGHT }}
+        width={SNAP_DISTANCE}
         height={DYNAMIC_HEIGHT}
-        mode={"horizontal-stack"}
-        modeConfig={{
-          snapDirection: "left",
-          stackInterval: 18,
+        // 3. Eliminamos el mode="horizontal-stack" y usamos customAnimation
+        customAnimation={(value: number) => {
+          "worklet";
+          // value: 0 es la tarjeta actual, 1 es la siguiente, -1 es la anterior.
+          // Traducimos cada tarjeta a su posición en X exacta.
+          return {
+            transform: [
+              {
+                translateX: value * SNAP_DISTANCE + MARGIN_LEFT,
+              },
+            ],
+          };
         }}
-        customConfig={() => ({ type: "positive", viewCount: 5 })}
         onProgressChange={(_, absoluteProgress) => {
           progress.value = absoluteProgress;
         }}
@@ -68,7 +80,7 @@ export default function CarouselCardBank() {
       />
       <Pagination.Custom<BankCardData>
         progress={progress}
-        data={balanceCards}
+        data={banks}
         size={6} // Aumentamos un poco el tamaño base de la celda
         containerStyle={{
           gap: 8, // Espaciado entre los puntos

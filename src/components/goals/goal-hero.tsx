@@ -127,7 +127,7 @@ export default function GoalHero() {
             alignItems: "center",
             justifyContent: "center",
           }}
-          //alignItem="center"
+        //alignItem="center"
         >
           <Typography
             bold
@@ -170,7 +170,10 @@ export default function GoalHero() {
           <Row
             alignItem="center"
             justifyContent="space-between"
-            customStyles={{ paddingVertical: sizes.lg }}
+            customStyles={{
+              paddingBottom: !isCollapsed ? sizes.lg : 0,
+              paddingTop: sizes.lg,
+            }}
           >
             <Typography txtWhite>Recently Completed</Typography>
             <Icon

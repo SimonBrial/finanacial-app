@@ -6,9 +6,47 @@ import useTheme from "../../hook/useTheme";
 import { LinearGradient } from "expo-linear-gradient";
 import CustomBadge from "../ui/custom-badge";
 import PayoneerIcon from "../icons/payoneer-icon";
+import { Transaction } from "../../interface/interface";
+import PaypalIcon from "../icons/paypal-icon";
+import Icon from "../ui/icon";
+import dayjs from "dayjs";
 
-export default function RecordCard() {
-  const { sizes, globalStyles } = useTheme();
+export default function RecordCard({
+  locationSave,
+  category,
+  library,
+  amount,
+  title,
+  color,
+  date,
+  icon,
+  bank,
+  type,
+  id,
+}: Transaction) {
+  const { sizes, globalStyles, theme } = useTheme();
+  const transactionDate = dayjs(date).format("DD/MM/YYYY");
+
+  const selectBankIcon = () => {
+    switch (bank) {
+      case "payoneer":
+        return <PayoneerIcon />;
+      case "paypal":
+        return <PaypalIcon />;
+      default:
+        return (
+          <Icon
+            name={icon}
+            library={library}
+            color={color}
+            rounded
+            size={24}
+            bgStyle={{ height: 50, width: 50 }}
+            variant="ghost"
+          />
+        );
+    }
+  };
   return (
     <View
       style={{
@@ -39,9 +77,7 @@ export default function RecordCard() {
         start={{ x: 0, y: 0.0 }}
         end={{ x: 1, y: 0 }}
       />
-      {/* <PaypalIcon /> */}
-      <PayoneerIcon />
-      {/* <Icon rounded size={24} bgStyle={{ height: 50, width: 50 }} /> */}
+      {selectBankIcon()}
       <View
         style={{
           flexDirection: "row",
@@ -58,22 +94,35 @@ export default function RecordCard() {
           }}
         >
           <Typography txtWhite fontSize={sizes.lg}>
-            Starbuck
+            {title}
           </Typography>
           <View style={{ flexDirection: "column", gap: sizes.xxs }}>
             <View style={{ flexDirection: "row", gap: sizes.xs }}>
               <Badge
-                text="Category"
+                text={category}
                 type="filled"
                 color={globalStyles.subtitle}
               />
-              <CustomBadge bankName="payoneer" />
+              <CustomBadge bankName={bank} />
             </View>
-            <Badge text="04:24 PM" type="flat" color={globalStyles.subtitle} />
+            <View style={{ flexDirection: "row", gap: sizes.xxs }}>
+              <Badge
+                text={transactionDate}
+                type="flat"
+                color={globalStyles.subtitle}
+              />
+              <Icon
+                name={locationSave ? "location-on" : "location-off"}
+                library="MaterialIcons"
+                variant="light"
+                color={theme.t100}
+                size={sizes.md}
+              />
+            </View>
           </View>
         </View>
         <View style={{ alignItems: "center", justifyContent: "center" }}>
-          <Typography txtWhite>$ 238.84</Typography>
+          <Typography txtWhite>$ {amount}</Typography>
           <PercentIndicator percentage="4.23%" trend="down" />
         </View>
       </View>

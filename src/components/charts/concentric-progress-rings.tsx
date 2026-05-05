@@ -186,7 +186,7 @@ export default function ConcentricProgressRings() {
 
 const styles = StyleSheet.create({
   cardContainer: {
-    backgroundColor: "#161618", // Fondo oscuro similar al de tu imagen
+    //backgroundColor: "#161618", // Fondo oscuro similar al de tu imagen
     borderRadius: 20,
     padding: 24,
     width: "100%",

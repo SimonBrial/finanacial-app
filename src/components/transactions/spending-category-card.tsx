@@ -5,6 +5,7 @@ import useTheme from "../../hook/useTheme";
 import Badge from "../ui/badge";
 import { LinearGradient } from "expo-linear-gradient";
 import { SpendingCategoryCardProps } from "../../interface/interface";
+import Notification from "../ui/notification";
 
 export default function SpendingCategoryCard({
   library = "MaterialCommunityIcons",
@@ -18,9 +19,21 @@ export default function SpendingCategoryCard({
   index,
   title,
 }: SpendingCategoryCardProps) {
-  const { sizes, globalStyles, inProgress } = useTheme();
+  const { sizes, globalStyles } = useTheme();
 
   const percentage = Math.min((amount / limit) * 100, 100);
+
+  const bannerSelected = () => {
+    if (amount >= limit * 0.9 && amount < limit) {
+      return <Notification type="warning" />;
+    }
+    if (amount === limit) {
+      return <Notification type="success" />;
+    }
+    if (amount > limit) {
+      return <Notification type="danger" />;
+    }
+  };
 
   return (
     <TouchableOpacity
@@ -110,29 +123,8 @@ export default function SpendingCategoryCard({
           />
         </View>
 
-        {/* Warning Banner */}
-        {approachingLimit && (
-          <View
-            style={[
-              styles.warningBanner,
-              { borderColor: inProgress.p100, backgroundColor: inProgress.p20 },
-            ]}
-          >
-            <Icon
-              name="warning"
-              library="AntDesign"
-              variant="light"
-              color={inProgress.p100}
-              size={sizes.md}
-            />
-            <Typography
-              fontSize={sizes.sm}
-              customStyles={{ color: inProgress.p100, marginLeft: 6 }}
-            >
-              Approaching monthly limit
-            </Typography>
-          </View>
-        )}
+        {/* Banner */}
+        {bannerSelected()}
 
         {/* Actions */}
         <View style={styles.actionsRow}>
@@ -200,17 +192,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     left: 0,
     top: 0,
-  },
-  warningBanner: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 8,
-    borderWidth: 1,
-    borderStyle: "dashed",
-    borderRadius: 6,
-    marginBottom: 16,
-    backgroundColor: "transparent",
-    width: "100%",
   },
   actionsRow: {
     flexDirection: "row",

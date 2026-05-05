@@ -1,8 +1,7 @@
 import { StyleSheet, View, ViewStyle } from "react-native";
 import useTheme from "../../hook/useTheme";
-import { IconBase, IconProps } from "../../interface/interface";
+import { IconProps } from "../../interface/interface";
 import { IconLibraries, IconVariant } from "../../types/type";
-
 
 export default function Icon({
   library = "MaterialCommunityIcons",
@@ -57,6 +56,7 @@ export default function Icon({
       justifyContent: "center",
       padding: padding,
       borderRadius: rounded ? 999 : sizes.xxs,
+      backgroundColor: color ? color : "red",
     },
     variantStyles[variant], // <-- Magia aquí: busca directo el estilo que le pases
     bgStyle,

@@ -97,6 +97,8 @@ export default function BarsChartContainer() {
           },
         ]}
       >
+
+
         <Row width="45%" justifyContent="flex-start" alignItem="flex-end">
           <Row
             width="100%"
@@ -245,6 +247,7 @@ export default function BarsChartContainer() {
           />
         </View>
       </View>
+
     </View>
   );
 }

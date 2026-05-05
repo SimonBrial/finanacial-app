@@ -6,25 +6,25 @@ export default function TabNavigator() {
   return (
     <Tabs
       tabBar={(props) => <CustomTabBar {...props} />}
-      screenOptions={{
-        headerShown: false,
-        tabBarActiveTintColor: "blue", // Active icon/label color
-        tabBarInactiveTintColor: "#ccc", // Inactive icon/label color
-        tabBarStyle: {
-          backgroundColor: "#333", // Tab bar background color
-          borderTopColor: "transparent", // Tab bar border color
-          height: 80,
-          paddingTop: 6,
-        },
-        tabBarItemStyle: {
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-          alignItems: "center",
-          borderWidth: 1,
-          borderColor: "#ccc",
-        },
-      }}
+    /*screenOptions={{
+      headerShown: false,
+      tabBarActiveTintColor: "white", // Active icon/label color
+      tabBarInactiveTintColor: "#ccc", // Inactive icon/label color
+      tabBarStyle: {
+        backgroundColor: "#000000ff", // Tab bar background color
+        //borderTopColor: "white", // Tab bar border color
+        height: 80,
+      },
+      tabBarItemStyle: {
+        marginTop: -10,
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        //borderWidth: 1,
+        //borderColor: "#ccc",
+      },
+    }}*/
     >
       <Tabs.Screen
         name="home"
@@ -47,6 +47,18 @@ export default function TabNavigator() {
           headerShown: false,
         }}
       />
+
+      <Tabs.Screen
+        name="exchanges"
+        options={{
+          title: "Add",
+          tabBarIcon: ({ color }) => (
+            <MaterialIcons size={28} name="add" color={color} />
+          ),
+          headerShown: false,
+        }}
+      />
+
       <Tabs.Screen
         name="transactions"
         options={{
@@ -57,20 +69,11 @@ export default function TabNavigator() {
           headerShown: false,
         }}
       />
-      <Tabs.Screen
-        name="exchanges"
-        options={{
-          title: "Exchanges",
-          tabBarIcon: ({ color }) => (
-            <MaterialIcons size={28} name="attach-money" color={color} />
-          ),
-          headerShown: false,
-        }}
-      />
+
       <Tabs.Screen
         name="settings"
         options={{
-          title: "Settings",
+          title: "Profile",
           tabBarIcon: ({ color }) => (
             <MaterialIcons size={28} name="person" color={color} />
           ),

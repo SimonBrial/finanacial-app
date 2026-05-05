@@ -32,19 +32,23 @@ export default function Transactions() {
           onPressIn={() => setReportPressed(true)}
           onPressOut={() => setReportPressed(false)}
           onPress={() => console.log("Report Generated")}
-          style={
-            {
-              flexDirection: "row",
-              alignItems: "center",
-              paddingHorizontal: 8,
-              paddingVertical: 4,
-              borderRadius: 8,
-              gap: sizes.sm,
-              backgroundColor: reportPressed ? theme.t20 : "transparent"
-            }
-          }
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            paddingHorizontal: 8,
+            paddingVertical: 4,
+            borderRadius: 8,
+            gap: sizes.sm,
+            backgroundColor: reportPressed ? theme.t20 : "transparent",
+          }}
         >
-          <View style={{ backgroundColor: `${theme.t20}80`, padding: 4, borderRadius: 6 }}>
+          <View
+            style={{
+              backgroundColor: `${theme.t20}80`,
+              padding: 4,
+              borderRadius: 6,
+            }}
+          >
             <Icon
               name="calendar"
               variant="light"
@@ -52,7 +56,10 @@ export default function Transactions() {
               size={sizes.xxl}
             />
           </View>
-          <Typography fontSize={sizes.sm} customStyles={{ color: "white", marginRight: 6 }}>
+          <Typography
+            fontSize={sizes.sm}
+            customStyles={{ color: "white", marginRight: 6 }}
+          >
             {"january".toUpperCase()}
           </Typography>
         </Pressable>
@@ -64,7 +71,7 @@ export default function Transactions() {
             alignItems: "center",
           }}
         >
-          <Icon
+          {/*<Icon
             bgStyle={{
               borderRadius: sizes.xs,
               backgroundColor: `${theme.t20}`,
@@ -72,7 +79,7 @@ export default function Transactions() {
             color={theme.t100}
             size={sizes.xxl}
             name={"eye"}
-          />
+          />*/}
           <Icon
             bgStyle={{
               borderRadius: sizes.xs,

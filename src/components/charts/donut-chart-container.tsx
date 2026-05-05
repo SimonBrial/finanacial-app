@@ -51,6 +51,12 @@ export default function DonutChartContainer() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const formattedDonutData = donutData.map((item: Data) => ({
+    ...item,
+    amount: item.value, // Proveemos un valor por defecto si no existe
+    limit: item.percentage, // Proveemos un valor por defecto si no existe
+  }));
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView
@@ -67,7 +73,7 @@ export default function DonutChartContainer() {
               decimals={decimals}
               colors={colors}
               radius={RADIUS}
-              data={donutData}
+              data={formattedDonutData}
               gap={GAP}
             />
           </View>

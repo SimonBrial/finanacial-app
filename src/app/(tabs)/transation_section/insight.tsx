@@ -152,22 +152,32 @@ export default function Insight() {
         </TouchableWithoutFeedback>
       </View>
 
-      <View style={{ alignItems: "center", marginBottom: 32 }}>
+      <View
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          alignItems: "center",
+          marginBottom: 32,
+          gap: 8,
+        }}
+      >
         <Typography
-          fontSize={sizes.sm}
+          fontSize={sizes.md}
           customStyles={{
             color: globalStyles.subtitle,
             textTransform: "uppercase",
+            marginLeft: 8,
           }}
         >
           TOTAL SPENT{" "}
-          <Typography
-            bold
-            fontSize={sizes.md}
-            customStyles={{ color: theme.t100 }}
-          >
-            {totalAmount.toFixed(2)} $
-          </Typography>
+        </Typography>
+        <Typography
+          bold
+          fontSize={sizes.lg}
+          customStyles={{ color: theme.t100 }}
+        >
+          {totalAmount.toFixed(2)} $
         </Typography>
       </View>
 

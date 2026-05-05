@@ -1,25 +1,53 @@
-import { View } from "react-native";
-import Icon from "./icon";
+import { Image, View, StyleSheet } from "react-native";
+//import Icon from "./icon";
 import useTheme from "../../hook/useTheme";
+import { AvatarProps } from "../../interface/interface";
 
-export default function Avatar() {
-  const{ theme } = useTheme();
+export default function Avatar({ hasNotification, size, source, borderWidth, borderColor }: AvatarProps) {
+  const { theme } = useTheme();
   return (
     <View
       style={{
-        borderColor: theme.t100,
-        borderStyle: "solid",
-        borderWidth: 1,
-        borderRadius: 50,
+        //borderColor: theme.t100,
+        ...styles.container
       }}
     >
-      <Icon
-        name="user-alt"
-        library="FontAwesome5"
-        rounded
-        size={40}
-        bgStyle={{ width: 80, height: 80 }}
+      <Image
+        source={source ? source : require("../../assets/img/avatar.jpg")}
+        style={{ width: size ?? 40, height: size ?? 40, borderRadius: 1000 }}
       />
+      {
+        hasNotification && (
+          <View
+            style={[
+              styles.signal,
+              {
+                borderWidth: borderWidth ?? 1,
+                borderColor: borderColor ?? borderColor,
+              },
+            ]}
+          ></View>
+        )
+      }
+
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    borderStyle: "solid",
+    borderWidth: 1,
+    borderRadius: 50,
+  },
+  signal: {
+    position: "absolute",
+    zIndex: 999,
+    top: 0,
+    right: -1,
+    height: 14,
+    width: 14,
+    borderRadius: "100%",
+    backgroundColor: "red",
+  },
+});

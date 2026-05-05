@@ -6,6 +6,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import Badge from "../ui/badge";
 import { Dropdown } from "react-native-element-dropdown";
 import { CategoryCardProps } from "../../interface/interface";
+import dayjs from "dayjs";
 
 const actionData = [
   {
@@ -25,19 +26,20 @@ const actionData = [
 ];
 
 export default function CategoryCard({
+  createdAt,
   library,
   color,
   share,
   title,
   icon,
+  id,
 }: CategoryCardProps) {
   const { sizes, globalStyles } = useTheme();
+  const categoryCreationDate = dayjs(createdAt).format("DD/MM/YYYY");
 
   const renderDropdownItem = (item: any) => {
     return (
-      <View
-        style={[styles.dropdownItem, { backgroundColor: `${item.color}22` }]}
-      >
+      <View style={styles.dropdownItem}>
         <Icon
           name={item.icon}
           library={item.iconLibrary}
@@ -47,7 +49,7 @@ export default function CategoryCard({
         />
         <Typography
           fontSize={sizes.md}
-          customStyles={{ color: item.color, marginLeft: 12 }}
+          customStyles={{ color: "white", marginLeft: 12 }}
         >
           {item.label}
         </Typography>
@@ -118,7 +120,7 @@ export default function CategoryCard({
               />
             )}
             <Badge
-              text="27 MAR 2026"
+              text={categoryCreationDate} //"27 MAR 2026"
               type="flat"
               color={globalStyles.subtitle}
             />
