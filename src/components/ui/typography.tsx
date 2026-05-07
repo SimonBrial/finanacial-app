@@ -11,7 +11,9 @@ export default function Typography({
   variant,
   ...rest
 }: TypographyProps) {
-  const combinedStyles = StyleSheet.flatten([
+  // ⚡ Bolt Optimization: Removed StyleSheet.flatten to avoid CPU-intensive deep object merging on every render.
+  // React Native efficiently processes arrays of style objects directly in C++.
+  const combinedStyles = [
     baseStyles.text,
     { fontSize },
     // Mapeamos la variante al nombre de la fuente que cargaste en el Root
@@ -19,7 +21,7 @@ export default function Typography({
     bold ? { fontWeight: "bold" as const } : {},
     txtWhite ? { color: "white" as const } : {},
     customStyles,
-  ]);
+  ];
 
   return (
     <Text style={combinedStyles} {...rest}>
