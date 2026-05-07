@@ -11,15 +11,15 @@ export default function Typography({
   variant,
   ...rest
 }: TypographyProps) {
-  const combinedStyles = StyleSheet.flatten([
+  const combinedStyles = [
     baseStyles.text,
     { fontSize },
     // Mapeamos la variante al nombre de la fuente que cargaste en el Root
     { fontFamily: `Inter-${variant}` },
-    bold ? { fontWeight: "bold" as const } : {},
-    txtWhite ? { color: "white" as const } : {},
+    bold ? { fontWeight: "bold" as const } : undefined,
+    txtWhite ? { color: "white" as const } : undefined,
     customStyles,
-  ]);
+  ];
 
   return (
     <Text style={combinedStyles} {...rest}>
