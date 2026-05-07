@@ -1,0 +1,3 @@
+## 2024-05-14 - Optimize style computation in Core UI Components
+**Learning:** `StyleSheet.flatten()` comes with significant CPU overhead because it performs deep object merging on every render cycle when used inside component render functions. React Native can correctly parse array styles directly, making flattening redundant and harmful to performance, especially for foundational components rendered frequently (like Stack, Row, Typography).
+**Action:** Always pass arrays of style objects directly to the component's `style` prop instead of flattening them beforehand, maintaining UI component performance under heavy component loads.
