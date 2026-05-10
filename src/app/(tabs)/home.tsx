@@ -16,6 +16,7 @@ export default function Home() {
           withNotificationIcon
           library="MaterialIcons"
           name="home"
+          showIconBalance
         />
         <CarouselCardBank />
         <BarsChartContainer />

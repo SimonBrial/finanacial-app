@@ -17,6 +17,7 @@ export default function Transactions() {
         withNotificationIcon
         name={"autorenew"}
         library="MaterialIcons"
+        showIconBalance
       />
 
       <View

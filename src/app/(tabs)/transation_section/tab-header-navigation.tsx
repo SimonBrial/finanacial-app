@@ -11,7 +11,7 @@ export default function TabHeaderNavigation() {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarLabelStyle: { fontSize: sizes.sm, color: "white" },
+        tabBarLabelStyle: { fontSize: sizes.sm + 2, color: "white" },
         tabBarItemStyle: { flex: 1 },
         tabBarIndicatorStyle: { height: 3 },
         tabBarStyle: {

@@ -3,22 +3,21 @@ import Typography from "./ui/typography";
 import { LinearGradient } from "expo-linear-gradient";
 import useTheme from "../hook/useTheme";
 import Row from "./ui/row";
-import ShowString from "./show-string";
 import Badge from "./ui/badge";
-import { useState } from "react";
 import { BankCardProps } from "../interface/interface";
+import { useBankStore } from "../store/useBankStore";
 
 export default function BankCard({
-  bankName,
   gradientColors = ["#444", "#000"],
-  balance,
-  currency,
-  lastEntry,
   percentage,
+  lastEntry,
   trendIcon,
+  bankName,
+  currency,
+  balance,
 }: BankCardProps) {
   const { sizes, globalStyles } = useTheme();
-  const [show, setShow] = useState<boolean>(false);
+  const showBalance = useBankStore().showBalance;
 
   // Verificación de seguridad extra
   if (!gradientColors || gradientColors.length < 2) {
@@ -80,7 +79,7 @@ export default function BankCard({
             paddingBottom: sizes.xs,
           }}
         >
-          {show ? (
+          {showBalance ? (
             <Typography fontSize={sizes.xxl} customStyles={{ color: "white" }}>
               {balance}
             </Typography>
@@ -89,7 +88,7 @@ export default function BankCard({
               {balance.replace(/./g, "*")}
             </Typography>
           )}
-          <ShowString fnShow={() => setShow(!show)} show={show} />
+          {/* <ShowString fnShow={() => setShow(!show)} show={show} /> */}
         </Row>
 
         <Row justifyContent="flex-start" gap={sizes.sm} width={"auto"}>
@@ -97,7 +96,7 @@ export default function BankCard({
             Last Entry:
           </Typography>
 
-          {show ? (
+          {showBalance ? (
             <Row justifyContent="flex-start" gap={sizes.sm}>
               <Badge size="sm" text={lastEntry} type="bordered" color="white" />
 

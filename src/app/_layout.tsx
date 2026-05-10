@@ -4,9 +4,9 @@ import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 
 export default function Layout() {
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView style={{ flex: 1, backgroundColor: "black" }}>
       <BottomSheetModalProvider>
-        <Stack screenOptions={{ headerShown: false }}>
+        <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: "black" } }}>
           <Stack.Screen
             name="index"
             options={{ title: "Home", headerShown: false }}

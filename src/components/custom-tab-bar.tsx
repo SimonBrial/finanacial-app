@@ -1,4 +1,10 @@
-import { TouchableOpacity, StyleSheet, Animated, View, Platform } from "react-native";
+import {
+  TouchableOpacity,
+  StyleSheet,
+  Animated,
+  View,
+  Platform,
+} from "react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { LinearGradient } from "expo-linear-gradient";
 import { TabItem } from "../interface/interface";
@@ -7,14 +13,11 @@ import useTheme from "../hook/useTheme";
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { Route } from "@react-navigation/native";
 import { useCallback, useRef } from "react";
-
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import {
+  BottomSheetBackdrop,
   BottomSheetModal,
   BottomSheetView,
-  BottomSheetModalProvider,
-  BottomSheetBackdrop,
-} from '@gorhom/bottom-sheet';
+} from "@gorhom/bottom-sheet";
 import ModalItems from "./modal-items";
 
 export default function CustomTabBar({
@@ -32,7 +35,7 @@ export default function CustomTabBar({
     bottomSheetModalRef.current?.present();
   }, []);
   const handleSheetChanges = useCallback((index: number) => {
-    console.log('handleSheetChanges', index);
+    console.log("handleSheetChanges", index);
   }, []);
 
   const renderBackdrop = useCallback(
@@ -44,7 +47,7 @@ export default function CustomTabBar({
         opacity={0.6} // Ajusta el nivel de oscuridad (0.0 a 1.0)
       />
     ),
-    []
+    [],
   );
 
   const tabsItem: TabItem[] = [
@@ -53,6 +56,31 @@ export default function CustomTabBar({
     { name: "transactions", icon: "autorenew", label: "Transactions" },
     { name: "exchanges", icon: "add", label: "Add" },
     { name: "settings", icon: "person-outline", label: "Profile" },
+  ];
+  const modalItems: {
+    name: string;
+    library: any;
+    title: string;
+    description: string;
+  }[] = [
+    {
+      title: "Voice",
+      name: "keyboard-voice",
+      library: "MaterialIcons",
+      description: "Add a new register with your voice",
+    },
+    {
+      title: "Manual",
+      name: "edit",
+      library: "MaterialIcons",
+      description: "Add a new register manually",
+    },
+    {
+      title: "Photo",
+      name: "camera-plus-outline",
+      library: "MaterialCommunityIcons",
+      description: "Add a new register with a photo",
+    },
   ];
 
   return (
@@ -148,15 +176,37 @@ export default function CustomTabBar({
       <BottomSheetModal
         ref={bottomSheetModalRef}
         index={0}
-        snapPoints={['50%', '75%']}
+        snapPoints={["50%", "75%"]}
         onChange={handleSheetChanges}
         backdropComponent={renderBackdrop}
         backgroundStyle={{ backgroundColor: "#1c1c1c" }}
         handleIndicatorStyle={{ backgroundColor: "rgba(255,255,255,0.5)" }}
       >
         <BottomSheetView style={stylesTabs.contentContainer}>
-          <ModalItems icon="attach-money" label="Income" onPress={() => { bottomSheetModalRef.current?.dismiss(); }} />
-          <ModalItems icon="money-off" label="Expense" onPress={() => { bottomSheetModalRef.current?.dismiss(); }} />
+          <Typography
+            fontSize={sizes.lg}
+            txtWhite
+            bold
+            customStyles={{
+              //paddingHorizontal: sizes.md,
+              paddingBottom: sizes.sm,
+              //width: "90%",
+            }}
+          >
+            Add Transaction
+          </Typography>
+          {modalItems.map((item, index) => (
+            <ModalItems
+              key={index}
+              name={item.name}
+              library={item.library}
+              title={item.title}
+              description={item.description}
+              onPress={() => {
+                bottomSheetModalRef.current?.dismiss();
+              }}
+            />
+          ))}
         </BottomSheetView>
       </BottomSheetModal>
     </View>
@@ -211,12 +261,12 @@ const stylesTabs = StyleSheet.create({
   container: {
     flex: 1,
     padding: 24,
-    justifyContent: 'center',
-    backgroundColor: 'grey',
+    justifyContent: "center",
+    backgroundColor: "grey",
   },
   contentContainer: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: "center",
     paddingVertical: 15,
   },
 });

@@ -12,7 +12,9 @@ export default function Notification({
   const router = useRouter();
 
   const hanleLogout = (exception: string) => {
-    router.push(exception === "Settings" ? "/settings" : "/404");
+    router.push(
+      exception.toLocaleLowerCase() === "settings" ? "/settings" : "/404",
+    );
   };
   return (
     <View
@@ -73,7 +75,7 @@ export default function Notification({
         <Typography customStyles={{ color: theme.t100 }}>Test</Typography>
       </View>
       <TouchableOpacity
-        onPress={() => hanleLogout("Settings")}
+        onPress={() => hanleLogout("Log Out")}
         style={{
           flex: 1,
           gap: 20,
@@ -85,15 +87,19 @@ export default function Notification({
           //height: 500,
         }}
       >
-
-        <Typography txtWhite customStyles={{
-          paddingVertical: sizes.sm,
-          paddingHorizontal: sizes.xl,
-          backgroundColor: theme.t20,
-          borderRadius: sizes.xs,
-          justifyContent: "center",
-          alignItems: "center",
-        }}>Go to login</Typography>
+        <Typography
+          txtWhite
+          customStyles={{
+            paddingVertical: sizes.sm,
+            paddingHorizontal: sizes.xl,
+            backgroundColor: theme.t20,
+            borderRadius: sizes.xs,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          Go to login
+        </Typography>
         {/* <Button
           fullWidth
           text="Go to login"

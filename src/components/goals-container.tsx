@@ -15,16 +15,21 @@ export default function GoalsContainer() {
       justifyContent="flex-start"
       customStyles={{
         paddingVertical: sizes.lg,
-        position: "relative",
-        height: 360,
+        marginBottom: sizes.sm,
         width: "100%",
+        //height: 360,
         //borderColor: "red",
         //borderWidth: 1,
       }}
     >
       <TitleCustom title="Goals" withNotificationIcon={false} />
       <Stack gap={sizes.md}>
-        <Row gap={sizes.xs} width={"100%"} wrap={true} justifyContent="flex-start">
+        <Row
+          gap={sizes.xs}
+          width={"100%"}
+          wrap={true}
+          justifyContent="flex-start"
+        >
           {goals.map((goal) => (
             <GoalCard
               key={goal.id}

@@ -164,6 +164,8 @@ export const mockTransactions: Transaction[] = [
     bank: "banesco",
     color: "#E50914", // Rojo Netflix
     locationSave: true,
+    latitude: 37.78825,
+    longitude: -122.4324,
   },
   {
     id: "tx-04",
@@ -203,6 +205,8 @@ export const mockTransactions: Transaction[] = [
     bank: "payoneer",
     color: "#9C27B0", // Morado
     locationSave: true,
+    latitude: 40.7128,
+    longitude: -74.0060,
   },
   {
     id: "tx-07",
@@ -216,6 +220,8 @@ export const mockTransactions: Transaction[] = [
     bank: "mercantil",
     color: "#795548", // Marrón
     locationSave: true,
+    latitude: 34.0522,
+    longitude: -118.2437,
   },
   {
     id: "tx-08",
@@ -229,6 +235,8 @@ export const mockTransactions: Transaction[] = [
     bank: "bdv",
     color: "#FFEB3B", // Amarillo
     locationSave: true,
+    latitude: 51.5074,
+    longitude: -0.1278,
   },
   {
     id: "tx-09",
@@ -242,6 +250,8 @@ export const mockTransactions: Transaction[] = [
     bank: "banesco",
     color: "#673AB7", // Morado profundo
     locationSave: true,
+    latitude: 48.8566,
+    longitude: 2.3522,
   },
   {
     id: "tx-10",
@@ -294,6 +304,8 @@ export const mockTransactions: Transaction[] = [
     bank: "mercantil",
     color: "#E91E63", // Rosa
     locationSave: true,
+    latitude: 35.6895,
+    longitude: 139.6917,
   },
   {
     id: "tx-14",

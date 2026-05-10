@@ -43,16 +43,16 @@ export default function DolarPriceItem({ title, color }: DolarPriceItemProps) {
       <Stack
         width={"32%"}
         alignItem="center"
-        //customStyles={{ marginRight: -100 }}
+      //customStyles={{ marginRight: -100 }}
       >
         <Typography fontSize={sizes.lg} customStyles={{ color: color }}>
           238.84
         </Typography>
         <Row
           width={"100%"}
-          gap={10}
+          gap={sizes.md}
           alignItem="flex-end"
-          //justifyContent="space-around"
+        //justifyContent="space-around"
         >
           <Typography
             fontSize={sizes.sm}

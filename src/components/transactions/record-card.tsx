@@ -1,4 +1,5 @@
-import { View } from "react-native";
+import { View, Pressable } from "react-native";
+import { useRouter } from "expo-router";
 import Badge from "../ui/badge";
 import PercentIndicator from "../ui/percent-indicator";
 import Typography from "../ui/typography";
@@ -26,6 +27,7 @@ export default function RecordCard({
 }: Transaction) {
   const { sizes, globalStyles, theme } = useTheme();
   const transactionDate = dayjs(date).format("DD/MM/YYYY");
+  const router = useRouter();
 
   const selectBankIcon = () => {
     switch (bank) {
@@ -48,7 +50,8 @@ export default function RecordCard({
     }
   };
   return (
-    <View
+    <Pressable
+      onPress={() => router.push(`/transaction/${id}`)}
       style={{
         width: "100%",
         flexDirection: "row",
@@ -126,6 +129,6 @@ export default function RecordCard({
           <PercentIndicator percentage="4.23%" trend="down" />
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 }

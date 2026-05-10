@@ -5,14 +5,19 @@ import Typography from "./ui/typography";
 import NotificationIcon from "./notification-icon";
 import useTheme from "../hook/useTheme";
 import { TitleCustomProps } from "../interface/interface";
+import ShowString from "./show-string";
+import { useBankStore } from "../store/useBankStore";
 
 export default function TitleCustom({
   withNotificationIcon,
+  showIconBalance = false,
   library,
   title,
   name,
 }: TitleCustomProps) {
   const { theme, sizes } = useTheme();
+  const showBalance = useBankStore().showBalance;
+  const fnShowBalance = useBankStore().setShowBalance;
   return (
     <Row
       alignItem="center"
@@ -50,6 +55,12 @@ export default function TitleCustom({
           {title}
         </Typography>
       </Row>
+      {showIconBalance && (
+        <ShowString
+          show={showBalance}
+          fnShow={() => fnShowBalance(!showBalance)}
+        />
+      )}
       {withNotificationIcon && <NotificationIcon hasNotification={true} />}
     </Row>
   );

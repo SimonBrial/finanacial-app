@@ -14,7 +14,7 @@ export default function Settings() {
   const router = useRouter();
 
   const hanleLogout = (exception: string) => {
-    router.push(exception === "Log Out" ? "/login" : "/404");
+    router.push(exception.toLowerCase() === "log out" ? "/login" : "/404");
   };
 
   const settingsOptions: SettingsOption[] = [

@@ -12,15 +12,16 @@ type GoalFilter = "All" | "Completed" | "In Progress" | "Deleted" | "Future";
 
 export default function Goals() {
   const [activeFilter, setActiveFilter] = useState<GoalFilter>("All");
-  const { theme } = useTheme();
+  const { theme, sizes } = useTheme();
   return (
     <GlobalContainer>
-      <ScrollView>
+      <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
         <TitleCustom
           title="Goals"
           withNotificationIcon
           name={"emoji-events"}
           library="MaterialIcons"
+          showIconBalance
         />
         <GoalHero />
         <View
@@ -38,7 +39,6 @@ export default function Goals() {
             name={"emoji-events"}
             library="MaterialIcons"
           />
-          <Icon name={"plus"} library="AntDesign" size={24} rounded />
         </View>
         <View
           style={{
@@ -65,7 +65,14 @@ export default function Goals() {
             ),
           )}
         </View>
-        <View style={{ width: "100%", marginTop: 10, gap: 20 }}>
+        <View
+          style={{
+            width: "100%",
+            marginTop: 10,
+            gap: 20,
+            marginBottom: 36,
+          }}
+        >
           <GoalCardLg title="Save for vacation" status="In Progress" />
           <GoalCardLg title="Buy a new car" status="Completed" />
           <GoalCardLg title="Learn a new language" status="New" />

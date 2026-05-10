@@ -12,6 +12,7 @@ import SegmentedControl from "./segment-control";
 import Button from "../ui/button";
 import { FilterKey } from "../../types/type";
 import { MOCK_DB } from "../../seeds/seeds";
+import CollapsibleCardContainer from "../collapsible-card-container";
 
 export default function BarsChartContainer() {
   const { sizes, theme, globalStyles, complete } = useTheme();
@@ -61,130 +62,69 @@ export default function BarsChartContainer() {
   const pillStyle = { borderRadius: 50, width: "31%" };
 
   return (
-    <View
-      style={[
-        styles.container,
-        {
-          paddingVertical: sizes.lg,
-          paddingHorizontal: sizes.sm,
-          marginTop: sizes.md,
-        },
-      ]}
+    <CollapsibleCardContainer
+      title="Historial"
+      library="MaterialCommunityIcons"
+      name="chart-bar"
     >
-      <LinearGradient
-        colors={[globalStyles.bgContainerStart, globalStyles.bgContainerEnd]}
-        style={[
-          StyleSheet.absoluteFill,
-          {
-            borderRadius: sizes.lg,
-            borderWidth: 1,
-            borderColor: globalStyles.borderContainer,
-          },
-        ]}
-        locations={[0.1, 1.0]}
-        start={{ x: 0, y: 0.0 }}
-        end={{ x: 1, y: 0 }}
-      />
-
       {/* Encabezado */}
       <View
-        style={[
-          styles.header,
-          {
-            gap: sizes.sm,
-            paddingHorizontal: sizes.md,
-            paddingBottom: sizes.md,
-          },
-        ]}
+        style={{
+          //flex: 1,
+          width: "100%",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          paddingBottom: sizes.sm,
+          paddingLeft: sizes.md,
+          paddingRight: sizes.lg,
+        }}
       >
-
-
-        <Row width="45%" justifyContent="flex-start" alignItem="flex-end">
-          <Row
-            width="100%"
-            gap={sizes.xs}
-            alignItem="center"
-            justifyContent="flex-start"
+        <View
+          style={{
+            flexDirection: "column",
+            alignItems: "flex-start",
+          }}
+        >
+          <Typography
+            fontSize={sizes.md}
+            bold={false}
+            customStyles={{ color: globalStyles.subtitle }}
           >
-            <Icon
-              bgStyle={{
-                padding: sizes.xxs,
-                borderRadius: sizes.xs,
-                backgroundColor: theme.t20,
-              }}
-              color={theme.t100}
-              size={sizes.xl}
-              name="insert-chart-outlined"
-              library="MaterialIcons"
-            />
-            <Typography
-              fontSize={sizes.xl}
-              bold={false}
-              customStyles={{ color: "white" }}
-            >
-              Historial
-            </Typography>
-          </Row>
-        </Row>
+            Total {isIncome ? "Ingresos" : "Egresos"}
+          </Typography>
+          <Typography
+            fontSize={sizes.xxl}
+            bold={false}
+            customStyles={{ color: "white" }}
+          >
+            {chartInfo.total}
+          </Typography>
+        </View>
 
         <View
           style={{
-            width: "100%",
-            flexDirection: "row",
+            flexDirection: "column",
             alignItems: "center",
-            justifyContent: "space-between",
-            paddingBottom: sizes.sm,
+            gap: sizes.sm,
+            borderColor: globalStyles.borderContainer,
+            borderWidth: 1,
+            paddingVertical: sizes.sm,
             paddingHorizontal: sizes.sm,
+            borderRadius: sizes.sm,
           }}
         >
-          <View
-            style={{
-              flexDirection: "column",
-              alignItems: "flex-start",
-              gap: 0,
-            }}
-          >
-            <Typography
-              fontSize={sizes.md}
-              bold={false}
-              customStyles={{ color: globalStyles.subtitle }}
-            >
-              Total {isIncome ? "Ingresos" : "Egresos"}
-            </Typography>
-            <Typography
-              fontSize={sizes.xxl}
-              bold={false}
-              customStyles={{ color: "white" }}
-            >
-              {chartInfo.total}
-            </Typography>
-          </View>
-
-          <View
-            style={{
-              flexDirection: "column",
-              alignItems: "center",
-              gap: sizes.sm,
-              borderColor: globalStyles.borderContainer,
-              borderWidth: 1,
-              paddingVertical: sizes.sm,
-              paddingHorizontal: sizes.sm,
-              borderRadius: sizes.sm,
-            }}
-          >
-            <Typography fontSize={sizes.md} txtWhite bold>
-              {chartInfo.label}
-            </Typography>
-            <View>
-              <Badge
-                text={`${chartInfo.isPositive ? "+" : "-"}${chartInfo.percentage}%`}
-                size="md"
-                type="bordered"
-                iconLeft={chartInfo.percentageIcon}
-                library="MaterialIcons"
-                color={chartInfo.percentageColor}
-              />
-            </View>
+          <Typography fontSize={sizes.md} txtWhite bold>
+            {chartInfo.label}
+          </Typography>
+          <View>
+            <Badge
+              text={`${chartInfo.isPositive ? "+" : "-"}${chartInfo.percentage}%`}
+              size="md"
+              type="bordered"
+              iconLeft={chartInfo.percentageIcon}
+              library="MaterialIcons"
+              color={chartInfo.percentageColor}
+            />
           </View>
         </View>
       </View>
@@ -192,9 +132,9 @@ export default function BarsChartContainer() {
       {/* Gráfica */}
       <View style={styles.chartContainer}>
         <BarChart
-          barWidth={30}
+          barWidth={20}
           noOfSections={5}
-          barBorderRadius={45}
+          barBorderRadius={9}
           data={chartInfo.data}
           width={300}
           height={200}
@@ -239,7 +179,7 @@ export default function BarsChartContainer() {
           ))}
         </View>
 
-        <View style={{ width: "100%", paddingHorizontal: sizes.sm }}>
+        <View style={{ width: "92%" }}>
           <SegmentedControl
             options={["Income", "Expense"]}
             selectedIndex={activeIndex}
@@ -247,16 +187,25 @@ export default function BarsChartContainer() {
           />
         </View>
       </View>
-
-    </View>
+    </CollapsibleCardContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { width: "100%", position: "relative" },
-  header: { display: "flex", flexDirection: "column", width: "100%" },
-  chartContainer: {
+  container: {
     width: "100%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  header: {
+    display: "flex",
+    flexDirection: "column",
+    width: "100%",
+  },
+  chartContainer: {
+    width: "92%",
     backgroundColor: "transparent",
     overflow: "hidden",
     borderColor: "transparent",
@@ -264,7 +213,7 @@ const styles = StyleSheet.create({
   },
   filtersContainer: {
     marginTop: 20,
-    width: "100%",
+    width: "92%",
     paddingHorizontal: 12,
     display: "flex",
     flexDirection: "row",

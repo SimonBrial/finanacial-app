@@ -14,6 +14,7 @@ import React from "react";
 
 interface CustomBadgeProps {
   bankName: import("../types/type").BankNameTypes;
+  size?: import("../types/type").BasesSize;
   width?: number;
   height?: number;
 }
@@ -336,6 +337,7 @@ interface GoalLgProps {
 interface TitleCustomProps extends IconBase {
   title: string;
   withNotificationIcon: boolean;
+  showIconBalance?: boolean;
 }
 
 interface PaypalIconProps {
@@ -353,10 +355,14 @@ interface BankState {
   banks: BankCardData[];
   selectedBankIndex: number | null;
   setSelectedBankIndex: (index: number | null) => void;
+  showBalance: boolean;
+  setShowBalance: (show: boolean) => void;
 }
 
 interface TransactionState {
   transactions: Transaction[];
+  updateTransactionLocation: (id: string, latitude: number, longitude: number) => void;
+  removeTransactionLocation: (id: string) => void;
 }
 
 interface GoalState {
@@ -385,6 +391,8 @@ interface Transaction {
   bank: BankNameTypes;
   color: string;
   locationSave: boolean;
+  latitude?: number;
+  longitude?: number;
 }
 
 export type {

@@ -7,6 +7,7 @@ import Icon from "../ui/icon"; // Asumiendo tu componente del ejemplo anterior
 import Row from "../ui/row";
 import useTheme from "../../hook/useTheme";
 import { GenerateScaleParams, ColorScaleItem } from "../../interface/interface";
+import CollapsibleCardContainer from "../collapsible-card-container";
 
 // Simulamos los datos del mes actual
 // Ordenamos de mayor a menor porcentaje para que el anillo más grande quede afuera
@@ -63,44 +64,8 @@ export default function ConcentricProgressRings() {
   }, []);
 
   return (
-    <View style={styles.cardContainer}>
-      <LinearGradient
-        colors={[globalStyles.bgContainerStart, globalStyles.bgContainerEnd]}
-        style={[
-          StyleSheet.absoluteFill,
-          {
-            borderRadius: sizes.lg,
-            borderWidth: 1,
-            borderColor: globalStyles.borderContainer,
-          },
-        ]}
-        locations={[0.1, 1.0]}
-        start={{ x: 0, y: 0.0 }}
-        end={{ x: 1, y: 0 }}
-      />
-      {/* HEADER */}
-      <Row
-        width="100%"
-        gap={12}
-        alignItem="center"
-        justifyContent="flex-start"
-        customStyles={{ marginBottom: 24 }}
-      >
-        <Icon
-          bgStyle={{
-            padding: 8,
-            borderRadius: 8,
-            backgroundColor: "#001B3D", // Un fondo sutil azulado
-          }}
-          color="#006DFF"
-          size={24}
-          name="home" // Asumiendo que usas MaterialIcons u otro paquete
-          library="MaterialIcons"
-        />
-        <Typography fontSize={22} customStyles={{ color: "white" }}>
-          Monthly Expenses
-        </Typography>
-      </Row>
+    <CollapsibleCardContainer title="Monthly Expenses" library="MaterialCommunityIcons" name="chart-arc">
+
 
       {/* BODY: Gráfico y Leyenda */}
       <View style={styles.chartArea}>
@@ -180,22 +145,26 @@ export default function ConcentricProgressRings() {
           ))}
         </View>
       </View>
-    </View>
+    </CollapsibleCardContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  cardContainer: {
+  /*cardContainer: {
     //backgroundColor: "#161618", // Fondo oscuro similar al de tu imagen
     borderRadius: 20,
     padding: 24,
     width: "100%",
     marginTop: 24,
-  },
+  },*/
   chartArea: {
+    width: "100%",
     flexDirection: "row",
+    gap: 20,
     alignItems: "center",
     justifyContent: "space-between",
+    paddingHorizontal: 10,
+    paddingVertical: 5,
   },
   centerTextContainer: {
     justifyContent: "center",
@@ -203,9 +172,9 @@ const styles = StyleSheet.create({
   },
   legendContainer: {
     flex: 1,
-    marginLeft: 24,
+    marginLeft: 2,
     justifyContent: "center",
-    gap: 16, // Espaciado entre elementos de la leyenda
+    gap: 8, // Espaciado entre elementos de la leyenda
   },
   legendItem: {
     flexDirection: "row",

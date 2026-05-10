@@ -1,3 +1,4 @@
+import React, { useMemo } from "react";
 import { View } from "react-native";
 import Svg, {
   LinearGradient,
@@ -8,7 +9,8 @@ import Svg, {
 } from "react-native-svg";
 import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
 import { CustomBadgeProps } from "../../interface/interface";
-import { BankNameTypes } from "../../types/type";
+import { BankNameTypes, BasesSize } from "../../types/type";
+import useTheme from "../../hook/useTheme";
 
 // Definimos la estructura de los datos de cada banco
 const BANK_CONFIGS: Record<BankNameTypes, string[]> = {
@@ -29,14 +31,58 @@ const BANK_CONFIGS: Record<BankNameTypes, string[]> = {
   // Puedes seguir agregando más bancos aquí...
 };
 
-
 const strokeWidth = 1;
 
 export default function CustomBadge({
   bankName,
-  width = 54,
-  height = 18,
+  size = "sm",
+  width,
+  height,
 }: CustomBadgeProps) {
+  const { sizes } = useTheme();
+
+  const { finalWidth, finalHeight, finalFontSize } = useMemo(() => {
+    const sizeConfig: Record<
+      BasesSize,
+      {
+        height: number;
+        width: number;
+        fontSize: number;
+        paddingHorizonta: number;
+      }
+    > = {
+      sm: { height: 18, width: 54, fontSize: 10, paddingHorizonta: 2 },
+      md: {
+        height: 20,
+        width: 60,
+        fontSize: sizes.sm || 12,
+        paddingHorizonta: sizes.xs,
+      },
+      lg: {
+        height: 22,
+        width: 66,
+        fontSize: sizes.md || 16,
+        paddingHorizonta: sizes.md,
+      },
+    };
+
+    const currentConfig = sizeConfig[size as BasesSize] || sizeConfig.sm;
+
+    const computedHeight = height ?? currentConfig.height;
+    const computedWidth = width ?? currentConfig.width;
+
+    // Adjust font size proportionally if height is overridden
+    const computedFontSize = height
+      ? computedHeight * (currentConfig.fontSize / currentConfig.height)
+      : currentConfig.fontSize;
+
+    return {
+      finalWidth: computedWidth,
+      finalHeight: computedHeight,
+      finalFontSize: computedFontSize,
+    };
+  }, [size, sizes, width, height]);
+
   // Buscamos los colores. Si el banco no existe, usamos uno por defecto (gris).
   const colors = BANK_CONFIGS[bankName.toLowerCase() as BankNameTypes] || [
     "#888",
@@ -51,7 +97,11 @@ export default function CustomBadge({
         justifyContent: "center",
       }}
     >
-      <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`}>
+      <Svg
+        height={finalHeight}
+        width={finalWidth}
+        viewBox={`0 0 ${finalWidth} ${finalHeight}`}
+      >
         <Defs>
           <LinearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="0%">
             {colors.map((color, index) => (
@@ -68,9 +118,9 @@ export default function CustomBadge({
         <Rect
           x={strokeWidth / 2}
           y={strokeWidth / 2}
-          width={width - strokeWidth}
-          height={height - strokeWidth}
-          rx={height / 2}
+          width={finalWidth - strokeWidth}
+          height={finalHeight - strokeWidth}
+          rx={finalHeight / 2}
           stroke={`url(#${gradientId})`}
           strokeWidth={strokeWidth}
           fill="transparent"
@@ -79,7 +129,7 @@ export default function CustomBadge({
         {/* Texto con degradado */}
         <SvgText
           fill={`url(#${gradientId})`}
-          fontSize="10"
+          fontSize={finalFontSize}
           fontWeight="bold"
           x="50%"
           y="58%" // Ajuste manual para centrado visual
