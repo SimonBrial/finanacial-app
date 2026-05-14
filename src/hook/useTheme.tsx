@@ -11,5 +11,7 @@ export default function useTheme() {
     danger: context.danger,
     theme: context.theme,
     sizes: context.sizes,
+    isDark: context.isDark,
+    toggleTheme: context.toggleTheme,
   };
 }

@@ -42,7 +42,10 @@ export default function PinScreen() {
     }
   };
 
-  const handleKeyPress = (e: NativeSyntheticEvent<TextInputKeyPressEventData>, index: number) => {
+  const handleKeyPress = (
+    e: NativeSyntheticEvent<TextInputKeyPressEventData>,
+    index: number,
+  ) => {
     if (e.nativeEvent.key === "Backspace" && pin[index] === "" && index > 0) {
       pinRefs[index - 1].current?.focus();
     }

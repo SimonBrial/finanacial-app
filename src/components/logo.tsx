@@ -1,12 +1,13 @@
 import { View, Text, StyleSheet } from "react-native";
+import useTheme from "../hook/useTheme";
 
 export default function Logo() {
+  const { globalStyles } = useTheme();
   return (
     <View style={styles.logoWrapper}>
-      <Text style={styles.logoText}>Ce</Text>
-      {/* <Text style={styles.logoText}>e</Text> */}
-      <View style={styles.logoDot} />
-      <View style={styles.logoLine} />
+      <Text style={[styles.logoText, { color: globalStyles.text }]}>Ce</Text>
+      <View style={[styles.logoDot, { backgroundColor: globalStyles.text }]} />
+      <View style={[styles.logoLine, { backgroundColor: globalStyles.text }]} />
     </View>
   );
 }
@@ -21,28 +22,21 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     width: 120, // Para depuración
     height: 120, // Para depuración
-    //borderColor: "red", // Para depuración
-    //borderWidth: 1, // Para depuración
   },
   logoText: {
     fontSize: 80,
     fontWeight: "bold",
-    color: "#ffffff",
     fontFamily: "Inter",
-    
   },
   logoLine: {
     width: "80%",
     height: 5,
     position: "absolute",
     bottom: 10,
-    backgroundColor: "#ffffff",
-    //marginLeft: -5,
   },
   logoDot: {
     width: 8,
     height: 8,
-    backgroundColor: "#ffffff",
     position: "absolute",
     top: 15,
     right: 10,

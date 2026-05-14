@@ -10,11 +10,17 @@ import { useRouter } from "expo-router";
 import { SettingsOption } from "../../interface/interface";
 
 export default function Settings() {
-  const { inProgress, sizes, theme } = useTheme();
+  const { inProgress, sizes, theme, isDark, toggleTheme, globalStyles } = useTheme();
   const router = useRouter();
 
-  const hanleLogout = (exception: string) => {
-    router.push(exception.toLowerCase() === "log out" ? "/login" : "/404");
+  const handlePress = (label: string) => {
+    if (label === "Theme") {
+      toggleTheme();
+    } else if (label === "Log Out") {
+      router.push("/login");
+    } else {
+      router.push("/404");
+    }
   };
 
   const settingsOptions: SettingsOption[] = [
@@ -24,6 +30,7 @@ export default function Settings() {
       library: "FontAwesome5",
     },
     { label: "Notifications", icon: "notifications", library: "Ionicons" },
+    { label: "Theme", icon: isDark ? "moon-sharp" : "sunny-sharp", library: "Ionicons" },
     { label: "Language", icon: "translate", library: "MaterialIcons" },
     {
       label: "Help & Support",
@@ -56,7 +63,7 @@ export default function Settings() {
         <View
           style={{ gap: sizes.xs, display: "flex", flexDirection: "column" }}
         >
-          <Typography txtWhite fontSize={sizes.lg}>
+          <Typography fontSize={sizes.lg}>
             Simon Briceño
           </Typography>
           <Badge
@@ -78,11 +85,11 @@ export default function Settings() {
         {settingsOptions.map((item) => (
           <TouchableOpacity
             key={item.label}
-            onPress={() => hanleLogout(item.label)}
+            onPress={() => handlePress(item.label)}
             style={{
               paddingHorizontal: sizes.md,
               paddingVertical: sizes.sm,
-              borderColor: theme.t100,
+              borderColor: globalStyles.border,
               borderBottomWidth: 1,
               width: "100%",
               display: "flex",
@@ -97,7 +104,7 @@ export default function Settings() {
               bgStyle={{ borderRadius: sizes.sm }}
               size={sizes.lg}
             />
-            <Typography txtWhite>{item.label}</Typography>
+            <Typography>{item.label}</Typography>
           </TouchableOpacity>
         ))}
       </View>

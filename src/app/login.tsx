@@ -1,12 +1,11 @@
 import {
   KeyboardAvoidingView,
-  TouchableOpacity,
   StyleSheet,
   StatusBar,
   TextInput,
   Platform,
   View,
-  Text,
+  TouchableOpacity,
 } from "react-native";
 import { useState } from "react";
 import PinScreen from "./pin-screen";
@@ -14,27 +13,43 @@ import Logo from "../components/logo";
 import BackgroundShapeLayout from "../components/background-shape-layout";
 import Button from "../components/ui/button";
 import Icon from "../components/ui/icon";
+import useTheme from "../hook/useTheme";
+import Typography from "../components/ui/typography";
 
 export default function Login() {
+  const { globalStyles, theme, isDark, toggleTheme } = useTheme();
   const [currentScreen, setCurrentScreen] = useState("login");
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // 1. Lógica del Botón Login -> Pasa a la pantalla del PIN
   const handleLogin = () => {
     if (email !== "" && password !== "") {
       setCurrentScreen("pin");
     }
   };
 
-  // Cabecera reutilizable para ambas pantallas
   const LogoHeader = () => (
     <View style={styles.headerContainer}>
+      <TouchableOpacity
+        onPress={toggleTheme}
+        style={{ position: "absolute", top: -40, right: -20, padding: 10 }}
+      >
+        <Icon
+          name={isDark ? "sunny" : "moon"}
+          library="Ionicons"
+          size={24}
+          color={isDark ? "#FFBF00" : "#6d0dd3"}
+        />
+      </TouchableOpacity>
       <Logo />
       <View style={{ alignItems: "center", marginTop: 20 }}>
-        <Text style={styles.title}>Welcome Back!</Text>
-        <Text style={styles.subtitle}>Welcome back we missed you</Text>
+        <Typography fontSize={26} bold>
+          Welcome Back!
+        </Typography>
+        <Typography fontSize={14} customStyles={{ color: "#00bcd4" }}>
+          Welcome back we missed you
+        </Typography>
       </View>
     </View>
   );
@@ -42,10 +57,10 @@ export default function Login() {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "padding"}
-      style={styles.container}
+      style={[styles.container, { backgroundColor: globalStyles.background }]}
       keyboardVerticalOffset={0}
     >
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle={isDark ? "light-content" : "dark-content"} />
 
       <View style={styles.content}>
         <LogoHeader />
@@ -53,19 +68,24 @@ export default function Login() {
         <BackgroundShapeLayout />
 
         {currentScreen === "login" ? (
-          // --- PANTALLA 1: LOGIN EXACTO ---
           <View style={styles.formContainer}>
-            <View style={styles.inputRow}>
+            <View
+              style={[
+                styles.inputRow,
+                { borderBottomColor: globalStyles.borderInput },
+              ]}
+            >
               <Icon
                 name={"at-sign"}
                 variant="light"
                 library="Feather"
                 size={22}
+                color={globalStyles.text}
               />
               <TextInput
-                style={styles.inputClean}
+                style={[styles.inputClean, { color: globalStyles.text }]}
                 placeholder="Email"
-                placeholderTextColor="#ffffff"
+                placeholderTextColor={globalStyles.textSecondary}
                 value={email}
                 onChangeText={setEmail}
                 keyboardType="email-address"
@@ -73,17 +93,23 @@ export default function Login() {
               />
             </View>
 
-            <View style={styles.inputRow}>
+            <View
+              style={[
+                styles.inputRow,
+                { borderBottomColor: globalStyles.borderInput },
+              ]}
+            >
               <Icon
                 name={"lock-outline"}
                 variant="light"
                 library="MaterialCommunityIcons"
                 size={22}
+                color={globalStyles.text}
               />
               <TextInput
-                style={styles.inputClean}
+                style={[styles.inputClean, { color: globalStyles.text }]}
                 placeholder="Password"
-                placeholderTextColor="#ffffff"
+                placeholderTextColor={globalStyles.textSecondary}
                 value={password}
                 onChangeText={setPassword}
                 secureTextEntry
@@ -92,17 +118,12 @@ export default function Login() {
             <Button
               text="Login"
               fullWidth
+              color={theme.t100}
               iconRight={"arrow-right"}
               onPress={handleLogin}
             />
-
-            {/* <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-              <Text style={styles.loginButtonText}>Login</Text>
-              <Feather name="arrow-right" size={20} color="#ffffff" />
-            </TouchableOpacity> */}
           </View>
         ) : (
-          // --- PANTALLA 2: PIN EXACTO ---
           <PinScreen />
         )}
       </View>
@@ -113,7 +134,6 @@ export default function Login() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#000000", // Color de fondo oscuro sólido
     justifyContent: "center",
   },
   content: {
@@ -127,19 +147,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 50,
   },
-  title: {
-    fontSize: 26,
-    color: "#ffffff",
-    marginBottom: 10,
-    fontFamily: "Inter",
-  },
-  subtitle: {
-    fontSize: 14,
-    color: "#00bcd4", // Cyan exacto de la imagen
-    fontFamily: "Inter",
-  },
   formContainer: {
-    //flex: 1,
     width: "100%",
     alignItems: "center",
   },
@@ -151,67 +159,11 @@ const styles = StyleSheet.create({
     width: "100%",
     marginBottom: 30,
     padding: 5,
-    borderBottomColor: "#ffffff",
     borderBottomWidth: 1,
-  },
-  icon: {
-    marginRight: 20,
   },
   inputClean: {
     flex: 1,
-    color: "#ffffff",
     fontSize: 16,
-    fontFamily: "Inter",
-  },
-  loginButton: {
-    backgroundColor: "#006DFF", // Tu color base
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%",
-    height: 55,
-    borderRadius: 8,
-    marginTop: 10,
-    gap: 10,
-  },
-  loginButtonText: {
-    color: "#ffffff",
-    fontSize: 16,
-    fontFamily: "Inter",
-  },
-  // --- Estilos Inputs PIN ---
-  pinContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    gap: 12,
-    marginBottom: 40,
-  },
-  pinBox: {
-    width: 60,
-    height: 80,
-    backgroundColor: "#161b22", // Gris muy oscuro
-    borderWidth: 1,
-    borderColor: "#30363d", // Borde sutil
-    borderRadius: 10,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  pinInputText: {
-    color: "#ffffff",
-    fontSize: 32,
-    textAlign: "center",
-    width: "100%",
-    height: "100%",
-    fontFamily: "Inter",
-  },
-  fingerprintText: {
-    color: "#00bcd4",
-    fontSize: 14,
-    marginBottom: 30,
-    fontFamily: "Inter",
-  },
-  fingerprintIconContainer: {
-    alignItems: "center",
-    justifyContent: "center",
+    fontFamily: "Inter-Regular",
   },
 });

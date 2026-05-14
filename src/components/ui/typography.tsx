@@ -1,6 +1,6 @@
-import { Text, StyleSheet, StyleProp, TextStyle } from "react-native";
+import { Text, StyleSheet } from "react-native";
 import { TypographyProps } from "../../interface/interface";
-
+import useTheme from "../../hook/useTheme";
 
 export default function Typography({
   fontSize = 16,
@@ -11,13 +11,15 @@ export default function Typography({
   variant = "Regular",
   ...rest
 }: TypographyProps) {
+  const { globalStyles } = useTheme();
+
   const combinedStyles = StyleSheet.flatten([
     baseStyles.text,
-    { fontSize },
+    { fontSize, color: globalStyles.text },
     // Mapeamos la variante al nombre de la fuente que cargaste en el Root
     { fontFamily: `Inter-${variant}` },
     bold ? { fontWeight: "bold" as const } : {},
-    txtWhite ? { color: "white" as const } : {},
+    txtWhite ? { color: "#FFFFFF" as const } : {},
     customStyles,
   ]);
 

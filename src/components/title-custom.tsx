@@ -50,7 +50,6 @@ export default function TitleCustom({
         <Typography
           fontSize={sizes.xl}
           bold={false}
-          customStyles={{ color: "white" }}
         >
           {title}
         </Typography>

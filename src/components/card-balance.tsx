@@ -14,9 +14,37 @@ export default function CardCoin({
   title,
   id,
 }: BalanceCardProps) {
-  const {sizes} = useTheme();
+  const { sizes, globalStyles, complete, danger, isDark } = useTheme();
+
+  const dynamicStyles = StyleSheet.create({
+    container: {
+      width: "95%",
+      height: 180,
+      borderColor: globalStyles.border,
+      borderWidth: 1,
+      borderRadius: 10,
+      padding: 15,
+      backgroundColor: globalStyles.backgroundSecondary,
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+    },
+    title: {
+      color: globalStyles.text,
+      fontSize: 20,
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 4,
+    },
+    amount: {
+      color: globalStyles.text,
+      fontSize: 24,
+    }
+  });
+
   return (
-    <View style={cardBalanceStyles.container}>
+    <View style={dynamicStyles.container}>
       <View
         style={{
           display: "flex",
@@ -26,7 +54,7 @@ export default function CardCoin({
           paddingBottom: 10,
         }}
       >
-        <Typography bold fontSize={sizes.md} customStyles={cardBalanceStyles.title}>
+        <Typography bold fontSize={sizes.md} customStyles={dynamicStyles.title}>
           {title}
         </Typography>
       </View>
@@ -41,15 +69,15 @@ export default function CardCoin({
           <Typography
             bold={false}
             fontSize={sizes.xl}
-            customStyles={{ color: "#FFFFFF", fontSize: 24 }}
+            customStyles={dynamicStyles.amount}
           >
-            <Feather name="dollar-sign" size={24} color="#FFFFFF" />
+            <Feather name="dollar-sign" size={24} color={globalStyles.text} />
             {amount}
           </Typography>
           <Typography
             bold={false}
             fontSize={sizes.xl}
-            customStyles={{ color: "#FFFFFF", fontSize: 20 }}
+            customStyles={{ color: globalStyles.text, fontSize: 20 }}
           >
             {currency}
           </Typography>
@@ -74,14 +102,14 @@ export default function CardCoin({
             <Typography
               bold={false}
               fontSize={sizes.md}
-              customStyles={{ color: "#2bf35d" }}
+              customStyles={{ color: complete.c100 }}
             >
               IN: {started}
             </Typography>
             <Typography
               bold={false}
               fontSize={sizes.md}
-              customStyles={{ color: "#f32b35" }}
+              customStyles={{ color: danger.d100 }}
             >
               OUT: {spent}
             </Typography>
@@ -98,7 +126,7 @@ export default function CardCoin({
           <Typography
             bold={false}
             fontSize={sizes.sm}
-            customStyles={{ color: "#AAAAAA" }}
+            customStyles={{ color: globalStyles.textSecondary }}
           >
             Last entry:
           </Typography>
@@ -114,26 +142,3 @@ export default function CardCoin({
     </View>
   );
 }
-
-const cardBalanceStyles = StyleSheet.create({
-  container: {
-    width: "95%",
-    height: 180,
-    borderColor: "#1a1a1a",
-    borderWidth: 1,
-    borderRadius: 10,
-    padding: 15,
-    backgroundColor: "#2A2A2A",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-  },
-  title: {
-    color: "#FFFFFF",
-    fontSize: 20,
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 4,
-  },
-});

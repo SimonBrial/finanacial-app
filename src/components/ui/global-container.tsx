@@ -3,6 +3,7 @@ import {
   useSafeAreaInsets,
   SafeAreaView,
 } from "react-native-safe-area-context";
+import useTheme from "../../hook/useTheme";
 
 export default function GlobalContainer({
   children,
@@ -10,18 +11,21 @@ export default function GlobalContainer({
   children: React.ReactNode;
 }) {
   const insets = useSafeAreaInsets();
-  const globalStyles = StyleSheet.flatten({
+  const { globalStyles, isDark } = useTheme();
+
+  const containerStyles = StyleSheet.flatten({
     paddingTop: insets.top,
-    //paddingBottom: insets.bottom,
     ...styles.containerGlobal,
+    backgroundColor: globalStyles.background,
   });
+
   return (
-    <View style={{ flex: 1, backgroundColor: "black" }}>
+    <View style={{ flex: 1, backgroundColor: globalStyles.background }}>
       <SafeAreaView style={{ flex: 1 }}>
-        <View style={globalStyles}>{children}</View>
+        <View style={containerStyles}>{children}</View>
         <StatusBar
-          barStyle={"light-content"}
-          backgroundColor={"#1a1a1a"}
+          barStyle={isDark ? "light-content" : "dark-content"}
+          backgroundColor={globalStyles.background}
           translucent={false}
         />
       </SafeAreaView>
@@ -32,10 +36,8 @@ export default function GlobalContainer({
 const styles = StyleSheet.create({
   containerGlobal: {
     flex: 1,
-    backgroundColor: "black",
     alignItems: "stretch",
     justifyContent: "flex-start",
     paddingHorizontal: 20,
-    //paddingBottom: 80,
   },
 });

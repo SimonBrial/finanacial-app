@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useWindowDimensions } from "react-native";
 import {
   Canvas,
@@ -9,24 +9,24 @@ import {
   Blur,
   Fill,
 } from "@shopify/react-native-skia";
+import useTheme from "../hook/useTheme";
 
 /**
  * BackgroundShapeLayout
  *
  * Optimized background using a single Skia Canvas.
- * Uses large radial gradients with a group blur to achieve the smooth "mesh" look
- * from the reference image without the "banding" or performance issues of multiple canvases.
  */
 export default function BackgroundShapeLayout() {
   const { width, height } = useWindowDimensions();
+  const { globalStyles, theme, isDark } = useTheme();
 
-  // Color Palette from reference image
-  const COLORS = {
-    base: "#050505", // Very dark background
-    purple: "#6d0dd3", // Primary purple glow
-    blue: "#006DFF", // Primary blue glow
-    darkBlue: "#0a1128", // Subtle deep blue transition
-  };
+  // Color Palette from theme and DESIGN.md logic
+  const COLORS = useMemo(() => ({
+    base: globalStyles.background,
+    purple: isDark ? "#6d0dd3" : "#6d0dd399", // More intense in light mode as requested
+    blue: theme.t100, 
+    darkBlue: isDark ? "#0a1128" : "#006DFF11",
+  }), [globalStyles.background, theme.t100, isDark]);
 
   return (
     <Canvas style={{ position: "absolute", width, height, zIndex: -1 }}>

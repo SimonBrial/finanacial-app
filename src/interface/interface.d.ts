@@ -197,7 +197,24 @@ interface ThemeContextProps {
   inProgress: Record<string, string>;
   complete: Record<string, string>;
   danger: Record<string, string>;
-  globalStyles: Record<string, string>;
+  globalStyles: {
+    background: string;
+    backgroundSecondary: string;
+    text: string;
+    textSecondary: string;
+    border: string;
+    // Keep existing keys for backward compatibility if needed, 
+    // but mapping them to semantic ones.
+    borderContainer: string;
+    subtitle: string;
+    bgContainerStart: string;
+    bgContainerEnd: string;
+    buttonDisabled: string;
+    buttonDisabledText: string;
+    borderInput: string;
+  };
+  isDark: boolean;
+  toggleTheme: () => void;
 }
 
 interface IconBase {

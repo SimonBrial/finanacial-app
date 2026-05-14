@@ -28,23 +28,25 @@ export default function Button({
   isActive = false,
   padding,
 }: ButtonProps) {
-  const { sizes } = useTheme();
+  const { sizes, globalStyles } = useTheme();
 
   const themedStyles = useMemo(() => {
     const currentType = isActive ? "filled" : type;
     const isFilled = currentType === "filled";
 
-    const activeColor = disabled ? "#555555" : color;
+    const activeColor = disabled ? globalStyles.buttonDisabled : color;
     const contentColor = isFilled
       ? disabled
-        ? "#A0A0A0"
+        ? globalStyles.buttonDisabledText
         : "#FFFFFF"
+      : disabled
+      ? globalStyles.buttonDisabledText
       : activeColor;
 
     // Ajuste de las variantes según el diseño
     const variantStyles: Record<PrimitiveVariants, ViewStyle> = {
       filled: {
-        backgroundColor: disabled ? "#333333" : color,
+        backgroundColor: disabled ? globalStyles.buttonDisabled : color,
         borderWidth: 0,
       },
       light: { backgroundColor: "transparent", borderWidth: 0 },
@@ -54,7 +56,7 @@ export default function Button({
         borderColor: activeColor,
       },
       ghost: {
-        backgroundColor: disabled ? "#333333" : `${color}25`,
+        backgroundColor: disabled ? globalStyles.buttonDisabled : `${color}25`,
         borderWidth: 0,
       },
       flat: {},
