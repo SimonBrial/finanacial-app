@@ -117,7 +117,7 @@ interface BadgeProps extends Partial<IconBase> {
   containerStyle?: ViewStyle;
 }
 interface ButtonProps extends Partial<IconBase> {
-  text: string;
+  text?: string;
   color?: string;
   type?: PrimitiveVariants;
   size?: BasesSize | "xs";
@@ -129,6 +129,7 @@ interface ButtonProps extends Partial<IconBase> {
   onPress?: () => void;
   disabled?: boolean;
   isActive?: boolean; // Nueva prop para controlar el estado activo
+  padding?: number; // Nueva prop para controlar el padding manual
 }
 
 interface ColProps {

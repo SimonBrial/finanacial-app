@@ -29,6 +29,7 @@ import {
   BottomSheetView,
 } from "@gorhom/bottom-sheet";
 import ModalItems from "../../components/modal-items";
+import Button from "../../components/ui/button";
 
 const modalItems: {
   name: string;
@@ -155,9 +156,13 @@ export default function TransactionDetails() {
         }}
       >
         <Typography txtWhite>Transaction not found</Typography>
-        <Pressable onPress={() => router.back()} style={{ marginTop: 20 }}>
-          <Typography customStyles={{ color: theme.t100 }}>Go Back</Typography>
-        </Pressable>
+        <Button
+          text="Go Back"
+          type="light"
+          color={theme.t100}
+          onPress={() => router.back()}
+          containerStyle={{ marginTop: 20 }}
+        />
       </View>
     );
   }
@@ -183,30 +188,30 @@ export default function TransactionDetails() {
           flexDirection: "row",
           justifyContent: "space-between",
           alignItems: "center",
-          marginBottom: sizes.xl,
+          marginBottom: sizes.xxxl,
         }}
       >
-        <Pressable onPress={() => router.back()}>
-          <Icon
-            name="chevron-back"
-            library="Ionicons"
-            size={28}
-            color="white"
-            variant="light"
-          />
-        </Pressable>
+        <Button
+          iconLeft="chevron-back"
+          library="Ionicons"
+          type="ghost"
+          size="lg"
+          color="white"
+          onPress={() => router.back()}
+          padding={10}
+        />
         <Typography fontSize={sizes.lg} txtWhite>
           Transaction Details
         </Typography>
-        <Pressable onPress={handlePresentModalPress}>
-          <Icon
-            name="dots-vertical"
-            library="MaterialCommunityIcons"
-            size={28}
-            color="white"
-            variant="light"
-          />
-        </Pressable>
+        <Button
+          iconLeft="dots-vertical"
+          library="MaterialCommunityIcons"
+          type="light"
+          size="lg"
+          color="white"
+          onPress={handlePresentModalPress}
+          padding={10}
+        />
       </View>
 
       <ScrollView
@@ -332,7 +337,7 @@ export default function TransactionDetails() {
             >
               LOCATION
             </Typography>
-             {transaction.locationSave && (
+            {transaction.locationSave && (
               <Pressable
                 onPress={() => openModal("editLocation")}
                 disabled={isLoadingLocation}
@@ -494,38 +499,19 @@ export default function TransactionDetails() {
             />
           </Pressable>
 
-          <Pressable
-            style={[
-              styles.actionButton,
-              {
-                backgroundColor: "rgba(220, 53, 69, 0.15)",
-                borderColor: "rgba(220, 53, 69, 0.3)",
-                marginTop: sizes.md,
-              },
-            ]}
-          >
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-                flex: 1,
-              }}
-            >
-              <Icon
-                name="warning-outline"
-                library="Ionicons"
-                size={20}
-                color="#dc3545"
-                variant="light"
-              />
-              <Typography
-                customStyles={{ color: "#dc3545", marginLeft: sizes.xs }}
-              >
-                Report Issue
-              </Typography>
-            </View>
-          </Pressable>
+          <Button
+            text="Report Issue"
+            iconLeft="warning-outline"
+            library="Ionicons"
+            type="ghost"
+            color="#dc3545"
+            fullWidth
+            containerStyle={{
+              marginTop: sizes.md,
+              borderWidth: 1,
+              borderColor: "rgba(220, 53, 69, 0.3)",
+            }}
+          />
         </View>
       </ScrollView>
 
@@ -700,44 +686,35 @@ export default function TransactionDetails() {
               gap: 15,
             }}
           >
-            <Pressable
+            <Button
+              text="Cancel"
+              type="ghost"
+              iconLeft="close"
+              library="MaterialCommunityIcons"
               onPress={() => setIsMapFullscreen(false)}
-              style={{
+              containerStyle={{
                 flex: 1,
-                backgroundColor: "rgba(255,255,255,0.1)",
-                padding: 16,
-                borderRadius: 12,
-                alignItems: "center",
+                backgroundColor: "rgba(255, 255, 255, 0.2)",
+                borderColor: "rgb(255, 255, 255)",
                 borderWidth: 1,
-                borderColor: "rgba(255,255,255,0.2)",
               }}
-            >
-              <Typography txtWhite bold>
-                Cancel
-              </Typography>
-            </Pressable>
-            <Pressable
+              color="white"
+            />
+            <Button
+              text="Save Location"
+              type="filled"
+              iconLeft="save-alt"
+              library="MaterialIcons"
+              color={theme.t100}
               onPress={() => {
                 setIsMapFullscreen(false);
-                // In a real flow, here we would take the new coordinates and save them.
-                // updateTransactionLocation(id, newLat, newLong);
                 Alert.alert(
                   "Location Saved",
                   "The new address has been updated successfully.",
                 );
               }}
-              style={{
-                flex: 1,
-                backgroundColor: theme.t100,
-                padding: 16,
-                borderRadius: 12,
-                alignItems: "center",
-              }}
-            >
-              <Typography txtWhite bold>
-                Save Location
-              </Typography>
-            </Pressable>
+              containerStyle={{ flex: 1 }}
+            />
           </View>
         </View>
       </Modal>

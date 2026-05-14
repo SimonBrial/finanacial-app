@@ -8,16 +8,14 @@ import {
   View,
   Text,
 } from "react-native";
-import { Feather } from "@expo/vector-icons";
 import { useState } from "react";
 import PinScreen from "./pin-screen";
 import Logo from "../components/logo";
-import BackgroundShapeLayout from "../components/backgroung-shape-layout";
+import BackgroundShapeLayout from "../components/background-shape-layout";
 import Button from "../components/ui/button";
 import Icon from "../components/ui/icon";
 
 export default function Login() {
-
   const [currentScreen, setCurrentScreen] = useState("login");
 
   const [email, setEmail] = useState("");
@@ -58,8 +56,12 @@ export default function Login() {
           // --- PANTALLA 1: LOGIN EXACTO ---
           <View style={styles.formContainer}>
             <View style={styles.inputRow}>
-              
-              <Icon name={"at-sign"} variant="light" library="Feather" size={22}/>
+              <Icon
+                name={"at-sign"}
+                variant="light"
+                library="Feather"
+                size={22}
+              />
               <TextInput
                 style={styles.inputClean}
                 placeholder="Email"
@@ -72,7 +74,12 @@ export default function Login() {
             </View>
 
             <View style={styles.inputRow}>
-              <Icon name={"lock-outline"} variant="light" library="MaterialCommunityIcons" size={22}/>
+              <Icon
+                name={"lock-outline"}
+                variant="light"
+                library="MaterialCommunityIcons"
+                size={22}
+              />
               <TextInput
                 style={styles.inputClean}
                 placeholder="Password"
@@ -82,7 +89,12 @@ export default function Login() {
                 secureTextEntry
               />
             </View>
-            <Button text="Login" fullWidth iconRight={"arrow-right"} onPress={handleLogin}/>
+            <Button
+              text="Login"
+              fullWidth
+              iconRight={"arrow-right"}
+              onPress={handleLogin}
+            />
 
             {/* <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
               <Text style={styles.loginButtonText}>Login</Text>

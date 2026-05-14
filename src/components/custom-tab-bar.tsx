@@ -159,7 +159,7 @@ export default function CustomTabBar({
                 color={isFocused ? "#FFFFFF" : "#888888"}
               />
               <Typography
-                fontSize={12}
+                fontSize={11}
                 customStyles={{
                   color: isFocused ? "#FFFFFF" : "#888888",
                   marginTop: 4,

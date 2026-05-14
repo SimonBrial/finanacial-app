@@ -26,6 +26,7 @@ export default function Button({
   onPress,
   disabled = false,
   isActive = false,
+  padding,
 }: ButtonProps) {
   const { sizes } = useTheme();
 
@@ -42,7 +43,10 @@ export default function Button({
 
     // Ajuste de las variantes según el diseño
     const variantStyles: Record<PrimitiveVariants, ViewStyle> = {
-      filled: { backgroundColor: disabled ? "#333333" : color, borderWidth: 0 },
+      filled: {
+        backgroundColor: disabled ? "#333333" : color,
+        borderWidth: 0,
+      },
       light: { backgroundColor: "transparent", borderWidth: 0 },
       bordered: {
         backgroundColor: "transparent",
@@ -65,7 +69,7 @@ export default function Button({
     };
 
     const sizeText: Record<string, TextStyle> = {
-      xs: { fontSize: sizes.sm * 0.85 }, // Ligeramente más pequeño que sm
+      xs: { fontSize: sizes.sm }, // Ligeramente más pequeño que sm
       sm: { fontSize: sizes.sm },
       md: { fontSize: sizes.md },
       lg: { fontSize: sizes.lg },
@@ -77,6 +81,16 @@ export default function Button({
       variantStyles[currentType as PrimitiveVariants], // Usamos currentType aquí
       sizeStyles[size as string],
       fullWidth && { width: "100%", alignSelf: "auto" as const },
+      // Solo aplicamos sombra a la variante 'filled' (o 'ghost' si se desea elevación)
+      // Los botones 'light', 'bordered' y 'flat' suelen ser planos por diseño
+      isFilled && {
+        shadowColor: color,
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.3,
+        shadowRadius: 4.65,
+        elevation: 8,
+      },
+      padding !== undefined && { paddingHorizontal: padding }, // Control manual del padding
       containerStyle,
     ]) as ViewStyle;
 
@@ -100,6 +114,9 @@ export default function Button({
     sizes,
     size,
     type,
+    isActive,
+    library,
+    padding,
   ]);
 
   // HitSlop aumenta el área táctil sin cambiar el tamaño visual (ideal para el tamaño xs)
@@ -129,12 +146,14 @@ export default function Button({
       )}
 
       {/* Asumiendo que Typography usa la fuente Inter que configuraste */}
-      <Typography
-        fontSize={themedStyles.sizeIcon.fontSize}
-        customStyles={themedStyles.textStyle}
-      >
-        {text}
-      </Typography>
+      {text && (
+        <Typography
+          fontSize={themedStyles.sizeIcon.fontSize}
+          customStyles={themedStyles.textStyle}
+        >
+          {text}
+        </Typography>
+      )}
 
       {iconRight && (
         <Icon

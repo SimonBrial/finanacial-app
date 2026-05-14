@@ -8,7 +8,7 @@ export default function Typography({
   customStyles,
   bold = false,
   txtWhite = false,
-  variant,
+  variant = "Regular",
   ...rest
 }: TypographyProps) {
   const combinedStyles = StyleSheet.flatten([
