@@ -5,6 +5,7 @@ import Icon from "./ui/icon";
 import Stack from "./ui/stack";
 import useTheme from "../hook/useTheme";
 import { IconBase } from "../interface/interface";
+import { LinearGradient } from "expo-linear-gradient";
 
 interface ModalItemProps extends IconBase {
   title: string;
@@ -25,7 +26,7 @@ export default function ModalItems({
   name,
   iconSize = 24,
 }: ModalItemProps) {
-  const { sizes } = useTheme();
+  const { sizes, globalStyles, complete } = useTheme();
 
   return (
     <TouchableOpacity
@@ -36,14 +37,32 @@ export default function ModalItems({
         gap: 16,
         paddingVertical: 16,
         paddingHorizontal: 20,
-        borderWidth: 1,
-        borderColor: "#979797",
-        borderRadius: 10,
-        backgroundColor: "#1c1c1c",
+        //borderWidth: 1,
+        //borderColor: "#979797",
+        //borderRadius: 10,
+        //backgroundColor: "#1c1c1c",
         width: "90%",
         marginBottom: 10,
       }}
     >
+      <LinearGradient
+        colors={[globalStyles.bgContainerStart, globalStyles.bgContainerEnd]} // DINÁMICO
+        style={[
+          {
+            position: "absolute",
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 0,
+            borderRadius: sizes.xs,
+            borderWidth: 1,
+            borderColor: globalStyles.borderContainer,
+          },
+        ]}
+        locations={[0.1, 1.0]}
+        start={{ x: 0, y: 0.0 }}
+        end={{ x: 1, y: 0 }}
+      />
       <Icon
         variant={variant}
         name={name}

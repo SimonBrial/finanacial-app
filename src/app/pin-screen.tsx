@@ -6,13 +6,22 @@ import {
   Text,
   NativeSyntheticEvent,
   TextInputKeyPressEventData,
+  KeyboardAvoidingView,
+  Platform,
+  StatusBar,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useState, useRef } from "react";
 import { useRouter } from "expo-router";
+import useTheme from "../hook/useTheme";
+import Typography from "../components/ui/typography";
+import BackgroundShapeLayout from "../components/background-shape-layout";
+import Logo from "../components/logo";
+import Icon from "../components/ui/icon";
 
 export default function PinScreen() {
   // 2. Lógica del PIN -> Al completar, viaja a /home
+  const { theme, isDark, globalStyles, toggleTheme } = useTheme();
 
   const router = useRouter(); // Inicializamos el hook
 
@@ -51,31 +60,96 @@ export default function PinScreen() {
     }
   }; // <-- Add this closing brace to properly end the function
 
-  return (
-    <View style={styles.formContainer}>
-      <View style={styles.pinContainer}>
-        {pin.map((digit, index) => (
-          <View key={index} style={styles.pinBox}>
-            <TextInput
-              ref={pinRefs[index]}
-              style={styles.pinInputText}
-              maxLength={1}
-              keyboardType="numeric"
-              value={digit}
-              onChangeText={(text) => handlePinChange(text, index)}
-              onKeyPress={(e) => handleKeyPress(e, index)}
-            />
-          </View>
-        ))}
-      </View>
-
-      <Text style={styles.fingerprintText}>Use the finger if you want</Text>
-
-      <TouchableOpacity>
-        <View style={styles.fingerprintIconContainer}>
-          <Ionicons name="finger-print-outline" size={32} color="#00bcd4" />
-        </View>
+  const LogoHeader = () => (
+    <View style={styles.headerContainer}>
+      <TouchableOpacity
+        onPress={toggleTheme}
+        style={{ position: "absolute", top: -40, right: -20, padding: 10 }}
+      >
+        <Icon
+          name={isDark ? "sunny" : "moon"}
+          library="Ionicons"
+          size={24}
+          color={isDark ? "#000000" : "#000"}
+        />
       </TouchableOpacity>
+      <Logo />
+      <View style={{ alignItems: "center", marginTop: 20 }}>
+        <Typography fontSize={26} bold>
+          Enter PIN
+        </Typography>
+        <Typography
+          fontSize={14}
+          customStyles={{ color: isDark ? "#00bcd4" : theme.t100 }}
+        >
+          Verify your identity
+        </Typography>
+      </View>
+    </View>
+  );
+
+  return (
+    <View style={{ flex: 1, backgroundColor: globalStyles.background }}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "padding"}
+        style={styles.container}
+        keyboardVerticalOffset={0}
+      >
+        <StatusBar barStyle={isDark ? "light-content" : "dark-content"} />
+
+        <View style={styles.content}>
+          <LogoHeader />
+          <BackgroundShapeLayout />
+
+          <View style={styles.formContainer}>
+            <View style={styles.pinContainer}>
+              {pin.map((digit, index) => (
+                <View
+                  key={index}
+                  style={[
+                    styles.pinBox,
+                    {
+                      backgroundColor: globalStyles.backgroundSecondary,
+                      borderColor: globalStyles.border,
+                    },
+                  ]}
+                >
+                  <TextInput
+                    ref={pinRefs[index]}
+                    style={[styles.pinInputText, { color: globalStyles.text }]}
+                    maxLength={1}
+                    keyboardType="numeric"
+                    value={digit}
+                    onChangeText={(text) => handlePinChange(text, index)}
+                    onKeyPress={(e) => handleKeyPress(e, index)}
+                  />
+                </View>
+              ))}
+            </View>
+
+            <Typography
+              customStyles={[
+                styles.fingerprintText,
+                {
+                  color: isDark ? "#00bcd4" : theme.t100,
+                },
+              ]}
+            >
+              Use the finger if you want
+            </Typography>
+
+            <TouchableOpacity>
+              <View style={styles.fingerprintIconContainer}>
+                <Ionicons
+                  name="finger-print-outline"
+                  size={32}
+                  color={isDark ? "#00bcd4" : theme.t100}
+                />
+              </View>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </KeyboardAvoidingView>
     </View>
   );
 }
@@ -83,7 +157,6 @@ export default function PinScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0d1117", // Color de fondo oscuro sólido
     justifyContent: "center",
   },
   content: {
@@ -91,6 +164,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 40,
     justifyContent: "center",
     zIndex: 10,
+    position: "relative",
   },
   headerContainer: {
     alignItems: "center",
@@ -204,7 +278,7 @@ const styles = StyleSheet.create({
     fontFamily: "Inter",
   },
   fingerprintText: {
-    color: "#00bcd4",
+    //color: "#00bcd4",
     fontSize: 14,
     marginBottom: 30,
     fontFamily: "Inter",

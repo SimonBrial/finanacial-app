@@ -521,7 +521,7 @@ export default function TransactionDetails() {
         snapPoints={snapPoints}
         onChange={handleSheetChanges}
         backdropComponent={renderBackdrop}
-        backgroundStyle={{ backgroundColor: "#1c1c1c" }}
+        backgroundStyle={{ backgroundColor: "#100F14" }}
         handleIndicatorStyle={{ backgroundColor: "rgba(255,255,255,0.5)" }}
       >
         {modalType === "addLocation" ? (

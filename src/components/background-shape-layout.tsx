@@ -21,15 +21,20 @@ export default function BackgroundShapeLayout() {
   const { globalStyles, theme, isDark } = useTheme();
 
   // Color Palette from theme and DESIGN.md logic
-  const COLORS = useMemo(() => ({
-    base: globalStyles.background,
-    purple: isDark ? "#6d0dd3" : "#6d0dd399", // More intense in light mode as requested
-    blue: theme.t100, 
-    darkBlue: isDark ? "#0a1128" : "#006DFF11",
-  }), [globalStyles.background, theme.t100, isDark]);
+  const COLORS = useMemo(
+    () => ({
+      base: globalStyles.background,
+      purple: isDark ? "#6d0dd3" : "#6d0dd399", // More intense in light mode as requested
+      blue: theme.t100,
+      darkBlue: isDark ? "#0a1128" : "#006DFF11",
+    }),
+    [globalStyles.background, theme.t100, isDark],
+  );
 
   return (
-    <Canvas style={{ position: "absolute", width, height, zIndex: -1 }}>
+    <Canvas
+      style={{ position: "absolute", width, height: height + 50, zIndex: -1 }}
+    >
       {/* 1. Base Background Color */}
       <Fill color={COLORS.base} />
 

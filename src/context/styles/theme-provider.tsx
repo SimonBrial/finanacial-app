@@ -46,7 +46,7 @@ const darkPalette = {
     t20: "#006DFF33",
   },
   globalStyles: {
-    background: "#100F14",
+    background: "#000000ff",
     backgroundSecondary: "#1B1A1F",
     text: "#FFFFFF",
     textSecondary: "#d4d4d4ff",

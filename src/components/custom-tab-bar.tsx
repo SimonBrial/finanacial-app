@@ -179,7 +179,7 @@ export default function CustomTabBar({
         snapPoints={["50%", "75%"]}
         onChange={handleSheetChanges}
         backdropComponent={renderBackdrop}
-        backgroundStyle={{ backgroundColor: "#1c1c1c" }}
+        backgroundStyle={{ backgroundColor: "#100F14" }}
         handleIndicatorStyle={{ backgroundColor: "rgba(255,255,255,0.5)" }}
       >
         <BottomSheetView style={stylesTabs.contentContainer}>
@@ -202,6 +202,7 @@ export default function CustomTabBar({
               library={item.library}
               title={item.title}
               description={item.description}
+              variant={"light"}
               onPress={() => {
                 bottomSheetModalRef.current?.dismiss();
               }}
