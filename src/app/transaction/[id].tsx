@@ -22,6 +22,7 @@ import PaypalIcon from "../../components/icons/paypal-icon";
 import { darkenHexColor } from "../../utils/darkenHexColor";
 import CustomMap from "../../components/ui/custom-map";
 import { useCallback, useRef, useState, useMemo } from "react";
+import LocationBottomSheet from "../../components/transactions/LocationBottomSheet";
 import * as Location from "expo-location";
 import {
   BottomSheetBackdrop,
@@ -78,6 +79,7 @@ export default function TransactionDetails() {
 
   // ref
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+  const locationSheetRef = useRef<BottomSheetModal>(null);
 
   const openModal = (type: ModalType) => {
     setModalType(type);
@@ -438,7 +440,7 @@ export default function TransactionDetails() {
           ) : (
             <Pressable
               style={styles.addLocationBox}
-              onPress={() => openModal("addLocation")}
+              onPress={() => locationSheetRef.current?.present()}
             >
               <Icon
                 name="add"
@@ -741,6 +743,12 @@ export default function TransactionDetails() {
           </View>
         </View>
       </Modal>
+      <LocationBottomSheet
+        sheetRef={locationSheetRef}
+        onLocationSelected={(lat, lng) => {
+          updateTransactionLocation(id as string, lat, lng);
+        }}
+      />
     </View>
   );
 }

@@ -17,7 +17,7 @@ import CustomMap from "../ui/custom-map";
 import useTheme from "../../hook/useTheme";
 
 interface LocationBottomSheetProps {
-  sheetRef: React.RefObject<BottomSheetModal>;
+  sheetRef: React.RefObject<BottomSheetModal | null>;
   onLocationSelected: (latitude: number, longitude: number, address?: string) => void;
   title?: string;
 }
@@ -162,6 +162,10 @@ export default function LocationBottomSheet({
             themeType="dark"
             interactive={true}
             height={100}
+            onLocationSelect={(lat, lng) => {
+              setTempLat(lat);
+              setTempLng(lng);
+            }}
           />
 
           {/* Bottom Actions Overlay */}

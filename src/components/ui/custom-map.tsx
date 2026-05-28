@@ -91,6 +91,7 @@ interface CustomMapProps {
   themeType?: "dark" | "light";
   interactive?: boolean;
   height?: number;
+  onLocationSelect?: (latitude: number, longitude: number) => void;
 }
 
 export default function CustomMap({
@@ -100,6 +101,7 @@ export default function CustomMap({
   themeType = "dark",
   interactive = true,
   height = 200,
+  onLocationSelect,
 }: CustomMapProps) {
   const { theme, sizes } = useTheme();
 
@@ -132,11 +134,28 @@ export default function CustomMap({
         rotateEnabled={interactive}
         userInterfaceStyle={themeType} // Para iOS
         customMapStyle={themeType === "dark" ? darkMapStyle : []} // Para Android/Google Maps
+        onPress={(e) => {
+          if (interactive && onLocationSelect) {
+            onLocationSelect(
+              e.nativeEvent.coordinate.latitude,
+              e.nativeEvent.coordinate.longitude
+            );
+          }
+        }}
       >
         <Marker
           coordinate={{ latitude, longitude }}
           title={title}
           pinColor={theme.t100}
+          draggable={interactive && !!onLocationSelect}
+          onDragEnd={(e) => {
+            if (onLocationSelect) {
+              onLocationSelect(
+                e.nativeEvent.coordinate.latitude,
+                e.nativeEvent.coordinate.longitude
+              );
+            }
+          }}
         />
       </MapView>
     </View>

@@ -13,12 +13,8 @@ import useTheme from "../hook/useTheme";
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { Route } from "@react-navigation/native";
 import { useCallback, useRef } from "react";
-import {
-  BottomSheetBackdrop,
-  BottomSheetModal,
-  BottomSheetView,
-} from "@gorhom/bottom-sheet";
-import ModalItems from "./modal-items";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import GenericBottomSheetModal from "./ui/generic-bottom-sheet-modal";
 import { useRouter } from "expo-router";
 
 export default function CustomTabBar({
@@ -39,18 +35,6 @@ export default function CustomTabBar({
   const handleSheetChanges = useCallback((index: number) => {
     console.log("handleSheetChanges", index);
   }, []);
-
-  const renderBackdrop = useCallback(
-    (props: any) => (
-      <BottomSheetBackdrop
-        {...props}
-        appearsOnIndex={0}
-        disappearsOnIndex={-1}
-        opacity={0.6} // Ajusta el nivel de oscuridad (0.0 a 1.0)
-      />
-    ),
-    [],
-  );
 
   const tabsItem: TabItem[] = [
     { name: "home", icon: "home", label: "Home" },
@@ -175,46 +159,20 @@ export default function CustomTabBar({
         })}
       </View>
 
-      <BottomSheetModal
-        ref={bottomSheetModalRef}
-        index={0}
+      <GenericBottomSheetModal
+        sheetRef={bottomSheetModalRef}
+        title="Add Transaction"
         snapPoints={["50%", "75%"]}
         onChange={handleSheetChanges}
-        backdropComponent={renderBackdrop}
-        backgroundStyle={{ backgroundColor: "#100F14" }}
-        handleIndicatorStyle={{ backgroundColor: "rgba(255,255,255,0.5)" }}
-      >
-        <BottomSheetView style={stylesTabs.contentContainer}>
-          <Typography
-            fontSize={sizes.lg}
-            txtWhite
-            bold
-            customStyles={{
-              //paddingHorizontal: sizes.md,
-              paddingBottom: sizes.sm,
-              //width: "90%",
-            }}
-          >
-            Add Transaction
-          </Typography>
-          {modalItems.map((item, index) => (
-            <ModalItems
-              key={index}
-              name={item.name}
-              library={item.library}
-              title={item.title}
-              description={item.description}
-              variant={"light"}
-              onPress={() => {
-                bottomSheetModalRef.current?.dismiss();
-                if (item.title === "Manual") {
-                  router.push("/transaction/form");
-                }
-              }}
-            />
-          ))}
-        </BottomSheetView>
-      </BottomSheetModal>
+        items={modalItems.map((item) => ({
+          ...item,
+          onPress: () => {
+            if (item.title === "Manual") {
+              router.push("/transaction/form");
+            }
+          },
+        }))}
+      />
     </View>
   );
 }

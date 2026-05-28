@@ -6,7 +6,7 @@ import Icon from "../ui/icon";
 import useTheme from "../../hook/useTheme";
 
 interface ReceiptBottomSheetProps {
-  sheetRef: React.RefObject<BottomSheetModal>;
+  sheetRef: React.RefObject<BottomSheetModal | null>;
   onReceiptSelected: (uri: string) => void;
   title?: string;
 }
