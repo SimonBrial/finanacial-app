@@ -203,7 +203,7 @@ interface ThemeContextProps {
     text: string;
     textSecondary: string;
     border: string;
-    // Keep existing keys for backward compatibility if needed, 
+    // Keep existing keys for backward compatibility if needed,
     // but mapping them to semantic ones.
     borderContainer: string;
     subtitle: string;
@@ -379,8 +379,18 @@ interface BankState {
 
 interface TransactionState {
   transactions: Transaction[];
-  updateTransactionLocation: (id: string, latitude: number, longitude: number) => void;
+  updateTransactionLocation: (
+    id: string,
+    latitude: number,
+    longitude: number,
+  ) => void;
   removeTransactionLocation: (id: string) => void;
+  addTransaction: (transaction: Omit<Transaction, "id">) => void;
+  editTransaction: (
+    id: string,
+    updatedTransaction: Partial<Transaction>,
+  ) => void;
+  deleteTransaction: (id: string) => void;
 }
 
 interface GoalState {
@@ -395,6 +405,19 @@ interface ExchangeState {
 }
 interface CategoriesState {
   categories: CategoryCardProps[];
+  addCategory: (category: Omit<CategoryCardProps, "id" | "createdAt">) => void;
+  editCategory: (
+    id: number,
+    updatedCategory: Partial<CategoryCardProps>,
+  ) => void;
+  deleteCategory: (id: number) => void;
+}
+
+interface CategoryIconData {
+  id: number;
+  Category: string[]; // Un array de strings para soportar múltiples subcategorías
+  Icon: string;
+  Library: IconLibrary; // Restringido a las librerías válidas de Expo
 }
 
 interface Transaction {
@@ -413,6 +436,15 @@ interface Transaction {
   longitude?: number;
 }
 
+export interface Bank {
+  code: string; // Código bancario de 4 dígitos (ej: "0178")
+  name: string; // Nombre comercial o común del banco
+  legalName: string; // Razón social o nombre legal completo
+  shortName: string; // Nombre corto o acrónimo
+  rif: string; // Registro de Información Fiscal (ej: "J503581107")
+  url: string; // Dirección del sitio web oficial
+}
+
 export type {
   SpendingCategoryCardProps,
   SegmentedControlProps,
@@ -427,6 +459,7 @@ export type {
   CategoryCardProps,
   NotificationProps,
   CustomBadgeProps,
+  CategoryIconData,
   TitleCustomProps,
   BalanceCardProps,
   CategoriesState,
@@ -450,6 +483,7 @@ export type {
   BadgeProps,
   GridProps,
   IconProps,
+  Bank,
   IconBase,
   ColProps,
   RowProps,

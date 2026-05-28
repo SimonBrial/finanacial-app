@@ -68,7 +68,7 @@ export default function TransactionDetails() {
   const { sizes, globalStyles, theme } = useTheme();
 
   const transaction = transactions.find((t) => t.id === id);
-  const { updateTransactionLocation, removeTransactionLocation } =
+  const { updateTransactionLocation, removeTransactionLocation, deleteTransaction } =
     useTransactionStore();
 
   type ModalType = "actions" | "addLocation" | "editLocation";
@@ -617,6 +617,25 @@ export default function TransactionDetails() {
                 iconSize={28}
                 onPress={() => {
                   bottomSheetModalRef.current?.dismiss();
+                  if (item.title === "Delete") {
+                    Alert.alert(
+                      "Delete Transaction",
+                      "Are you sure you want to delete this transaction?",
+                      [
+                        { text: "Cancel", style: "cancel" },
+                        {
+                          text: "Delete",
+                          style: "destructive",
+                          onPress: () => {
+                            deleteTransaction(id as string);
+                            router.back();
+                          },
+                        },
+                      ]
+                    );
+                  } else if (item.title === "Edit") {
+                    router.push(`/transaction/form?type=transaction&id=${id}`);
+                  }
                 }}
               />
             ))}

@@ -19,6 +19,7 @@ import {
   BottomSheetView,
 } from "@gorhom/bottom-sheet";
 import ModalItems from "./modal-items";
+import { useRouter } from "expo-router";
 
 export default function CustomTabBar({
   descriptors,
@@ -26,6 +27,7 @@ export default function CustomTabBar({
   state,
 }: BottomTabBarProps) {
   const { sizes, theme, globalStyles } = useTheme();
+  const router = useRouter();
 
   // ref
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
@@ -205,6 +207,9 @@ export default function CustomTabBar({
               variant={"light"}
               onPress={() => {
                 bottomSheetModalRef.current?.dismiss();
+                if (item.title === "Manual") {
+                  router.push("/transaction/form");
+                }
               }}
             />
           ))}

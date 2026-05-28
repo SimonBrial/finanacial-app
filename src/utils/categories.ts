@@ -1,0 +1,623 @@
+import { CategoryIconData } from "../interface/interface";
+
+export const categoriesData: CategoryIconData[] = [
+  // 1. Alimentación y Compras
+  {
+    id: 1,
+    Category: ["Mercado", "Supermercado"],
+    Icon: "cart",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 2,
+    Category: ["Mercado", "Supermercado"],
+    Icon: "basket",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 3,
+    Category: ["Mercado", "Supermercado"],
+    Icon: "shopping-basket",
+    Library: "FontAwesome5",
+  },
+  {
+    id: 4,
+    Category: ["Mercado", "Supermercado"],
+    Icon: "store",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 5,
+    Category: ["Restaurantes", "Comida Rápida"],
+    Icon: "fast-food",
+    Library: "Ionicons",
+  },
+  {
+    id: 6,
+    Category: ["Restaurantes", "Comida Rápida"],
+    Icon: "restaurant",
+    Library: "Ionicons",
+  },
+  {
+    id: 7,
+    Category: ["Restaurantes", "Comida Rápida"],
+    Icon: "silverware-fork-knife",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 8,
+    Category: ["Restaurantes", "Comida Rápida"],
+    Icon: "pizza",
+    Library: "Ionicons",
+  },
+  {
+    id: 9,
+    Category: ["Cafetería", "Postres"],
+    Icon: "coffee",
+    Library: "Ionicons",
+  },
+  {
+    id: 10,
+    Category: ["Cafetería", "Postres"],
+    Icon: "cafe",
+    Library: "Ionicons",
+  },
+  {
+    id: 11,
+    Category: ["Cafetería", "Postres"],
+    Icon: "ice-cream",
+    Library: "Ionicons",
+  },
+  {
+    id: 12,
+    Category: ["Cafetería", "Postres"],
+    Icon: "cupcake",
+    Library: "MaterialCommunityIcons",
+  },
+
+  // 2. Vivienda y Servicios Básicos
+  {
+    id: 13,
+    Category: ["Alquiler", "Hipoteca"],
+    Icon: "home",
+    Library: "Ionicons",
+  },
+  {
+    id: 14,
+    Category: ["Alquiler", "Hipoteca"],
+    Icon: "house",
+    Library: "FontAwesome6",
+  },
+  {
+    id: 15,
+    Category: ["Alquiler", "Hipoteca"],
+    Icon: "bank",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 16,
+    Category: ["Electricidad"],
+    Icon: "flash",
+    Library: "Ionicons",
+  },
+  {
+    id: 17,
+    Category: ["Electricidad"],
+    Icon: "lightning",
+    Library: "Ionicons",
+  },
+  {
+    id: 18,
+    Category: ["Electricidad"],
+    Icon: "power",
+    Library: "Ionicons",
+  },
+  {
+    id: 19,
+    Category: ["Electricidad"],
+    Icon: "zap",
+    Library: "Feather",
+  },
+  {
+    id: 20,
+    Category: ["Agua"],
+    Icon: "water",
+    Library: "Ionicons",
+  },
+  {
+    id: 21,
+    Category: ["Agua"],
+    Icon: "water-pump",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 22,
+    Category: ["Agua"],
+    Icon: "opacity",
+    Library: "MaterialIcons",
+  },
+  {
+    id: 23,
+    Category: ["Gas", "Calefacción"],
+    Icon: "gas-station",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 24,
+    Category: ["Gas", "Calefacción"],
+    Icon: "fire",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 25,
+    Category: ["Gas", "Calefacción"],
+    Icon: "heating",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 26,
+    Category: ["Mantenimiento", "Reparaciones"],
+    Icon: "wrench",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 27,
+    Category: ["Mantenimiento", "Reparaciones"],
+    Icon: "tools",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 28,
+    Category: ["Mantenimiento", "Reparaciones"],
+    Icon: "hammer",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 29,
+    Category: ["Mantenimiento", "Reparaciones"],
+    Icon: "construction",
+    Library: "MaterialIcons",
+  },
+
+  // 3. Transporte y Vehículos
+  {
+    id: 30,
+    Category: ["Combustible", "Gasolina"],
+    Icon: "gas-station",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 31,
+    Category: ["Combustible", "Gasolina"],
+    Icon: "fuel",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 32,
+    Category: ["Mantenimiento del Auto", "Escáner"],
+    Icon: "car-cog",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 33,
+    Category: ["Mantenimiento del Auto", "Escáner"],
+    Icon: "car-wash",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 34,
+    Category: ["Mantenimiento del Auto", "Escáner"],
+    Icon: "engine-outline",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 35,
+    Category: ["Mantenimiento del Auto", "Escáner"],
+    Icon: "car-repair",
+    Library: "MaterialIcons",
+  },
+  {
+    id: 36,
+    Category: ["Transporte Público"],
+    Icon: "bus",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 37,
+    Category: ["Transporte Público"],
+    Icon: "subway",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 38,
+    Category: ["Transporte Público"],
+    Icon: "train",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 39,
+    Category: ["Transporte Público"],
+    Icon: "transit-connection",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 40,
+    Category: ["Seguro", "Peajes"],
+    Icon: "shield-car",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 41,
+    Category: ["Seguro", "Peajes"],
+    Icon: "card-account-details",
+    Library: "MaterialCommunityIcons",
+  },
+
+  // 4. Finanzas y Gestión de Dinero
+  {
+    id: 42,
+    Category: ["Ingresos", "Salario"],
+    Icon: "cash-multiple",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 43,
+    Category: ["Ingresos", "Salario"],
+    Icon: "wallet",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 44,
+    Category: ["Ingresos", "Salario"],
+    Icon: "trending-up",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 45,
+    Category: ["Ingresos", "Salario"],
+    Icon: "payments",
+    Library: "MaterialIcons",
+  },
+  {
+    id: 46,
+    Category: ["Ahorros", "Inversiones"],
+    Icon: "piggy-bank",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 47,
+    Category: ["Ahorros", "Inversiones"],
+    Icon: "bank",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 48,
+    Category: ["Ahorros", "Inversiones"],
+    Icon: "chart-line",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 49,
+    Category: ["Ahorros", "Inversiones"],
+    Icon: "safe",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 50,
+    Category: ["Deudas", "Tarjetas de Crédito"],
+    Icon: "credit-card",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 51,
+    Category: ["Deudas", "Tarjetas de Crédito"],
+    Icon: "credit-card-outline",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 52,
+    Category: ["Deudas", "Tarjetas de Crédito"],
+    Icon: "receipt",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 53,
+    Category: ["Criptomonedas"],
+    Icon: "bitcoin",
+    Library: "FontAwesome6",
+  },
+  {
+    id: 54,
+    Category: ["Criptomonedas"],
+    Icon: "currency-usd",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 55,
+    Category: ["Criptomonedas"],
+    Icon: "currency-btc",
+    Library: "MaterialCommunityIcons",
+  },
+
+  // 5. Salud y Bienestar
+  {
+    id: 56,
+    Category: ["Consultas Médicas", "Farmacia"],
+    Icon: "medical-bag",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 57,
+    Category: ["Consultas Médicas", "Farmacia"],
+    Icon: "pill",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 58,
+    Category: ["Consultas Médicas", "Farmacia"],
+    Icon: "doctor",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 59,
+    Category: ["Consultas Médicas", "Farmacia"],
+    Icon: "heart-pulse",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 60,
+    Category: ["Gimnasio", "Deporte"],
+    Icon: "dumbbell",
+    Library: "FontAwesome6",
+  },
+  {
+    id: 61,
+    Category: ["Gimnasio", "Deporte"],
+    Icon: "weight-lifter",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 62,
+    Category: ["Gimnasio", "Deporte"],
+    Icon: "fitness",
+    Library: "Ionicons",
+  },
+  {
+    id: 63,
+    Category: ["Gimnasio", "Deporte"],
+    Icon: "run",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 64,
+    Category: ["Cuidado Personal"],
+    Icon: "spa",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 65,
+    Category: ["Cuidado Personal"],
+    Icon: "content-cut",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 66,
+    Category: ["Cuidado Personal"],
+    Icon: "face-man-shaving",
+    Library: "MaterialCommunityIcons",
+  },
+
+  // 6. Educación y Desarrollo Personal
+  {
+    id: 67,
+    Category: ["Universidad", "Cursos", "Notas"],
+    Icon: "school",
+    Library: "Ionicons",
+  },
+  {
+    id: 68,
+    Category: ["Universidad", "Cursos", "Notas"],
+    Icon: "book-open",
+    Library: "Ionicons",
+  },
+  {
+    id: 69,
+    Category: ["Universidad", "Cursos", "Notas"],
+    Icon: "notebook",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 70,
+    Category: ["Universidad", "Cursos", "Notas"],
+    Icon: "certificate",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 71,
+    Category: ["Productividad", "Notas Personales"],
+    Icon: "file-text",
+    Library: "Feather",
+  },
+  {
+    id: 72,
+    Category: ["Productividad", "Notas Personales"],
+    Icon: "clipboard-text",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 73,
+    Category: ["Productividad", "Notas Personales"],
+    Icon: "pencil",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 74,
+    Category: ["Productividad", "Notas Personales"],
+    Icon: "calendar",
+    Library: "MaterialCommunityIcons",
+  },
+
+  // 7. Entretenimiento, Ocio y Viajes
+  {
+    id: 75,
+    Category: ["Suscripciones"],
+    Icon: "play-circle",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 76,
+    Category: ["Suscripciones"],
+    Icon: "gamepad-variant",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 77,
+    Category: ["Suscripciones"],
+    Icon: "television",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 78,
+    Category: ["Suscripciones"],
+    Icon: "steam",
+    Library: "FontAwesome6",
+  },
+  {
+    id: 79,
+    Category: ["Viajes", "Vuelos", "Turismo"],
+    Icon: "airplane",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 80,
+    Category: ["Viajes", "Vuelos", "Turismo"],
+    Icon: "passport",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 81,
+    Category: ["Viajes", "Vuelos", "Turismo"],
+    Icon: "map-marker",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 82,
+    Category: ["Viajes", "Vuelos", "Turismo"],
+    Icon: "compass",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 83,
+    Category: ["Naturaleza", "Senderismo"],
+    Icon: "terrain",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 84,
+    Category: ["Naturaleza", "Senderismo"],
+    Icon: "hiking",
+    Library: "FontAwesome6",
+  },
+  {
+    id: 85,
+    Category: ["Naturaleza", "Senderismo"],
+    Icon: "image-filter-hdr",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 86,
+    Category: ["Naturaleza", "Senderismo"],
+    Icon: "tree",
+    Library: "MaterialCommunityIcons",
+  },
+
+  // 8. Familia y Mascotas
+  {
+    id: 87,
+    Category: ["Hijos", "Guardería", "Escuela"],
+    Icon: "baby-carriage",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 88,
+    Category: ["Hijos", "Guardería", "Escuela"],
+    Icon: "toy-brick",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 89,
+    Category: ["Hijos", "Guardería", "Escuela"],
+    Icon: "human-child",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 90,
+    Category: ["Mascotas"],
+    Icon: "cat",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 91,
+    Category: ["Mascotas"],
+    Icon: "dog",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 92,
+    Category: ["Mascotas"],
+    Icon: "paw",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 93,
+    Category: ["Mascotas"],
+    Icon: "pet-can",
+    Library: "MaterialCommunityIcons",
+  },
+
+  // 9. Tecnología y Conectividad
+  {
+    id: 94,
+    Category: ["Internet", "Telefonía"],
+    Icon: "wifi",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 95,
+    Category: ["Internet", "Telefonía"],
+    Icon: "cellphone",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 96,
+    Category: ["Internet", "Telefonía"],
+    Icon: "router-wireless",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 97,
+    Category: ["Herramientas de Software", "Desarrollo"],
+    Icon: "code-braces",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 98,
+    Category: ["Herramientas de Software", "Desarrollo"],
+    Icon: "database",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 99,
+    Category: ["Herramientas de Software", "Desarrollo"],
+    Icon: "api",
+    Library: "MaterialCommunityIcons",
+  },
+  {
+    id: 100,
+    Category: ["Herramientas de Software", "Desarrollo"],
+    Icon: "layers",
+    Library: "MaterialCommunityIcons",
+  },
+];
+
+export default categoriesData;
