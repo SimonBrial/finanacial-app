@@ -12,6 +12,9 @@ import useTheme from "../../hook/useTheme";
 import Icon from "./icon";
 import Typography from "./typography";
 
+import { LinearGradient } from "expo-linear-gradient";
+import { darkenHexColor } from "../../utils/darkenHexColor";
+
 export default function Button({
   text,
   color = "#006dff",
@@ -29,6 +32,13 @@ export default function Button({
   padding,
 }: ButtonProps) {
   const { sizes, globalStyles } = useTheme();
+
+  const darkerColor = useMemo(() => {
+    if (color && color.startsWith("#")) {
+      return darkenHexColor(color, 20); // 20% darker
+    }
+    return color; // Fallback
+  }, [color]);
 
   const themedStyles = useMemo(() => {
     const currentType = isActive ? "filled" : type;
@@ -84,7 +94,6 @@ export default function Button({
       sizeStyles[size as string],
       fullWidth && { width: "100%", alignSelf: "auto" as const },
       // Solo aplicamos sombra a la variante 'filled' (o 'ghost' si se desea elevación)
-      // Los botones 'light', 'bordered' y 'flat' suelen ser planos por diseño
       isFilled && {
         shadowColor: color,
         shadowOffset: { width: 0, height: 4 },
@@ -96,7 +105,6 @@ export default function Button({
       containerStyle,
     ]) as ViewStyle;
 
-    // 2. Retornamos el objeto con sus propiedades bien definidas
     return {
       container: containerStyleObj,
       textStyle: {
@@ -125,14 +133,8 @@ export default function Button({
   const hitSlop =
     size === "xs" ? { top: 10, bottom: 10, left: 10, right: 10 } : undefined;
 
-  return (
-    <TouchableOpacity
-      style={themedStyles.container}
-      onPress={onPress}
-      disabled={disabled}
-      activeOpacity={0.7} // Da ese efecto de "click" de las librerías web
-      hitSlop={hitSlop}
-    >
+  const renderInnerContent = () => (
+    <>
       {iconLeft && (
         <Icon
           variant="light"
@@ -147,7 +149,6 @@ export default function Button({
         />
       )}
 
-      {/* Asumiendo que Typography usa la fuente Inter que configuraste */}
       {text && (
         <Typography
           fontSize={themedStyles.sizeIcon.fontSize}
@@ -169,6 +170,44 @@ export default function Button({
           }
           size={themedStyles.sizeIcon.fontSize}
         />
+      )}
+    </>
+  );
+
+  const isFilled = (isActive ? "filled" : type) === "filled";
+
+  return (
+    <TouchableOpacity
+      style={[
+        themedStyles.container,
+        isFilled && !disabled && {
+          backgroundColor: "transparent",
+          paddingHorizontal: 0,
+          paddingVertical: 0,
+        },
+      ]}
+      onPress={onPress}
+      disabled={disabled}
+      activeOpacity={0.7}
+      hitSlop={hitSlop}
+    >
+      {isFilled && !disabled ? (
+        <LinearGradient
+          colors={[color, darkerColor]}
+          style={[
+            styles.defaultStyles,
+            {
+              borderRadius: themedStyles.container.borderRadius,
+              paddingHorizontal: themedStyles.container.paddingHorizontal,
+              height: themedStyles.container.height,
+              width: "100%",
+            },
+          ]}
+        >
+          {renderInnerContent()}
+        </LinearGradient>
+      ) : (
+        renderInnerContent()
       )}
     </TouchableOpacity>
   );

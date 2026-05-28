@@ -283,13 +283,17 @@ export default function TransactionDetails() {
         {/* Details Card */}
         <View style={styles.card}>
           <DetailRow
-            label="Status"
+            label="Type"
             value={
               <Badge
-                text="Complete"
+                text={transaction.type === "income" ? "Income" : "Expense"}
                 type="ghost"
-                color="#00C851"
-                iconLeft="checkmark-circle-outline"
+                color={transaction.type === "income" ? "#00C851" : "#df1d31"}
+                iconLeft={
+                  transaction.type === "income"
+                    ? "arrow-up-circle-outline"
+                    : "arrow-down-circle-outline"
+                }
                 library="Ionicons"
                 size="md"
               />
