@@ -1,8 +1,8 @@
 import { useState } from "react";
-import useTheme from "../hook/useTheme";
+import useTheme from "../hooks/useTheme";
 import Stack from "./ui/stack";
 import DolarPriceItem from "./dolar-price-item";
-import { useExchangeStore } from "../store/useExchangeStore";
+import { useExchangeStore } from "../stores/useExchangeStore";
 import CollapsibleCardContainer from "./collapsible-card-container";
 
 export default function DolarPriceContainer() {

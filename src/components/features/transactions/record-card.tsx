@@ -1,15 +1,15 @@
 import { View, Pressable } from "react-native";
 import { useRouter } from "expo-router";
-import Badge from "../ui/badge";
-import PercentIndicator from "../ui/percent-indicator";
-import Typography from "../ui/typography";
-import useTheme from "../../hook/useTheme";
+import Badge from "../../ui/badge";
+import PercentIndicator from "../../ui/percent-indicator";
+import Typography from "../../ui/typography";
+import useTheme from "../../../hooks/useTheme";
 import { LinearGradient } from "expo-linear-gradient";
-import CustomBadge from "../ui/custom-badge";
-import PayoneerIcon from "../icons/payoneer-icon";
-import { Transaction } from "../../interface/interface";
-import PaypalIcon from "../icons/paypal-icon";
-import Icon from "../ui/icon";
+import CustomBadge from "../../ui/custom-badge";
+import PayoneerIcon from "../../icons/payoneer-icon";
+import { Transaction } from "../../../types/interface";
+import PaypalIcon from "../../icons/paypal-icon";
+import Icon from "../../ui/icon";
 import dayjs from "dayjs";
 
 export default function RecordCard({

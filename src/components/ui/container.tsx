@@ -1,5 +1,5 @@
 import { View, StyleSheet } from "react-native";
-import { GridProps } from "../../interface/interface";
+import { GridProps } from "../../types/interface";
 import { useContext } from "react";
 import { ThemeContext } from "../../context/styles/theme-provider";
 

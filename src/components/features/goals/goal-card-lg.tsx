@@ -1,9 +1,9 @@
 import { View, StyleSheet } from "react-native";
-import useTheme from "../../hook/useTheme";
-import Typography from "../ui/typography";
+import useTheme from "../../../hooks/useTheme";
+import Typography from "../../ui/typography";
 import { LinearGradient } from "expo-linear-gradient";
-import Badge from "../ui/badge";
-import Button from "../ui/button";
+import Badge from "../../ui/badge";
+import Button from "../../ui/button";
 import {
   Blur,
   Canvas,
@@ -11,9 +11,9 @@ import {
   Rect,
   vec,
 } from "@shopify/react-native-skia";
-import Icon from "../ui/icon";
-import CircularProgress from "../charts/progress-donut";
-import { GoalLgProps } from "../../interface/interface";
+import Icon from "../../ui/icon";
+import CircularProgress from "../../charts/progress-donut";
+import { GoalLgProps } from "../../../types/interface";
 
 export default function GoalCardLg({ title, status }: GoalLgProps) {
   const { sizes, globalStyles, complete, theme, inProgress } = useTheme();

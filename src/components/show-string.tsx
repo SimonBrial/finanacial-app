@@ -1,6 +1,6 @@
 import { Pressable, View } from "react-native";
 import Icon from "./ui/icon";
-import { ShowStringProps } from "../interface/interface";
+import { ShowStringProps } from "../types/interface";
 
 export default function ShowString({ show, fnShow }: ShowStringProps) {
   return (

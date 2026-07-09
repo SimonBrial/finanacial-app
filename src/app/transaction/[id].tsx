@@ -9,8 +9,8 @@ import {
   TextInput,
 } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { useTransactionStore } from "../../store/useTransactionStore";
-import useTheme from "../../hook/useTheme";
+import { useTransactionStore } from "../../stores/useTransactionStore";
+import useTheme from "../../hooks/useTheme";
 import Typography from "../../components/ui/typography";
 import Icon from "../../components/ui/icon";
 import Badge from "../../components/ui/badge";
@@ -22,7 +22,7 @@ import PaypalIcon from "../../components/icons/paypal-icon";
 import { darkenHexColor } from "../../utils/darkenHexColor";
 import CustomMap from "../../components/ui/custom-map";
 import { useCallback, useRef, useState, useMemo } from "react";
-import LocationBottomSheet from "../../components/transactions/LocationBottomSheet";
+import LocationBottomSheet from "../../components/features/transactions/LocationBottomSheet";
 import * as Location from "expo-location";
 import {
   BottomSheetBackdrop,

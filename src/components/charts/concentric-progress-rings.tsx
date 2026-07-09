@@ -5,8 +5,8 @@ import { LinearGradient } from "expo-linear-gradient";
 import Typography from "../ui/typography"; // Asumiendo tu componente del ejemplo anterior
 import Icon from "../ui/icon"; // Asumiendo tu componente del ejemplo anterior
 import Row from "../ui/row";
-import useTheme from "../../hook/useTheme";
-import { GenerateScaleParams, ColorScaleItem } from "../../interface/interface";
+import useTheme from "../../hooks/useTheme";
+import { GenerateScaleParams, ColorScaleItem } from "../../types/interface";
 import CollapsibleCardContainer from "../collapsible-card-container";
 
 // Simulamos los datos del mes actual

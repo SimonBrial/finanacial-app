@@ -9,7 +9,7 @@ import {
   Blur,
   Fill,
 } from "@shopify/react-native-skia";
-import useTheme from "../hook/useTheme";
+import useTheme from "../hooks/useTheme";
 
 /**
  * BackgroundShapeLayout

@@ -13,7 +13,7 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { useState, useRef } from "react";
 import { useRouter } from "expo-router";
-import useTheme from "../hook/useTheme";
+import useTheme from "../hooks/useTheme";
 import Typography from "../components/ui/typography";
 import BackgroundShapeLayout from "../components/background-shape-layout";
 import Logo from "../components/logo";

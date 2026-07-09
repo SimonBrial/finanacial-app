@@ -1,9 +1,9 @@
 import React, { useMemo } from "react";
 import { StyleSheet, ViewStyle, TextStyle, View } from "react-native";
 import Typography from "./typography";
-import useTheme from "../../hook/useTheme";
+import useTheme from "../../hooks/useTheme";
 import Icon from "./icon";
-import { BadgeProps } from "../../interface/interface";
+import { BadgeProps } from "../../types/interface";
 import { BasesSize, PrimitiveVariants } from "../../types/type";
 
 const DEFAULT_COLOR = "#006dff";

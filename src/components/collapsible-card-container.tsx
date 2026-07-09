@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useTheme from "../hook/useTheme";
+import useTheme from "../hooks/useTheme";
 import { TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Collapsible from "react-native-collapsible";
@@ -7,7 +7,7 @@ import Icon from "./ui/icon";
 import Row from "./ui/row";
 import Typography from "./ui/typography";
 import Stack from "./ui/stack";
-import { IconBase } from "../interface/interface";
+import { IconBase } from "../types/interface";
 
 interface CollapsibleCardContainerProps extends IconBase {
   children: React.ReactNode;

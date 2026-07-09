@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { View, StyleSheet } from "react-native";
 import Animated, { useSharedValue, useAnimatedStyle, withTiming, Easing } from "react-native-reanimated";
-import { useNotificationStore } from "../../store/useNotificationStore";
+import { useNotificationStore } from "../../stores/useNotificationStore";
 import { LinearGradient } from "expo-linear-gradient";
 import Typography from "./typography";
 import Icon from "./icon";

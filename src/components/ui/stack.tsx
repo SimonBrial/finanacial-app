@@ -1,6 +1,6 @@
 import { View, StyleSheet } from "react-native";
-import { GridProps } from "../../interface/interface";
-import useTheme from "../../hook/useTheme";
+import { GridProps } from "../../types/interface";
+import useTheme from "../../hooks/useTheme";
 
 export default function Stack({
   justifyContent,

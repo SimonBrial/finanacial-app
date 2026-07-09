@@ -3,7 +3,7 @@ import {
   useSafeAreaInsets,
   SafeAreaView,
 } from "react-native-safe-area-context";
-import useTheme from "../../hook/useTheme";
+import useTheme from "../../hooks/useTheme";
 
 export default function GlobalContainer({
   children,

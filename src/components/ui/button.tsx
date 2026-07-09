@@ -5,10 +5,10 @@ import {
   TextStyle,
   ViewStyle,
 } from "react-native";
-import { ButtonProps } from "../../interface/interface";
+import { ButtonProps } from "../../types/interface";
 import { useMemo } from "react";
 import { PrimitiveVariants } from "../../types/type";
-import useTheme from "../../hook/useTheme";
+import useTheme from "../../hooks/useTheme";
 import Icon from "./icon";
 import Typography from "./typography";
 

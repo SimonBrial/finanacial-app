@@ -1,11 +1,11 @@
 import { TouchableOpacity, View } from "react-native";
-import Stack from "../ui/stack";
-import Typography from "../ui/typography";
-import Row from "../ui/row";
-import useTheme from "../../hook/useTheme";
+import Stack from "../../ui/stack";
+import Typography from "../../ui/typography";
+import Row from "../../ui/row";
+import useTheme from "../../../hooks/useTheme";
 import { LinearGradient } from "expo-linear-gradient";
-import Badge from "../ui/badge";
-import Icon from "../ui/icon";
+import Badge from "../../ui/badge";
+import Icon from "../../ui/icon";
 import Collapsible from "react-native-collapsible";
 import { useState } from "react";
 import { Canvas, RadialGradient, Rect, vec } from "@shopify/react-native-skia";

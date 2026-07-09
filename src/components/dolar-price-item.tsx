@@ -2,10 +2,10 @@ import React from "react";
 import Row from "./ui/row";
 import { View } from "react-native";
 import Typography from "./ui/typography";
-import useTheme from "../hook/useTheme";
+import useTheme from "../hooks/useTheme";
 import Stack from "./ui/stack";
 import PercentIndicator from "./ui/percent-indicator";
-import { DolarPriceItemProps } from "../interface/interface";
+import { DolarPriceItemProps } from "../types/interface";
 
 export default function DolarPriceItem({ title, color }: DolarPriceItemProps) {
   const { sizes, globalStyles, theme } = useTheme();

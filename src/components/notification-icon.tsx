@@ -1,7 +1,7 @@
 import { DrawerActions } from "@react-navigation/native";
 import { useNavigation } from "expo-router";
 import { Pressable } from "react-native";
-import { NotificationIconProps } from "../interface/interface";
+import { NotificationIconProps } from "../types/interface";
 import Avatar from "./ui/avatar";
 
 export default function NotificationIcon({

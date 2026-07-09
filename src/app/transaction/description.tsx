@@ -7,7 +7,7 @@ import {
   TenTapStartKit,
 } from "@10play/tentap-editor";
 import { useRouter } from "expo-router";
-import useTheme from "../../hook/useTheme";
+import useTheme from "../../hooks/useTheme";
 import Typography from "../../components/ui/typography";
 import Button from "../../components/ui/button";
 

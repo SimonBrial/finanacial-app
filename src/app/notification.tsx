@@ -2,7 +2,7 @@ import { StyleSheet, TouchableOpacity, View } from "react-native";
 import Typography from "../components/ui/typography";
 import Icon from "../components/ui/icon";
 import Row from "../components/ui/row";
-import useTheme from "../hook/useTheme";
+import useTheme from "../hooks/useTheme";
 import { DrawerContentComponentProps } from "@react-navigation/drawer";
 import { useRouter } from "expo-router";
 export default function Notification({

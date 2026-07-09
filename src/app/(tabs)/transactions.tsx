@@ -1,9 +1,9 @@
 import { View, Pressable } from "react-native";
 import GlobalContainer from "../../components/ui/global-container";
-import useTheme from "../../hook/useTheme";
+import useTheme from "../../hooks/useTheme";
 import TitleCustom from "../../components/title-custom";
 import Icon from "../../components/ui/icon";
-import TabHeaderNavigation from "./transation_section/tab-header-navigation";
+import TabHeaderNavigation from "./transaction_section/tab-header-navigation";
 import Typography from "../../components/ui/typography";
 import { useState } from "react";
 

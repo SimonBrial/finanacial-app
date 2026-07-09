@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet } from "react-native";
-import useTheme from "../hook/useTheme";
+import useTheme from "../hooks/useTheme";
 
 export default function Logo() {
   const { globalStyles } = useTheme();

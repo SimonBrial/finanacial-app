@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import Typography from "./typography";
 import Icon from "./icon";
-import useTheme from "../../hook/useTheme";
+import useTheme from "../../hooks/useTheme";
 
 interface InputProps extends Omit<TextInputProps, "size"> {
   label?: string;

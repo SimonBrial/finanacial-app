@@ -1,6 +1,6 @@
 import { ScrollView, View } from "react-native";
 import GlobalContainer from "../../components/ui/global-container";
-import useTheme from "../../hook/useTheme";
+import useTheme from "../../hooks/useTheme";
 import TitleCustom from "../../components/title-custom";
 import Button from "../../components/ui/button";
 

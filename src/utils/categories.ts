@@ -1,4 +1,4 @@
-import { CategoryIconData } from "../interface/interface";
+import { CategoryIconData } from "../types/interface";
 
 export const categoriesData: CategoryIconData[] = [
   // 1. Alimentación y Compras

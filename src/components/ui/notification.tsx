@@ -1,5 +1,5 @@
 import { View, StyleSheet } from "react-native";
-import useTheme from "../../hook/useTheme";
+import useTheme from "../../hooks/useTheme";
 import Icon from "./icon";
 import Typography from "./typography";
 

@@ -7,9 +7,9 @@ import {
 } from "react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { LinearGradient } from "expo-linear-gradient";
-import { TabItem } from "../interface/interface";
+import { TabItem } from "../types/interface";
 import Typography from "./ui/typography";
-import useTheme from "../hook/useTheme";
+import useTheme from "../hooks/useTheme";
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { Route } from "@react-navigation/native";
 import { useCallback, useRef } from "react";

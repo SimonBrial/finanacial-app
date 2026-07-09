@@ -1,7 +1,7 @@
 import React from "react";
 import { Path, Skia, Group } from "@shopify/react-native-skia";
 import { useDerivedValue, withTiming } from "react-native-reanimated";
-import { DonutPathProps } from "../../interface/interface";
+import { DonutPathProps } from "../../types/interface";
 
 export default function DonutPath({
   outerStrokeWidth,

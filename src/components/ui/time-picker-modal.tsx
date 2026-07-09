@@ -21,7 +21,7 @@ import { Picker } from "react-native-wheel-pick";
 import Constants, { ExecutionEnvironment } from "expo-constants";
 import Typography from "./typography";
 import Button from "./button";
-import useTheme from "../../hook/useTheme";
+import useTheme from "../../hooks/useTheme";
 
 // Detect if we should use the JS fallback picker to avoid WheelCurvedPicker crashes in Expo Go
 const useFallbackPicker = (() => {

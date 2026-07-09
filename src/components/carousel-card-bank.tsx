@@ -3,14 +3,14 @@ import { useWindowDimensions, View } from "react-native";
 import type { ICarouselInstance } from "react-native-reanimated-carousel";
 import Carousel, { Pagination } from "react-native-reanimated-carousel";
 import BankCard from "./bank-card";
-import { useBankStore } from "../store/useBankStore";
+import { useBankStore } from "../stores/useBankStore";
 import {
   interpolate,
   Extrapolation,
   useSharedValue,
 } from "react-native-reanimated";
-import useTheme from "../hook/useTheme";
-import { BankCardData } from "../interface/interface";
+import useTheme from "../hooks/useTheme";
+import { BankCardData } from "../types/interface";
 
 export default function CarouselCardBank() {
   const progress = useSharedValue<number>(0);

@@ -2,7 +2,7 @@ import { Canvas, Path, Skia } from "@shopify/react-native-skia";
 import { View, StyleSheet } from "react-native";
 
 import DonutPath from "./donut-path";
-import { DonutChartProps } from "../../interface/interface";
+import { DonutChartProps } from "../../types/interface";
 
 export default function DonutChart({
   outerStrokeWidth,

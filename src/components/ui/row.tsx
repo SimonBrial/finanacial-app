@@ -1,6 +1,6 @@
 import { StyleSheet, View } from "react-native";
-import { RowProps } from "../../interface/interface";
-import useTheme from "../../hook/useTheme";
+import { RowProps } from "../../types/interface";
+import useTheme from "../../hooks/useTheme";
 
 export default function Row({
   justifyContent = "center",

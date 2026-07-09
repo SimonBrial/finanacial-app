@@ -1,6 +1,6 @@
 import { StyleSheet, View, ViewStyle } from "react-native";
-import useTheme from "../../hook/useTheme";
-import { IconProps } from "../../interface/interface";
+import useTheme from "../../hooks/useTheme";
+import { IconProps } from "../../types/interface";
 import { IconLibraries, IconVariant } from "../../types/type";
 
 export default function Icon({

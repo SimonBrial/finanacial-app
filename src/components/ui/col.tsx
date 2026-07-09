@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import { ColProps } from "../../interface/interface";
+import { ColProps } from "../../types/interface";
 
 export default function Col({ children, numRows }: ColProps) {
   return <View style={{ flex: numRows, gap: 4 }}>{children}</View>;

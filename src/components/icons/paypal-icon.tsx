@@ -1,6 +1,6 @@
 import React from "react";
 import Svg, { G, Path } from "react-native-svg";
-import { PaypalIconProps } from "../../interface/interface";
+import { PaypalIconProps } from "../../types/interface";
 
 export default function PaypalIcon({
   size,

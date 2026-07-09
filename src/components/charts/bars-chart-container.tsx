@@ -3,7 +3,7 @@ import React, { useState, useMemo } from "react";
 import { View, StyleSheet } from "react-native";
 import { BarChart } from "react-native-gifted-charts";
 import { LinearGradient } from "expo-linear-gradient";
-import useTheme from "../../hook/useTheme";
+import useTheme from "../../hooks/useTheme";
 import Badge from "../ui/badge";
 import Row from "../ui/row";
 import Typography from "../ui/typography";
@@ -11,7 +11,7 @@ import Icon from "../ui/icon";
 import SegmentedControl from "./segment-control";
 import Button from "../ui/button";
 import { FilterKey } from "../../types/type";
-import { MOCK_DB } from "../../seeds/seeds";
+import { MOCK_DB } from "../../constants/seeds";
 import CollapsibleCardContainer from "../collapsible-card-container";
 
 export default function BarsChartContainer() {

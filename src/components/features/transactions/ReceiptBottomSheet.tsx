@@ -1,9 +1,9 @@
 import React, { useCallback, useMemo } from "react";
 import { View, StyleSheet, Pressable, Alert } from "react-native";
 import { BottomSheetBackdrop, BottomSheetModal, BottomSheetView } from "@gorhom/bottom-sheet";
-import Typography from "../ui/typography";
-import Icon from "../ui/icon";
-import useTheme from "../../hook/useTheme";
+import Typography from "../../ui/typography";
+import Icon from "../../ui/icon";
+import useTheme from "../../../hooks/useTheme";
 
 interface ReceiptBottomSheetProps {
   sheetRef: React.RefObject<BottomSheetModal | null>;

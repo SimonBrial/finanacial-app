@@ -1,5 +1,5 @@
 import React, { createContext, useMemo, useState } from "react";
-import { ThemeContextProps } from "../../interface/interface";
+import { ThemeContextProps } from "../../types/interface";
 
 const sizes: Record<string, number> = {
   xxs: 4,
@@ -59,6 +59,8 @@ const darkPalette = {
     bgContainerEnd: "#1B1A1F",
     buttonDisabled: "#333333",
     buttonDisabledText: "#A0A0A0",
+    ButtonCustomDisabled: "#333333",
+    ButtonCustomDisabledText: "#A0A0A0",
   },
 };
 
@@ -85,6 +87,8 @@ const lightPalette = {
     bgContainerEnd: "#F8F9FA",
     buttonDisabled: "#E0E0E0",
     buttonDisabledText: "#9CA3AF",
+    ButtonCustomDisabled: "#E0E0E0",
+    ButtonCustomDisabledText: "#9CA3AF",
   },
 };
 

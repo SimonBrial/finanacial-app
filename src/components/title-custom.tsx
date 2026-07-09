@@ -3,10 +3,10 @@ import Icon from "./ui/icon";
 import Row from "./ui/row";
 import Typography from "./ui/typography";
 import NotificationIcon from "./notification-icon";
-import useTheme from "../hook/useTheme";
-import { TitleCustomProps } from "../interface/interface";
+import useTheme from "../hooks/useTheme";
+import { TitleCustomProps } from "../types/interface";
 import ShowString from "./show-string";
-import { useBankStore } from "../store/useBankStore";
+import { useBankStore } from "../stores/useBankStore";
 
 export default function TitleCustom({
   withNotificationIcon,

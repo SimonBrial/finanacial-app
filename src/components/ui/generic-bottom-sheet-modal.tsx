@@ -7,7 +7,7 @@ import {
 } from "@gorhom/bottom-sheet";
 import Typography from "./typography";
 import ModalItems from "../modal-items";
-import useTheme from "../../hook/useTheme";
+import useTheme from "../../hooks/useTheme";
 
 interface BottomSheetItem {
   title: string;

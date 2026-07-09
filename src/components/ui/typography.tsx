@@ -1,6 +1,6 @@
 import { Text, StyleSheet } from "react-native";
-import { TypographyProps } from "../../interface/interface";
-import useTheme from "../../hook/useTheme";
+import { TypographyProps } from "../../types/interface";
+import useTheme from "../../hooks/useTheme";
 
 export default function Typography({
   fontSize = 16,

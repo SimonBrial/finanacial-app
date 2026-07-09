@@ -6,8 +6,8 @@ import {
   Text as SVGText,
   //RadialGradient,
 } from "react-native-svg";
-import useTheme from "../../hook/useTheme";
-import { CircularProgressProps } from "../../interface/interface";
+import useTheme from "../../hooks/useTheme";
+import { CircularProgressProps } from "../../types/interface";
 
 export default function CircularProgress(props: CircularProgressProps) {
   const { theme } = useTheme();

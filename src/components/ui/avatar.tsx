@@ -1,35 +1,42 @@
 import { Image, View, StyleSheet } from "react-native";
 //import Icon from "./icon";
-import useTheme from "../../hook/useTheme";
-import { AvatarProps } from "../../interface/interface";
+import useTheme from "../../hooks/useTheme";
+import { AvatarProps } from "../../types/interface";
 
-export default function Avatar({ hasNotification, size, source, borderWidth, borderColor }: AvatarProps) {
+export default function Avatar({
+  hasNotification,
+  size,
+  source,
+  borderWidth,
+  borderColor,
+}: AvatarProps) {
   const { theme } = useTheme();
   return (
     <View
       style={{
         //borderColor: theme.t100,
-        ...styles.container
+        ...styles.container,
       }}
     >
       <Image
         source={source ? source : require("../../assets/img/avatar.jpg")}
-        style={{ width: size ?? 40, height: size ?? 40, borderRadius: 1000 }}
+        style={{
+          width: (size ?? 40) as any,
+          height: (size ?? 40) as any,
+          borderRadius: 1000,
+        }}
       />
-      {
-        hasNotification && (
-          <View
-            style={[
-              styles.signal,
-              {
-                borderWidth: borderWidth ?? 1,
-                borderColor: borderColor ?? borderColor,
-              },
-            ]}
-          ></View>
-        )
-      }
-
+      {hasNotification && (
+        <View
+          style={[
+            styles.signal,
+            {
+              borderWidth: borderWidth ?? 1,
+              borderColor: borderColor ?? borderColor,
+            },
+          ]}
+        ></View>
+      )}
     </View>
   );
 }

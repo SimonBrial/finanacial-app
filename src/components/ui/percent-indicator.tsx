@@ -1,6 +1,6 @@
-import useTheme from "../../hook/useTheme";
+import useTheme from "../../hooks/useTheme";
 import Badge from "./badge";
-import { PercentIndicatorProps } from "../../interface/interface";
+import { PercentIndicatorProps } from "../../types/interface";
 
 
 export default function PercentIndicator({

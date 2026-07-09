@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import useTheme from "../../hook/useTheme";
+import useTheme from "../../hooks/useTheme";
 import { LinearGradient } from "expo-linear-gradient";
 import { useEffect } from "react";
 import { View, Pressable, StyleSheet } from "react-native";
@@ -9,7 +9,7 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import Typography from "../ui/typography";
-import { SegmentedControlProps } from "../../interface/interface";
+import { SegmentedControlProps } from "../../types/interface";
 
 export default function SegmentedControl({
   selectedIndex,

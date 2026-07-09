@@ -10,11 +10,11 @@ import {
 } from "react-native";
 import * as Location from "expo-location";
 import { BottomSheetBackdrop, BottomSheetModal, BottomSheetView } from "@gorhom/bottom-sheet";
-import Typography from "../ui/typography";
-import Icon from "../ui/icon";
-import Button from "../ui/button";
-import CustomMap from "../ui/custom-map";
-import useTheme from "../../hook/useTheme";
+import Typography from "../../ui/typography";
+import Icon from "../../ui/icon";
+import Button from "../../ui/button";
+import CustomMap from "../../ui/custom-map";
+import useTheme from "../../../hooks/useTheme";
 
 interface LocationBottomSheetProps {
   sheetRef: React.RefObject<BottomSheetModal | null>;

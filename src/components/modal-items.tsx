@@ -3,8 +3,8 @@ import Typography from "./ui/typography";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Icon from "./ui/icon";
 import Stack from "./ui/stack";
-import useTheme from "../hook/useTheme";
-import { IconBase } from "../interface/interface";
+import useTheme from "../hooks/useTheme";
+import { IconBase } from "../types/interface";
 import { LinearGradient } from "expo-linear-gradient";
 
 interface ModalItemProps extends IconBase {

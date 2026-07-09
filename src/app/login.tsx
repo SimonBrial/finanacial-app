@@ -13,7 +13,7 @@ import Logo from "../components/logo";
 import BackgroundShapeLayout from "../components/background-shape-layout";
 import Button from "../components/ui/button";
 import Icon from "../components/ui/icon";
-import useTheme from "../hook/useTheme";
+import useTheme from "../hooks/useTheme";
 import Typography from "../components/ui/typography";
 
 export default function Login() {

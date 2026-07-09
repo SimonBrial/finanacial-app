@@ -1,12 +1,12 @@
 import GlobalContainer from "../../components/ui/global-container";
 import TitleCustom from "../../components/title-custom";
-import GoalHero from "../../components/goals/goal-hero";
+import GoalHero from "../../components/features/goals/goal-hero";
 import { View, ScrollView } from "react-native";
 import Icon from "../../components/ui/icon";
 import Button from "../../components/ui/button";
 import { useState } from "react";
-import useTheme from "../../hook/useTheme";
-import GoalCardLg from "../../components/goals/goal-card-lg";
+import useTheme from "../../hooks/useTheme";
+import GoalCardLg from "../../components/features/goals/goal-card-lg";
 
 type GoalFilter = "All" | "Completed" | "In Progress" | "Deleted" | "Future";
 

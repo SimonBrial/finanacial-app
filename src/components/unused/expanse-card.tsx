@@ -1,11 +1,11 @@
 import { MaterialIcons } from "@expo/vector-icons";
-import { Expense } from "../../interface/interface";
+import { Expense } from "../../types/interface";
 import Container from "../ui/container";
 import Typography from "../ui/typography";
 import { StyleSheet } from "react-native";
 import Stack from "../ui/stack";
 import Badge from "../ui/badge";
-import useTheme from "../../hook/useTheme";
+import useTheme from "../../hooks/useTheme";
 
 export default function ExpanseCard({
   description,

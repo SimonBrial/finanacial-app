@@ -1,11 +1,11 @@
 import { StyleSheet, View } from "react-native";
-import Typography from "../../components/ui/typography";
-import useTheme from "../../hook/useTheme";
-import Icon from "../ui/icon";
+import Typography from "../../../components/ui/typography";
+import useTheme from "../../../hooks/useTheme";
+import Icon from "../../ui/icon";
 import { LinearGradient } from "expo-linear-gradient";
-import Badge from "../ui/badge";
+import Badge from "../../ui/badge";
 import { Dropdown } from "react-native-element-dropdown";
-import { CategoryCardProps } from "../../interface/interface";
+import { CategoryCardProps } from "../../../types/interface";
 import dayjs from "dayjs";
 
 const actionData = [

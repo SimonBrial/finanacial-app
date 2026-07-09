@@ -1,11 +1,11 @@
-import useTheme from "../hook/useTheme";
+import useTheme from "../hooks/useTheme";
 import Badge from "./ui/badge";
 import Row from "./ui/row";
 import Typography from "./ui/typography";
 import CircularProgress from "./charts/progress-donut";
 import { View } from "react-native";
 import { Canvas, Rect, RadialGradient, vec } from "@shopify/react-native-skia";
-import { GoalCardProps } from "../interface/interface";
+import { GoalCardProps } from "../types/interface";
 
 export default function GoalCard({
   currentAmount,

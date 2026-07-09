@@ -1,13 +1,13 @@
 import { TouchableOpacity, View, ScrollView } from "react-native";
 import GlobalContainer from "../../components/ui/global-container";
 import Typography from "../../components/ui/typography";
-import useTheme from "../../hook/useTheme";
+import useTheme from "../../hooks/useTheme";
 import TitleCustom from "../../components/title-custom";
 import Avatar from "../../components/ui/avatar";
 import Badge from "../../components/ui/badge";
 import Icon from "../../components/ui/icon";
 import { useRouter } from "expo-router";
-import { SettingsOption } from "../../interface/interface";
+import { SettingsOption } from "../../types/interface";
 
 export default function Settings() {
   const { inProgress, sizes, theme, isDark, toggleTheme, globalStyles } = useTheme();

@@ -3,7 +3,7 @@ import { ActivityIndicator, ScrollView, StyleSheet, View } from "react-native";
 import { useSharedValue, withTiming } from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
 import DonutChart from "./donut-chart";
-import { Data } from "../../interface/interface";
+import { Data } from "../../types/interface";
 
 const RADIUS = 160;
 const STROKE_WIDTH = 10;

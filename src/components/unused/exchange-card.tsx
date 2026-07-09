@@ -1,9 +1,9 @@
 import { View, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { ExchangeCardProps } from "../../interface/interface";
+import { ExchangeCardProps } from "../../types/interface";
 import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
 import Typography from "../ui/typography";
-import useTheme from "../../hook/useTheme";
+import useTheme from "../../hooks/useTheme";
 
 export default function ExchangeCard({
   dolarRate,

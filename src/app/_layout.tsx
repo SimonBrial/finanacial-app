@@ -3,7 +3,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import Toast, { BaseToast, ErrorToast } from "react-native-toast-message";
 import { ThemeProvider } from "../context/styles/theme-provider";
-import useTheme from "../hook/useTheme";
+import useTheme from "../hooks/useTheme";
 
 const toastConfig = {
   success: (props: any) => (

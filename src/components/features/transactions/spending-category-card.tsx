@@ -1,11 +1,11 @@
 import { View, StyleSheet, TouchableOpacity } from "react-native";
-import Icon from "../ui/icon";
-import Typography from "../ui/typography";
-import useTheme from "../../hook/useTheme";
-import Badge from "../ui/badge";
+import Icon from "../../ui/icon";
+import Typography from "../../ui/typography";
+import useTheme from "../../../hooks/useTheme";
+import Badge from "../../ui/badge";
 import { LinearGradient } from "expo-linear-gradient";
-import { SpendingCategoryCardProps } from "../../interface/interface";
-import Notification from "../ui/notification";
+import { SpendingCategoryCardProps } from "../../../types/interface";
+import Notification from "../../ui/notification";
 
 export default function SpendingCategoryCard({
   library = "MaterialCommunityIcons",

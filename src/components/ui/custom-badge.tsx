@@ -8,9 +8,9 @@ import Svg, {
   Rect,
 } from "react-native-svg";
 import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
-import { CustomBadgeProps } from "../../interface/interface";
+import { CustomBadgeProps } from "../../types/interface";
 import { BankNameTypes, BasesSize } from "../../types/type";
-import useTheme from "../../hook/useTheme";
+import useTheme from "../../hooks/useTheme";
 
 // Definimos la estructura de los datos de cada banco
 const BANK_CONFIGS: Record<BankNameTypes, string[]> = {

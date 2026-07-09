@@ -1,11 +1,11 @@
 import { View, StyleSheet } from "react-native";
 import Typography from "./ui/typography";
 import { LinearGradient } from "expo-linear-gradient";
-import useTheme from "../hook/useTheme";
+import useTheme from "../hooks/useTheme";
 import Row from "./ui/row";
 import Badge from "./ui/badge";
-import { BankCardProps } from "../interface/interface";
-import { useBankStore } from "../store/useBankStore";
+import { BankCardProps } from "../types/interface";
+import { useBankStore } from "../stores/useBankStore";
 
 export default function BankCard({
   gradientColors = ["#444", "#000"],
