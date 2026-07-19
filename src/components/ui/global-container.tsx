@@ -1,43 +1,33 @@
-import { StatusBar, StyleSheet, View } from "react-native";
-import {
-  useSafeAreaInsets,
-  SafeAreaView,
-} from "react-native-safe-area-context";
+import { StatusBar, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { cssInterop } from "nativewind";
 import useTheme from "../../hooks/useTheme";
+
+cssInterop(SafeAreaView, {
+  className: "style",
+});
 
 export default function GlobalContainer({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const insets = useSafeAreaInsets();
-  const { globalStyles, isDark } = useTheme();
-
-  const containerStyles = StyleSheet.flatten({
-    paddingTop: insets.top,
-    ...styles.containerGlobal,
-    backgroundColor: globalStyles.background,
-  });
+  const { isDark } = useTheme();
 
   return (
-    <View style={{ flex: 1, backgroundColor: globalStyles.background }}>
-      <SafeAreaView style={{ flex: 1 }}>
-        <View style={containerStyles}>{children}</View>
-        <StatusBar
-          barStyle={isDark ? "light-content" : "dark-content"}
-          backgroundColor={globalStyles.background}
-          translucent={false}
-        />
-      </SafeAreaView>
-    </View>
+    <SafeAreaView
+      className={` ${isDark ? "bg-zinc-900" : "bg-slate-100"} pt-6 flex-1`}
+    >
+      <View
+        className={` flex-1 items-stretch justify-start px-5 ${isDark ? "bg-zinc-900" : "bg-slate-100"}`}
+      >
+        {children}
+      </View>
+      <StatusBar
+        barStyle={isDark ? "light-content" : "dark-content"}
+        backgroundColor={isDark ? "#09090B" : "#F1F5F9"}
+        translucent={false}
+      />
+    </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  containerGlobal: {
-    flex: 1,
-    alignItems: "stretch",
-    justifyContent: "flex-start",
-    paddingHorizontal: 20,
-  },
-});

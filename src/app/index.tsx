@@ -1,5 +1,5 @@
-import Login from "./login";
+import Loginn from "./loginn";
 
 export default function App() {
-  return <Login />;
+  return <Loginn />;
 }

@@ -82,7 +82,7 @@ export default function Notification({
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "black",
+          //backgroundColor: "black",
           width: "100%",
           //height: 500,
         }}

@@ -1,47 +1,25 @@
 import {
   KeyboardAvoidingView,
-  TouchableOpacity,
   StyleSheet,
   StatusBar,
-  TextInput,
   Platform,
   View,
 } from "react-native";
-import { useState } from "react";
 import { useRouter } from "expo-router";
 import Logo from "../components/logo";
 import BackgroundShapeLayout from "../components/background-shape-layout";
 import Button from "../components/ui/button";
-import Icon from "../components/ui/icon";
 import useTheme from "../hooks/useTheme";
 import Typography from "../components/ui/typography";
 
-export default function Login() {
+export default function Loginn() {
   const { globalStyles, theme, isDark, toggleTheme } = useTheme();
   const router = useRouter();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleLogin = () => {
-    if (email !== "" && password !== "") {
-      router.push("/pin-screen");
-    }
-  };
+  const handleLogin = () => router.push("/home");
 
   const LogoHeader = () => (
     <View style={styles.headerContainer}>
-      <TouchableOpacity
-        onPress={toggleTheme}
-        style={{ position: "absolute", top: -40, right: -20, padding: 10 }}
-      >
-        <Icon
-          name={isDark ? "sunny" : "moon"}
-          library="Ionicons"
-          size={24}
-          color={isDark ? "#000000" : "#000"}
-        />
-      </TouchableOpacity>
       <Logo />
       <View style={{ alignItems: "center", marginTop: 20 }}>
         <Typography fontSize={26} bold>
@@ -72,52 +50,6 @@ export default function Login() {
           <BackgroundShapeLayout />
 
           <View style={styles.formContainer}>
-            <View
-              style={[
-                styles.inputRow,
-                { borderBottomColor: globalStyles.borderInput },
-              ]}
-            >
-              <Icon
-                name={"at-sign"}
-                variant="light"
-                library="Feather"
-                size={22}
-                color={globalStyles.text}
-              />
-              <TextInput
-                style={[styles.inputClean, { color: globalStyles.text }]}
-                placeholder="Email"
-                placeholderTextColor={globalStyles.textSecondary}
-                value={email}
-                onChangeText={setEmail}
-                keyboardType="email-address"
-                autoCapitalize="none"
-              />
-            </View>
-
-            <View
-              style={[
-                styles.inputRow,
-                { borderBottomColor: globalStyles.borderInput },
-              ]}
-            >
-              <Icon
-                name={"lock-outline"}
-                variant="light"
-                library="MaterialCommunityIcons"
-                size={22}
-                color={globalStyles.text}
-              />
-              <TextInput
-                style={[styles.inputClean, { color: globalStyles.text }]}
-                placeholder="Password"
-                placeholderTextColor={globalStyles.textSecondary}
-                value={password}
-                onChangeText={setPassword}
-                secureTextEntry
-              />
-            </View>
             <Button
               text="Login"
               fullWidth

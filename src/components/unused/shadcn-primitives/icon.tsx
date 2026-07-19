@@ -3,6 +3,7 @@ import type { LucideIcon, LucideProps } from "lucide-react-native";
 import { cssInterop } from "nativewind";
 import * as React from "react";
 import { cn } from "./utils";
+import useTheme from "@/hooks/useTheme";
 
 type IconProps = LucideProps & {
   as: LucideIcon;
@@ -29,11 +30,11 @@ function Icon({
   size = 14,
   ...props
 }: IconProps) {
-  const textClass = React.useContext(TextClassContext);
+  const { isDark } = useTheme();
   return (
     <IconImpl
       as={IconComponent}
-      className={cn("text-foreground", textClass, className)}
+      className={cn(isDark ? "text-slate-50" : "text-slate-900", className)}
       size={size}
       {...props}
     />

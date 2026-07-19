@@ -8,9 +8,13 @@ import Badge from "../../components/ui/badge";
 import Icon from "../../components/ui/icon";
 import { useRouter } from "expo-router";
 import { SettingsOption } from "../../types/interface";
+import { Switch } from "@/components/unused/shadcn-primitives/switch";
+import React from "react";
+import * as Haptics from "expo-haptics";
 
 export default function Settings() {
-  const { inProgress, sizes, theme, isDark, toggleTheme, globalStyles } = useTheme();
+  const { inProgress, sizes, theme, isDark, toggleTheme, globalStyles } =
+    useTheme();
   const router = useRouter();
 
   const handlePress = (label: string) => {
@@ -23,6 +27,11 @@ export default function Settings() {
     }
   };
 
+  function onCheckedChange(checked: boolean) {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    toggleTheme();
+  }
+
   const settingsOptions: SettingsOption[] = [
     {
       label: "Edit Profile",
@@ -30,7 +39,11 @@ export default function Settings() {
       library: "FontAwesome5",
     },
     { label: "Notifications", icon: "notifications", library: "Ionicons" },
-    { label: "Theme", icon: isDark ? "moon-sharp" : "sunny-sharp", library: "Ionicons" },
+    {
+      label: "Theme",
+      icon: isDark ? "moon-sharp" : "sunny-sharp",
+      library: "Ionicons",
+    },
     { label: "Language", icon: "translate", library: "MaterialIcons" },
     {
       label: "Help & Support",
@@ -63,9 +76,7 @@ export default function Settings() {
         <View
           style={{ gap: sizes.xs, display: "flex", flexDirection: "column" }}
         >
-          <Typography fontSize={sizes.lg}>
-            Simon Briceño
-          </Typography>
+          <Typography fontSize={sizes.lg}>Simon Briceño</Typography>
           <Badge
             iconLeft={"crown"}
             library="MaterialCommunityIcons"
@@ -82,31 +93,63 @@ export default function Settings() {
           marginTop: sizes.lg,
         }}
       >
-        {settingsOptions.map((item) => (
-          <TouchableOpacity
-            key={item.label}
-            onPress={() => handlePress(item.label)}
-            style={{
-              paddingHorizontal: sizes.md,
-              paddingVertical: sizes.sm,
-              borderColor: globalStyles.border,
-              borderBottomWidth: 1,
-              width: "100%",
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              gap: sizes.sm,
-            }}
-          >
-            <Icon
-              name={item.icon}
-              library={item.library}
-              bgStyle={{ borderRadius: sizes.sm }}
-              size={sizes.lg}
-            />
-            <Typography>{item.label}</Typography>
-          </TouchableOpacity>
-        ))}
+        {settingsOptions.map((item) => {
+          return item.label === "Theme" ? (
+            <View
+              key={`${item.label}-${item.icon}`}
+              style={{
+                paddingHorizontal: sizes.md,
+                paddingVertical: sizes.sm,
+                borderColor: globalStyles.border,
+                borderBottomWidth: 1,
+                width: "100%",
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                gap: sizes.sm,
+              }}
+            >
+              <Icon
+                name={item.icon}
+                library={item.library}
+                bgStyle={{ borderRadius: sizes.sm }}
+                size={sizes.lg}
+              />
+              <Typography>{item.label}</Typography>
+              <View style={{ flex: 1 }} />
+              <Switch
+                checked={isDark}
+                onCheckedChange={onCheckedChange}
+                id="airplane-mode"
+                nativeID="airplane-mode"
+              />
+            </View>
+          ) : (
+            <TouchableOpacity
+              key={item.label}
+              onPress={() => handlePress(item.label)}
+              style={{
+                paddingHorizontal: sizes.md,
+                paddingVertical: sizes.sm,
+                borderColor: globalStyles.border,
+                borderBottomWidth: 1,
+                width: "100%",
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                gap: sizes.sm,
+              }}
+            >
+              <Icon
+                name={item.icon}
+                library={item.library}
+                bgStyle={{ borderRadius: sizes.sm }}
+                size={sizes.lg}
+              />
+              <Typography>{item.label}</Typography>
+            </TouchableOpacity>
+          );
+        })}
       </View>
     </GlobalContainer>
   );

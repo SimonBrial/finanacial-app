@@ -11,8 +11,7 @@
     "node_modules",
     "babel.config.js",
     "metro.config.js",
-    "expo-env.d.ts",
-    "src/components/unused"
+    "expo-env.d.ts"
   ]
 }
 

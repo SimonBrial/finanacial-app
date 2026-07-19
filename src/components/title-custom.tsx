@@ -18,6 +18,7 @@ export default function TitleCustom({
   const { theme, sizes } = useTheme();
   const showBalance = useBankStore().showBalance;
   const fnShowBalance = useBankStore().setShowBalance;
+
   return (
     <Row
       alignItem="center"
@@ -47,10 +48,7 @@ export default function TitleCustom({
           library={library}
           name={name}
         />
-        <Typography
-          fontSize={sizes.xl}
-          bold={false}
-        >
+        <Typography fontSize={sizes.xl} bold={false}>
           {title}
         </Typography>
       </Row>
