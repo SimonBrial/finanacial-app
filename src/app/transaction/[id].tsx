@@ -30,7 +30,7 @@ import {
   BottomSheetView,
 } from "@gorhom/bottom-sheet";
 import ModalItems from "../../components/modal-items";
-import Button from "../../components/ui/button";
+import Button from "../../components/ui/button-own";
 
 const modalItems: {
   name: string;
@@ -69,8 +69,11 @@ export default function TransactionDetails() {
   const { sizes, globalStyles, theme } = useTheme();
 
   const transaction = transactions.find((t) => t.id === id);
-  const { updateTransactionLocation, removeTransactionLocation, deleteTransaction } =
-    useTransactionStore();
+  const {
+    updateTransactionLocation,
+    removeTransactionLocation,
+    deleteTransaction,
+  } = useTransactionStore();
 
   type ModalType = "actions" | "addLocation" | "editLocation";
   const [modalType, setModalType] = useState<ModalType | null>(null);
@@ -637,7 +640,7 @@ export default function TransactionDetails() {
                             router.back();
                           },
                         },
-                      ]
+                      ],
                     );
                   } else if (item.title === "Edit") {
                     router.push(`/transaction/form?type=transaction&id=${id}`);

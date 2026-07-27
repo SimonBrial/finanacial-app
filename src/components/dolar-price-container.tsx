@@ -4,34 +4,35 @@ import Stack from "./ui/stack";
 import DolarPriceItem from "./dolar-price-item";
 import { useExchangeStore } from "../stores/useExchangeStore";
 import CollapsibleCardContainer from "./collapsible-card-container";
+import { BadgeDollarSign } from "lucide-react-native";
+import { View } from "react-native";
 
 export default function DolarPriceContainer() {
   const { sizes, complete, danger, inProgress, theme } = useTheme();
   const { rates } = useExchangeStore();
 
+  const colorVariants = [
+    { bg: "bg-emerald-500", text: "text-emerald-500" },
+    { bg: "bg-blue-500", text: "text-blue-500" },
+    { bg: "bg-red-500", text: "text-red-500" },
+    { bg: "bg-amber-500", text: "text-amber-500" },
+  ];
+
   return (
-    <CollapsibleCardContainer
-      title="Dolar Price"
-      library="MaterialCommunityIcons"
-      name="currency-usd"
-    >
-      <Stack gap={sizes.md}>
+    <CollapsibleCardContainer title="Dolar Price" as={BadgeDollarSign}>
+      <View className="flex-col gap-4">
         {rates.map((rate, index) => {
-          const colors = [
-            complete.c100,
-            theme.t100,
-            danger.d100,
-            inProgress.p100,
-          ];
+          const variant = colorVariants[index % colorVariants.length];
           return (
             <DolarPriceItem
-              key={index}
+              textColorClass={variant.text}
               title={rate.exchangeName}
-              color={colors[index % colors.length]}
+              bgColorClass={variant.bg}
+              key={index}
             />
           );
         })}
-      </Stack>
+      </View>
     </CollapsibleCardContainer>
   );
 }

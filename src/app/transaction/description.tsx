@@ -9,7 +9,7 @@ import {
 import { useRouter } from "expo-router";
 import useTheme from "../../hooks/useTheme";
 import Typography from "../../components/ui/typography";
-import Button from "../../components/ui/button";
+import Button from "../../components/ui/button-own";
 
 export default function TransactionDescription() {
   const router = useRouter();

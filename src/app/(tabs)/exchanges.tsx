@@ -2,7 +2,7 @@ import { ScrollView, View } from "react-native";
 import GlobalContainer from "../../components/ui/global-container";
 import useTheme from "../../hooks/useTheme";
 import TitleCustom from "../../components/title-custom";
-import Button from "../../components/ui/button";
+import Button from "../../components/ui/button-own";
 
 export default function Exchange() {
   const { sizes, theme } = useTheme();

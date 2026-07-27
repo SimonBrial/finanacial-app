@@ -1,84 +1,81 @@
 import { useState } from "react";
 import useTheme from "../hooks/useTheme";
-import { TouchableOpacity } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import { TouchableOpacity, View } from "react-native";
 import Collapsible from "react-native-collapsible";
-import Icon from "./ui/icon";
-import Row from "./ui/row";
-import Typography from "./ui/typography";
-import Stack from "./ui/stack";
-import { IconBase } from "../types/interface";
+import { Icon } from "./unused/shadcn-primitives/icon";
+import {
+  EllipsisVertical,
+  ChartColumnBig,
+  LucideIcon,
+  RotateCcw,
+} from "lucide-react-native";
+import { Button } from "./ui/button";
+import { Text } from "./ui/text";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "./unused/shadcn-primitives/accordion";
 
-interface CollapsibleCardContainerProps extends IconBase {
+interface CollapsibleCardContainerProps {
   children: React.ReactNode;
   title: string;
+  as: LucideIcon;
 }
 
 export default function CollapsibleCardContainer({
   children,
   title,
-  library = "MaterialCommunityIcons",
-  name,
+  as = ChartColumnBig,
+  //library = "MaterialCommunityIcons",
+  //name,
 }: CollapsibleCardContainerProps) {
-  const { sizes, globalStyles, theme } = useTheme();
+  const { sizes, isDark } = useTheme();
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   const toggleCollapsible = () => {
     setIsCollapsed(!isCollapsed);
   };
   return (
-    <LinearGradient
-      colors={[globalStyles.bgContainerStart, globalStyles.bgContainerEnd]} // DINÁMICO
-      style={[
-        {
-          borderRadius: sizes.lg,
-          borderWidth: 1,
-          borderColor: globalStyles.borderContainer,
-          marginTop: sizes.xl,
-        },
-      ]}
-      locations={[0.1, 1.0]}
-      start={{ x: 0, y: 0.0 }}
-      end={{ x: 1, y: 0 }}
+    <Accordion
+      className={`"flex-1 justify-start rounded-[20] shadow" ${isDark ? "border border-zinc-700 bg-zinc-900" : "border border-white bg-slate-100"} `}
+      type="single"
+      collapsable
     >
-      <Stack
-        gap={sizes.lg}
-        justifyContent="flex-start"
-        customStyles={{
-          flex: 1,
-          paddingHorizontal: sizes.lg,
-          paddingBottom: !isCollapsed ? sizes.lg : 0,
-          paddingTop: sizes.lg,
-        }}
-      >
-        <TouchableOpacity onPress={toggleCollapsible}>
-          <Row gap={sizes.xs} alignItem="center" justifyContent="start">
-            <Icon
-              bgStyle={{
-                padding: sizes.xxs,
-                borderRadius: sizes.xs,
-                backgroundColor: `${theme.t20}`,
-                //width: 44,
-                //height: 44,
-              }}
-              color={theme.t100}
-              size={sizes.xl}
-              library={library}
-              name={name}
-            />
-            <Typography
-              fontSize={sizes.xl}
+      <AccordionItem value={title}>
+        <AccordionTrigger>
+          <View className="flex-1 flex-row justify-center items-center">
+            <View className="flex-1 flex-row gap-2 items-center justify-start">
+              <Icon as={as} size={24} />
+              <Text
+                variant={"h3"}
+                className={`my-0 w-[85%] font-medium ${isDark ? "text-white" : "text-slate-900"}`}
+              >
+                {title}
+              </Text>
+              {/* <Typography
+              fontSize={sizes.lg}
               bold={false}
               customStyles={{ color: "white", width: "85%" }}
             >
               {title}
-            </Typography>
-          </Row>
-        </TouchableOpacity>
-        <Collapsible collapsed={isCollapsed} align="center" duration={300}>
-          {children}
-        </Collapsible>
-      </Stack>
-    </LinearGradient>
+            </Typography> */}
+            </View>
+            {title.toLowerCase() === "dolar price" && (
+              <View className="flex-row items-center">
+                <Button size={"icon"}>
+                  <Icon as={RotateCcw} size={20} className="px-4" />
+                </Button>
+                <Button size={"icon"}>
+                  <Icon as={EllipsisVertical} size={20} className="px-4" />
+                </Button>
+              </View>
+            )}
+          </View>
+        </AccordionTrigger>
+        <AccordionContent>{children}</AccordionContent>
+      </AccordionItem>
+    </Accordion>
   );
 }

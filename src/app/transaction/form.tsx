@@ -17,7 +17,7 @@ dayjs.extend(customParseFormat);
 import { Dropdown } from "react-native-element-dropdown";
 import useTheme from "../../hooks/useTheme";
 import Typography from "../../components/ui/typography";
-import Button from "../../components/ui/button";
+import Button from "../../components/ui/button-own";
 import Icon from "../../components/ui/icon";
 import InputText from "../../components/ui/input-text";
 import { useTransactionStore } from "../../stores/useTransactionStore";

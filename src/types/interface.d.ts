@@ -1,4 +1,4 @@
-import { TextStyle } from "react-native";
+import { TextStyle, ViewStyle, StyleProp } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { SharedValue } from "react-native-reanimated";
 import { LucideIcon } from "lucide-react-native";
@@ -68,7 +68,8 @@ interface IconProps extends IconBase {
 
 interface DolarPriceItemProps {
   title: string;
-  color?: string;
+  bgColorClass: string;
+  textColorClass: string;
 }
 
 interface CircularProgressProps {
@@ -330,6 +331,22 @@ interface SegmentedControlProps {
   options: string[];
   selectedIndex: number;
   onChange: (index: number) => void;
+  duration?: number;
+
+  // Estilos del contenedor (Fondo del componente)
+  containerStyle?: StyleProp<ViewStyle>;
+  containerClassName?: string;
+  className?: string; // Alias para containerClassName
+
+  // Estilos del indicador (Botón / opción seleccionada)
+  indicatorStyle?: StyleProp<ViewStyle>;
+  indicatorClassName?: string;
+
+  // Estilos opcionales del texto
+  textStyle?: StyleProp<TextStyle>;
+  textClassName?: string;
+  selectedTextStyle?: StyleProp<TextStyle>;
+  selectedTextClassName?: string;
 }
 
 interface GoalCardProps {

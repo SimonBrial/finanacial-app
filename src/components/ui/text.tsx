@@ -1,8 +1,8 @@
-import { cn } from "./utils";
 import { Slot } from "@rn-primitives/slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 import { Platform, Text as RNText, type Role } from "react-native";
+import { cn } from "../unused/shadcn-primitives/utils";
 
 const textVariants = cva(
   cn(
@@ -20,7 +20,7 @@ const textVariants = cva(
           Platform.select({ web: "scroll-m-20 text-balance" }),
         ),
         h2: cn(
-          "border-border border-b pb-2 text-3xl font-semibold tracking-tight",
+          "border-border border-b-0 text-3xl font-semibold tracking-tight",
           Platform.select({ web: "scroll-m-20 first:mt-0" }),
         ),
         h3: cn(
@@ -31,7 +31,7 @@ const textVariants = cva(
           "text-xl font-semibold tracking-tight",
           Platform.select({ web: "scroll-m-20" }),
         ),
-        p: "mt-0 leading-7 sm:mt-0",
+        p: "mt-3 leading-7 sm:mt-6",
         blockquote: "mt-4 border-l-2 pl-3 italic sm:mt-6 sm:pl-6",
         code: cn(
           "bg-muted relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold",
@@ -79,7 +79,6 @@ function Text({
   React.RefAttributes<typeof RNText> &
   TextVariantProps & {
     asChild?: boolean;
-    className?: string;
   }) {
   const textClass = React.useContext(TextClassContext);
   const Component = asChild ? Slot : RNText;

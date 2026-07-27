@@ -3,7 +3,7 @@ import useTheme from "../../../hooks/useTheme";
 import Typography from "../../ui/typography";
 import { LinearGradient } from "expo-linear-gradient";
 import Badge from "../../ui/badge";
-import Button from "../../ui/button";
+import Button from "../../ui/button-own";
 import {
   Blur,
   Canvas,

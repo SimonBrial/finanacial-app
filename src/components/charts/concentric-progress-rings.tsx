@@ -1,13 +1,12 @@
 import React, { useMemo } from "react";
 import { View, StyleSheet, Dimensions } from "react-native";
 import Svg, { Circle, G } from "react-native-svg";
-import { LinearGradient } from "expo-linear-gradient";
-import Typography from "../ui/typography"; // Asumiendo tu componente del ejemplo anterior
-import Icon from "../ui/icon"; // Asumiendo tu componente del ejemplo anterior
-import Row from "../ui/row";
 import useTheme from "../../hooks/useTheme";
 import { GenerateScaleParams, ColorScaleItem } from "../../types/interface";
 import CollapsibleCardContainer from "../collapsible-card-container";
+import { BanknoteArrowDown } from "lucide-react-native";
+import { Text } from "../ui/text";
+import generateScale from "@/utils/generateScale";
 
 // Simulamos los datos del mes actual
 // Ordenamos de mayor a menor porcentaje para que el anillo más grande quede afuera
@@ -32,6 +31,12 @@ const CURRENT_MONTH_EXPENSES = [
   }, // Tono más oscuro
   {
     id: "4",
+    category: "Dulces",
+    percentage: 25,
+    color: "rgba(0, 42, 102, 0.4)",
+  }, // Tono más oscuro
+  {
+    id: "5",
     category: "Otros",
     percentage: 25,
     color: "rgba(0, 42, 102, 0.4)",
@@ -43,16 +48,18 @@ const colorArray = generateScale({
   steps: CURRENT_MONTH_EXPENSES.length,
   categoryId: CURRENT_MONTH_EXPENSES.map((item) => item.id),
 });
+
 export default function ConcentricProgressRings() {
-  const { globalStyles, sizes } = useTheme();
+  const { isDark } = useTheme();
+
   // --- CONFIGURACIÓN RESPONSIVE ---
   const screenWidth = Dimensions.get("window").width;
-  // El tamaño del gráfico será el 50% del ancho de la pantalla (puedes ajustarlo)
-  const size = screenWidth * 0.45;
+  // El tamaño del gráfico será el 45% del ancho de la pantalla
+  const size = screenWidth * 0.55;
   const center = size / 2;
   const strokeWidth = 10; // Grosor de cada anillo
   const ringGap = 6; // Espacio entre cada anillo
-  const trackColor = "#131E32"; // Color de fondo del anillo (desactivado)
+  const trackColor = "rgba(28, 33, 51, 0.1)"; // Color de fondo del anillo
 
   // Calculamos el porcentaje general (promedio) para mostrar en el centro
   const totalPercentage = useMemo(() => {
@@ -64,27 +71,22 @@ export default function ConcentricProgressRings() {
   }, []);
 
   return (
-    <CollapsibleCardContainer title="Monthly Expenses" library="MaterialCommunityIcons" name="chart-arc">
-
-
+    <CollapsibleCardContainer title="Monthly Expenses" as={BanknoteArrowDown}>
       {/* BODY: Gráfico y Leyenda */}
-      <View style={styles.chartArea}>
+      <View className="w-full flex-row gap-5 items-center justify-between px-2.5 py-1">
         {/* LADO IZQUIERDO: SVG */}
-        <View style={{ width: size, height: size, position: "relative" }}>
+        <View className="relative" style={{ width: size, height: size }}>
           <Svg width={size} height={size}>
             {CURRENT_MONTH_EXPENSES.map((item, index) => {
-              // Calcular el radio de cada anillo. El primero es el más grande.
-              // Restamos strokeWidth / 2 para que no se corte en los bordes.
               const radius =
                 center - strokeWidth / 2 - index * (strokeWidth + ringGap);
               const circumference = 2 * Math.PI * radius;
-              // Calculamos cuánto del anillo se debe pintar
               const strokeDashoffset =
                 circumference - (item.percentage / 100) * circumference;
 
               return (
                 <G key={item.id} origin={`${center}, ${center}`}>
-                  {/* Anillo de Fondo (Pista oscura) */}
+                  {/* Anillo de Fondo */}
                   <Circle
                     cx={center}
                     cy={center}
@@ -105,7 +107,7 @@ export default function ConcentricProgressRings() {
                     strokeWidth={strokeWidth}
                     strokeDasharray={circumference}
                     strokeDashoffset={strokeDashoffset}
-                    strokeLinecap="round" // Esto hace que las puntas sean redondeadas
+                    strokeLinecap="round"
                     fill="none"
                   />
                 </G>
@@ -114,165 +116,44 @@ export default function ConcentricProgressRings() {
           </Svg>
 
           {/* TEXTO CENTRAL (Porcentaje Global) */}
-          <View
-            style={[StyleSheet.absoluteFillObject, styles.centerTextContainer]}
-          >
-            <Typography fontSize={18} bold customStyles={{ color: "white" }}>
+          <View className="absolute inset-0 justify-center items-center">
+            <Text
+              className={`text-lg font-bold my-0 ${isDark ? "text-white" : "text-slate-900"}`}
+              variant="h3"
+            >
               {totalPercentage}%
-            </Typography>
+            </Text>
           </View>
         </View>
 
         {/* LADO DERECHO: LEYENDA */}
-        <View style={styles.legendContainer}>
+        <View className="flex-1 ml-0.5 justify-center gap-2">
           {CURRENT_MONTH_EXPENSES.map((item) => (
-            <View key={item.id} style={styles.legendItem}>
+            <View key={item.id} className="flex-row items-center gap-2.5">
               {/* Puntito de color con brillo simulado */}
               <View
-                style={[
-                  styles.colorDot,
-                  {
-                    backgroundColor:
-                      colorArray.find((c) => c.categoryId === item.id)?.color ||
-                      item.color,
-                  },
-                ]}
+                className="w-[14px] h-[14px] rounded-full"
+                style={{
+                  backgroundColor:
+                    colorArray.find((c) => c.categoryId === item.id)?.color ||
+                    item.color,
+                  shadowColor: "#006DFF",
+                  shadowOffset: { width: 0, height: 0 },
+                  shadowOpacity: 0.5,
+                  shadowRadius: 4,
+                  elevation: 3,
+                }}
               />
-              <Typography fontSize={14} customStyles={{ color: "#E0E0E0" }}>
+              <Text
+                className={`text-sm my-0 ${isDark ? "text-slate-200" : "text-slate-700"}`}
+                variant="p"
+              >
                 {item.category}
-              </Typography>
+              </Text>
             </View>
           ))}
         </View>
       </View>
     </CollapsibleCardContainer>
   );
-}
-
-const styles = StyleSheet.create({
-  /*cardContainer: {
-    //backgroundColor: "#161618", // Fondo oscuro similar al de tu imagen
-    borderRadius: 20,
-    padding: 24,
-    width: "100%",
-    marginTop: 24,
-  },*/
-  chartArea: {
-    width: "100%",
-    flexDirection: "row",
-    gap: 20,
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-  },
-  centerTextContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  legendContainer: {
-    flex: 1,
-    marginLeft: 2,
-    justifyContent: "center",
-    gap: 8, // Espaciado entre elementos de la leyenda
-  },
-  legendItem: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 10,
-  },
-  colorDot: {
-    width: 14,
-    height: 14,
-    borderRadius: 7,
-    // Simular un efecto glow leve
-    shadowColor: "#006DFF",
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.5,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-});
-
-// Convierte un color HEX a un objeto HSL { h, s, l }
-function hexToHSL(hex: string): { h: number; s: number; l: number } {
-  // Elimina el "#" si está presente
-  hex = hex.replace(/^#/, "");
-  // Convierte valores cortos (#abc) a largos (#aabbcc)
-  if (hex.length === 3) {
-    hex = hex
-      .split("")
-      .map((x) => x + x)
-      .join("");
-  }
-  const num = parseInt(hex, 16);
-  const r = (num >> 16) & 255;
-  const g = (num >> 8) & 255;
-  const b = num & 255;
-
-  const rNorm = r / 255;
-  const gNorm = g / 255;
-  const bNorm = b / 255;
-
-  const max = Math.max(rNorm, gNorm, bNorm);
-  const min = Math.min(rNorm, gNorm, bNorm);
-  let h = 0,
-    s = 0,
-    l = (max + min) / 2;
-
-  if (max !== min) {
-    const d = max - min;
-    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-    switch (max) {
-      case rNorm:
-        h = (gNorm - bNorm) / d + (gNorm < bNorm ? 6 : 0);
-        break;
-      case gNorm:
-        h = (bNorm - rNorm) / d + 2;
-        break;
-      case bNorm:
-        h = (rNorm - gNorm) / d + 4;
-        break;
-    }
-    h = h * 60;
-  }
-  return {
-    h: Math.round(h),
-    s: Math.round(s * 100),
-    l: Math.round(l * 100),
-  };
-}
-
-function generateScale({
-  categoryId,
-  steps,
-  hex,
-}: GenerateScaleParams): ColorScaleItem[] {
-  // 1. Convertir HEX a HSL (Función simplificada)
-  let { h, s, l } = hexToHSL(hex);
-
-  let scale = [];
-
-  for (let i = 0; i < steps; i++) {
-    // Calculamos el porcentaje de distribución (0 a 1)
-    let pct = i / (steps - 1);
-
-    // Ajustamos la luminosidad de forma lineal
-    // 90% (muy claro) -> l (base) -> 10% (muy oscuro)
-    let newL;
-    if (pct < 0.5) {
-      // Interpolar entre 70% de luz y la luz del color base
-      newL = 70 - pct * 2 * (70 - l);
-    } else {
-      // Interpolar entre la luz del color base y 15% de luz
-      newL = l - (pct - 0.5) * 2 * (l - 15);
-    }
-
-    scale.push(`hsl(${h}, ${s}%, ${newL}%)`);
-  }
-
-  return scale.map((color, index) => ({
-    categoryId: categoryId[index],
-    color,
-  }));
 }

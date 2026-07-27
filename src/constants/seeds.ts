@@ -166,7 +166,7 @@ export const constExpense: Expense[] = [
 ];
 export const MOCK_DB: Record<FilterKey, any> = {
   Week: {
-    periodLabel: "Esta Semana", // Comparado con la semana anterior
+    periodLabel: "Esta Semana",
     Income: {
       data: [
         { value: 120, label: "Mon" },
@@ -195,11 +195,10 @@ export const MOCK_DB: Record<FilterKey, any> = {
     },
   },
   Month: {
-    periodLabel: "Febrero 2026", // Comparado con el mes anterior
+    periodLabel: "Febrero 2026",
     Income: {
-      // 28 días generados como ejemplo para un mes
       data: Array.from({ length: 28 }, (_, i) => ({
-        value: Math.floor(Math.random() * 500) + 50,
+        value: Math.floor(Math.random() * 300) + 50,
         label: `${i + 1}`,
       })),
       currentTotal: 8500,
@@ -207,7 +206,7 @@ export const MOCK_DB: Record<FilterKey, any> = {
     },
     Expense: {
       data: Array.from({ length: 28 }, (_, i) => ({
-        value: Math.floor(Math.random() * 300) + 20,
+        value: Math.floor(Math.random() * 200) + 20,
         label: `${i + 1}`,
       })),
       currentTotal: 4200,

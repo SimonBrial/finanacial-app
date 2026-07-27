@@ -1,108 +1,122 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from "react";
 import useTheme from "../../hooks/useTheme";
-import { LinearGradient } from "expo-linear-gradient";
-import { useEffect } from "react";
-import { View, Pressable, StyleSheet } from "react-native";
+import { View, Pressable } from "react-native";
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
+  Easing,
 } from "react-native-reanimated";
-import Typography from "../ui/typography";
 import { SegmentedControlProps } from "../../types/interface";
+import { Text } from "../ui/text";
 
-export default function SegmentedControl({
+const SegmentedControl = React.memo(function SegmentedControl({
+  selectedTextClassName,
+  containerClassName,
+  indicatorClassName,
+  selectedTextStyle,
+  duration = 150,
+  containerStyle,
+  indicatorStyle,
+  textClassName,
   selectedIndex,
+  className,
+  textStyle,
   onChange,
   options,
 }: SegmentedControlProps) {
-  const { sizes, globalStyles, theme } = useTheme();
-  const width = useSharedValue(0);
+  const { isDark } = useTheme();
+  const [containerWidth, setContainerWidth] = useState(0);
+  const widthShared = useSharedValue(0);
   const thumbPosition = useSharedValue(0);
 
-  // Animamos la posición cuando cambia el índice seleccionado o el ancho
-  useEffect(() => {
-    thumbPosition.value = withTiming(
-      selectedIndex === 0 ? 0 : width.value / 2 - 8,
-      { duration: 300 },
-    );
-  }, [selectedIndex, width.value]);
+  const numOptions = Math.max(1, options.length);
 
-  const animatedThumbStyle = useAnimatedStyle(() => ({
-    transform: [{ translateX: thumbPosition.value }],
-  }));
+  // Animación del indicador al cambiar la opción seleccionada o el ancho
+  useEffect(() => {
+    if (containerWidth > 0) {
+      widthShared.value = containerWidth;
+      const availableWidth = Math.max(0, containerWidth - 15);
+      const segmentWidth = availableWidth / numOptions;
+      const targetX = selectedIndex * segmentWidth;
+
+      thumbPosition.value = withTiming(targetX, {
+        duration,
+        easing: Easing.out(Easing.quad),
+      });
+    }
+  }, [selectedIndex, containerWidth, numOptions, duration]);
+
+  // Estilo animado para ancho y posición (translateX) del indicador
+  const animatedThumbStyle = useAnimatedStyle(() => {
+    const availableWidth = Math.max(0, widthShared.value - 10);
+    const segmentWidth = availableWidth / numOptions;
+
+    return {
+      width: segmentWidth,
+      transform: [{ translateX: thumbPosition.value }],
+    };
+  }, [numOptions]);
+
+  // Estilos del contenedor (Track)
+  const defaultContainerBg = isDark ? "bg-slate-800/20" : "bg-slate-200";
+  const baseContainerClass = `flex-row w-full h-12 relative overflow-hidden px-2 py-1 border border-transparent rounded-full ${defaultContainerBg}`;
+  const finalContainerClass = `${baseContainerClass} ${containerClassName || className || ""}`;
+
+  // Estilos del indicador animado (Thumb)
+  const defaultIndicatorBg = isDark
+    ? "bg-slate-700 border border-slate-600"
+    : "bg-white border border-slate-200";
+  const baseIndicatorClass = "absolute h-full top-1 left-2 rounded-full";
+  const finalIndicatorClass = `${baseIndicatorClass} ${indicatorClassName ? indicatorClassName : defaultIndicatorBg}`;
 
   return (
     <View
-      style={[switchStyles.track, { borderRadius: sizes.xs }]}
+      className={finalContainerClass}
+      style={containerStyle}
       onLayout={(e) => {
-        width.value = e.nativeEvent.layout.width;
+        const w = e.nativeEvent.layout.width;
+        if (w !== containerWidth) {
+          setContainerWidth(w);
+        }
       }}
     >
-      {/* Indicador animado (Fondo del botón seleccionado) */}
-      <Animated.View style={[switchStyles.thumb, animatedThumbStyle]}>
-        <LinearGradient
-          colors={[globalStyles.bgContainerStart, globalStyles.bgContainerEnd]}
-          style={[
-            StyleSheet.absoluteFill,
-            {
-              borderRadius: sizes.xs,
-              borderWidth: 1,
-              borderColor: globalStyles.borderContainer,
-            },
-          ]}
-          locations={[0.1, 1.0]}
-          start={{ x: 0, y: 0.0 }}
-          end={{ x: 1, y: 0 }}
-        />
-      </Animated.View>
+      {/* Indicador animado (Fondo de la opción seleccionada) */}
+      <Animated.View
+        className={finalIndicatorClass}
+        style={[animatedThumbStyle, indicatorStyle]}
+      />
 
-      {/* Botones Clickables Individuales */}
-      {options.map((option: string, index: number) => (
-        <Pressable
-          key={option}
-          style={switchStyles.option}
-          onPress={() => onChange(index)}
-        >
-          <Typography
-            fontSize={sizes.md}
-            bold={selectedIndex === index}
-            customStyles={{
-              color: selectedIndex === index ? theme.t100 : "white",
-            }}
+      {/* Opciones clickables */}
+      {options.map((option: string, index: number) => {
+        const isSelected = selectedIndex === index;
+
+        return (
+          <Pressable
+            key={option}
+            className="flex-1 justify-center items-center z-10"
+            onPress={() => onChange(index)}
           >
-            {option}
-          </Typography>
-        </Pressable>
-      ))}
+            <Text
+              variant="p"
+              className={`my-0 ${
+                isSelected
+                  ? selectedTextClassName ||
+                    (isDark
+                      ? "text-white font-semibold"
+                      : "text-slate-900 font-semibold")
+                  : textClassName || "text-slate-400 font-normal"
+              }`}
+              style={isSelected ? selectedTextStyle : textStyle}
+            >
+              {option}
+            </Text>
+          </Pressable>
+        );
+      })}
     </View>
   );
-}
-
-const switchStyles = StyleSheet.create({
-  track: {
-    flexDirection: "row",
-    width: "100%",
-    height: 50,
-    backgroundColor: "rgba(49, 48, 53, 0.2)",
-    position: "relative",
-    overflow: "hidden",
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0)",
-  },
-  thumb: {
-    position: "absolute",
-    height: "100%",
-    width: "50%",
-    top: 4,
-    left: 8,
-  },
-  option: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    zIndex: 1, // Asegura que el texto esté por encima del thumb animado
-  },
 });
+
+export default SegmentedControl;

@@ -2,7 +2,6 @@ import {
   TouchableOpacity,
   StyleSheet,
   View,
-  Platform,
   Pressable,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
@@ -14,28 +13,29 @@ import { Route } from "@react-navigation/native";
 import { useState, useEffect } from "react";
 import { useRouter } from "expo-router";
 import * as Haptics from "expo-haptics";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
-  withTiming,
   interpolate,
+  withTiming,
   runOnJS,
   Easing,
 } from "react-native-reanimated";
 import {
-  Home,
+  LayoutDashboard,
+  AlarmClock,
+  CirclePlus,
+  FolderPlus,
+  Settings2,
+  HandMetal,
+  Lightbulb,
   Trophy,
   Repeat,
-  Settings2,
-  CirclePlus,
-  Mic,
   Camera,
-  FolderPlus,
   Coins,
-  AlarmClock,
-  Lightbulb,
-  HandMetal,
-  LayoutDashboard,
+  Home,
+  Mic,
 } from "lucide-react-native";
 
 // ==========================================
@@ -75,6 +75,7 @@ interface PopupMenuProps {
   isDark: boolean;
   animatedMenuProps: any;
   handleMenuAction: (action: string) => void;
+  insetsBottom: number;
 }
 
 // ==========================================
@@ -304,6 +305,7 @@ function PopupMenu({
   isDark,
   animatedMenuProps,
   handleMenuAction,
+  insetsBottom,
 }: PopupMenuProps) {
   if (!menuVisible) return null;
 
@@ -315,10 +317,11 @@ function PopupMenu({
         {
           backgroundColor: isDark ? "#18181B" : "#FFFFFF",
           borderColor: isDark ? "#2E2E34" : "#E2E8F0",
+          bottom: 86 + Math.max(insetsBottom, 16),
         },
         !isDark ? stylesTabs.capsuleShadowLight : stylesTabs.capsuleShadowDark,
       ]}
-      className="absolute bottom-24 left-5 right-5 p-5 rounded-[32px] border shadow-xl"
+      className="absolute left-5 right-5 p-5 rounded-[32px] border shadow-xl"
     >
       {/* New Register Section */}
       <View className="mb-4">
@@ -538,6 +541,7 @@ export default function CustomTabBar({
   const { isDark } = useTheme();
   const { isLeftHanded } = useSettingsStore();
   const router = useRouter();
+  const insets = useSafeAreaInsets();
 
   // Menu Visibility State
   const [menuVisible, setMenuVisible] = useState(false);
@@ -649,6 +653,7 @@ export default function CustomTabBar({
         isDark={isDark}
         animatedMenuProps={animatedMenuProps}
         handleMenuAction={handleMenuAction}
+        insetsBottom={insets.bottom}
       />
 
       {/* Row containing navigation capsule and floating action button */}
@@ -656,6 +661,7 @@ export default function CustomTabBar({
       <View
         style={[
           stylesTabs.tabBar,
+          { paddingBottom: Math.max(insets.bottom + 8, 16) },
           isLeftHanded && { flexDirection: "row-reverse" },
         ]}
         pointerEvents="box-none"
@@ -702,7 +708,6 @@ const stylesTabs = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: 20,
-    paddingBottom: Platform.OS === "ios" ? 34 : 20,
     paddingTop: 10,
   },
   capsuleShadowLight: {

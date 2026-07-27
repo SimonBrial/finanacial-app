@@ -3,7 +3,7 @@ import TitleCustom from "../../components/title-custom";
 import GoalHero from "../../components/features/goals/goal-hero";
 import { View, ScrollView } from "react-native";
 import Icon from "../../components/ui/icon";
-import Button from "../../components/ui/button";
+import Button from "../../components/ui/button-own";
 import { useState } from "react";
 import useTheme from "../../hooks/useTheme";
 import GoalCardLg from "../../components/features/goals/goal-card-lg";

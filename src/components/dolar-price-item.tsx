@@ -6,63 +6,65 @@ import useTheme from "../hooks/useTheme";
 import Stack from "./ui/stack";
 import PercentIndicator from "./ui/percent-indicator";
 import { DolarPriceItemProps } from "../types/interface";
+import { Text } from "./ui/text";
 
-export default function DolarPriceItem({ title, color }: DolarPriceItemProps) {
-  const { sizes, globalStyles, theme } = useTheme();
+export default function DolarPriceItem({
+  title,
+  bgColorClass,
+  textColorClass,
+}: DolarPriceItemProps) {
+  const { isDark } = useTheme();
   return (
-    <Row
-      justifyContent="flex-start"
-      width={"100%"}
-      customStyles={{ paddingLeft: 10 }}
-    >
-      <View
-        style={{
-          height: 50,
-          width: 6,
-          backgroundColor: color || theme.t100,
-          marginRight: sizes.sm,
-          borderRadius: 1000,
-        }}
-      />
-      <Stack width={"60%"}>
-        <Row gap={sizes.sm} alignItem="flex-end" justifyContent="flex-start">
-          <Typography fontSize={sizes.lg} customStyles={{ color: "white" }}>
+    <View className="flex-row justify-start items-center w-full pl-3">
+      <View className={`${bgColorClass} h-14 w-2 mr-3 rounded-full`} />
+      <View className="w-3/5 flex-col">
+        <View className="flex-row gap-3 items-end justify-start">
+          <Text
+            className={`my-0 ${isDark ? "text-white" : "text-slate-900"} font-normal`}
+            variant={"h4"}
+          >
             {title}
-          </Typography>
-          <Typography fontSize={sizes.sm} customStyles={{ color: "white" }}>
+          </Text>
+          {/* <Typography fontSize={sizes.lg} customStyles={{ color: "white" }}>
+            {title}
+          </Typography> */}
+          <Text className="my-0 text-sm text-slate-900" variant={"p"}>
             (VES)
-          </Typography>
-        </Row>
-        <Typography
+          </Text>
+          {/* <Typography fontSize={sizes.sm} customStyles={{ color: "white" }}>
+            (VES)
+          </Typography> */}
+        </View>
+        <Text className="my-0 text-sm text-slate-500" variant={"p"}>
+          15/02/2026
+        </Text>
+        {/* <Typography
           fontSize={sizes.sm}
           customStyles={{ color: globalStyles.subtitle }}
         >
           15/02/2026
-        </Typography>
-      </Stack>
-      <Stack
-        width={"32%"}
-        alignItem="center"
-      //customStyles={{ marginRight: -100 }}
-      >
-        <Typography fontSize={sizes.lg} customStyles={{ color: color }}>
+        </Typography> */}
+      </View>
+      <View className="w-[32%] flex-col items-center ">
+        <Text className={`my-0  ${textColorClass} font-medium`} variant={"h4"}>
           238.84
-        </Typography>
-        <Row
-          width={"100%"}
-          gap={sizes.md}
-          alignItem="flex-end"
-        //justifyContent="space-around"
-        >
-          <Typography
+        </Text>
+        {/* <Typography fontSize={sizes.lg} customStyles={{ color: color }}>
+          238.84
+        </Typography> */}
+        <View className="w-full flex-row gap-0 items-center justify-center">
+          <Text className="my-0 text-sm text-slate-500" variant={"p"}>
+            -10.55
+          </Text>
+          {/* <Typography
             fontSize={sizes.sm}
             customStyles={{ color: globalStyles.subtitle, marginRight: -20 }}
           >
             -10.55{" "}
-          </Typography>
+          </Typography> */}
           <PercentIndicator percentage="4.23%" trend="down" />
-        </Row>
-      </Stack>
-    </Row>
+        </View>
+      </View>
+    </View>
   );
 }

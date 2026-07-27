@@ -1,224 +1,123 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import {
-  TouchableOpacity,
-  StyleSheet,
-  TextStyle,
-  ViewStyle,
-} from "react-native";
-import { ButtonProps } from "../../types/interface";
-import { useMemo } from "react";
-import { PrimitiveVariants } from "../../types/type";
-import useTheme from "../../hooks/useTheme";
-import Icon from "./icon";
-import Typography from "./typography";
+import { TextClassContext } from "@/components/ui/text";
+import { cva, type VariantProps } from "class-variance-authority";
+import { Platform, Pressable } from "react-native";
+import { cn } from "../unused/shadcn-primitives/utils";
 
-import { LinearGradient } from "expo-linear-gradient";
-import { darkenHexColor } from "../../utils/darkenHexColor";
-
-export default function Button({
-  text,
-  color = "#006dff",
-  type = "filled",
-  size = "md",
-  iconLeft,
-  iconRight,
-  fullWidth = false,
-  library = "MaterialCommunityIcons",
-  containerStyle,
-  customColorText,
-  onPress,
-  disabled = false,
-  isActive = false,
-  padding,
-}: ButtonProps) {
-  const { sizes, globalStyles } = useTheme();
-
-  const darkerColor = useMemo(() => {
-    if (color && color.startsWith("#")) {
-      return darkenHexColor(color, 20); // 20% darker
-    }
-    return color; // Fallback
-  }, [color]);
-
-  const themedStyles = useMemo(() => {
-    const currentType = isActive ? "filled" : type;
-    const isFilled = currentType === "filled";
-
-    const activeColor = disabled ? globalStyles.buttonDisabled : color;
-    const contentColor = isFilled
-      ? disabled
-        ? globalStyles.buttonDisabledText
-        : "#FFFFFF"
-      : disabled
-      ? globalStyles.buttonDisabledText
-      : activeColor;
-
-    // Ajuste de las variantes según el diseño
-    const variantStyles: Record<PrimitiveVariants, ViewStyle> = {
-      filled: {
-        backgroundColor: disabled ? globalStyles.buttonDisabled : color,
-        borderWidth: 0,
+const buttonVariants = cva(
+  cn(
+    "group shrink-0 flex-row items-center justify-center gap-2 rounded-md shadow-none",
+    Platform.select({
+      web: "focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive whitespace-nowrap outline-none transition-all focus-visible:ring-[3px] disabled:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+    }),
+  ),
+  {
+    variants: {
+      variant: {
+        default: cn(
+          "bg-primary active:bg-primary/90 shadow-sm shadow-black/5",
+          Platform.select({ web: "hover:bg-primary/90" }),
+        ),
+        destructive: cn(
+          "bg-destructive active:bg-destructive/90 dark:bg-destructive/60 shadow-sm shadow-black/5",
+          Platform.select({
+            web: "hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40",
+          }),
+        ),
+        outline: cn(
+          "border-border bg-background active:bg-accent dark:bg-input/30 dark:border-input dark:active:bg-input/50 border shadow-sm shadow-black/5",
+          Platform.select({
+            web: "hover:bg-accent dark:hover:bg-input/50",
+          }),
+        ),
+        secondary: cn(
+          "bg-secondary active:bg-secondary/80 shadow-sm shadow-black/5",
+          Platform.select({ web: "hover:bg-secondary/80" }),
+        ),
+        ghost: cn(
+          "active:bg-accent dark:active:bg-accent/50",
+          Platform.select({ web: "hover:bg-accent dark:hover:bg-accent/50" }),
+        ),
+        link: "",
       },
-      light: { backgroundColor: "transparent", borderWidth: 0 },
-      bordered: {
-        backgroundColor: "transparent",
-        borderWidth: 1,
-        borderColor: activeColor,
+      size: {
+        default: cn(
+          "h-10 px-4 py-2 sm:h-9",
+          Platform.select({ web: "has-[>svg]:px-3" }),
+        ),
+        sm: cn(
+          "h-9 gap-1.5 rounded-md px-3 sm:h-8",
+          Platform.select({ web: "has-[>svg]:px-2.5" }),
+        ),
+        lg: cn(
+          "h-11 rounded-md px-6 sm:h-10",
+          Platform.select({ web: "has-[>svg]:px-4" }),
+        ),
+        icon: "h-10 w-10 sm:h-9 sm:w-9",
       },
-      ghost: {
-        backgroundColor: disabled ? globalStyles.buttonDisabled : `${color}25`,
-        borderWidth: 0,
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
+  },
+);
+
+const buttonTextVariants = cva(
+  cn(
+    "text-foreground text-sm font-medium",
+    Platform.select({ web: "pointer-events-none transition-colors" }),
+  ),
+  {
+    variants: {
+      variant: {
+        default: "text-primary-foreground",
+        destructive: "text-white",
+        outline: cn(
+          "group-active:text-accent-foreground",
+          Platform.select({ web: "group-hover:text-accent-foreground" }),
+        ),
+        secondary: "text-secondary-foreground",
+        ghost: "group-active:text-accent-foreground",
+        link: cn(
+          "text-primary group-active:underline",
+          Platform.select({
+            web: "underline-offset-4 hover:underline group-hover:underline",
+          }),
+        ),
       },
-      flat: {},
-    };
-
-    // Añadido tamaño 'xs' para casos muy pequeños
-    const sizeStyles: Record<string, ViewStyle> = {
-      xs: { height: 28, paddingHorizontal: 12, borderRadius: 6 },
-      sm: { height: 36, paddingHorizontal: 16, borderRadius: 8 },
-      md: { height: 44, paddingHorizontal: 24, borderRadius: 8 },
-      lg: { height: 52, paddingHorizontal: 32, borderRadius: 10 },
-    };
-
-    const sizeText: Record<string, TextStyle> = {
-      xs: { fontSize: sizes.sm }, // Ligeramente más pequeño que sm
-      sm: { fontSize: sizes.sm },
-      md: { fontSize: sizes.md },
-      lg: { fontSize: sizes.lg },
-    };
-
-    // 1. Calculamos el estilo del contenedor
-    const containerStyleObj = StyleSheet.flatten([
-      styles.defaultStyles,
-      variantStyles[currentType as PrimitiveVariants], // Usamos currentType aquí
-      sizeStyles[size as string],
-      fullWidth && { width: "100%", alignSelf: "auto" as const },
-      // Solo aplicamos sombra a la variante 'filled' (o 'ghost' si se desea elevación)
-      isFilled && {
-        shadowColor: color,
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.3,
-        shadowRadius: 4.65,
-        elevation: 8,
+      size: {
+        default: "",
+        sm: "",
+        lg: "",
+        icon: "",
       },
-      padding !== undefined && { paddingHorizontal: padding }, // Control manual del padding
-      containerStyle,
-    ]) as ViewStyle;
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
+  },
+);
 
-    return {
-      container: containerStyleObj,
-      textStyle: {
-        color: customColorText?.color || contentColor,
-        textAlign: "center",
-        fontSize: sizeText[size as string]?.fontSize,
-      } as TextStyle,
-      iconColor: customColorText?.color || contentColor,
-      sizeIcon: sizeText[size as string],
-    };
-  }, [
-    customColorText,
-    containerStyle,
-    fullWidth,
-    disabled,
-    color,
-    sizes,
-    size,
-    type,
-    isActive,
-    library,
-    padding,
-  ]);
+type ButtonProps = React.ComponentProps<typeof Pressable> &
+  React.RefAttributes<typeof Pressable> &
+  VariantProps<typeof buttonVariants>;
 
-  // HitSlop aumenta el área táctil sin cambiar el tamaño visual (ideal para el tamaño xs)
-  const hitSlop =
-    size === "xs" ? { top: 10, bottom: 10, left: 10, right: 10 } : undefined;
-
-  const renderInnerContent = () => (
-    <>
-      {iconLeft && (
-        <Icon
-          variant="light"
-          name={iconLeft}
-          library={library}
-          color={
-            typeof themedStyles.iconColor === "string"
-              ? themedStyles.iconColor
-              : "#FFFFFF"
-          }
-          size={themedStyles.sizeIcon.fontSize}
-        />
-      )}
-
-      {text && (
-        <Typography
-          fontSize={themedStyles.sizeIcon.fontSize}
-          customStyles={themedStyles.textStyle}
-        >
-          {text}
-        </Typography>
-      )}
-
-      {iconRight && (
-        <Icon
-          variant="light"
-          name={iconRight}
-          library={library}
-          color={
-            typeof themedStyles.iconColor === "string"
-              ? themedStyles.iconColor
-              : "#FFFFFF"
-          }
-          size={themedStyles.sizeIcon.fontSize}
-        />
-      )}
-    </>
-  );
-
-  const isFilled = (isActive ? "filled" : type) === "filled";
-
+function Button({ className, variant, size, ...props }: ButtonProps) {
   return (
-    <TouchableOpacity
-      style={[
-        themedStyles.container,
-        isFilled && !disabled && {
-          backgroundColor: "transparent",
-          paddingHorizontal: 0,
-          paddingVertical: 0,
-        },
-      ]}
-      onPress={onPress}
-      disabled={disabled}
-      activeOpacity={0.7}
-      hitSlop={hitSlop}
-    >
-      {isFilled && !disabled ? (
-        <LinearGradient
-          colors={[color, darkerColor]}
-          style={[
-            styles.defaultStyles,
-            {
-              borderRadius: themedStyles.container.borderRadius,
-              paddingHorizontal: themedStyles.container.paddingHorizontal,
-              height: themedStyles.container.height,
-              width: "100%",
-            },
-          ]}
-        >
-          {renderInnerContent()}
-        </LinearGradient>
-      ) : (
-        renderInnerContent()
-      )}
-    </TouchableOpacity>
+    <TextClassContext.Provider value={buttonTextVariants({ variant, size })}>
+      <Pressable
+        className={cn(
+          props.disabled && "opacity-50",
+          buttonVariants({ variant, size }),
+          className,
+        )}
+        role="button"
+        {...props}
+      />
+    </TextClassContext.Provider>
   );
 }
 
-const styles = StyleSheet.create({
-  defaultStyles: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 8,
-    alignSelf: "flex-start",
-  },
-});
+export { Button, buttonTextVariants, buttonVariants };
+export type { ButtonProps };

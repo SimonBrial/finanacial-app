@@ -9,16 +9,24 @@ import {
   Pressable,
 } from "react-native";
 import * as Location from "expo-location";
-import { BottomSheetBackdrop, BottomSheetModal, BottomSheetView } from "@gorhom/bottom-sheet";
+import {
+  BottomSheetBackdrop,
+  BottomSheetModal,
+  BottomSheetView,
+} from "@gorhom/bottom-sheet";
 import Typography from "../../ui/typography";
 import Icon from "../../ui/icon";
-import Button from "../../ui/button";
+import Button from "../../ui/button-own";
 import CustomMap from "../../ui/custom-map";
 import useTheme from "../../../hooks/useTheme";
 
 interface LocationBottomSheetProps {
   sheetRef: React.RefObject<BottomSheetModal | null>;
-  onLocationSelected: (latitude: number, longitude: number, address?: string) => void;
+  onLocationSelected: (
+    latitude: number,
+    longitude: number,
+    address?: string,
+  ) => void;
   title?: string;
 }
 
@@ -46,7 +54,7 @@ export default function LocationBottomSheet({
       setIsLoadingLocation(false);
       Alert.alert(
         "Permission Denied",
-        "Permission to access location was denied. Please enable it in your phone settings."
+        "Permission to access location was denied. Please enable it in your phone settings.",
       );
       return;
     }
@@ -58,7 +66,7 @@ export default function LocationBottomSheet({
     } catch (error) {
       Alert.alert(
         "Error",
-        "Could not get current location. Please make sure location services are enabled."
+        "Could not get current location. Please make sure location services are enabled.",
       );
     } finally {
       setIsLoadingLocation(false);
@@ -74,7 +82,7 @@ export default function LocationBottomSheet({
         opacity={0.6}
       />
     ),
-    []
+    [],
   );
 
   return (
@@ -102,16 +110,30 @@ export default function LocationBottomSheet({
             onPress={handleUseCurrentLocation}
             disabled={isLoadingLocation}
           >
-            <View style={[styles.iconWrapper, { backgroundColor: "rgba(255,255,255,0.05)" }]}>
+            <View
+              style={[
+                styles.iconWrapper,
+                { backgroundColor: "rgba(255,255,255,0.05)" },
+              ]}
+            >
               {isLoadingLocation ? (
                 <ActivityIndicator size="small" color="white" />
               ) : (
-                <Icon name="my-location" library="MaterialIcons" size={24} color="white" />
+                <Icon
+                  name="my-location"
+                  library="MaterialIcons"
+                  size={24}
+                  color="white"
+                />
               )}
             </View>
             <View style={styles.textWrapper}>
-              <Typography txtWhite bold>Use Current Location</Typography>
-              <Typography customStyles={{ color: "rgba(255,255,255,0.5)", fontSize: 12 }}>
+              <Typography txtWhite bold>
+                Use Current Location
+              </Typography>
+              <Typography
+                customStyles={{ color: "rgba(255,255,255,0.5)", fontSize: 12 }}
+              >
                 Get location from GPS
               </Typography>
             </View>
@@ -124,12 +146,26 @@ export default function LocationBottomSheet({
               setIsMapFullscreen(true);
             }}
           >
-            <View style={[styles.iconWrapper, { backgroundColor: "rgba(255,255,255,0.05)" }]}>
-              <Icon name="map" library="MaterialIcons" size={24} color="white" />
+            <View
+              style={[
+                styles.iconWrapper,
+                { backgroundColor: "rgba(255,255,255,0.05)" },
+              ]}
+            >
+              <Icon
+                name="map"
+                library="MaterialIcons"
+                size={24}
+                color="white"
+              />
             </View>
             <View style={styles.textWrapper}>
-              <Typography txtWhite bold>Add Manually</Typography>
-              <Typography customStyles={{ color: "rgba(255,255,255,0.5)", fontSize: 12 }}>
+              <Typography txtWhite bold>
+                Add Manually
+              </Typography>
+              <Typography
+                customStyles={{ color: "rgba(255,255,255,0.5)", fontSize: 12 }}
+              >
                 Select on map
               </Typography>
             </View>
@@ -147,7 +183,13 @@ export default function LocationBottomSheet({
         <View style={{ flex: 1, backgroundColor: "#100F14" }}>
           {/* Search Bar Overlay */}
           <View style={styles.searchBarContainer}>
-            <Icon name="search" library="Ionicons" size={20} color="#888" variant="light" />
+            <Icon
+              name="search"
+              library="Ionicons"
+              size={20}
+              color="#888"
+              variant="light"
+            />
             <TextInput
               placeholder="Search address or place..."
               placeholderTextColor="#888"

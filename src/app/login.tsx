@@ -11,7 +11,7 @@ import { useState } from "react";
 import { useRouter } from "expo-router";
 import Logo from "../components/logo";
 import BackgroundShapeLayout from "../components/background-shape-layout";
-import Button from "../components/ui/button";
+import Button from "../components/ui/button-own";
 import Icon from "../components/ui/icon";
 import useTheme from "../hooks/useTheme";
 import Typography from "../components/ui/typography";

@@ -8,7 +8,7 @@ import {
 import dayjs from "dayjs";
 import Typography from "./typography";
 import Icon from "./icon";
-import Button from "./button";
+import Button from "./button-own";
 import useTheme from "../../hooks/useTheme";
 
 interface CalendarModalProps {

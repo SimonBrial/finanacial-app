@@ -22,6 +22,7 @@
     "@rn-primitives/accordion": "^1.5.2",
     "@rn-primitives/slot": "^1.5.2",
     "@rn-primitives/switch": "^1.5.2",
+    "@rn-primitives/tabs": "^1.5.2",
     "@rn-primitives/toggle": "^1.5.2",
     "@shopify/react-native-skia": "2.2.12",
     "class-variance-authority": "^0.7.1",

@@ -1,57 +1,41 @@
-import React from "react";
-import Icon from "./ui/icon";
-import Row from "./ui/row";
-import Typography from "./ui/typography";
+import { Icon } from "./unused/shadcn-primitives/icon";
 import NotificationIcon from "./notification-icon";
 import useTheme from "../hooks/useTheme";
-import { TitleCustomProps } from "../types/interface";
 import ShowString from "./show-string";
 import { useBankStore } from "../stores/useBankStore";
+import type { LucideIcon } from "lucide-react-native";
+import { House } from "lucide-react-native";
+import { Text } from "./ui/text";
+import { View } from "react-native";
+
+interface TitleCustomProps {
+  withNotificationIcon: boolean;
+  showIconBalance?: boolean;
+  as: LucideIcon;
+  title: string;
+}
 
 export default function TitleCustom({
-  withNotificationIcon,
   showIconBalance = false,
-  library,
+  withNotificationIcon,
+  as = House,
   title,
-  name,
 }: TitleCustomProps) {
-  const { theme, sizes } = useTheme();
+  const { isDark } = useTheme();
   const showBalance = useBankStore().showBalance;
   const fnShowBalance = useBankStore().setShowBalance;
 
   return (
-    <Row
-      alignItem="center"
-      justifyContent="space-between"
-      width={"100%"}
-      customStyles={{
-        paddingBottom: sizes.sm,
-      }}
-    >
-      <Row
-        width={"70%"}
-        gap={sizes.xs}
-        //customStyles={{ paddingLeft: sizes.xs }}
-        alignItem="center"
-        justifyContent="start"
-      >
-        <Icon
-          bgStyle={{
-            padding: sizes.xxs,
-            borderRadius: sizes.xs,
-            backgroundColor: `${theme.t20}`,
-            //width: 44,
-            //height: 44,
-          }}
-          color={theme.t100}
-          size={sizes.xl}
-          library={library}
-          name={name}
-        />
-        <Typography fontSize={sizes.xl} bold={false}>
+    <View className="flex-row items-center justify-between w-full pb-3">
+      <View className={"w-[70%] flex-row items-center justify-start gap-3"}>
+        <Icon as={as} size={24} />
+        <Text
+          variant={"h2"}
+          className={`pb-0 font-normal ${isDark ? "text-white" : "text-slate-900"}`}
+        >
           {title}
-        </Typography>
-      </Row>
+        </Text>
+      </View>
       {showIconBalance && (
         <ShowString
           show={showBalance}
@@ -59,6 +43,6 @@ export default function TitleCustom({
         />
       )}
       {withNotificationIcon && <NotificationIcon hasNotification={true} />}
-    </Row>
+    </View>
   );
 }
