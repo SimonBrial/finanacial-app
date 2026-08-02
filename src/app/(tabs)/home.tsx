@@ -4,7 +4,6 @@ import DolarPriceContainer from "../../components/dolar-price-container";
 import TitleCustom from "../../components/title-custom";
 import GoalsContainer from "../../components/goals-container";
 import BarsChartContainer from "../../components/charts/bars-chart-container";
-import ConcentricProgressRings from "../../components/charts/concentric-progress-rings";
 import { ScrollView, View } from "react-native";
 import { House } from "lucide-react-native";
 

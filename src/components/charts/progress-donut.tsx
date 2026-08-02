@@ -1,4 +1,3 @@
-import React from "react";
 import { View } from "react-native";
 import {
   Svg,
@@ -10,7 +9,7 @@ import useTheme from "../../hooks/useTheme";
 import { CircularProgressProps } from "../../types/interface";
 
 export default function CircularProgress(props: CircularProgressProps) {
-  const { theme } = useTheme();
+  const { theme, isDark } = useTheme();
   const { size, strokeWidth, text } = props;
   const radius = (size - strokeWidth) / 2;
   const circum = radius * 2 * Math.PI;
@@ -48,7 +47,7 @@ export default function CircularProgress(props: CircularProgressProps) {
           x={size / 2}
           y={size / 2 + (props.textSize ? Number(props.textSize) / 2 - 1 : 5)}
           textAnchor="middle"
-          fill={"white"}
+          fill={isDark ? "white" : "#0F172B"}
         >
           {text}
         </SVGText>

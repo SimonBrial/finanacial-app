@@ -1,7 +1,5 @@
-import { useState } from "react";
 import useTheme from "../hooks/useTheme";
-import { TouchableOpacity, View } from "react-native";
-import Collapsible from "react-native-collapsible";
+import { TouchableOpacity, View, ActivityIndicator } from "react-native";
 import { Icon } from "./unused/shadcn-primitives/icon";
 import {
   EllipsisVertical,
@@ -22,24 +20,22 @@ interface CollapsibleCardContainerProps {
   children: React.ReactNode;
   title: string;
   as: LucideIcon;
+  onRefresh?: () => void;
+  isLoading?: boolean;
 }
 
 export default function CollapsibleCardContainer({
   children,
   title,
   as = ChartColumnBig,
-  //library = "MaterialCommunityIcons",
-  //name,
+  onRefresh,
+  isLoading = false,
 }: CollapsibleCardContainerProps) {
-  const { sizes, isDark } = useTheme();
-  const [isCollapsed, setIsCollapsed] = useState(true);
+  const { isDark } = useTheme();
 
-  const toggleCollapsible = () => {
-    setIsCollapsed(!isCollapsed);
-  };
   return (
     <Accordion
-      className={`"flex-1 justify-start rounded-[20] shadow" ${isDark ? "border border-zinc-700 bg-zinc-900" : "border border-white bg-slate-100"} `}
+      className={`"flex-1 justify-start rounded-[20] shadow" ${isDark ? "border border-zinc-700 bg-bgContainerDark" : "border border-white bg-slate-100"} `}
       type="single"
       collapsable
     >
@@ -47,29 +43,45 @@ export default function CollapsibleCardContainer({
         <AccordionTrigger>
           <View className="flex-1 flex-row justify-center items-center">
             <View className="flex-1 flex-row gap-2 items-center justify-start">
-              <Icon as={as} size={24} />
+              {onRefresh ? (
+                <TouchableOpacity
+                  onPress={onRefresh}
+                  activeOpacity={0.7}
+                  disabled={isLoading}
+                  className="p-1"
+                >
+                  {isLoading ? (
+                    <ActivityIndicator
+                      size="small"
+                      color={isDark ? "#ffffff" : "#0f172a"}
+                    />
+                  ) : (
+                    <Icon as={as} size={24} />
+                  )}
+                </TouchableOpacity>
+              ) : (
+                <Icon as={as} size={24} />
+              )}
               <Text
                 variant={"h3"}
                 className={`my-0 w-[85%] font-medium ${isDark ? "text-white" : "text-slate-900"}`}
               >
                 {title}
               </Text>
-              {/* <Typography
-              fontSize={sizes.lg}
-              bold={false}
-              customStyles={{ color: "white", width: "85%" }}
-            >
-              {title}
-            </Typography> */}
             </View>
             {title.toLowerCase() === "dolar price" && (
               <View className="flex-row items-center">
-                <Button size={"icon"}>
-                  <Icon as={RotateCcw} size={20} className="px-4" />
+                <Button size={"icon"} onPress={onRefresh} disabled={isLoading}>
+                  {isLoading ? (
+                    <ActivityIndicator size="small" color="#ffffff" />
+                  ) : (
+                    <Icon as={RotateCcw} size={20} className="px-4" />
+                  )}
                 </Button>
+                {/* 
                 <Button size={"icon"}>
                   <Icon as={EllipsisVertical} size={20} className="px-4" />
-                </Button>
+                </Button> */}
               </View>
             )}
           </View>

@@ -1,25 +1,35 @@
-import { StyleSheet, View, ViewStyle } from "react-native";
+import React from "react";
+import { View, ViewStyle } from "react-native";
+import * as LucideIcons from "lucide-react-native";
 import useTheme from "../../hooks/useTheme";
 import { IconProps } from "../../types/interface";
-import { IconLibraries, IconVariant } from "../../types/type";
+import { IconVariant } from "../../types/type";
+
+// Convierte nombres en formato kebab-case o lowercase ("check-circle", "home") a PascalCase ("CheckCircle", "Home")
+function formatIconName(name: string): string {
+  if (!name) return "HelpCircle";
+  return name.replace(/(^\w|-\w)/g, (m) => m.replace("-", "").toUpperCase());
+}
 
 export default function Icon({
-  library = "MaterialCommunityIcons",
-  color, // Lo dejamos dinámico según la variante si no se pasa uno explícito
+  color,
   rounded = false,
-  variant = "solid", // 'ghost' suele ser un buen por defecto para íconos sueltos
-  name = "home",
+  variant = "solid",
+  name = "Home",
   size = 24,
   padding = 8,
   bgStyle,
   style,
 }: IconProps) {
   const { sizes, theme } = useTheme();
-  const SelectedIcon = IconLibraries[library as keyof typeof IconLibraries];
 
-  if (!SelectedIcon) {
-    return null;
-  }
+  const pascalName = formatIconName(name);
+
+  // Obtenemos el ícono de lucide-react-native
+  const IconComponent =
+    (LucideIcons as Record<string, any>)[pascalName] ||
+    (LucideIcons as Record<string, any>)[name] ||
+    LucideIcons.HelpCircle;
 
   const variantStyles: Record<IconVariant, ViewStyle> = {
     light: {
@@ -42,33 +52,32 @@ export default function Icon({
     },
   };
 
-  const variantTextStyle: Record<IconVariant, string> = {
-    light: color ? (color as string) : "white",
-    solid: theme.t100,
-    bordered: theme.t100,
-    ghost: color ? color : theme.t100,
-  };
+  const iconColor =
+    variant === "light"
+      ? color || "white"
+      : variant === "ghost"
+        ? color || theme.t100
+        : theme.t100;
 
-  const containerStyles = StyleSheet.flatten([
+  const containerStyles = [
     {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      padding: padding,
+      display: "flex" as const,
+      alignItems: "center" as const,
+      justifyContent: "center" as const,
+      padding: variant === "light" ? 0 : padding,
       borderRadius: rounded ? 999 : sizes.xxs,
-      backgroundColor: color ? color : "red",
     },
-    variantStyles[variant], // <-- Magia aquí: busca directo el estilo que le pases
+    variantStyles[variant],
     bgStyle,
-  ]);
+  ];
 
   return (
     <View style={containerStyles}>
-      <SelectedIcon
-        name={name as any}
+      <IconComponent
         size={size}
-        color={variantTextStyle[variant]}
+        color={iconColor}
         style={style}
+        strokeWidth={2}
       />
     </View>
   );

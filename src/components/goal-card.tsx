@@ -1,11 +1,10 @@
 import useTheme from "../hooks/useTheme";
-import Badge from "./ui/badge";
-import Row from "./ui/row";
-import Typography from "./ui/typography";
 import CircularProgress from "./charts/progress-donut";
 import { View } from "react-native";
 import { Canvas, Rect, RadialGradient, vec } from "@shopify/react-native-skia";
 import { GoalCardProps } from "../types/interface";
+import { Text } from "./ui/text";
+import Badge from "./ui/badge";
 
 export default function GoalCard({
   currentAmount,
@@ -16,7 +15,7 @@ export default function GoalCard({
   title,
   size,
 }: GoalCardProps) {
-  const { sizes, globalStyles, complete, theme } = useTheme();
+  const { theme, isDark } = useTheme();
 
   // Función para formatear números al estilo europeo/latino (puntos para miles, coma para decimal)
   const formatNumber = (num: number) => {
@@ -27,37 +26,25 @@ export default function GoalCard({
   };
 
   return (
-    <Row
-      width={"48%"}
-      justifyContent="center" // Alineado al centro
-      alignItem="center"
-      customStyles={{
-        borderRadius: 1000,
-        paddingHorizontal: sizes.xs,
-        paddingVertical: sizes.xs,
-        backgroundColor: globalStyles.bgContainerStart,
-        borderColor: globalStyles.borderContainer,
-        borderWidth: 1,
-        alignSelf: size === "sm" ? "flex-start" : "stretch", // Aquí está la clave
-        gap: sizes.sm, // Espacio entre círculo y texto
-      }}
+    <View
+      className={`
+        w-[48%] flex-row items-center justify-center rounded-full p-2 gap-3 
+        ${isDark ? "bg-bgContainerDark" : "bg-white"}
+        ${isDark ? "border border-zinc-800" : "border border-white"}
+        ${size === "sm" ? "self-start" : "self-stretch"}
+      `}
     >
       <View
-        style={{
-          //backgroundColor: "red",
-          width: size === "sm" ? 60 : 80,
-          height: size === "sm" ? 60 : 80,
-          borderRadius: 1000,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
+        className={`rounded-full justify-center items-center ${
+          size === "sm" ? "w-[60px] h-[60px]" : "w-[80px] h-[80px]"
+        }`}
       >
         <Canvas
           style={{
             flex: 1,
+            position: "absolute",
             width: 70,
             height: 70,
-            position: "absolute",
             opacity: 0.2,
             borderRadius: 1000,
           }}
@@ -86,31 +73,29 @@ export default function GoalCard({
           progressPercent={progress}
         />
       </View>
-      <View style={{ flex: 1, gap: 2 }}>
-        <Typography
-          bold
-          fontSize={size === "sm" ? sizes.sm : sizes.lg}
-          customStyles={{ color: "white" }}
+      <View className="flex-col flex-1 gap-1">
+        <Text
+          className={`font-bold ${size ? "text-xs" : "text-xl"} ${isDark ? "text-white" : "text-slate-900"} `}
         >
           {title}
-        </Typography>
+        </Text>
         {status ? (
           <Badge
             text="Complete"
-            type="ghost"
-            color={complete.c100}
+
+            type="gradient"
+            color={"#00BC7D"}
             iconLeft={"check-circle"}
-            size="sm"
+            //size="sm"
           />
         ) : (
-          <Typography
-            fontSize={size === "sm" ? sizes.sm : sizes.md}
-            customStyles={{ color: globalStyles.subtitle, opacity: 0.7 }}
+          <Text
+            className={`${size ? "text-xs" : "text-base"} ${isDark ? "text-gray-400" : "text-slate-600"}  opacity-70 `}
           >
             {formatNumber(currentAmount)}/{goalAmount}
-          </Typography>
+          </Text>
         )}
       </View>
-    </Row>
+    </View>
   );
 }

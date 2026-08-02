@@ -70,6 +70,8 @@ export default function Button({
         borderWidth: 0,
       },
       flat: {},
+      glow: {},
+      gradient: {},
     };
 
     // Añadido tamaño 'xs' para casos muy pequeños

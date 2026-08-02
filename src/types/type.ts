@@ -22,7 +22,14 @@ export const IconLibraries = {
 
 type IconLibrary = keyof typeof IconLibraries;
 
-type PrimitiveVariants = "filled" | "bordered" | "ghost" | "light" | "flat";
+type PrimitiveVariants =
+  | "filled"
+  | "bordered"
+  | "ghost"
+  | "light"
+  | "flat"
+  | "glow"
+  | "gradient";
 
 type BasesSize = "sm" | "md" | "lg";
 

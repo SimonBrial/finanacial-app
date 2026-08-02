@@ -11,7 +11,7 @@ export const mockBankCards: BankCardData[] = [
   {
     id: "card-1",
     bankName: "Banesco",
-    gradientColors: ["#00B4DB", "#0083B0"],
+    gradientColors: ["#0D5CE5", "#22C55E", "#C87533", "#0B1E48"],
     balance: "1,250.00",
     currency: "USD",
     lastEntry: "+ $150.00",
@@ -21,7 +21,7 @@ export const mockBankCards: BankCardData[] = [
   {
     id: "card-2",
     bankName: "Mercantil",
-    gradientColors: ["#0B486B", "#F56217"],
+    gradientColors: ["#0B486B", "#00C9A7", "#F56217", "#0A1329"],
     balance: "4,500.50",
     currency: "USD",
     lastEntry: "- $50.00",
@@ -31,7 +31,7 @@ export const mockBankCards: BankCardData[] = [
   {
     id: "card-3",
     bankName: "Payoneer",
-    gradientColors: ["#ff4500", "#ff8c00"],
+    gradientColors: ["#E52E71", "#FF8A00", "#9B51E0", "#14092A"],
     balance: "8,920.00",
     currency: "USD",
     lastEntry: "+ $1,200.00",
@@ -41,7 +41,7 @@ export const mockBankCards: BankCardData[] = [
   {
     id: "card-4",
     bankName: "PayPal",
-    gradientColors: ["#003087", "#009cde"],
+    gradientColors: ["#003087", "#009CDE", "#00D2FF", "#021338"],
     balance: "340.25",
     currency: "USD",
     lastEntry: "- $12.99",

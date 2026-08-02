@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useRef } from "react";
 import { useWindowDimensions, View } from "react-native";
 import type { ICarouselInstance } from "react-native-reanimated-carousel";
 import Carousel, { Pagination } from "react-native-reanimated-carousel";
@@ -14,7 +14,7 @@ import { BankCardData } from "../types/interface";
 
 export default function CarouselCardBank() {
   const progress = useSharedValue<number>(0);
-  const { sizes } = useTheme();
+  const { isDark } = useTheme();
   const { banks } = useBankStore();
 
   const { width: windowWidth } = useWindowDimensions();
@@ -29,15 +29,9 @@ export default function CarouselCardBank() {
   // Mantenemos tu proporción original
   const DYNAMIC_HEIGHT = ITEM_WIDTH * 0.65;
 
-  const ref = React.useRef<ICarouselInstance>(null);
+  const ref = useRef<ICarouselInstance>(null);
   return (
-    <View
-      testID="carousel-component"
-      style={{
-        marginBottom: sizes.lg,
-        flex: 1,
-      }}
-    >
+    <View testID="carousel-component" className="mb-5 flex-1">
       <Carousel
         ref={ref}
         autoPlayInterval={2000}
@@ -91,12 +85,7 @@ export default function CarouselCardBank() {
         }}
         renderItem={() => (
           <View
-            style={{
-              backgroundColor: "#fffff", // Color base inactivo (un poco transparente)
-              height: 6, // Grosor de la línea/punto
-              width: 6, // Ancho base (se sobreescribe por customReanimatedStyle)
-              borderRadius: 1000, // Para que sea redondo
-            }}
+            className={`h-2 w-2 rounded-full ${isDark ? "bg-white" : "bg-slate-400"}`}
           />
         )}
         horizontal
@@ -125,7 +114,7 @@ export default function CarouselCardBank() {
           return {
             width,
             opacity,
-            backgroundColor: "#ffffff",
+            backgroundColor: isDark ? "#ffffff" : "#94a3b8",
             borderRadius: 1000,
             shadowColor: "#ffffff",
             shadowOffset: { width: 0, height: 0 },

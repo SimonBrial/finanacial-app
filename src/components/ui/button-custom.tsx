@@ -72,6 +72,8 @@ export default function ButtonCustom({
         borderWidth: 0,
       },
       flat: {},
+      glow: {},
+      gradient: {},
     };
 
     // Añadido tamaño 'xs' para casos muy pequeños

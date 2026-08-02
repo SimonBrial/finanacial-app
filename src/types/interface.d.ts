@@ -22,7 +22,7 @@ interface CustomBadgeProps {
 
 interface PercentIndicatorProps {
   percentage: string;
-  trend: "up" | "down";
+  trend: "up" | "down" | "same" | "flat";
 }
 
 interface ExchangeCardProps {
@@ -70,6 +70,12 @@ interface DolarPriceItemProps {
   title: string;
   bgColorClass: string;
   textColorClass: string;
+  price?: number | string;
+  date?: string;
+  change?: number | string;
+  percentage?: string;
+  trend?: "up" | "down" | "same" | "flat";
+  currency?: string;
 }
 
 interface CircularProgressProps {
@@ -89,7 +95,7 @@ interface DonutChartData {
 interface BankCardData {
   id: string;
   bankName: string;
-  gradientColors: [string, string];
+  gradientColors: string[];
   balance: string;
   currency: string;
   lastEntry: string;
@@ -161,9 +167,19 @@ interface GridProps {
 }
 
 interface ExchangeRate {
-  exchangeName: string;
-  value: number;
-  todayDate: string;
+  moneda?: string;
+  fuente?: string;
+  nombre: string;
+  compra?: number | null;
+  venta?: number | null;
+  promedio: number;
+  fechaActualizacion: string;
+  exchangeName?: string;
+  value?: number;
+  todayDate?: string;
+  change?: number;
+  percentageChange?: string;
+  trend?: "up" | "down" | "same" | "flat";
 }
 
 interface Goal {
@@ -246,7 +262,7 @@ interface BackgroundShapesProps {
 
 interface BankCardProps {
   bankName: string;
-  gradientColors: [string, string];
+  gradientColors: string[];
   balance: string;
   currency: string;
   lastEntry: string;
@@ -420,9 +436,11 @@ interface GoalState {
 
 interface ExchangeState {
   rates: ExchangeRate[];
-}
-interface ExchangeState {
-  rates: ExchangeRate[];
+  euroRates?: ExchangeRate[];
+  previousRates?: Record<string, number>;
+  loading: boolean;
+  error: string | null;
+  fetchRates: () => Promise<void>;
 }
 interface CategoriesState {
   categories: CategoryCardProps[];

@@ -1,35 +1,18 @@
-import React from "react";
 import TitleCustom from "./title-custom";
 import useTheme from "../hooks/useTheme";
-import Stack from "./ui/stack";
 import GoalCard from "./goal-card";
 import Row from "./ui/row";
 import { useGoalStore } from "../stores/useGoalStore";
+import { Home } from "lucide-react-native";
+import { View } from "react-native";
 
 export default function GoalsContainer() {
-  const { sizes } = useTheme();
   const { goals } = useGoalStore();
   return (
-    <Stack
-      gap={sizes.lg}
-      justifyContent="flex-start"
-      customStyles={{
-        paddingVertical: sizes.lg,
-        marginBottom: sizes.sm,
-        width: "100%",
-        //height: 360,
-        //borderColor: "red",
-        //borderWidth: 1,
-      }}
-    >
-      <TitleCustom title="Goals" withNotificationIcon={false} />
-      <Stack gap={sizes.md}>
-        <Row
-          gap={sizes.xs}
-          width={"100%"}
-          wrap={true}
-          justifyContent="flex-start"
-        >
+    <View className="w-full py-5 mb-3 justify-start gap-5">
+      <TitleCustom title="Goals" withNotificationIcon={false} as={Home} />
+      <View className="w-full justify-start gap-4">
+        <View className="flex-row gap-2 w-full flex-wrap justify-start">
           {goals.map((goal) => (
             <GoalCard
               key={goal.id}
@@ -42,8 +25,8 @@ export default function GoalsContainer() {
               size="sm"
             />
           ))}
-        </Row>
-      </Stack>
-    </Stack>
+        </View>
+      </View>
+    </View>
   );
 }

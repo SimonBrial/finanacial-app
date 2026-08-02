@@ -30,6 +30,7 @@ export default function GlobalContainer({
         style={{
           // Sumamos la altura del sistema (3 botones o gestos) + un margen cómodo base (ej. 16px)
           paddingBottom: insets.bottom + 48,
+          paddingTop: insets.top - 10,
         }}
       >
         {children}

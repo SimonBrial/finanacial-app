@@ -7,6 +7,7 @@ module.exports = {
       colors: {
         bgAppLight: "#E5E8EF",
         theme: "#006DFF",
+        bgContainerDark: "#100F14",
       },
     },
   },

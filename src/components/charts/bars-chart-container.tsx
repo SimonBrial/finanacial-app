@@ -15,7 +15,7 @@ import { formatCompactNumber } from "../../utils/formatNumber";
 const filterOptions: FilterKey[] = ["Week", "Month", "Year"];
 
 export default function BarsChartContainer() {
-  const { isDark, globalStyles, complete } = useTheme();
+  const { isDark, complete } = useTheme();
 
   const [activeIndex, setActiveIndex] = useState(0); // 0 = Income, 1 = Expense
   const [activeFilter, setActiveFilter] = useState<FilterKey>("Month");
@@ -70,16 +70,21 @@ export default function BarsChartContainer() {
   return (
     <CollapsibleCardContainer title="Historial" as={ChartColumnBig}>
       {/* Tarjeta oscura redondeada */}
-      <View className="w-full bg-slate-50 rounded-3xl p-4 border border-white self-center">
+      <View
+        className={`w-full ${isDark ? "bg-zinc-900" : "bg-slate-50"} rounded-3xl p-4 ${isDark ? "border border-zinc-800" : "border border-white"} self-center`}
+      >
         {/* Encabezado con totales */}
         <View className="w-full flex-row justify-between pb-3 px-2">
           <View className="flex-col items-start">
-            <Text variant="p" className="text-xs text-slate-900 my-0">
+            <Text
+              variant="p"
+              className={`text-xs ${isDark ? "text-zinc-400" : "text-slate-900"}  my-0`}
+            >
               Total {isIncome ? "Ingresos" : "Egresos"}
             </Text>
             <Text
               variant="h2"
-              className="my-0 text-slate-900 font-bold text-xl"
+              className={`text-xl font-bold ${isDark ? "text-white" : "text-slate-900"}  my-0`}
             >
               {chartInfo.total}
             </Text>
@@ -88,7 +93,7 @@ export default function BarsChartContainer() {
           <View className="flex-col items-center gap-1 py-1 px-2.5 rounded-xl">
             <Text
               variant="p"
-              className="text-xs font-semibold text-slate-900 my-0"
+              className={`text-xs font-semibold ${isDark ? "text-white" : "text-slate-900"}  my-0`}
             >
               {chartInfo.label}
             </Text>
@@ -105,7 +110,7 @@ export default function BarsChartContainer() {
 
         {/* ÁREA DE LA GRÁFICA: pb-6 y sin overflow-hidden para dar espacio completo a las letras inferiores */}
         <View
-          className="w-full bg-transparent items-center self-center pb-0 pt-2 border border-red-500"
+          className="w-full bg-transparent items-center self-center pb-0 pt-2"
           onLayout={(e) => {
             const w = e.nativeEvent.layout.width;
             if (w !== containerWidth) {
@@ -128,14 +133,14 @@ export default function BarsChartContainer() {
               xAxisThickness={1}
               xAxisColor="#90A1B9"
               xAxisLabelTextStyle={{
-                color: "#0F172B",
+                color: isDark ? "#ffffff" : "#0F172B",
                 fontSize: 11,
                 marginTop: 6,
                 fontWeight: "500",
                 textAlign: "center",
               }}
               yAxisTextStyle={{
-                color: "#0F172B",
+                color: isDark ? "#ffffff" : "#0F172B",
                 fontSize: 12,
                 fontWeight: "500",
               }}
@@ -158,15 +163,17 @@ export default function BarsChartContainer() {
         </View>
 
         {/* Línea divisora */}
-        <View className="w-full h-[1px] bg-slate-200 mb-1 -mt-4" />
+        <View
+          className={`w-full h-[1px] ${isDark ? "bg-zinc-600" : "bg-slate-200"} mb-4 -mt-4`}
+        />
 
-        {/* Control Segmentado tipo Píldora Azul (Day, Week, Month, Year) */}
+        {/* Control Segmentado tipo Píldora Azul (Week, Month, Year) */}
         <View className="w-full">
           <SegmentedControl
-            containerClassName="bg-slate-50 rounded-full"
+            containerClassName="bg-transparent rounded-full"
             indicatorClassName="bg-theme rounded-full shadow-md"
             selectedTextClassName="text-white font-semibold text-sm"
-            textClassName="text-slate-500 font-medium text-sm"
+            textClassName={`font-medium text-sm ${isDark ? "text-slate-400" : "text-slate-500"}`}
             options={filterOptions}
             selectedIndex={filterOptions.indexOf(activeFilter)}
             onChange={(index) => setActiveFilter(filterOptions[index])}
@@ -176,13 +183,13 @@ export default function BarsChartContainer() {
 
       {/* Selector secundario Tipo (Income / Expense) */}
       <View className="flex-1 w-full gap-3 items-center mt-3">
-        <View className="w-[92%]">
+        <View className="w-full">
           <SegmentedControl
-            containerClassName={isDark ? "bg-slate-800/40" : "bg-slate-200"}
+            containerClassName={isDark ? "bg-zinc-800/90" : "bg-slate-200"}
             selectedTextClassName="text-theme font-bold"
-            textClassName="text-slate-500"
+            textClassName={isDark ? "text-white" : "text-slate-500"}
             indicatorClassName={
-              isDark ? "bg-slate-900 border border-slate-700" : "bg-white"
+              isDark ? "bg-zinc-900/80 border border-zinc-800" : "bg-white"
             }
             options={["Income", "Expense"]}
             selectedIndex={activeIndex}
