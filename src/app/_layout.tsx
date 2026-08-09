@@ -97,35 +97,55 @@ const toastConfig = {
   ),
 };
 
+/**
+ * RootApp
+ *
+ * Componente raíz de la app que configura la navegación principal.
+ * Usa un Stack navigator de expo-router como contenedor principal.
+ * Incluye GestureHandlerRootView para soporte de gestos y
+ * BottomSheetModalProvider para bottom sheets globales.
+ */
 function RootApp() {
   const { globalStyles } = useTheme();
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 /* backgroundColor: "black" */ }}>
+    <GestureHandlerRootView style={{ flex: 1 }}>
       <BottomSheetModalProvider>
+        {/* Stack principal — controla la navegación entre pantallas */}
         <Stack
           screenOptions={{
             headerShown: false,
             contentStyle: { backgroundColor: globalStyles.background },
           }}
         >
+          {/* Pantalla de inicio — redirige a las tabs */}
           <Stack.Screen
             name="index"
             options={{ title: "Home", headerShown: false }}
           />
+
+          {/* Grupo de tabs — contiene la navegación inferior principal */}
           <Stack.Screen
-            name="settings"
-            options={{ title: "Settings", headerShown: false }}
+            name="(tabs)"
+            options={{ headerShown: false }}
           />
+
+          {/*
+           * Pantalla de notificaciones — presentada como modal.
+           * Se abre desde NotificationIcon y se desliza desde abajo.
+           * Anteriormente era un drawer lateral; ahora es un modal
+           * para mayor simplicidad y compatibilidad con SDK 57.
+           */}
           <Stack.Screen
-            name="transactions"
-            options={{ title: "Transactions", headerShown: false }}
-          />
-          <Stack.Screen
-            name="goals"
-            options={{ title: "Goals", headerShown: false }}
+            name="notification"
+            options={{
+              presentation: "modal",
+              headerShown: false,
+              animation: "slide_from_bottom",
+            }}
           />
         </Stack>
+        {/* Toast global — muestra notificaciones tipo snackbar */}
         <Toast config={toastConfig} />
       </BottomSheetModalProvider>
     </GestureHandlerRootView>

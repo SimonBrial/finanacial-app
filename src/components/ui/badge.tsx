@@ -75,7 +75,7 @@ export default function Badge({
 
   // Clases NativeWind para estructura fija (Altura única de 26px)
   const baseClassName = isIconOnly
-    ? "p-1 rounded-full items-center justify-center self-start"
+    ? "p-1 rounded-full items-center justify-center self-start flex-row"
     : ` rounded-full p-1 pr-1.5 flex-row items-center justify-center gap-1.5 self-start ${
         fullWidth ? "w-full self-auto" : ""
       }`;

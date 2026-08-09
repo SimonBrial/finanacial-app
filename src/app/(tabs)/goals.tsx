@@ -2,11 +2,11 @@ import GlobalContainer from "../../components/ui/global-container";
 import TitleCustom from "../../components/title-custom";
 import GoalHero from "../../components/features/goals/goal-hero";
 import { View, ScrollView } from "react-native";
-import Icon from "../../components/ui/icon";
 import Button from "../../components/ui/button-own";
 import { useState } from "react";
 import useTheme from "../../hooks/useTheme";
 import GoalCardLg from "../../components/features/goals/goal-card-lg";
+import { Trophy } from "lucide-react-native";
 
 type GoalFilter = "All" | "Completed" | "In Progress" | "Deleted" | "Future";
 
@@ -19,8 +19,7 @@ export default function Goals() {
         <TitleCustom
           title="Goals"
           withNotificationIcon
-          name={"emoji-events"}
-          library="MaterialIcons"
+          as={Trophy}
           showIconBalance
         />
         <GoalHero />
@@ -36,8 +35,7 @@ export default function Goals() {
           <TitleCustom
             title="Your Goals"
             withNotificationIcon={false}
-            name={"emoji-events"}
-            library="MaterialIcons"
+            as={Trophy}
           />
         </View>
         <View

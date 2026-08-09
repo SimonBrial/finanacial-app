@@ -1,21 +1,39 @@
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+/**
+ * Notification Screen
+ *
+ * Pantalla de notificaciones presentada como modal.
+ * Muestra las notificaciones del usuario y un botón para ir al login.
+ *
+ * Anteriormente era el contenido del drawer lateral usando
+ * DrawerContentComponentProps de @react-navigation/drawer.
+ * Ahora es una pantalla independiente que se presenta como modal
+ * desde el root Stack layout.
+ */
+import { StyleSheet, TouchableOpacity, View, Pressable } from "react-native";
 import Typography from "../components/ui/typography";
 import Icon from "../components/ui/icon";
 import Row from "../components/ui/row";
 import useTheme from "../hooks/useTheme";
-import { DrawerContentComponentProps } from "@react-navigation/drawer";
 import { useRouter } from "expo-router";
-export default function Notification({
-  ...props
-}: DrawerContentComponentProps) {
+
+export default function Notification() {
   const { theme, sizes, globalStyles } = useTheme();
   const router = useRouter();
 
-  const hanleLogout = (exception: string) => {
-    router.push(
-      exception.toLocaleLowerCase() === "settings" ? "/settings" : "/404",
-    );
+  /** Navega a la pantalla indicada o cierra el modal */
+  const handleAction = (action: string) => {
+    if (action.toLowerCase() === "settings") {
+      router.push("/settings");
+    } else {
+      router.push("/404");
+    }
   };
+
+  /** Cierra el modal de notificaciones y vuelve a la pantalla anterior */
+  const closeModal = () => {
+    router.back();
+  };
+
   return (
     <View
       style={[
@@ -28,11 +46,11 @@ export default function Notification({
         },
       ]}
     >
+      {/* Encabezado con título y botón de cerrar */}
       <Row alignItem="center" justifyContent="space-between" width={"100%"}>
         <Row
           width={"70%"}
           gap={sizes.xs}
-          //customStyles={{ paddingLeft: sizes.xs }}
           alignItem="center"
           justifyContent="start"
         >
@@ -44,7 +62,19 @@ export default function Notification({
             Notifications
           </Typography>
         </Row>
+
+        {/* Botón para cerrar el modal */}
+        <Pressable onPress={closeModal}>
+          <Icon
+            name={"close"}
+            library="MaterialIcons"
+            size={sizes.xl}
+            color={"white"}
+          />
+        </Pressable>
       </Row>
+
+      {/* Card de ejemplo de notificación */}
       <View
         style={{
           backgroundColor: theme.t20,
@@ -64,8 +94,6 @@ export default function Notification({
             padding: sizes.xs,
             borderRadius: "100%",
             backgroundColor: `${theme.t20}`,
-            //width: 44,
-            //height: 44,
           }}
           name={"emoji-events"}
           library="MaterialIcons"
@@ -74,17 +102,17 @@ export default function Notification({
         />
         <Typography customStyles={{ color: theme.t100 }}>Test</Typography>
       </View>
+
+      {/* Botón de acción — navega al login */}
       <TouchableOpacity
-        onPress={() => hanleLogout("Log Out")}
+        onPress={() => handleAction("Log Out")}
         style={{
           flex: 1,
           gap: 20,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          //backgroundColor: "black",
           width: "100%",
-          //height: 500,
         }}
       >
         <Typography
@@ -100,25 +128,13 @@ export default function Notification({
         >
           Go to login
         </Typography>
-        {/* <Button
-          fullWidth
-          text="Go to login"
-          customColorText={{ color: theme.t100 }}
-          containerStyle={{
-            paddingVertical: sizes.sm,
-            paddingHorizontal: sizes.xl,
-            backgroundColor: theme.t20,
-            borderRadius: sizes.xs,
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        /> */}
       </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  /** Contenedor principal del modal — fondo oscuro semi-transparente */
   container: {
     display: "flex",
     alignItems: "flex-start",
@@ -129,7 +145,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     opacity: 0.9,
     height: "90%",
-
-    //borderColor: "rgba(255, 255, 255, 0.1)",
   },
 });

@@ -1,5 +1,13 @@
-import { DrawerActions } from "@react-navigation/native";
-import { useNavigation } from "expo-router";
+/**
+ * NotificationIcon
+ *
+ * Componente que muestra el avatar del usuario y al presionarlo
+ * navega a la pantalla de notificaciones (presentada como modal).
+ *
+ * Anteriormente abría un drawer lateral usando DrawerActions de
+ * @react-navigation/native. Ahora usa router.push de expo-router.
+ */
+import { useRouter } from "expo-router";
 import { Pressable } from "react-native";
 import { NotificationIconProps } from "../types/interface";
 import Avatar from "./ui/avatar";
@@ -9,11 +17,13 @@ export default function NotificationIcon({
   active,
   ...props
 }: NotificationIconProps) {
-  const navigation = useNavigation();
+  const router = useRouter();
 
+  /** Abre la pantalla de notificaciones como modal */
   const openNotifications = () => {
-    navigation.dispatch(DrawerActions.openDrawer());
+    router.push("/notification");
   };
+
   return (
     <Pressable onPress={openNotifications}>
       <Avatar hasNotification={hasNotification} />

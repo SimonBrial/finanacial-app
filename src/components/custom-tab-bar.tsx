@@ -1,3 +1,17 @@
+/**
+ * CustomTabBar
+ *
+ * Barra de navegación inferior personalizada con diseño de cápsula.
+ * Incluye un botón flotante azul con gradiente que abre un menú popup
+ * con acciones rápidas (crear transacción manual, por voz, por foto, etc.).
+ *
+ * Soporta modo zurdo (isLeftHanded) para invertir la posición del botón.
+ * Compatible con temas claro y oscuro.
+ *
+ * Nota: Los tipos BottomTabBarProps y NavigationRoute se definen localmente
+ * para evitar importar @react-navigation/* directamente (incompatible con
+ * expo-router desde SDK 56+). Expo-router pasa estas mismas props internamente.
+ */
 import {
   TouchableOpacity,
   StyleSheet,
@@ -8,8 +22,6 @@ import { LinearGradient } from "expo-linear-gradient";
 import Typography from "./ui/typography";
 import useTheme from "../hooks/useTheme";
 import { useSettingsStore } from "../stores/useSettingsStore";
-import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
-import { Route } from "@react-navigation/native";
 import { useState, useEffect } from "react";
 import { useRouter } from "expo-router";
 import * as Haptics from "expo-haptics";
@@ -42,6 +54,46 @@ import {
 // TYPES & INTERFACES
 // ==========================================
 
+/**
+ * NavigationRoute — Representa una ruta de navegación individual.
+ * Reemplaza el tipo Route<string> de @react-navigation/native.
+ * Contiene la información mínima necesaria para identificar y navegar a una pantalla.
+ */
+interface NavigationRoute {
+  key: string;      // Identificador único generado por el navegador
+  name: string;     // Nombre de la ruta (ej: "home", "goals", "transactions")
+  params?: any;     // Parámetros opcionales pasados a la pantalla
+}
+
+/**
+ * NavigationState — Estado actual de la navegación por tabs.
+ * Contiene la lista de rutas disponibles y cuál está activa.
+ */
+interface NavigationState {
+  routes: NavigationRoute[];  // Todas las rutas registradas en el tab navigator
+  index: number;              // Índice de la ruta actualmente activa
+}
+
+/**
+ * TabBarNavigation — Objeto de navegación que permite emitir eventos
+ * y navegar programáticamente entre tabs.
+ */
+interface TabBarNavigation {
+  emit: (event: { type: string; target?: string; canPreventDefault?: boolean }) => { defaultPrevented: boolean };
+  navigate: (name: string, params?: any) => void;
+}
+
+/**
+ * BottomTabBarProps — Props que expo-router pasa al componente tabBar personalizado.
+ * Reemplaza la importación directa de @react-navigation/bottom-tabs.
+ */
+interface BottomTabBarProps {
+  state: NavigationState;                   // Estado actual de navegación
+  navigation: TabBarNavigation;             // Objeto para navegar y emitir eventos
+  descriptors: Record<string, any>;         // Descriptores de cada pantalla (opciones, render, etc.)
+}
+
+/** Props para cada ícono individual de tab en la cápsula */
 interface TabItemProps {
   isFocused: boolean;
   label: string;
@@ -51,15 +103,17 @@ interface TabItemProps {
   isDark: boolean;
 }
 
+/** Props del backdrop — overlay transparente que cierra el menú al tocar fuera */
 interface BackdropProps {
   menuVisible: boolean;
   closeMenu: () => void;
 }
 
+/** Props de la cápsula de tabs — contiene las rutas y estado de navegación */
 interface TabCapsuleProps {
-  capsuleRoutes: Route<string>[];
-  state: any;
-  navigation: any;
+  capsuleRoutes: NavigationRoute[];
+  state: NavigationState;
+  navigation: TabBarNavigation;
   isDark: boolean;
   closeMenu: () => void;
 }
@@ -217,7 +271,7 @@ function TabCapsule({
         !isDark ? stylesTabs.capsuleShadowLight : stylesTabs.capsuleShadowDark,
       ]}
     >
-      {capsuleRoutes.map((route: Route<string>) => {
+      {capsuleRoutes.map((route: NavigationRoute) => {
         const IconComponent = routeIcons[route.name];
         if (!IconComponent) return null;
 
