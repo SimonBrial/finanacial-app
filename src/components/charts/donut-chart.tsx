@@ -15,8 +15,7 @@ export default function DonutChart({
   selectedIndex = null,
 }: DonutChartProps) {
   const innerRadius = radius - outerStrokeWidth / 2;
-  const path = Skia.Path.Make();
-  path.addCircle(radius, radius, innerRadius);
+  const path = Skia.Path.Circle(radius, radius, innerRadius);
 
   return (
     <View style={styles.container}>

@@ -4,7 +4,7 @@ import useTheme from "../../../hooks/useTheme";
 import { useCategoriesStore } from "../../../stores/useCategoriesStore";
 
 export default function Categories() {
-  const { sizes } = useTheme();
+  const { sizes, globalStyles } = useTheme();
   const { categories } = useCategoriesStore();
 
   return (
@@ -13,7 +13,7 @@ export default function Categories() {
         flex: 1,
         justifyContent: "flex-start",
         alignItems: "flex-start",
-        backgroundColor: "black",
+        backgroundColor: "none",
         gap: 8,
         paddingTop: sizes.lg,
       }}

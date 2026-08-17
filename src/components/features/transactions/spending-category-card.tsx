@@ -77,8 +77,7 @@ export default function SpendingCategoryCard({
               >
                 <Typography
                   fontSize={sizes.md}
-                  txtWhite
-                  customStyles={{ marginBottom: 2 }}
+                  customStyles={{ color: globalStyles.text, marginBottom: 2 }}
                 >
                   {title}
                 </Typography>
@@ -132,7 +131,7 @@ export default function SpendingCategoryCard({
             style={[styles.btn, styles.btnAdd, { backgroundColor: color }]}
             activeOpacity={0.7}
           >
-            <Typography bold fontSize={sizes.sm} txtWhite>
+            <Typography bold fontSize={sizes.sm} customStyles={{ color: "#FFFFFF" }}>
               + Add
             </Typography>
           </TouchableOpacity>

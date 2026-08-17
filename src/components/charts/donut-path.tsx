@@ -15,8 +15,7 @@ export default function DonutPath({
   segmentData,
 }: DonutPathProps) {
   const innerRadius = radius - outerStrokeWidth / 2;
-  const path = Skia.Path.Make();
-  path.addCircle(radius, radius, innerRadius);
+  const path = Skia.Path.Circle(radius, radius, innerRadius);
 
   const isSelected = selectedIndex === index;
 

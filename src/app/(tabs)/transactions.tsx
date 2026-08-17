@@ -6,19 +6,22 @@ import Icon from "../../components/ui/icon";
 import TabHeaderNavigation from "./transaction_section/tab-header-navigation";
 import Typography from "../../components/ui/typography";
 import { useState } from "react";
+import { RefreshCw } from "lucide-react-native";
 
 export default function Transactions() {
-  const { sizes, theme } = useTheme();
+  const { sizes, theme, globalStyles } = useTheme();
   const [reportPressed, setReportPressed] = useState(false);
   return (
-    <GlobalContainer>
-      <TitleCustom
-        title="Transactions"
-        withNotificationIcon
-        name={"autorenew"}
-        library="MaterialIcons"
-        showIconBalance
-      />
+    <GlobalContainer
+      header={
+        <TitleCustom
+          title="Transactions"
+          withNotificationIcon
+          as={RefreshCw}
+          showIconBalance
+        />
+      }
+    >
 
       <View
         style={{
@@ -59,7 +62,7 @@ export default function Transactions() {
           </View>
           <Typography
             fontSize={sizes.sm}
-            customStyles={{ color: "white", marginRight: 6 }}
+            customStyles={{ color: globalStyles.text, marginRight: 6 }}
           >
             {"january".toUpperCase()}
           </Typography>

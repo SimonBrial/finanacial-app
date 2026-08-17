@@ -117,12 +117,14 @@ interface BalanceCardProps {
 interface BadgeProps extends Partial<IconBase> {
   text?: string;
   color?: string;
-  type?: PrimitiveVariants;
+  type?: PrimitiveVariants | "subtle" | "solid" | "outline";
   size?: BasesSize;
   iconLeft?: string;
   iconRight?: string;
+  iconSize?: number;
   fullWidth?: boolean;
-  containerStyle?: ViewStyle;
+  containerStyle?: StyleProp<ViewStyle>;
+  textStyle?: StyleProp<TextStyle>;
 }
 interface ButtonCustomProps extends Partial<IconBase> {
   text?: string;

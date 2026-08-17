@@ -56,7 +56,7 @@ export default function Records() {
   }));
 
   return (
-    <View style={{ flex: 1, backgroundColor: "black" }}>
+    <View style={{ flex: 1, backgroundColor: "transparent", opacity: 0.9 }}>
       <SectionList
         sections={TRANSACTIONS_DATA}
         keyExtractor={(item) => item.id}
@@ -86,7 +86,7 @@ export default function Records() {
               paddingLeft: sizes.sm,
               paddingTop: sizes.md,
               paddingBottom: sizes.xs,
-              backgroundColor: "black", // Importante para que no se superponga raro al hacer scroll
+              backgroundColor: "transparent", // Importante para que no se superponga raro al hacer scroll
             }}
           >
             {getFriendlyDate(title)}
@@ -95,6 +95,7 @@ export default function Records() {
         // 4. LA SOLUCIÓN AL CORTE: Espacio extra al final de la lista
         contentContainerStyle={{
           paddingBottom: 10, // Ajusta este valor (80, 100, 120) según el alto de tu menú inferior
+          backgroundColor: "transparent",
         }}
         // Opcional: Hace que las fechas se queden pegadas arriba mientras haces scroll
         stickySectionHeadersEnabled={true}

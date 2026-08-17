@@ -11,7 +11,7 @@ import { useState } from "react";
 import { Canvas, RadialGradient, Rect, vec } from "@shopify/react-native-skia";
 
 export default function GoalHero() {
-  const { globalStyles, sizes, inProgress, complete, theme } = useTheme();
+  const { globalStyles, sizes, inProgress, complete, theme, isDark } = useTheme();
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   const toggleCollapsible = () => {
@@ -132,7 +132,7 @@ export default function GoalHero() {
           <Typography
             bold
             customStyles={{
-              color: "white",
+              color: globalStyles.text,
               width: "100%",
               textAlign: "center",
             }}
@@ -142,19 +142,19 @@ export default function GoalHero() {
           </Typography>
 
           <Row alignItem="center" justifyContent="space-between">
-            <Typography fontSize={sizes.sm} customStyles={{ color: "white" }}>
+            <Typography fontSize={sizes.sm} customStyles={{ color: globalStyles.text }}>
               Total
             </Typography>
             <Badge text="10" size="md" />
           </Row>
           <Row alignItem="center" justifyContent="space-between">
-            <Typography fontSize={sizes.sm} customStyles={{ color: "white" }}>
+            <Typography fontSize={sizes.sm} customStyles={{ color: globalStyles.text }}>
               Completed
             </Typography>
             <Badge text="10" size="md" color={complete.c100} />
           </Row>
           <Row alignItem="center" justifyContent="space-between">
-            <Typography fontSize={sizes.sm} customStyles={{ color: "white" }}>
+            <Typography fontSize={sizes.sm} customStyles={{ color: globalStyles.text }}>
               In progress
             </Typography>
             <Badge text="10" size="md" color={inProgress.p100} />
@@ -175,20 +175,20 @@ export default function GoalHero() {
               paddingTop: sizes.lg,
             }}
           >
-            <Typography txtWhite>Recently Completed</Typography>
+            <Typography customStyles={{ color: globalStyles.text }}>Recently Completed</Typography>
             <Icon
               variant="light"
               withBg={false}
               name={isCollapsed ? "chevron-down" : "chevron-up"}
               library="Feather"
-              style={{ color: "white" }}
+              style={{ color: globalStyles.text }}
             />
           </Row>
         </TouchableOpacity>
         <Collapsible collapsed={isCollapsed} align="center" duration={300}>
           <Stack customStyles={{ width: "100%" }} gap={sizes.sm}>
             <Row justifyContent="space-between" width={"100%"}>
-              <Typography txtWhite>Toggle Content</Typography>
+              <Typography customStyles={{ color: globalStyles.text }}>Toggle Content</Typography>
               <Badge
                 text="Complete"
                 size="md"
@@ -197,7 +197,7 @@ export default function GoalHero() {
               />
             </Row>
             <Row justifyContent="space-between" width={"100%"}>
-              <Typography txtWhite>Toggle Content</Typography>
+              <Typography customStyles={{ color: globalStyles.text }}>Toggle Content</Typography>
               <Badge
                 text="Complete"
                 size="md"
@@ -206,7 +206,7 @@ export default function GoalHero() {
               />
             </Row>
             <Row justifyContent="space-between" width={"100%"}>
-              <Typography txtWhite>Toggle Content</Typography>
+              <Typography customStyles={{ color: globalStyles.text }}>Toggle Content</Typography>
               <Badge
                 text="Complete"
                 size="md"
@@ -215,7 +215,7 @@ export default function GoalHero() {
               />
             </Row>
             <Row justifyContent="space-between" width={"100%"}>
-              <Typography txtWhite>Toggle Content</Typography>
+              <Typography customStyles={{ color: globalStyles.text }}>Toggle Content</Typography>
               <Badge
                 text="Complete"
                 size="md"

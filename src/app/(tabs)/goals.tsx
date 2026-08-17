@@ -12,16 +12,19 @@ type GoalFilter = "All" | "Completed" | "In Progress" | "Deleted" | "Future";
 
 export default function Goals() {
   const [activeFilter, setActiveFilter] = useState<GoalFilter>("All");
-  const { theme, sizes } = useTheme();
+  const { theme, sizes, isDark, globalStyles } = useTheme();
   return (
-    <GlobalContainer>
-      <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
+    <GlobalContainer
+      header={
         <TitleCustom
           title="Goals"
           withNotificationIcon
           as={Trophy}
           showIconBalance
         />
+      }
+    >
+      <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
         <GoalHero />
         <View
           style={{
@@ -56,7 +59,7 @@ export default function Goals() {
                 text={filter}
                 size="xs"
                 type={filter === activeFilter ? "filled" : "bordered"}
-                color={filter === activeFilter ? theme.t100 : "white"}
+                color={filter === activeFilter ? theme.t100 : globalStyles.text}
                 onPress={() => setActiveFilter(filter as GoalFilter)}
                 containerStyle={{ borderRadius: 1000 }}
               />

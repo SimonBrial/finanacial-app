@@ -82,11 +82,10 @@ export default function GoalCard({
         {status ? (
           <Badge
             text="Complete"
-
             type="gradient"
             color={"#00BC7D"}
             iconLeft={"check-circle"}
-            //size="sm"
+            size="sm"
           />
         ) : (
           <Text

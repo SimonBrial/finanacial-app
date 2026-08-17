@@ -5,6 +5,12 @@ import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import Toast, { BaseToast, ErrorToast } from "react-native-toast-message";
 import { ThemeProvider } from "../context/styles/theme-provider";
 import useTheme from "../hooks/useTheme";
+import { configureReanimatedLogger, ReanimatedLogLevel } from "react-native-reanimated";
+
+configureReanimatedLogger({
+  level: ReanimatedLogLevel.warn,
+  strict: false,
+});
 
 const toastConfig = {
   success: (props: any) => (

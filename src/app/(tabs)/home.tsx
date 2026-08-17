@@ -9,14 +9,17 @@ import { House } from "lucide-react-native";
 
 export default function Home() {
   return (
-    <GlobalContainer>
-      <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
+    <GlobalContainer
+      header={
         <TitleCustom
           title="Hi Simon!!!"
           withNotificationIcon
           as={House}
           showIconBalance
         />
+      }
+    >
+      <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
         <CarouselCardBank />
         <View className="flex-col gap-5 pt-2">
           <BarsChartContainer />

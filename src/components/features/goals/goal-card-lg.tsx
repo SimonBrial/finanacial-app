@@ -16,7 +16,8 @@ import CircularProgress from "../../charts/progress-donut";
 import { GoalLgProps } from "../../../types/interface";
 
 export default function GoalCardLg({ title, status }: GoalLgProps) {
-  const { sizes, globalStyles, complete, theme, inProgress } = useTheme();
+  const { sizes, globalStyles, complete, theme, inProgress, isDark } =
+    useTheme();
   if (status === "Completed") {
     return (
       <LinearGradient
@@ -35,18 +36,19 @@ export default function GoalCardLg({ title, status }: GoalLgProps) {
         <View style={{ flexDirection: "row", gap: 20, width: "100%" }}>
           <View style={{ width: "50%" }}>
             <View style={{ flexDirection: "row", gap: 10, marginBottom: 10 }}>
-              <Badge text="Category" color="gray" type="filled" />
+              <Badge text="Category" color="gray" type="filled" size="sm" />
               <Badge
                 text="Category"
                 color={complete.c100}
                 iconLeft={"check-circle"}
                 type="ghost"
+                size="sm"
               />
             </View>
             <Typography
               fontSize={sizes.xxl}
               bold
-              customStyles={{ color: "white" }}
+              customStyles={{ color: globalStyles.text }}
             >
               {title}
             </Typography>
@@ -141,18 +143,19 @@ export default function GoalCardLg({ title, status }: GoalLgProps) {
         <View style={{ flexDirection: "row", gap: 20, width: "100%" }}>
           <View style={{ width: "50%" }}>
             <View style={{ flexDirection: "row", gap: 10, marginBottom: 10 }}>
-              <Badge text="Category" color="gray" type="filled" />
+              <Badge text="Category" color="gray" type="filled" size="sm" />
               <Badge
                 text="New"
                 color={"#6D0DD3"}
                 iconLeft={"diamond"}
                 type="ghost"
+                size="sm"
               />
             </View>
             <Typography
               fontSize={sizes.xxl}
               bold
-              customStyles={{ color: "white" }}
+              customStyles={{ color: globalStyles.text }}
             >
               {title}
             </Typography>
@@ -253,18 +256,19 @@ export default function GoalCardLg({ title, status }: GoalLgProps) {
       <View style={{ flexDirection: "row", gap: 20, width: "100%" }}>
         <View style={{ width: "50%" }}>
           <View style={{ flexDirection: "row", gap: 10, marginBottom: 10 }}>
-            <Badge text="Category" color="gray" type="filled" />
+            <Badge text="Category" color="gray" type="filled" size="sm" />
             <Badge
               text="In Progress"
               color={inProgress.p100}
               iconLeft={"timer-sand"}
               type="ghost"
+              size="sm"
             />
           </View>
           <Typography
             fontSize={sizes.xxl}
             bold
-            customStyles={{ color: "white" }}
+            customStyles={{ color: globalStyles.text }}
           >
             {title}
           </Typography>

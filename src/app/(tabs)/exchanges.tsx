@@ -4,17 +4,21 @@ import useTheme from "../../hooks/useTheme";
 import TitleCustom from "../../components/title-custom";
 import Button from "../../components/ui/button-own";
 
+import { DollarSign } from "lucide-react-native";
+
 export default function Exchange() {
   const { sizes, theme } = useTheme();
   return (
-    <GlobalContainer>
-      <ScrollView>
+    <GlobalContainer
+      header={
         <TitleCustom
           title="Exchanges"
           withNotificationIcon
-          name={"attach-money"}
-          library="MaterialIcons"
+          as={DollarSign}
         />
+      }
+    >
+      <ScrollView>
 
         <View
           style={{

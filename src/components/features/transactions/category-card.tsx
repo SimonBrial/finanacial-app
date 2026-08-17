@@ -49,7 +49,7 @@ export default function CategoryCard({
         />
         <Typography
           fontSize={sizes.md}
-          customStyles={{ color: "white", marginLeft: 12 }}
+          customStyles={{ color: globalStyles.text, marginLeft: 12 }}
         >
           {item.label}
         </Typography>
@@ -94,7 +94,7 @@ export default function CategoryCard({
             gap: 4,
           }}
         >
-          <Typography txtWhite fontSize={sizes.lg}>
+          <Typography customStyles={{ color: globalStyles.text }} fontSize={sizes.lg}>
             {title}
           </Typography>
           <View

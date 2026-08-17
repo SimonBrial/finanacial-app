@@ -39,9 +39,9 @@ const TABS = [
  * Usa valores en píxeles (no porcentajes) para compatibilidad con Reanimated.
  */
 function TabIndicator({
+  containerWidth,
   activeIndex,
   tabCount,
-  containerWidth,
 }: {
   activeIndex: SharedValue<number>;
   tabCount: number;
@@ -73,7 +73,7 @@ function TabIndicator({
 }
 
 export default function TabHeaderNavigation() {
-  const { sizes } = useTheme();
+  const { sizes, globalStyles, isDark } = useTheme();
   /** Índice de la pestaña actualmente seleccionada */
   const [selectedIndex, setSelectedIndex] = useState(0);
   /** Ancho del contenedor de tabs en píxeles (medido dinámicamente) */
@@ -115,7 +115,7 @@ export default function TabHeaderNavigation() {
                   styles.tabLabel,
                   {
                     fontSize: sizes.sm + 2,
-                    color: "white",
+                    color: globalStyles.text,
                     opacity: selectedIndex === index ? 1 : 0.6,
                     fontWeight: selectedIndex === index ? "600" : "400",
                   },
@@ -168,10 +168,9 @@ const styles = StyleSheet.create({
     height: 3,
     width: "100%",
   },
-  /** Línea indicadora animada — blanca */
+  /** Línea indicadora animada */
   indicator: {
     height: 3,
-    backgroundColor: "white",
+    backgroundColor: "#006DFF",
   },
 });
-

@@ -12,7 +12,7 @@ import SpendingCategoryCard from "../../../components/features/transactions/spen
 import { useBudgetStore } from "../../../stores/useBudgetStore"; // Importar Zustand
 
 export default function Insight() {
-  const { sizes, theme, globalStyles } = useTheme();
+  const { sizes, theme, globalStyles, isDark } = useTheme();
   const { insights, selectedIndex, setSelectedIndex } = useBudgetStore();
 
   // 1. Cálculos de totales reales (basados en la data)
@@ -70,7 +70,11 @@ export default function Insight() {
     if (!selectedCategory) {
       return (
         <View style={{ alignItems: "center" }}>
-          <Typography bold fontSize={sizes.xl} txtWhite>
+          <Typography
+            bold
+            fontSize={sizes.xl}
+            customStyles={{ color: globalStyles.text }}
+          >
             {globalPercentage}%
           </Typography>
           <Typography
@@ -117,11 +121,16 @@ export default function Insight() {
 
   return (
     <ScrollView
-      style={{ flex: 1, backgroundColor: "black" }}
+      style={{ flex: 1, backgroundColor: "transparent" }}
       showsVerticalScrollIndicator={false}
     >
       <View
-        style={{ height: 280, justifyContent: "center", alignItems: "center" }}
+        style={{
+          height: 280,
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: "none",
+        }}
       >
         {/* Touchable para deseleccionar al tocar fuera */}
         <TouchableWithoutFeedback onPress={() => setSelectedIndex(null)}>

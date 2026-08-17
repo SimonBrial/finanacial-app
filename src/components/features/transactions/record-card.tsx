@@ -96,7 +96,7 @@ export default function RecordCard({
             //flex: 1,
           }}
         >
-          <Typography txtWhite fontSize={sizes.lg}>
+          <Typography customStyles={{ color: globalStyles.text }} fontSize={sizes.lg}>
             {title}
           </Typography>
           <View style={{ flexDirection: "column", gap: sizes.xxs }}>
@@ -125,7 +125,7 @@ export default function RecordCard({
           </View>
         </View>
         <View style={{ alignItems: "center", justifyContent: "center" }}>
-          <Typography txtWhite>$ {amount}</Typography>
+          <Typography customStyles={{ color: globalStyles.text }}>$ {amount}</Typography>
           <PercentIndicator percentage="4.23%" trend="down" />
         </View>
       </View>
