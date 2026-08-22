@@ -12,19 +12,21 @@ export default function Stack({
   gap,
 }: GridProps) {
   const { sizes } = useTheme();
-  const styles = StyleSheet.flatten([
+
+  // ⚡ Bolt: Avoid StyleSheet.flatten in render to prevent unnecessary object deep merges on every render
+  const styles = [
     customStyles,
     {
       display: "flex",
       flexDirection: "column",
       width: "100%",
-    },
+    } as const,
     { gap: gap ? gap : sizes.xxs },
     { width: width ? width : "100%" },
-    { alignItems: alignItem ? alignItem : "flex-start" },
-    { justifyContent: justifyContent ? justifyContent : "flex-start" },
-    { flexWrap: wrap ? "wrap" : "nowrap" },
-  ]);
+    { alignItems: alignItem ? alignItem : "flex-start" } as const,
+    { justifyContent: justifyContent ? justifyContent : "flex-start" } as const,
+    { flexWrap: wrap ? "wrap" : "nowrap" } as const,
+  ];
 
   return <View style={styles}>{children}</View>;
 }
