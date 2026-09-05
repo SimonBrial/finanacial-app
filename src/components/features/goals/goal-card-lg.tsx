@@ -94,20 +94,7 @@ export default function GoalCardLg({ title, status }: GoalLgProps) {
               </Rect>
             </Canvas>
             <View className="p-3 bg-[#17C964] rounded-full">
-              <Icon
-                as={Medal}
-                //rounded
-                color="white"
-                size={50}
-                //name={"emoji-events"}
-                //library="MaterialIcons"
-
-                /* bgStyle={{
-                padding: 16,
-                backgroundColor: complete.c100,
-                }} */
-                //variant="light"
-              />
+              <Icon as={Medal} color="white" size={50} />
             </View>
           </View>
         </View>
