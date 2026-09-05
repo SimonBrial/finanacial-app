@@ -29,8 +29,7 @@ export default function GoalCard({
     <View
       className={`
         w-[48%] flex-row items-center justify-center rounded-full p-2 gap-3 
-        ${isDark ? "bg-bgContainerDark" : "bg-white"}
-        ${isDark ? "border border-zinc-800" : "border border-white"}
+        ${isDark ? "bg-bgContainerDark border border-zinc-800" : "bg-white border border-white"}
         ${size === "sm" ? "self-start" : "self-stretch"}
       `}
     >

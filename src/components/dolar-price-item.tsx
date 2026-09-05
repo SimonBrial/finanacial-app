@@ -44,11 +44,11 @@ export default function DolarPriceItem({
         : "0.00";
 
   return (
-    <View className="flex-row justify-start items-center w-full pl-3 pr-1">
-      <View className={`${bgColorClass} border h-14 w-2 mr-3 rounded-full`} />
+    <View className="flex-row justify-start items-center w-full pl-3">
+      <View className={`${bgColorClass} h-14 w-2 mr-3 rounded-full`} />
 
       {/* Título y Fecha con Hora (Lado Izquierdo) */}
-      <View className="flex-row flex-1 justify-between pr-5">
+      <View className="flex-row flex-1 justify-between">
         <View className="w-[50%] flex-col ">
           <View className="flex-row gap-2 items-end justify-start">
             <Text

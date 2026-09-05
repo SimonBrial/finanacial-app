@@ -26,5 +26,5 @@ export default function PercentIndicator({
       ? complete.s100
       : "#94a3b8";
 
-  return <Badge text={percentage} iconLeft={icon} type="light" color={color} />;
+  return <Badge text={percentage} iconLeft={icon} type="light" color={color} size="sm"/>;
 }

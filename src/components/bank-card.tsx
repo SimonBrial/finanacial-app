@@ -212,18 +212,19 @@ export default function BankCard({
           )}
         </View>
 
-        <View className="flex-row justify-star gap-3">
-          <Text className="text-white text-xs">Last Entry:</Text>
+        <View className="flex-row justify-start items-center gap-3">
+          <Text className="text-white text-sm">Last Entry:</Text>
 
           {showBalance ? (
             <View className="flex-row justify-start gap-3">
-              <Badge text={lastEntry} type="bordered" color="white" />
+              <Badge text={lastEntry} type="bordered" color="white" size="sm" />
 
               <Badge
                 text={percentage}
                 type="bordered"
                 color="#ffffff"
                 iconLeft={trendIcon}
+                size="sm"
               />
             </View>
           ) : (

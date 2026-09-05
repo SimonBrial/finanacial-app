@@ -1,78 +1,29 @@
 import { TouchableOpacity, View } from "react-native";
-import Stack from "../../ui/stack";
-import Typography from "../../ui/typography";
-import Row from "../../ui/row";
 import useTheme from "../../../hooks/useTheme";
-import { LinearGradient } from "expo-linear-gradient";
-import Badge from "../../ui/badge";
-import Icon from "../../ui/icon";
 import Collapsible from "react-native-collapsible";
 import { useState } from "react";
 import { Canvas, RadialGradient, Rect, vec } from "@shopify/react-native-skia";
+import { Icon } from "@/components/unused/shadcn-primitives/icon";
+import { Medal, ChevronDown, ChevronUp } from "lucide-react-native";
+import Badge from "@/components/ui/badge";
+import { Text } from "@/components/ui/text";
 
 export default function GoalHero() {
-  const { globalStyles, sizes, inProgress, complete, theme, isDark } = useTheme();
+  const { inProgress, complete, theme, isDark } = useTheme();
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   const toggleCollapsible = () => {
     setIsCollapsed(!isCollapsed);
   };
+
   return (
-    <Stack
-      customStyles={{
-        padding: sizes.lg,
-        width: "100%",
-        /* borderColor: "red",
-        borderWidth: 1, */
-      }}
+    <View
+      className={`flex-1 justify-start rounded-[20] shadow p-5 ${isDark ? "border border-zinc-700 bg-bgContainerDark" : "border border-white bg-slate-50"} `}
     >
-      <LinearGradient
-        colors={[globalStyles.bgContainerStart, globalStyles.bgContainerEnd]} // DINÁMICO
-        style={[
-          {
-            position: "absolute",
-            left: 0,
-            right: 0,
-            top: 0,
-            bottom: 0,
-            //height: 360,
-            //width: "100%",
-            borderRadius: sizes.lg,
-            borderWidth: 1,
-            borderColor: globalStyles.borderContainer,
-          },
-        ]}
-        locations={[0.1, 1.0]}
-        start={{ x: 0, y: 0.0 }}
-        end={{ x: 1, y: 0 }}
-      />
       <View
-        style={{
-          width: "100%",
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-evenly",
-          gap: sizes.lg,
-          borderBottomColor: globalStyles.borderContainer,
-          borderBottomWidth: 1,
-          paddingBottom: sizes.xxl,
-          position: "relative",
-        }}
+        className={`w-full flex-1 flex-row items-center justify-evenly gap-5 relative pb-8 ${isDark ? "border-b border-b-zinc-700" : "border-b border-b-slate-200 "}`}
       >
-        <View
-          style={{
-            height: 120,
-            width: 120,
-            backgroundColor: theme.t20,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            borderRadius: 1000,
-            borderWidth: 1,
-            borderColor: theme.t100,
-          }}
-        >
+        <View className="h-[120px] w-[120px] bg-[#006DFF33] items-center justify-center rounded-full border border-[#006DFF]">
           <Canvas
             style={{
               flex: 1,
@@ -105,127 +56,104 @@ export default function GoalHero() {
               />
             </Rect>
           </Canvas>
-          <Icon
-            rounded
-            color="white"
-            size={50}
-            name={"emoji-events"}
-            library="MaterialIcons"
-            bgStyle={{
-              padding: 16,
-              backgroundColor: theme.t100,
-            }}
-            variant="light"
-          />
+          <View className="bg-theme p-4 rounded-full">
+            <Icon as={Medal} size={50} className="text-white" />
+          </View>
         </View>
-        <View
-          style={{
-            width: "50%",
-            display: "flex",
-            flexDirection: "column",
-            gap: sizes.sm,
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        //alignItem="center"
-        >
-          <Typography
-            bold
-            customStyles={{
-              color: globalStyles.text,
-              width: "100%",
-              textAlign: "center",
-            }}
-            fontSize={sizes.lg}
+        <View className="w-1/2 flex-col gap-3 items-center justify-center">
+          <Text
+            className={`text-xl font-bold w-full text-center ${isDark ? "text-white" : "text-slate-900"}`}
           >
             Total Goals
-          </Typography>
+          </Text>
 
-          <Row alignItem="center" justifyContent="space-between">
-            <Typography fontSize={sizes.sm} customStyles={{ color: globalStyles.text }}>
+          <View className="w-full flex-row items-center justify-between">
+            <Text
+              className={`text-sm ${isDark ? "text-white" : "text-slate-900"}`}
+            >
               Total
-            </Typography>
+            </Text>
             <Badge text="10" size="md" />
-          </Row>
-          <Row alignItem="center" justifyContent="space-between">
-            <Typography fontSize={sizes.sm} customStyles={{ color: globalStyles.text }}>
+          </View>
+          <View className="w-full flex-row items-center justify-between">
+            <Text
+              className={`text-sm ${isDark ? "text-white" : "text-slate-900"}`}
+            >
               Completed
-            </Typography>
+            </Text>
             <Badge text="10" size="md" color={complete.c100} />
-          </Row>
-          <Row alignItem="center" justifyContent="space-between">
-            <Typography fontSize={sizes.sm} customStyles={{ color: globalStyles.text }}>
+          </View>
+          <View className="w-full flex-row items-center justify-between">
+            <Text
+              className={`text-sm ${isDark ? "text-white" : "text-slate-900"}`}
+            >
               In progress
-            </Typography>
+            </Text>
             <Badge text="10" size="md" color={inProgress.p100} />
-          </Row>
+          </View>
         </View>
       </View>
-      <View
-        style={{
-          width: "100%",
-        }}
-      >
-        <TouchableOpacity onPress={toggleCollapsible}>
-          <Row
-            alignItem="center"
-            justifyContent="space-between"
-            customStyles={{
-              paddingBottom: !isCollapsed ? sizes.lg : 0,
-              paddingTop: sizes.lg,
-            }}
+      <View className="w-full">
+        <TouchableOpacity
+          onPress={toggleCollapsible}
+          className={`w-full flex-row items-center justify-between pt-4 ${!isCollapsed ? "pb-4" : "pb-0"}`}
+        >
+          <Text
+            className={`font-semibold ${isDark ? "text-white" : "text-slate-900"}`}
           >
-            <Typography customStyles={{ color: globalStyles.text }}>Recently Completed</Typography>
-            <Icon
-              variant="light"
-              withBg={false}
-              name={isCollapsed ? "chevron-down" : "chevron-up"}
-              library="Feather"
-              style={{ color: globalStyles.text }}
-            />
-          </Row>
+            Recently Completed
+          </Text>
+          <Icon as={isCollapsed ? ChevronDown : ChevronUp} />
         </TouchableOpacity>
         <Collapsible collapsed={isCollapsed} align="center" duration={300}>
-          <Stack customStyles={{ width: "100%" }} gap={sizes.sm}>
-            <Row justifyContent="space-between" width={"100%"}>
-              <Typography customStyles={{ color: globalStyles.text }}>Toggle Content</Typography>
+          <View className="w-full flex-col gap-2 pt-2">
+            <View className="w-full flex-row items-center justify-between">
+              <Text className={`${isDark ? "text-white" : "text-slate-900"}`}>
+                Toggle Content
+              </Text>
               <Badge
                 text="Complete"
                 size="md"
                 color={complete.c100}
                 iconLeft={"check-circle"}
               />
-            </Row>
-            <Row justifyContent="space-between" width={"100%"}>
-              <Typography customStyles={{ color: globalStyles.text }}>Toggle Content</Typography>
+            </View>
+            <View className="w-full flex-row items-center justify-between">
+              <Text className={`${isDark ? "text-white" : "text-slate-900"}`}>
+                Toggle Content
+              </Text>
               <Badge
                 text="Complete"
                 size="md"
                 color={complete.c100}
                 iconLeft={"check-circle"}
               />
-            </Row>
-            <Row justifyContent="space-between" width={"100%"}>
-              <Typography customStyles={{ color: globalStyles.text }}>Toggle Content</Typography>
+            </View>
+            <View className="w-full flex-row items-center justify-between">
+              <Text className={`${isDark ? "text-white" : "text-slate-900"}`}>
+                Toggle Content
+              </Text>
               <Badge
                 text="Complete"
                 size="md"
                 color={complete.c100}
                 iconLeft={"check-circle"}
               />
-            </Row>
-            <Row justifyContent="space-between" width={"100%"}>
-              <Typography customStyles={{ color: globalStyles.text }}>Toggle Content</Typography>
+            </View>
+            <View className="w-full flex-row items-center justify-between">
+              <Text className={`${isDark ? "text-white" : "text-slate-900"}`}>
+                Toggle Content
+              </Text>
               <Badge
                 text="Complete"
                 size="md"
                 color={complete.c100}
                 iconLeft={"check-circle"}
               />
-            </Row>
-          </Stack>
+            </View>
+          </View>
         </Collapsible>
       </View>
-    </Stack>
+    </View>
   );
 }

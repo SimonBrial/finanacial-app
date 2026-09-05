@@ -5,9 +5,9 @@ import Carousel, { Pagination } from "react-native-reanimated-carousel";
 import BankCard from "./bank-card";
 import { useBankStore } from "../stores/useBankStore";
 import {
-  interpolate,
-  Extrapolation,
   useSharedValue,
+  Extrapolation,
+  interpolate,
 } from "react-native-reanimated";
 import useTheme from "../hooks/useTheme";
 import { BankCardData } from "../types/interface";
@@ -78,7 +78,7 @@ export default function CarouselCardBank() {
         size={6} // Aumentamos un poco el tamaño base de la celda
         containerStyle={{
           gap: 8, // Espaciado entre los puntos
-          //marginTop: 20,
+          marginTop: -10,
           alignItems: "center",
           justifyContent: "center",
           backgroundColor: "transparent",

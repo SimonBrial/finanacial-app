@@ -86,7 +86,7 @@ export const useExchangeStore = create<ExchangeState>((set, get) => ({
 
       // Validar si la respuesta HTTP fue exitosa
       if (!dolarRes.ok || !euroRes.ok) {
-        throw new Error("Error al consultar las tasas actuales de DolarApi");
+        throw new Error("Error al consultar las tasas actuales");
       }
 
       // 3. Parsear respuestas a JSON (los históricos usan fallback a [] si fallan)
@@ -153,12 +153,12 @@ export const useExchangeStore = create<ExchangeState>((set, get) => ({
             if (isEuro) {
               displayName =
                 item.fuente === "oficial"
-                  ? "Euro Oficial (BCV)"
+                  ? "Euro (BCV)"
                   : "Euro Paralelo";
             } else {
               displayName =
                 item.nombre === "Dólar" || item.fuente === "oficial"
-                  ? "Oficial (BCV)"
+                  ? "Dolar (BCV)"
                   : item.nombre || "Dólar Paralelo";
             }
 

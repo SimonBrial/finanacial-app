@@ -35,7 +35,7 @@ export default function CollapsibleCardContainer({
 
   return (
     <Accordion
-      className={`"flex-1 justify-start rounded-[20] shadow" ${isDark ? "border border-zinc-700 bg-bgContainerDark" : "border border-white bg-slate-100"} `}
+      className={`"flex-1 justify-start rounded-[20] shadow" ${isDark ? "border border-zinc-700 bg-bgContainerDark" : "border border-white bg-slate-50"} `}
       type="single"
       collapsable
     >

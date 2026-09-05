@@ -71,7 +71,11 @@ export default function BarsChartContainer() {
     <CollapsibleCardContainer title="Historial" as={ChartColumnBig}>
       {/* Tarjeta oscura redondeada */}
       <View
-        className={`w-full ${isDark ? "bg-zinc-900" : "bg-slate-50"} rounded-3xl p-4 ${isDark ? "border border-zinc-800" : "border border-white"} self-center`}
+        className={`w-full self-center rounded-3xl p-4 ${
+          isDark
+            ? "bg-zinc-900 border border-zinc-800"
+            : "bg-slate-100 border border-white"
+        }`}
       >
         {/* Encabezado con totales */}
         <View className="w-full flex-row justify-between pb-3 px-2">
